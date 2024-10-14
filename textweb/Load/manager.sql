@@ -1,0 +1,16 @@
+CREATE DATABASE manager;
+
+USE manager;
+
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(100) NOT NULL,
+    password VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE likes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    articleId VARCHAR(100) NOT NULL UNIQUE,
+    likes INT DEFAULT 0
+);

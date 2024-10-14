@@ -1,0 +1,24 @@
+/* styles2.css */
+
+/* 图片墙样式 */
+.image-wall {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    overflow: hidden;
+    height: 300px;
+}
+
+.image-wall img {
+    width: 32%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transform: translateX(-100%);
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+.image-wall img.show {
+    opacity: 1;
+    transform: translateX(0);
+}

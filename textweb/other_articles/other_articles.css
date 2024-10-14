@@ -1,0 +1,44 @@
+/* other_articles.css */
+
+/* 文章样式 */
+.article {
+    border-bottom: 1px solid #ccc;
+    padding: 20px 0;
+}
+
+.article h2 {
+    margin: 0;
+    cursor: pointer;
+}
+
+.article .like-section {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.article .like-button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.article .like-button:hover {
+    background-color: #555;
+}
+
+.article .like-count {
+    font-size: 14px;
+    color: #666;
+}
+
+.article .read-more {
+    display: inline-block;
+    margin-top: 10px;
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+}

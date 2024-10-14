@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据库设置 - 博客</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="budingfor.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">首页</a>
+            <ul class="nav-links">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="blog.html">文章</a></li>
+                <li><a href="StudySources/Sources.html">学习资源</a></li>
+                <li><a href="about.html">关于</a></li>
+                <li><a href="relation.html">联系</a></li>
+            </ul>
+            <div class="menu-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主要内容 -->
+    <div class="container main-content">
+        <article class="article">
+            <h1>数据库设置</h1>
+            <p>在现代Web应用程序中，数据库是存储和管理数据的关键组件。以下是一些常见的数据库设置步骤：</p>
+            <ol>
+                <li><strong>选择数据库管理系统（DBMS）</strong>：根据项目需求选择合适的数据库管理系统，如MySQL、PostgreSQL、MongoDB等。</li>
+                <li><strong>安装DBMS</strong>：根据所选的DBMS，安装相应的软件包。例如，对于MySQL，可以使用以下命令进行安装：
+                    <pre><code>sudo apt-get update
+sudo apt-get install mysql-server</code></pre>
+                </li>
+                <li><strong>配置DBMS</strong>：配置数据库服务器的参数，如端口号、字符集、用户权限等。例如，对于MySQL，可以编辑配置文件 `/etc/mysql/my.cnf`。</li>
+                <li><strong>创建数据库</strong>：使用DBMS提供的工具或命令行创建数据库。例如，对于MySQL，可以使用以下命令：
+                    <pre><code>mysql -u root -p
+CREATE DATABASE mydatabase;</code></pre>
+                </li>
+                <li><strong>创建用户和授权</strong>：为应用程序创建一个数据库用户，并授予其对数据库的访问权限。例如，对于MySQL，可以使用以下命令：
+                    <pre><code>CREATE USER 'myuser'@'localhost' IDENTIFIED BY 'mypassword';
+GRANT ALL PRIVILEGES ON mydatabase.* TO 'myuser'@'localhost';
+FLUSH PRIVILEGES;</code></pre>
+                </li>
+                <li><strong>连接数据库</strong>：在应用程序中配置数据库连接信息，如数据库主机、端口、用户名、密码等。例如，在Node.js中，可以使用以下代码：
+                    <pre><code>const mysql = require('mysql');
+const connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'myuser',
+    password: 'mypassword',
+    database: 'mydatabase'
+});
+connection.connect();</code></pre>
+                </li>
+                <li><strong>测试连接</strong>：确保应用程序能够成功连接到数据库，并执行一些基本的查询操作。</li>
+            </ol>
+            <p>通过以上步骤，您可以成功设置和管理数据库，为Web应用程序提供数据存储和访问功能。</p>
+        </article>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2023 博客. 版权所有归中国矿业大学。来自计算机学院和机电学院。</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="scripts.js"></script>
+</body>
+</html>

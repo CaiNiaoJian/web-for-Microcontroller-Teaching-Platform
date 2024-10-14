@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>控制类文章标题 1 - 博客</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="logo">博客</a>
+            <ul class="nav-links">
+                <li><a href="../index.html">首页</a></li>
+                <li><a href="../blog.html">文章</a></li>
+                <li><a href="../about.html">关于</a></li>
+                <li><a href="../relation.html">联系</a></li>
+            </ul>
+            <div class="menu-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主要内容 -->
+    <div class="container main-content">
+        <!-- 文章内容 -->
+        <article class="article-detail" data-views="0" data-date="2023-10-01">
+            <h1>波形发生器设计实验</h1>
+            <div class="article-meta">
+                <span class="views">阅读次数: <span class="view-count">0</span></span>
+                <span class="date">发布时间: <span class="publish-date">2023-10-01</span></span>
+            </div>
+			<h2>一．	实验目的</h2>
+            <p>学习定时器的工作模式，掌握定时器工作模式的配置方式、工作状态的控制以及对应中断的控制。</p>
+			<h2>二．	实验原理</h2>
+            <p>方波以及PWM波形的产生：</p>
+            <p>通过定时翻转I/O口可以产生一定周期的方波，修改翻转的时间间隔即可实现不同频率的方波波形。PWM波建立在方波的基础上，修改每个周期中高电平所占时间比例即可产生相应的PWM波。同时PWM波也作为一种驱动手段广泛地应用在直流电机、舵机、无源蜂鸣器等外设的使用中。</p>
+			<p>I/O口扫描：</p>
+			<p>当I/O口作为输入口时，往往需要动态地反馈采集到的外部数据，为了实时接收数据并让CPU快速响应，通常会采用扫描的方式，以极短的时间间隔重复读取I/O口的数值并做出判断。</p>
+			<h2>三．	实验要求</h2>
+			<ul>
+				<li>能够产生不同频率方波，可通过按钮改变周期</li>
+				<li>PWM波，按钮调速（定时器+中断完成），改变占空比</li>
+				<li>运放功能，正弦波，等等  （拓展结合AD/DA）</li>
+				<li>将上述要求设计合理的操作界面（控制方式设计）</li>
+			</ul>
+			<h4>注：本实验所设计的波形并不要求能实现连续变化，即完成一定范围内波形的离散变化即可</h4>
+			<h2>四．	实验参考</h2>
+			<img src="Project_images/波形发生器设计实验/图1.png" alt="封面图" class="center-image">
+			<p>如图，通过P2.0设置方波周期，P2.1、P2.2分别控制占空比的增减，外部中断0实现整体程序复位，恢复默认波形，重置所有参数。</p>
+			
+			<p>程序示例：</p>
+			
+			<p>//定义按键</p>
+			<img src="Project_images/波形发生器设计实验/代码1.png" alt="封面图" class="center-image">
+			<p>//参数设置，定义初始参数周期和占空比参数表，而Freq,dutycycle作为数组指针，将周期和占空比分成十份。</p>
+			<img src="Project_images/波形发生器设计实验/代码2.png" alt="封面图" class="center-image">
+			<p>//0.1ms倒计时定时器0初始化，每0.1ms参数time+1，</p>
+			<img src="Project_images/波形发生器设计实验/代码3.png" alt="封面图" class="center-image">
+			<p>//扫描按键，每个按键对应了10个档位的调节</p>
+			<img src="Project_images/波形发生器设计实验/代码4.png" alt="封面图" class="center-image">
+			<p>//主程序</p>
+			<img src="Project_images/波形发生器设计实验/代码5.png" alt="封面图" class="center-image">
+		
+		</article>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2023 博客. 版权所有归中国矿业大学。来自计算机学院和机电学院。</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../scripts.js"></script>
+</body>
+</html>
