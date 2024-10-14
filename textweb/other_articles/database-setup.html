@@ -5,19 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>数据库的建立 - 博客</title>
     <link rel="stylesheet" href="../styles.css">
+	<link rel="stylesheet" href="../control_articles/control_articles.css">
+	
 </head>
 <body>
     <!-- 导航栏 -->
     <nav class="navbar">
         <div class="container">
-            <a href="../index.html" class="logo">博客</a>
+            <a href="../index.html" class="logo">首页</a>
             <ul class="nav-links">
                 <li><a href="../index.html">首页</a></li>
                 <li><a href="../blog.html">文章</a></li>
+                <li><a href="../StudySources/Sources.html">学习资源</a></li>
                 <li><a href="../about.html">关于</a></li>
                 <li><a href="../relation.html">联系</a></li>
-                <li><a href="../Paper_Writer/submit.html">写作投稿</a></li>
-                <li><a href="../admin.html">管理员登陆</a></li>
             </ul>
             <div class="menu-toggle" id="mobile-menu">
                 <span class="bar"></span>
@@ -111,6 +112,27 @@ VALUES
 SELECT * FROM articles;
             </pre>
         </article>
+		
+		<!-- 评论区 -->
+		<section class="comments">
+		    <h2>评论区</h2>
+		    <div class="comment-form">
+		        <textarea id="comment-input" placeholder="请输入评论内容"></textarea>
+		        <div class="emoji-picker">
+		            <span class="emoji" data-emoji="😀">😀</span>
+		            <span class="emoji" data-emoji="😊">😊</span>
+		            <span class="emoji" data-emoji="😂">😂</span>
+		            <span class="emoji" data-emoji="😍">😍</span>
+		            <span class="emoji" data-emoji="😎">😎</span>
+					<span class="emoji" data-emoji="🤬">🤬</span>
+		        </div>
+		        <button id="submit-comment">提交评论</button>
+		    </div>
+		    <div class="comment-list">
+		        <!-- 评论列表 -->
+		    </div>
+		</section>
+		
     </div>
 
     <!-- 页脚 -->
@@ -122,5 +144,29 @@ SELECT * FROM articles;
 
     <!-- JavaScript -->
     <script src="../scripts.js"></script>
+    <script src="control_articles.js"></script>
+    <script>
+        document.getElementById('submit-comment').addEventListener('click', function() {
+            const commentInput = document.getElementById('comment-input');
+            const commentText = commentInput.value.trim();
+    
+            if (commentText) {
+                const commentList = document.querySelector('.comment-list');
+                const newComment = document.createElement('div');
+                newComment.classList.add('comment');
+                const currentTime = new Date().toLocaleString();
+                newComment.innerHTML = `<p>${commentText}</p><span class="comment-time">${currentTime}</span>`;
+                commentList.appendChild(newComment);
+                commentInput.value = '';
+            }
+        });
+    
+        document.querySelectorAll('.emoji').forEach(emoji => {
+            emoji.addEventListener('click', function() {
+                const commentInput = document.getElementById('comment-input');
+                commentInput.value += this.getAttribute('data-emoji');
+            });
+        });
+    </script>
 </body>
 </html>

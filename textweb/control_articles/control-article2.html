@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>控制类文章标题 1 - 博客</title>
     <link rel="stylesheet" href="../styles.css">
+	<link rel="stylesheet" href="control_articles.css">
 </head>
 <body>
     <!-- 导航栏 -->
@@ -37,6 +38,27 @@
             <p>这是控制类文章的详细内容。这是控制类文章的详细内容。这是控制类文章的详细内容。</p>
             <p>这是控制类文章的详细内容。这是控制类文章的详细内容。这是控制类文章的详细内容。</p>
             <p>这是控制类文章的详细内容。这是控制类文章的详细内容。这是控制类文章的详细内容。</p>
+			
+			<!-- 评论区 -->
+			<section class="comments">
+			    <h2>评论区</h2>
+			    <div class="comment-form">
+			        <textarea id="comment-input" placeholder="请输入评论内容"></textarea>
+			        <div class="emoji-picker">
+			            <span class="emoji" data-emoji="😀">😀</span>
+			            <span class="emoji" data-emoji="😊">😊</span>
+			            <span class="emoji" data-emoji="😂">😂</span>
+			            <span class="emoji" data-emoji="😍">😍</span>
+			            <span class="emoji" data-emoji="😎">😎</span>
+						<span class="emoji" data-emoji="🤬">🤬</span>						
+			        </div>
+			        <button id="submit-comment">提交评论</button>
+			    </div>
+			    <div class="comment-list">
+			        <!-- 评论列表 -->
+			    </div>
+			</section>
+			
         </article>
     </div>
 
@@ -49,5 +71,29 @@
 
     <!-- JavaScript -->
     <script src="../scripts.js"></script>
+    <script src="control_articles.js"></script>
+    <script>
+        document.getElementById('submit-comment').addEventListener('click', function() {
+            const commentInput = document.getElementById('comment-input');
+            const commentText = commentInput.value.trim();
+    
+            if (commentText) {
+                const commentList = document.querySelector('.comment-list');
+                const newComment = document.createElement('div');
+                newComment.classList.add('comment');
+                const currentTime = new Date().toLocaleString();
+                newComment.innerHTML = `<p>${commentText}</p><span class="comment-time">${currentTime}</span>`;
+                commentList.appendChild(newComment);
+                commentInput.value = '';
+            }
+        });
+    
+        document.querySelectorAll('.emoji').forEach(emoji => {
+            emoji.addEventListener('click', function() {
+                const commentInput = document.getElementById('comment-input');
+                commentInput.value += this.getAttribute('data-emoji');
+            });
+        });
+    </script>
 </body>
 </html>
