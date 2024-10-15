@@ -9,3 +9,156 @@
     max-width: 800px; /* 根据需要调整图片的最大宽度 */
     height: auto;
 }
+
+/* 评论区样式 */
+.comment-section {
+    margin-top: 40px;
+}
+
+.comment-section h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.comment-form {
+    margin-bottom: 20px;
+}
+
+.comment-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical;
+    min-height: 100px;
+}
+
+.comment-form button {
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.comment-form button:hover {
+    background-color: #555;
+}
+
+.emoji-picker {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.emoji-picker .emoji {
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.comments {
+    border-top: 1px solid #ccc;
+    padding-top: 20px;
+}
+
+.comment {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.comment .comment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.comment .comment-header .comment-time {
+    font-size: 14px;
+    color: #666;
+}
+
+.comment .comment-content {
+    margin-bottom: 10px;
+}
+
+.comment .comment-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.comment .comment-actions button {
+    padding: 5px 10px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.comment .comment-actions button:hover {
+    background-color: #555;
+}
+
+.comment .reply-form {
+    margin-top: 20px;
+}
+
+.comment .reply-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical;
+    min-height: 80px;
+}
+
+.comment .reply-form button {
+    padding: 5px 10px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.comment .reply-form button:hover {
+    background-color: #555;
+}
+
+.comment .replies {
+    margin-top: 20px;
+    padding-left: 20px;
+    border-left: 2px solid #ccc;
+}
+
+.comment .replies .reply {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.comment .replies .reply .reply-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.comment .replies .reply .reply-header .reply-time {
+    font-size: 14px;
+    color: #666;
+}
+
+.comment .replies .reply .reply-content {
+    margin-bottom: 10px;
+}

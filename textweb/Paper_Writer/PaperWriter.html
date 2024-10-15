@@ -1,9 +1,55 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<title></title>
-	</head>
-	<body>
-	</body>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文章编辑器</title>
+    <link rel="stylesheet" href="Paper_Writer.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="logo">博客</a>
+            <ul class="nav-links">
+                <li><a href="../index.html">首页</a></li>
+                <li><a href="../blog.html">文章</a></li>
+                <li><a href="../about.html">关于</a></li>
+                <li><a href="../relation.html">联系</a></li>
+            </ul>
+            <div class="menu-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主要内容 -->
+    <div class="container main-content">
+        <h1>文章编辑器</h1>
+        <div class="editor-container">
+            <div class="toolbar">
+                <button id="bold-btn">加粗</button>
+                <button id="italic-btn">斜体</button>
+                <button id="code-btn">插入代码</button>
+                <button id="latex-btn">插入LaTeX</button>
+                <button id="publish-btn">发布</button>
+                <button id="login-btn">管理员登录</button>
+                <button id="back-btn">返回</button>
+            </div>
+            <div id="editor" contenteditable="true" placeholder="在此处输入文章内容..."></div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2023 博客. 版权所有归中国矿业大学。来自计算机学院和机电学院。</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="Paper_Writer.js"></script>
+</body>
 </html>

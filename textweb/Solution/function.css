@@ -1,0 +1,86 @@
+/* function.css */
+
+/* 网站功能详情样式 */
+.website-detail {
+    margin-bottom: 40px;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.website-detail h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.website-detail p {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #555;
+}
+
+.website-detail ul {
+    list-style: disc;
+    padding-left: 40px;
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #555;
+}
+
+.website-detail ul li {
+    margin-bottom: 10px;
+}
+
+/* 图片样式 */
+.cover-image {
+    display: block;
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+    margin: 0 auto 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 动态文本样式 */
+.dynamic-text {
+    font-size: 20px;
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dynamic-text p {
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.dynamic-text .module {
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dynamic-text .module h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.dynamic-text .module ul {
+    list-style: disc;
+    padding-left: 40px;
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.dynamic-text .module ul li {
+    margin-bottom: 10px;
+}
