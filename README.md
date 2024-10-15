@@ -35,7 +35,7 @@ Web for CUMT Microcontroller Teaching Platform 是一款旨在为中国矿业大
 
 如有问题或建议，请通过以下方式与我们联系：
 
-- 邮箱：cumtMLP@163.com
+- 邮箱：cumtMLP123@163.com
 - GitHub：[[@CUMT-Microcontroller-Teaching-Platform](https://github.com/CUMT-Microcontroller-Teaching-Platform](https://github.com/CaiNiaoJian/web-for-cumt-Microcontroller-Teaching-Platform.git))
 
 ---
