@@ -18,7 +18,7 @@ Web for CUMT Microcontroller Teaching Platform 是一款旨在为中国矿业大
 - 前端：HTML, CSS, JavaScript
 - 后端：Node.js, Express(待开发)
 - 数据库：MySQL
-- 模拟器：基于HBuilder的微控制器模拟环境
+- 
 
 ## 使用说明
 
