@@ -294,6 +294,15 @@ body {
     margin-bottom: 20px;
 }
 
+.news-image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 20px auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
 /* 图片栏样式 */
 .image-section {
     margin-bottom: 40px;
@@ -408,3 +417,4 @@ body {
         width: 100%;
     }
 }
+

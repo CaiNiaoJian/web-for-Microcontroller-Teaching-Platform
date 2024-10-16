@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>博客 - 文章</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="blogs.css"> <!-- 新增的样式文件 -->
+    <link rel="stylesheet" href="blog_forum.css"> <!-- 新增的样式文件 -->
 </head>
 <body>
     <!-- 导航栏 -->
@@ -13,12 +15,17 @@
             <a href="index.html" class="logo">博客</a>
             <ul class="nav-links">
                 <li><a href="index.html">首页</a></li>
-                <li><a href="blog.html">文章</a></li>
+                <li class="dropdown">
+                    <a href="blog.html" class="dropbtn">文章</a>
+                    <div class="dropdown-content">
+                        <a href="Paper_Writer/submit.html">想法投稿</a>
+                        <a href="Paper_Writer/PaperWriter.html">文章编辑</a>
+                        <a href="forum/forum.html">论坛&帖吧</a>
+                    </div>
+                </li>
                 <li><a href="StudySources/Sources.html">学习资源</a></li>
                 <li><a href="about.html">关于</a></li>
                 <li><a href="relation.html">联系</a></li>
-				<li><a href="Paper_Writer/submit.html">想法投稿</a></li>
-				<li><a href="Paper_Writer/PaperWriter.html">文章编辑</a></li>
                 <li><a href="Load/ManagementLoading.html">管理员登陆</a></li>
             </ul>
             <div class="menu-toggle" id="mobile-menu">
@@ -79,6 +86,18 @@
                 </div>
             </div>
         </section>
+
+        <!-- 论坛&帖吧板块 -->
+        <section class="forum">
+            <h2>论坛&帖吧</h2>
+            <div class="forum-grid">
+                <div class="forum-item">
+                    <h3>交流社区</h3>
+                    <p>这算是一个社区，来交流一下吧！</p>
+                    <a href="forum/forum.html" target="_blank" class="read-more">进入</a>
+                </div>
+            </div>
+        </section>
     </div>
 
     <!-- 页脚 -->
@@ -90,5 +109,6 @@
 
     <!-- JavaScript -->
     <script src="scripts.js"></script>
+    <script src="blogs.js"></script> <!-- 新增的脚本文件 -->
 </body>
 </html>
