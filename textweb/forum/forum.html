@@ -1,9 +1,148 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<title></title>
-	</head>
-	<body>
-	</body>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>论坛 - 博客</title>
+    <link rel="stylesheet" href="forum.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="logo">博客</a>
+            <ul class="nav-links">
+                <li><a href="../index.html">首页</a></li>
+                <li><a href="../blog.html">文章</a></li>
+                <li><a href="../about.html">关于</a></li>
+                <li><a href="../relation.html">联系</a></li>
+            </ul>
+            <div class="menu-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主要内容 -->
+    <div class="container forum-content">
+        <!-- 左侧板块：论坛分类 -->
+        <aside class="forum-sidebar">
+            <h2>论坛分类</h2>
+            <ul class="forum-categories">
+                <li><a href="#">技术讨论</a></li>
+                <li><a href="#">生活分享</a></li>
+                <li><a href="#">游戏交流</a></li>
+                <li><a href="#">学习资源</a></li>
+            </ul>
+        </aside>
+
+        <!-- 中间板块：帖子列表 -->
+        <main class="forum-main">
+            <h1>论坛帖子</h1>
+            <div class="forum-posts-container">
+                <ul class="forum-posts">
+                    <li class="forum-post">
+                        <h2><a href="#">帖子标题 1</a></h2>
+                        <p>这是帖子 1 的简短描述。这是帖子 1 的简短描述。</p>
+                        <div class="post-meta">
+                            <span class="author">作者: 张三</span>
+                            <span class="date">发布时间: 2023-10-04</span>
+                        </div>
+                    </li>
+                    <li class="forum-post">
+                        <h2><a href="#">帖子标题 2</a></h2>
+                        <p>这是帖子 2 的简短描述。这是帖子 2 的简短描述。</p>
+                        <div class="post-meta">
+                            <span class="author">作者: 李四</span>
+                            <span class="date">发布时间: 2023-10-03</span>
+                        </div>
+                    </li>
+					<li class="forum-post">
+					    <h2><a href="#">帖子标题 2</a></h2>
+					    <p>这是帖子 2 的简短描述。这是帖子 2 的简短描述。</p>
+					    <div class="post-meta">
+					        <span class="author">作者: 李四</span>
+					        <span class="date">发布时间: 2023-10-03</span>
+					    </div>
+					</li>
+					<li class="forum-post">
+					    <h2><a href="#">帖子标题 2</a></h2>
+					    <p>这是帖子 2 的简短描述。这是帖子 2 的简短描述。</p>
+					    <div class="post-meta">
+					        <span class="author">作者: 李四</span>
+					        <span class="date">发布时间: 2023-10-03</span>
+					    </div>
+					</li>
+					<li class="forum-post">
+					    <h2><a href="#">帖子标题 2</a></h2>
+					    <p>这是帖子 2 的简短描述。这是帖子 2 的简短描述。</p>
+					    <div class="post-meta">
+					        <span class="author">作者: 李四</span>
+					        <span class="date">发布时间: 2023-10-03</span>
+					    </div>
+					</li>
+					<li class="forum-post">
+					    <h2><a href="#">帖子标题 2</a></h2>
+					    <p>这是帖子 2 的简短描述。这是帖子 2 的简短描述。</p>
+					    <div class="post-meta">
+					        <span class="author">作者: 李四</span>
+					        <span class="date">发布时间: 2023-10-03</span>
+					    </div>
+					</li>
+                    <!-- 更多帖子 -->
+                </ul>
+            </div>
+
+            <!-- 编辑区 -->
+            <div class="forum-editor">
+                <h2>发布新帖子</h2>
+                <form id="post-form">
+                    <div class="form-group">
+                        <label for="post-title">标题</label>
+                        <input type="text" id="post-title" name="post-title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="post-content">内容</label>
+                        <textarea id="post-content" name="post-content" rows="5" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="post-emojis">表情包</label>
+                        <select id="post-emojis" name="post-emojis">
+                            <option value="😀">😀</option>
+                            <option value="😂">😂</option>
+                            <option value="👍">👍</option>
+                            <option value="❤️">❤️</option>
+                        </select>
+                    </div>
+                    <button type="submit">发布</button>
+                </form>
+            </div>
+        </main>
+
+        <!-- 右侧板块：帖子详情 -->
+        <aside class="forum-details">
+            <h2>帖子详情</h2>
+            <div class="post-detail">
+                <h3>帖子标题 1</h3>
+                <p>这是帖子 1 的详细内容。这是帖子 1 的详细内容。这是帖子 1 的详细内容。</p>
+                <div class="post-meta">
+                    <span class="author">作者: 张三</span>
+                    <span class="date">发布时间: 2023-10-04</span>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 博客. 版权所有归中国矿业大学。来自计算机学院和机电学院。</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="forum.js"></script>
+</body>
 </html>
