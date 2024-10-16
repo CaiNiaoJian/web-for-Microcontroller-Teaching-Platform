@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="blogs.css"> <!-- 新增的样式文件 -->
     <link rel="stylesheet" href="blog_forum.css"> <!-- 新增的样式文件 -->
+	<link rel="stylesheet" href="styles2.css"><!-- 图片墙 -->
+	
 </head>
 <body>
     <!-- 导航栏 -->
@@ -98,6 +100,14 @@
                 </div>
             </div>
         </section>
+		
+		<!-- 图片墙 -->
+		<section class="image-wall">
+		    <img src="images/专业图1.jpg" alt="风景1" class="image">
+		    <img src="images/专业图2.jpg" alt="风景2" class="image">
+		    <img src="images/专业图3.png" alt="风景3" class="image">
+		</section>
+		
     </div>
 
     <!-- 页脚 -->
@@ -110,5 +120,19 @@
     <!-- JavaScript -->
     <script src="scripts.js"></script>
     <script src="blogs.js"></script> <!-- 新增的脚本文件 -->
+	
+	<script>
+	    // 图片墙动态效果
+	    const images = document.querySelectorAll('.image-wall img');
+	    
+	    let delay = 0;
+	    images.forEach(image => {
+	        setTimeout(() => {
+	            image.classList.add('show');
+	        }, delay);
+	        delay += 1000; // 每张图片延迟 2 秒
+	    });
+	</script>
+	
 </body>
 </html>
