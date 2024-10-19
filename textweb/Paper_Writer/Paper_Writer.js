@@ -20,18 +20,66 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 插入代码按钮
     codeBtn.addEventListener('click', () => {
-        const code = prompt('请输入代码片段：');
-        if (code) {
-            document.execCommand('insertHTML', false, `<pre><code>${code}</code></pre>`);
-        }
+        const modal = document.createElement('div');
+        modal.className = 'modal';
+        modal.innerHTML = `
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <textarea id="code-input" placeholder="请输入代码片段..."></textarea>
+                <button id="insert-code-btn">插入代码</button>
+            </div>
+        `;
+        document.body.appendChild(modal);
+
+        const closeBtn = modal.querySelector('.close');
+        const insertCodeBtn = modal.querySelector('#insert-code-btn');
+        const codeInput = modal.querySelector('#code-input');
+
+        closeBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        insertCodeBtn.addEventListener('click', () => {
+            const code = codeInput.value;
+            if (code) {
+                document.execCommand('insertHTML', false, `<pre><code>${code}</code></pre>`);
+            }
+            modal.style.display = 'none';
+        });
+
+        modal.style.display = 'block';
     });
 
     // 插入LaTeX按钮
     latexBtn.addEventListener('click', () => {
-        const latex = prompt('请输入LaTeX公式：');
-        if (latex) {
-            document.execCommand('insertHTML', false, `<span class="latex">${latex}</span>`);
-        }
+        const modal = document.createElement('div');
+        modal.className = 'modal';
+        modal.innerHTML = `
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <textarea id="latex-input" placeholder="请输入LaTeX公式..."></textarea>
+                <button id="insert-latex-btn">插入LaTeX</button>
+            </div>
+        `;
+        document.body.appendChild(modal);
+
+        const closeBtn = modal.querySelector('.close');
+        const insertLatexBtn = modal.querySelector('#insert-latex-btn');
+        const latexInput = modal.querySelector('#latex-input');
+
+        closeBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        insertLatexBtn.addEventListener('click', () => {
+            const latex = latexInput.value;
+            if (latex) {
+                document.execCommand('insertHTML', false, `<span class="latex">${latex}</span>`);
+            }
+            modal.style.display = 'none';
+        });
+
+        modal.style.display = 'block';
     });
 
     // 发布按钮
