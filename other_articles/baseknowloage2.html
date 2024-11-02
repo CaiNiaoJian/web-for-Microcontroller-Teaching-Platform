@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>51单片机开发进阶知识和嵌入式C语言实践</title>
+    <style>
+        /* 全局样式 */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        /* 页头样式 */
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+        }
+
+        /* 内容区域样式 */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+        .article-content {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .article-content h2 {
+            margin-top: 0;
+        }
+        .article-content p {
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .article-content ul {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+        .article-content li {
+            margin-bottom: 10px;
+        }
+        .article-content pre {
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .article-content code {
+            font-family: monospace;
+        }
+        .article-content .code-explanation {
+            margin-top: 20px;
+        }
+        .article-content .code-explanation h3 {
+            margin-top: 0;
+        }
+        .article-content .code-explanation p {
+            margin-bottom: 10px;
+        }
+        .article-content .learning-resources {
+            margin-top: 40px;
+        }
+        .article-content .learning-resources h3 {
+            margin-top: 0;
+        }
+        .article-content .learning-resources ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .article-content .learning-resources li {
+            margin-bottom: 10px;
+        }
+        .article-content .learning-resources a {
+            color: #333;
+            text-decoration: none;
+        }
+        .article-content .learning-resources a:hover {
+            color: #555;
+        }
+        .back-button {
+            display: inline-block;
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .back-button:hover {
+            background-color: #555;
+        }
+
+        /* 页脚样式 */
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        footer p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>51单片机开发进阶知识和嵌入式C语言实践</h1>
+    </header>
+
+    <div class="container">
+        <div class="article-content">
+            <h2>中断系统</h2>
+            <p>51单片机的中断系统是其重要的功能之一。中断可以使CPU暂时中断正在执行的程序,转而执行中断服务程序,从而实现对外部事件的及时响应。51单片机有以下几种中断源:</p>
+            <ul>
+                <li>外部中断0和外部中断1</li>
+                <li>定时器0和定时器1中断</li>
+                <li>串行口接收和发送中断</li>
+                <li>ADC完成中断</li>
+            </ul>
+            <p>中断服务程序需要遵循以下规则:</p>
+            <ul>
+                <li>使用关键字<code>interrupt</code>声明</li>
+                <li>函数名需要与中断向量表中的名称一致</li>
+                <li>在中断服务程序中需要保存和恢复被中断的现场</li>
+                <li>中断服务程序应该尽快返回,以免影响其他中断的响应</li>
+            </ul>
+
+            <h2>串行通信</h2>
+            <p>51单片机集成了UART(通用异步收发器)模块,可以实现串行通信。串行通信的主要步骤包括:</p>
+            <ul>
+                <li>设置波特率</li>
+                <li>初始化UART模块</li>
+                <li>发送和接收数据</li>
+                <li>处理接收中断</li>
+            </ul>
+            <p>以下是一个简单的串行通信程序示例:</p>
+
+            <pre><code>
+#include &lt;reg51.h&gt;
+
+void uart_init() {
+    TMOD = 0x20; // 设置定时器1为模式2
+    TH1 = 0xFD; // 设置波特率为9600bps
+    SCON = 0x50; // 设置串口为模式1
+    TR1 = 1; // 启动定时器1
+}
+
+void uart_send(unsigned char dat) {
+    SBUF = dat; // 将数据写入发送缓冲区
+    while (TI == 0); // 等待发送完成
+    TI = 0; // 清除发送标志
+}
+
+void uart_recv() interrupt 4 {
+    unsigned char rec_data = SBUF; // 读取接收缓冲区的数据
+    RI = 0; // 清除接收标志
+    // 在此处处理接收到的数据
+}
+
+void main() {
+    uart_init(); // 初始化串口
+    while (1) {
+        uart_send('A'); // 发送字符'A'
+        // 在此处添加其他串口通信代码
+    }
+}
+            </code></pre>
+
+            <h2>ADC转换</h2>
+            <p>51单片机通常集成了ADC(模数转换器)模块,可以将模拟量信号转换为数字量。ADC转换的主要步骤包括:</p>
+            <ul>
+                <li>选择ADC通道</li>
+                <li>启动ADC转换</li>
+                <li>读取转换结果</li>
+                <li>处理ADC完成中断</li>
+            </ul>
+            <p>以下是一个简单的ADC转换程序示例:</p>
+
+            <pre><code>
+#include &lt;reg51.h&gt;
+
+sbit ADC_CS = P2^6; // ADC片选引脚
+sbit ADC_CLK = P2^7; // ADC时钟引脚
+
+unsigned int adc_read(unsigned char channel) {
+    unsigned int result;
+    ADC_CS = 0; // 片选ADC
+    ADCON = channel; // 选择ADC通道
+    ADC_CLK = 0; // 启动ADC转换
+    while (!(ADCON & 0x80)); // 等待转换完成
+    result = (ADCH << 8) | ADCL; // 读取转换结果
+    ADC_CS = 1; // 取消片选
+    return result;
+}
+
+void adc_isr() interrupt 10 {
+    // 在此处处理ADC完成中断
+}
+
+void main() {
+    unsigned int adc_value;
+    while (1) {
+        adc_value = adc_read(0); // 读取ADC通道0的值
+        // 在此处处理ADC转换结果
+    }
+}
+            </code></pre>
+
+            <h2>PWM输出</h2>
+            <p>51单片机可以通过定时器模块实现PWM(脉冲宽度调制)输出,用于控制电机、LED亮度等。PWM输出的主要步骤包括:</p>
+            <ul>
+                <li>设置定时器模式</li>
+                <li>配置PWM周期和占空比</li>
+                <li>输出PWM信号</li>
+            </ul>
+            <p>以下是一个简单的PWM输出程序示例:</p>
+
+            <pre><code>
+#include &lt;reg51.h&gt;
+
+sbit PWM_OUT = P1^0; // PWM输出引脚
+
+void pwm_init() {
+    TMOD = 0x20; // 设置定时器1为模式2
+    TH1 = 0xFF; // 设置PWM周期
+    TL1 = 0x00;
+    TR1 = 1; // 启动定时器1
+}
+
+void pwm_set(unsigned char duty) {
+    CCAP0L = duty; // 设置PWM占空比
+}
+
+void main() {
+    pwm_init(); // 初始化PWM
+    while (1) {
+        pwm_set(0x80); // 设置PWM占空比为50%
+        // 在此处添加其他PWM控制代码
+    }
+}
+            </code></pre>
+
+            <h2>EEPROM读写</h2>
+            <p>51单片机通常集成了EEPROM(电可擦可编程只读存储器),可以用于存储配置参数、历史数据等。EEPROM读写的主要步骤包括:</p>
+            <ul>
+                <li>设置EEPROM地址</li>
+                <li>读取或写入EEPROM数据</li>
+                <li>等待EEPROM操作完成</li>
+            </ul>
+            <p>以下是一个简单的EEPROM读写程序示例:</p>
+
+            <pre><code>
+#include &lt;reg51.h&gt;
+
+unsigned char eeprom_read(unsigned int addr) {
+    unsigned char dat;
+    ACC = addr;
+    PSW = (PSW &amp; 0xF8) | ((addr &gt;&gt; 8) &amp; 0x07); // 设置EEPROM地址高3位
+    ECON = 0x00; // 设置EEPROM控制寄存器
+    ECON |= 0x01; // 启动EEPROM读操作
+    while (ECON &amp; 0x01); // 等待读操作完成
+    dat = *((unsigned char code *) 0x2100); // 读取EEPROM数据
+    return dat;
+}
+
+void eeprom_write(unsigned int addr, unsigned char dat) {
+    ACC = addr;
+    PSW = (PSW &amp; 0xF8) | ((addr &gt;&gt; 8) &amp; 0x07); // 设置EEPROM地址高3位
+    *((unsigned char code *) 0x2100) = dat; // 写入EEPROM数据
+    ECON = 0x02; // 设置EEPROM控制寄存器
+    ECON |= 0x02; // 启动EEPROM写操作
+    while (ECON &amp; 0x02); // 等待写操作完成
+}
+
+void main() {
+    unsigned char data;
+    data = eeprom_read(0x0100); // 读取EEPROM地址0x0100的数据
+    eeprom_write(0x0100, 0x55); // 向EEPROM地址0x0100写入数据0x55
+}
+            </code></pre>
+
+            <h2>学习资源</h2>
+            <p>以下是一些推荐的51单片机和嵌入式C语言学习资源:</p>
+            <ul>
+                <li><a href="https://www.keil.com/support/man/docs/c51/">Keil C51编程手册</a></li>
+                <li><a href="https://www.electronicshub.org/8051-microcontroller-tutorial/">8051单片机教程</a></li>
+                <li><a href="https://www.embedded.com/category/embedded-c/">嵌入式C语言教程</a></li>
+                <li><a href="https://www.youtube.com/playlist?list=PLWPirh4EWFpEvN4jcCyuWT_uiXPqiGDkY">51单片机视频教程</a></li>
+            </ul>
+			
+			 <a href="other-articles.html" class="back-button">返回</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 51单片机开发教程. All rights reserved.</p>
+    </footer>
+<script>window.parent.postMessage({ action: "ready" }, "*"); 
+ 
+window.console = new Proxy(console, {
+  get(target, prop) {
+    if (['log', 'warn', 'error'].includes(prop)) {
+      return new Proxy(target[prop], {
+        apply(fn, thisArg, args) {
+          fn.apply(thisArg, args);
+          window.parent.postMessage({ action: 'console', 
+            type: prop, 
+            args: args.map((arg) => {
+              try {
+                return JSON.stringify(arg).replace(/^["']|["']$/g, '');
+              } catch (e) {
+                return arg;
+              }
+            }) 
+          }, '*');
+        }
+      });
+    }
+    return target[prop];
+  }
+});
+</script></body>
+</html>

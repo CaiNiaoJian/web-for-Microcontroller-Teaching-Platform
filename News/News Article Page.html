@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>News Article</title>
+  <style>
+    /* Global styles */
+    body {
+      font-family: Georgia, serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f8ff;
+    }
+
+    /* Header styles */
+    header {
+      background-color: rgba(65, 105, 225, 0.8);
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 32px;
+    }
+
+    .back-button {
+      background-color: #fff;
+      color: #4169e1;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .back-button:hover {
+      background-color: #4169e1;
+      color: #fff;
+    }
+
+    /* Main content styles */
+    main {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .news-article {
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 40px;
+    }
+
+    .news-article h2 {
+      color: #4169e1;
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    .news-article .news-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      color: #888;
+      font-size: 14px;
+    }
+
+    .news-article .news-meta .news-tag {
+      display: inline-block;
+      padding: 4px 12px;
+      background-color: #4169e1;
+      color: #fff;
+      border-radius: 20px;
+      font-size: 12px;
+    }
+
+    .news-article .news-content {
+      font-size: 16px;
+      line-height: 1.6;
+      color: #333;
+    }
+
+    .news-article .news-content img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 5px;
+      margin: 20px 0;
+    }
+
+    .news-article .news-content p {
+      margin-bottom: 20px;
+    }
+
+    /* Comment section styles */
+    .comment-section {
+      margin-top: 40px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+    }
+
+    .comment-section h3 {
+      color: #4169e1;
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+
+    .comment-form {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 20px;
+    }
+
+    .comment-form input,
+    .comment-form textarea {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    .comment-form textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .comment-form .emoji-picker {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+
+    .comment-form .emoji-picker .emoji {
+      font-size: 24px;
+      margin: 0 5px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .comment-form .emoji-picker .emoji.selected {
+      transform: scale(1.2);
+    }
+
+    .comment-form button {
+      background-color: #4169e1;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .comment-form button:hover {
+      background-color: #1e90ff;
+    }
+
+    .comment {
+      border-top: 1px solid #eee;
+      padding-top: 20px;
+      margin-top: 20px;
+    }
+
+    .comment .comment-author {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .comment .comment-date {
+      color: #888;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .comment .comment-content {
+      font-size: 16px;
+      line-height: 1.6;
+      color: #333;
+      display: flex;
+      align-items: center;
+    }
+
+    .comment .comment-content .emoji {
+      font-size: 24px;
+      margin-right: 10px;
+    }
+
+    .comment .reply-form {
+      margin-top: 10px;
+      display: none;
+    }
+
+    .comment .reply-form input,
+    .comment .reply-form textarea {
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+
+    .comment .reply-form button {
+      background-color: #4169e1;
+      color: #fff;
+      border: none;
+      padding: 5px 10px;
+      font-size: 14px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .comment .reply-form button:hover {
+      background-color: #1e90ff;
+    }
+
+    /* Footer styles */
+    footer {
+      background-color: rgba(65, 105, 225, 0.8);
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="#" class="back-button">← Back</a>
+    <h1>News Article</h1>
+  </header>
+
+  <main>
+    <div class="news-article">
+      <h2>Tech Giant Announces Major Acquisition</h2>
+      <div class="news-meta">
+        <span class="news-tag">Technology</span>
+        <span class="news-date">January 20, 2024</span>
+      </div>
+      <div class="news-content">
+        <img src="/api/placeholder/800/400" alt="News Image">
+        <p>In a surprise move, the leading tech company has acquired a smaller startup, signaling a shift in their strategic direction. The acquisition is expected to bolster the tech giant's capabilities in a rapidly evolving industry, as they aim to stay ahead of the curve and maintain their competitive edge.</p>
+        <p>The deal, valued at $1.2 billion, will see the integration of the startup's innovative technology and talented team into the tech giant's operations. Industry analysts believe this move could pave the way for new product offerings and enhanced services, ultimately benefiting the company's customers and shareholders.</p>
+        <p>The announcement has generated significant buzz within the tech community, with many speculating on the potential synergies and long-term implications of the acquisition. As the integration process unfolds, industry watchers will closely monitor the developments and their impact on the broader technology landscape.</p>
+      </div>
+    </div>
+
+    <div class="comment-section">
+      <h3>Comments</h3>
+      <div class="comment-form">
+        <input type="text" placeholder="Name" id="comment-name">
+        <textarea placeholder="Leave a comment..." id="comment-text"></textarea>
+        <div class="emoji-picker">
+          <span class="emoji">😀</span>
+          <span class="emoji">😃</span>
+          <span class="emoji">😄</span>
+          <span class="emoji">😁</span>
+          <span class="emoji">😆</span>
+          <span class="emoji">😅</span>
+          <span class="emoji">😂</span>
+          <span class="emoji">🤣</span>
+        </div>
+        <button id="submit-comment">Submit</button>
+      </div>
+      <div id="comments-container">
+        <!-- Comments will be dynamically added here -->
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2023 News Article. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Function to add a new comment
+    function addComment(name, content, date, emoji) {
+      const commentsContainer = document.getElementById('comments-container');
+      const commentElement = document.createElement('div');
+      commentElement.classList.add('comment');
+
+      commentElement.innerHTML = `
+        <div class="comment-author">${name}</div>
+        <div class="comment-date">${date}</div>
+        <div class="comment-content">
+          <span class="emoji">${emoji}</span>
+          ${content}
+          <div class="reply-form">
+            <input type="text" placeholder="Reply" class="reply-input">
+            <button class="reply-button">Reply</button>
+          </div>
+          <button class="reply-toggle">Reply</button>
+        </div>
+      `;
+
+      commentsContainer.appendChild(commentElement);
+
+      // Add event listener for reply button
+      const replyToggle = commentElement.querySelector('.reply-toggle');
+      const replyForm = commentElement.querySelector('.reply-form');
+      replyToggle.addEventListener('click', () => {
+        replyForm.style.display = replyForm.style.display === 'none' ? 'block' : 'none';
+      });
+
+      // Add event listener for reply submission
+      const replyInput = commentElement.querySelector('.reply-input');
+      const replyButton = commentElement.querySelector('.reply-button');
+      replyButton.addEventListener('click', () => {
+        if (replyInput.value.trim() !== '') {
+          const replyContent = replyInput.value;
+          addReply(name, replyContent, new Date().toLocaleString());
+          replyInput.value = '';
+        }
+      });
+    }
+
+    // Function to add a reply
+    function addReply(name, content, date) {
+      const commentsContainer = document.getElementById('comments-container');
+      const lastComment = commentsContainer.lastElementChild;
+      const replyElement = document.createElement('div');
+      replyElement.classList.add('comment');
+      replyElement.innerHTML = `
+        <div class="comment-author">${name}</div>
+        <div class="comment-date">${date}</div>
+        <div class="comment-content">${content}</div>
+      `;
+      lastComment.appendChild(replyElement);
+    }
+
+    // Event listener for the submit button
+    document.getElementById('submit-comment').addEventListener('click', () => {
+      const nameInput = document.getElementById('comment-name');
+      const commentInput = document.getElementById('comment-text');
+      const emojiPicker = document.querySelectorAll('.emoji-picker .emoji');
+      let selectedEmoji = '😀';
+
+      if (nameInput.value.trim() !== '' && commentInput.value.trim() !== '') {
+        emojiPicker.forEach(emoji => {
+          if (emoji.classList.contains('selected')) {
+            selectedEmoji = emoji.textContent;
+          }
+        });
+
+        const currentDate = new Date().toLocaleString();
+        addComment(nameInput.value, commentInput.value, currentDate, selectedEmoji);
+
+        // Clear the input fields
+        nameInput.value = '';
+        commentInput.value = '';
+        emojiPicker.forEach(emoji => emoji.classList.remove('selected'));
+      }
+    });
+
+    // Event listener for emoji selection
+    const emojiPicker = document.querySelectorAll('.emoji-picker .emoji');
+    emojiPicker.forEach(emoji => {
+      emoji.addEventListener('click', () => {
+        emojiPicker.forEach(e => e.classList.remove('selected'));
+        emoji.classList.add('selected');
+      });
+    });
+  </script>
+<script>window.parent.postMessage({ action: "ready" }, "*"); 
+ 
+window.console = new Proxy(console, {
+  get(target, prop) {
+    if (['log', 'warn', 'error'].includes(prop)) {
+      return new Proxy(target[prop], {
+        apply(fn, thisArg, args) {
+          fn.apply(thisArg, args);
+          window.parent.postMessage({ action: 'console', 
+            type: prop, 
+            args: args.map((arg) => {
+              try {
+                return JSON.stringify(arg).replace(/^["']|["']$/g, '');
+              } catch (e) {
+                return arg;
+              }
+            }) 
+          }, '*');
+        }
+      });
+    }
+    return target[prop];
+  }
+});
+</script></body>
+</html>
