@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>控制类文章标题 1 - 博客</title>
+		<link rel="stylesheet" href="../styles.css">
+		<link rel="stylesheet" href="control_articles.css">
+		<style>
+			.back-button {
+				display: inline-block;
+				background-color: #333;
+				color: #fff;
+				padding: 10px 20px;
+				text-decoration: none;
+				border-radius: 5px;
+				margin-top: 20px;
+			}
+
+			.back-button:hover {
+				background-color: #555;
+			}
+
+			.article-detail .article-meta {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				margin-bottom: 20px;
+			}
+
+			.article-detail .article-meta span {
+				font-size: 14px;
+				color: #666;
+			}
+
+			.article-detail .article-meta .views,
+			.article-detail .article-meta .date {
+				display: flex;
+				align-items: center;
+			}
+
+			.article-detail .article-meta .views::before,
+			.article-detail .article-meta .date::before {
+				content: '';
+				display: inline-block;
+				width: 16px;
+				height: 16px;
+				margin-right: 5px;
+				background-size: cover;
+			}
+
+			.article-detail .article-meta .views::before {
+				background-image: url('icons/eye.png');
+			}
+
+			.article-detail .article-meta .date::before {
+				background-image: url('icons/calendar.png');
+			}
+
+			.article-detail .article-meta .views .view-count,
+			.article-detail .article-meta .date .publish-date {
+				font-weight: bold;
+			}
+
+			.article-detail img {
+				max-width: 100%;
+				height: auto;
+				display: block;
+				margin: 20px auto;
+				border-radius: 10px;
+				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+			}
+
+			.article-detail .code-block {
+				background-color: #f4f4f4;
+				padding: 15px;
+				border-radius: 5px;
+				overflow-x: auto;
+				margin: 20px 0;
+			}
+
+			.article-detail .code-block pre {
+				margin: 0;
+				font-family: 'Courier New', Courier, monospace;
+				white-space: pre-wrap;
+			}
+
+			/* 模态框样式 */
+			.modal {
+				display: none;
+				position: fixed;
+				z-index: 1;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				overflow: auto;
+				background-color: rgba(0, 0, 0, 0.5);
+			}
+
+			.modal-content {
+				background-color: #fefefe;
+				margin: 15% auto;
+				padding: 20px;
+				border: 1px solid #888;
+				width: 80%;
+				max-width: 600px;
+				border-radius: 10px;
+				position: relative;
+			}
+
+			.close {
+				color: #aaa;
+				position: absolute;
+				top: 10px;
+				right: 20px;
+				font-size: 28px;
+				font-weight: bold;
+				cursor: pointer;
+			}
+
+			.close:hover,
+			.close:focus {
+				color: black;
+				text-decoration: none;
+				cursor: pointer;
+			}
+
+			/* 表格样式 */
+			table {
+				width: 100%;
+				border-collapse: collapse;
+				margin-bottom: 20px;
+			}
+
+			th,
+			td {
+				border: 1px solid #ddd;
+				padding: 8px;
+				text-align: center;
+			}
+
+			th {
+				background-color: #4CAF50;
+				color: white;
+			}
+
+			.component {
+				font-weight: bold;
+			}
+
+			.pin {
+				font-size: 12px;
+				color: #555;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- 导航栏 -->
+		<nav class="navbar">
+			<div class="container">
+				<a href="../index.html" class="logo">博客</a>
+				<ul class="nav-links">
+					<li><a href="../index.html">首页</a></li>
+					<li><a href="../blog.html">文章</a></li>
+					<li><a href="../about.html">关于</a></li>
+					<li><a href="../relation.html">联系</a></li>
+				</ul>
+				<div class="menu-toggle" id="mobile-menu">
+					<span class="bar"></span>
+					<span class="bar"></span>
+					<span class="bar"></span>
+				</div>
+			</div>
+		</nav>
+
+		<!-- 主要内容 -->
+		<div class="container main-content">
+			<!-- 文章内容 -->
+			<article class="article-detail" data-views="0" data-date="2024-10-14">
+				<h1>波形发生器设计实验</h1>
+				<div class="article-meta">
+					<span class="views">阅读次数: <span class="view-count">0</span></span>
+					<span class="date">发布时间: <span class="publish-date">2024-10-14</span></span>
+					<button id="open-modal" class="back-button">元器件介绍</button>
+				</div>
+				<h2>一． 实验目的</h2>
+				<p>学习定时器的工作模式，掌握定时器工作模式的配置方式、工作状态的控制以及对应中断的控制。</p>
+				<h2>二． 实验原理</h2>
+				<p>方波以及PWM波形的产生：</p>
+				<p>通过定时翻转I/O口可以产生一定周期的方波，修改翻转的时间间隔即可实现不同频率的方波波形。PWM波建立在方波的基础上，修改每个周期中高电平所占时间比例即可产生相应的PWM波。同时PWM波也作为一种驱动手段广泛地应用在直流电机、舵机、无源蜂鸣器等外设的使用中。
+				</p>
+				<p>I/O口扫描：</p>
+				<p>当I/O口作为输入口时，往往需要动态地反馈采集到的外部数据，为了实时接收数据并让CPU快速响应，通常会采用扫描的方式，以极短的时间间隔重复读取I/O口的数值并做出判断。</p>
+				<h2>三． 实验要求</h2>
+				<ul>
+					<li>能够产生不同频率方波，可通过按钮改变周期</li>
+					<li>PWM波，按钮调速（定时器+中断完成），改变占空比</li>
+					<li>运放功能，正弦波，等等 （拓展结合AD/DA）</li>
+					<li>将上述要求设计合理的操作界面（控制方式设计）</li>
+				</ul>
+				<h4>注：本实验所设计的波形并不要求能实现连续变化，即完成一定范围内波形的离散变化即可</h4>
+				<h2>四． 实验参考</h2>
+				<img src="Project_images/波形发生器设计实验/图1.png" alt="封面图" class="center-image">
+				<p>如图，通过P2.0设置方波周期，P2.1、P2.2分别控制占空比的增减，外部中断0实现整体程序复位，恢复默认波形，重置所有参数。</p>
+
+				<p>程序示例：</p>
+
+				<div class="code-block">
+					<pre>//定义按键</pre>
+					<img src="Project_images/波形发生器设计实验/代码1.png" alt="封面图" class="center-image">
+				</div>
+				<div class="code-block">
+					<pre>//参数设置，定义初始参数周期和占空比参数表，而Freq,dutycycle作为数组指针，将周期和占空比分成十份。</pre>
+					<img src="Project_images/波形发生器设计实验/代码2.png" alt="封面图" class="center-image">
+				</div>
+				<div class="code-block">
+					<pre>//0.1ms倒计时定时器0初始化，每0.1ms参数time+1，</pre>
+					<img src="Project_images/波形发生器设计实验/代码3.png" alt="封面图" class="center-image">
+				</div>
+				<div class="code-block">
+					<pre>//扫描按键，每个按键对应了10个档位的调节</pre>
+					<img src="Project_images/波形发生器设计实验/代码4.png" alt="封面图" class="center-image">
+				</div>
+				<div class="code-block">
+					<pre>//主程序</pre>
+					<img src="Project_images/波形发生器设计实验/代码5.png" alt="封面图" class="center-image">
+				</div>
+			</article>
+
+			<!-- 评论区 -->
+			<section class="comments">
+				<h2>评论区</h2>
+				<div class="comment-form">
+					<textarea id="comment-input" placeholder="请输入评论内容"></textarea>
+					<div class="emoji-picker">
+						<span class="emoji" data-emoji="😀">😀</span>
+						<span class="emoji" data-emoji="😊">😊</span>
+						<span class="emoji" data-emoji="😂">😂</span>
+						<span class="emoji" data-emoji="😍">😍</span>
+						<span class="emoji" data-emoji="😎">😎</span>
+						<span class="emoji" data-emoji="🤬">🤬</span>
+					</div>
+					<button id="submit-comment">提交评论</button>
+				</div>
+				<div class="comment-list">
+					<!-- 评论列表 -->
+				</div>
+			</section>
+		</div>
+
+		<!-- 模态框 -->
+		<div id="modal" class="modal">
+			<div class="modal-content">
+				<span class="close">&times;</span>
+				<h2>元器件介绍</h2>
+				<table>
+					<tr>
+						<th>引脚</th>
+						<th>功能</th>
+						<th>元件</th>
+						<th>连接</th>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>RST</td>
+						<td>U1</td>
+						<td>复位</td>
+					</tr>
+					<tr>
+						<td>2-9</td>
+						<td>P1.0-P1.7</td>
+						<td>U1</td>
+						<td>外部电路</td>
+					</tr>
+					<tr>
+						<td>10-17</td>
+						<td>P3.0-P3.7</td>
+						<td>U1</td>
+						<td>外部电路</td>
+					</tr>
+					<tr>
+						<td>18</td>
+						<td>GND</td>
+						<td>U1</td>
+						<td>电源负极</td>
+					</tr>
+					<tr>
+						<td>19</td>
+						<td>XTAL1</td>
+						<td>U1</td>
+						<td>X1 (晶振输入)</td>
+					</tr>
+					<tr>
+						<td>20</td>
+						<td>XTAL2</td>
+						<td>U1</td>
+						<td>X1 (晶振输出)</td>
+					</tr>
+					<tr>
+						<td>21-28</td>
+						<td>P2.0-P2.7</td>
+						<td>U1</td>
+						<td>外部电路</td>
+					</tr>
+					<tr>
+						<td>29</td>
+						<td>ALE</td>
+						<td>U1</td>
+						<td>地址锁存使能</td>
+					</tr>
+					<tr>
+						<td>30</td>
+						<td>EA</td>
+						<td>U1</td>
+						<td>外部访问使能</td>
+					</tr>
+					<tr>
+						<td>31</td>
+						<td>PSEN</td>
+						<td>U1</td>
+						<td>程序存储使能</td>
+					</tr>
+					<tr>
+						<td>32-39</td>
+						<td>P0.0-P0.7</td>
+						<td>U1</td>
+						<td>外部电路</td>
+					</tr>
+					<tr>
+						<td>40</td>
+						<td>VCC</td>
+						<td>U1</td>
+						<td>电源正极</td>
+					</tr>
+				</table>
+
+				<h2>元件列表</h2>
+				<table>
+					<tr>
+						<th>元件</th>
+						<th>型号/值</th>
+						<th>描述</th>
+					</tr>
+					<tr>
+						<td class="component">U1</td>
+						<td>AT89C51</td>
+						<td>8位微控制器</td>
+					</tr>
+					<tr>
+						<td class="component">C1</td>
+						<td>22pF</td>
+						<td>电容</td>
+					</tr>
+					<tr>
+						<td class="component">C2</td>
+						<td>22pF</td>
+						<td>电容</td>
+					</tr>
+					<tr>
+						<td class="component">C3</td>
+						<td>10uF</td>
+						<td>电容</td>
+					</tr>
+					<tr>
+						<td class="component">X1</td>
+						<td>12MHz</td>
+						<td>晶振</td>
+					</tr>
+				</table>
+
+				<h2>连接图</h2>
+				<table>
+					<tr>
+						<th>元件</th>
+						<th>引脚</th>
+						<th>连接</th>
+					</tr>
+					<tr>
+						<td class="component">U1</td>
+						<td class="pin">1</td>
+						<td>RST</td>
+					</tr>
+					<tr>
+						<td class="component">U1</td>
+						<td class="pin">2-9</td>
+						<td>P1.0-P1.7</td>
+					</tr>
+					<tr>
+						<td class="component">U1</td>
+						<td class="pin">10-17</td>
+						<td>P3.0-P3.7</td>
+					</tr>
+					<tr>
+						<td class="component">U1</td>
+						<td class="pin">18</td>
+						<td>GND</td>
+					</tr>
+					<tr>
+						<td class="component">U1</td>
+						<td class="pin">19</td>
+						<td>XTAL1</td>
+					</tr>
+					<tr>
+						<td class="component">U1</td>
+						<td class="pin">20</td>
+						<td>XTAL2</td>
+					</tr>
+					<tr>
+						<td class="component">U1</td>
+						<td class="pin">21-28</td>
+						<td>P2.0-P2.7</td>
+					</tr>
+					<tr>
+						<td class="component">U1</td>
+						<td class="pin">29</td>
+						<td>ALE</td>
+					</tr>
+					<tr>
+						<td class="component">U1</td>
+						<td class="pin">30</td>
+						<td>EA</td>
+					</tr>
+					<tr>
+						<td class="component">U1</td>
+						<td class="pin">31</td>
+						<td>PSEN</td>
+					</tr>
+					<tr>
+						<td class="component">U1</td>
+						<td class="pin">32-39</td>
+						<td>P0.0-P0.7</td>
+					</tr>
+					<tr>
+						<td class="component">U1</td>
+						<td class="pin">40</td>
+						<td>VCC</td>
+					</tr>
+					<tr>
+						<td class="component">X1</td>
+						<td class="pin">XTAL1</td>
+						<td>U1 (19)</td>
+					</tr>
+					<tr>
+						<td class="component">X1</td>
+						<td class="pin">XTAL2</td>
+						<td>U1 (20)</td>
+					</tr>
+					<tr>
+						<td class="component">C1</td>
+						<td class="pin">22pF</td>
+						<td>X1 (XTAL1)</td>
+					</tr>
+					<tr>
+						<td class="component">C2</td>
+						<td class="pin">22pF</td>
+						<td>X1 (XTAL2)</td>
+					</tr>
+					<tr>
+						<td class="component">C3</td>
+						<td class="pin">10uF</td>
+						<td>电源滤波</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+
+		<!-- 页脚 -->
+		<footer class="footer">
+			<div class="container">
+				<p>&copy; 2024 博客. 版权所有归中国矿业大学。来自计算机学院和机电学院。</p>
+			</div>
+		</footer>
+
+		<!-- JavaScript -->
+		<script src="../scripts.js"></script>
+		<script src="control_articles.js"></script>
+		<script>
+			// 打开模态框
+			document.getElementById('open-modal').addEventListener('click', function() {
+				document.getElementById('modal').style.display = 'block';
+			});
+
+			// 关闭模态框
+			document.querySelector('.close').addEventListener('click', function() {
+				document.getElementById('modal').style.display = 'none';
+			});
+
+			// 提交评论
+			document.getElementById('submit-comment').addEventListener('click', function() {
+				const commentInput = document.getElementById('comment-input');
+				const commentText = commentInput.value.trim();
+
+				if (commentText) {
+					const commentList = document.querySelector('.comment-list');
+					const newComment = document.createElement('div');
+					newComment.classList.add('comment');
+					const currentTime = new Date().toLocaleString();
+					newComment.innerHTML = `<p>${commentText}</p><span class="comment-time">${currentTime}</span>`;
+					commentList.appendChild(newComment);
+					commentInput.value = '';
+				}
+			});
+
+			// 选择表情
+			document.querySelectorAll('.emoji').forEach(emoji => {
+				emoji.addEventListener('click', function() {
+					const commentInput = document.getElementById('comment-input');
+					commentInput.value += this.getAttribute('data-emoji');
+				});
+			});
+		</script>
+	</body>
+</html>
