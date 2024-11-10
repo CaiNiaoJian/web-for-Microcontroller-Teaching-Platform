@@ -1,46 +1,143 @@
 body {
-    background-color: #ffffff; /* 淡蓝色背景 */
+	background-color: #f0f8ff;
+	/* 更浅的淡蓝色背景 */
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+
+.navbar {
+	background-color: #333;
+	color: #fff;
+	padding: 10px 0;
+	text-align: center;
+}
+
+.navbar .container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 20px;
+}
+
+.navbar .logo {
+	color: #fff;
+	text-decoration: none;
+	font-size: 1.5em;
 }
 
 .registration-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	padding: 0 20px;
+}
+
+.registration-content {
+	display: flex;
+	align-items: center;
+	background-color: #fff;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	overflow: hidden;
+	width: 100%;
+	max-width: 800px;
+}
+
+.side-image {
+	width: 50%;
+	height: auto;
+	object-fit: cover;
 }
 
 .registration-form {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 300px;
+	width: 50%;
+	padding: 20px;
 }
 
 .registration-form h2 {
-    margin-bottom: 20px;
-    text-align: center;
+	margin-bottom: 20px;
+	text-align: center;
 }
 
 .registration-form input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+	width: 100%;
+	padding: 10px;
+	margin-bottom: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	box-sizing: border-box;
+	/* 确保输入框的宽度包含内边距和边框 */
 }
 
 .registration-form button {
-    width: 100%;
-    padding: 10px;
-    background-color: #333;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+	width: 100%;
+	padding: 10px;
+	background-color: #333;
+	color: #fff;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
 }
 
 .registration-form button:hover {
-    background-color: #555;
+	background-color: #555;
+}
+
+.captcha-container {
+	display: flex;
+	align-items: center;
+	margin-bottom: 10px;
+}
+
+.captcha-container input {
+	flex: 1;
+	margin-right: 10px;
+}
+
+.captcha-container #captcha-image {
+	font-size: 20px;
+	font-weight: bold;
+	cursor: pointer;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	background-color: #f0f0f0;
+}
+
+.footer {
+	background-color: #333;
+	color: #fff;
+	text-align: center;
+	padding: 10px 0;
+	margin-top: auto;
+	/* 确保页脚固定在底部 */
+}
+
+.footer .container {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 20px;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+	.registration-content {
+		flex-direction: column;
+	}
+
+	.side-image,
+	.registration-form {
+		width: 100%;
+	}
+
+	.side-image {
+		margin-bottom: 20px;
+	}
 }
