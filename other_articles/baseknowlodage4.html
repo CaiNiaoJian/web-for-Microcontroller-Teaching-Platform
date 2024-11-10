@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>51单片机GPIO和基础外设开发</title>
+		<style>
+			/* 全局样式 */
+			body {
+				font-family: Arial, sans-serif;
+				margin: 0;
+				padding: 0;
+				background-color: #f5f5f5;
+			}
+
+			/* 页头样式 */
+			header {
+				background-color: #333;
+				color: #fff;
+				padding: 20px;
+				text-align: center;
+			}
+
+			header h1 {
+				margin: 0;
+			}
+
+			/* 内容区域样式 */
+			.container {
+				max-width: 800px;
+				margin: 0 auto;
+				padding: 40px;
+			}
+
+			.article-content {
+				background-color: #fff;
+				padding: 30px;
+				border-radius: 5px;
+				box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+			}
+
+			.article-content h2 {
+				margin-top: 0;
+			}
+
+			.article-content p {
+				line-height: 1.6;
+				margin-bottom: 20px;
+			}
+
+			.article-content ul {
+				margin-left: 20px;
+				margin-bottom: 20px;
+			}
+
+			.article-content li {
+				margin-bottom: 10px;
+			}
+
+			.article-content pre {
+				background-color: #f5f5f5;
+				padding: 20px;
+				border-radius: 5px;
+				overflow-x: auto;
+			}
+
+			.article-content code {
+				font-family: monospace;
+			}
+
+			.article-content .code-explanation {
+				margin-top: 20px;
+			}
+
+			.article-content .code-explanation h3 {
+				margin-top: 0;
+			}
+
+			.article-content .code-explanation p {
+				margin-bottom: 10px;
+			}
+
+			.article-content .gpio-showcase {
+				margin-top: 40px;
+			}
+
+			.article-content .gpio-showcase h3 {
+				margin-top: 0;
+			}
+
+			.article-content .gpio-showcase .gpio {
+				margin-bottom: 30px;
+			}
+
+			.article-content .gpio-showcase .gpio h4 {
+				margin-top: 0;
+			}
+
+			.article-content .gpio-showcase .gpio p {
+				margin-bottom: 10px;
+			}
+
+			.article-content .gpio-showcase .gpio pre {
+				margin-top: 10px;
+			}
+
+			.back-button {
+				display: inline-block;
+				background-color: #333;
+				color: #fff;
+				padding: 10px 20px;
+				text-decoration: none;
+				border-radius: 5px;
+				margin-top: 20px;
+			}
+
+			.back-button:hover {
+				background-color: #555;
+			}
+
+			/* 页脚样式 */
+			footer {
+				background-color: #333;
+				color: #fff;
+				padding: 20px;
+				text-align: center;
+			}
+
+			footer p {
+				margin: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<h1>51单片机GPIO和基础外设开发</h1>
+		</header>
+
+		<div class="container">
+			<div class="article-content">
+				<h2>GPIO基础</h2>
+				<p>GPIO(General Purpose Input/Output)是51单片机最基本的输入输出接口,可以用于连接各种外围设备。下面是一个GPIO控制LED灯的示例:</p>
+				<div class="gpio-showcase">
+					<div class="gpio">
+						<h4>GPIO控制LED灯</h4>
+						<pre><code>
+#include &lt;reg51.h&gt;
+
+sbit LED = P1^0; // 定义LED引脚
+
+void main() {
+    while (1) {
+        LED = 0; // 点亮LED
+        delay_ms(500); // 延迟500毫秒
+        LED = 1; // 熄灭LED
+        delay_ms(500); // 延迟500毫秒
+    }
+}
+
+void delay_ms(unsigned int ms) {
+    unsigned int i, j;
+    for (i = 0; i &lt; ms; i++)
+        for (j = 0; j &lt; 123; j++);
+}
+                    </code></pre>
+						<div class="code-explanation">
+							<h3>代码解析</h3>
+							<p>该程序实现了以下功能:</p>
+							<ul>
+								<li>定义一个LED引脚,连接到P1.0端口</li>
+								<li>在main()函数中,不断切换LED的状态,实现闪烁效果</li>
+								<li>使用delay_ms()函数实现毫秒级延迟</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<h2>按键输入</h2>
+				<div class="gpio-showcase">
+					<div class="gpio">
+						<h4>GPIO读取按键状态</h4>
+						<pre><code>
+#include &lt;reg51.h&gt;
+
+sbit KEY = P3^3; // 定义按键引脚
+
+void main() {
+    while (1) {
+        if (KEY == 0) { // 检测按键是否按下
+            delay_ms(20); // 消抖延迟
+            if (KEY == 0) { // 再次确认按键状态
+                // 按键处理代码
+                LED = ~LED; // 翻转LED状态
+            }
+            while (KEY == 0); // 等待按键释放
+        }
+    }
+}
+
+void delay_ms(unsigned int ms) {
+    unsigned int i, j;
+    for (i = 0; i &lt; ms; i++)
+        for (j = 0; j &lt; 123; j++);
+}
+                    </code></pre>
+						<div class="code-explanation">
+							<h3>代码解析</h3>
+							<p>该程序实现了以下功能:</p>
+							<ul>
+								<li>定义一个按键引脚,连接到P3.3端口</li>
+								<li>在main()函数中,不断检测按键状态,当按键按下时执行相应的处理</li>
+								<li>使用delay_ms()函数实现消抖延迟,防止按键抖动</li>
+								<li>在按键处理代码中,翻转LED的状态</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<h2>ADC转换</h2>
+				<div class="gpio-showcase">
+					<div class="gpio">
+						<h4>GPIO读取ADC转换结果</h4>
+						<pre><code>
+#include &lt;reg51.h&gt;
+
+sbit ADC_CS = P2^0; // ADC片选信号
+sbit ADC_CLK = P2^1; // ADC时钟信号
+sbit ADC_DOUT = P2^2; // ADC数据输出
+
+unsigned char adc_read(unsigned char channel) {
+    unsigned char i, adc_value = 0;
+    ADC_CS = 0; // 片选ADC
+    channel &amp;= 0x07; // 限制通道在0-7范围
+    // 发送通道选择命令
+    for (i = 0; i &lt; 3; i++) {
+        ADC_CLK = 0;
+        if (channel &amp; 0x04) ADC_DOUT = 1;
+        else ADC_DOUT = 0;
+        channel &lt;&lt;= 1;
+        ADC_CLK = 1;
+    }
+    // 读取ADC转换结果
+    for (i = 0; i &lt; 8; i++) {
+        ADC_CLK = 0;
+        adc_value &lt;&lt;= 1;
+        adc_value |= ADC_DOUT;
+        ADC_CLK = 1;
+    }
+    ADC_CS = 1; // 取消片选
+    return adc_value;
+}
+
+void main() {
+    unsigned char adc_value;
+    while (1) {
+        adc_value = adc_read(0); // 读取ADC通道0的值
+        // 处理ADC转换结果
+    }
+}
+                    </code></pre>
+						<div class="code-explanation">
+							<h3>代码解析</h3>
+							<p>该程序实现了以下功能:</p>
+							<ul>
+								<li>定义ADC的片选信号(ADC_CS)、时钟信号(ADC_CLK)和数据输出信号(ADC_DOUT)</li>
+								<li>实现adc_read()函数,用于读取指定ADC通道的转换结果</li>
+								<li>在main()函数中,不断读取ADC通道0的值,并进行相应的处理</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<h2>总结</h2>
+				<p>通过本篇教程,大家应该对51单片机的GPIO和一些基础外设开发有了更深入的了解。GPIO是单片机最基本的输入输出接口,可以用于连接各种外围设备,如LED灯和按键。ADC转换则可以用于读取模拟量传感器的数据。掌握这些基础知识对于后续的项目开发非常重要。
+				</p>
+				<a href="other-articles.html" class="back-button">返回</a>
+			</div>
+		</div>
+
+		<footer>
+			<p>&copy; 2024 51单片机开发教程. All rights reserved.</p>
+		</footer>
+		<script>
+			window.parent.postMessage({
+				action: "ready"
+			}, "*");
+
+			window.console = new Proxy(console, {
+				get(target, prop) {
+					if (['log', 'warn', 'error'].includes(prop)) {
+						return new Proxy(target[prop], {
+							apply(fn, thisArg, args) {
+								fn.apply(thisArg, args);
+								window.parent.postMessage({
+									action: 'console',
+									type: prop,
+									args: args.map((arg) => {
+										try {
+											return JSON.stringify(arg).replace(
+												/^["']|["']$/g, '');
+										} catch (e) {
+											return arg;
+										}
+									})
+								}, '*');
+							}
+						});
+					}
+					return target[prop];
+				}
+			});
+		</script>
+	</body>
+</html>

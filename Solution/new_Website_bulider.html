@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>关于我们的团队</title>
+		<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap"
+			rel="stylesheet">
+		<style>
+			body {
+				margin: 0;
+				overflow: hidden;
+				background-color: #000;
+				color: #fff;
+				font-family: 'Playfair Display', serif;
+			}
+
+			canvas {
+				display: block;
+				position: absolute;
+				top: 0;
+				left: 0;
+				z-index: -1;
+			}
+
+			.team-intro {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				text-align: center;
+				background-color: rgba(0, 0, 0, 0.7);
+				padding: 20px;
+				border-radius: 10px;
+				max-width: 90%;
+				width: 600px;
+			}
+
+			.team-intro h1 {
+				font-size: 2.5em;
+				margin-bottom: 20px;
+			}
+
+			.team-intro p {
+				font-size: 1.2em;
+				margin-bottom: 15px;
+			}
+
+			.team-intro ul {
+				list-style-type: none;
+				padding: 0;
+				margin-top: 20px;
+			}
+
+			.team-intro ul li {
+				font-size: 1.1em;
+				margin-bottom: 10px;
+			}
+
+			/* 手机适配 */
+			@media (max-width: 600px) {
+				.team-intro {
+					padding: 15px;
+				}
+
+				.team-intro h1 {
+					font-size: 2em;
+				}
+
+				.team-intro p {
+					font-size: 1em;
+				}
+
+				.team-intro ul li {
+					font-size: 0.9em;
+				}
+			}
+
+			/* 返回旧版按钮样式 */
+			.back-button {
+				position: absolute;
+				top: 20px;
+				right: 20px;
+				padding: 10px 20px;
+				background-color: rgba(0, 0, 0, 0.7);
+				color: #fff;
+				border: 2px solid transparent;
+				/* 初始边框颜色 */
+				border-image: linear-gradient(to right, #ff0000, #5500ff) 1;
+				/* 初始渐变边框 */
+				border-radius: 5px;
+				cursor: pointer;
+				font-size: 1em;
+				transition: background-color 0.3s, border-color 0.3s;
+				animation: borderAnimation 10s infinite;
+				/* 添加动画 */
+			}
+
+			.back-button:hover {
+				background-color: rgba(255, 99, 71, 0.7);
+				/* 悬停时背景色变化 */
+				border-color: #fff;
+				/* 悬停时边框颜色变化 */
+			}
+
+			/* 边框颜色动画 */
+			@keyframes borderAnimation {
+				0% {
+					border-image: linear-gradient(to right, #ff0000, #ff5500) 1;
+				}
+
+				20% {
+					border-image: linear-gradient(to right, #ff5500, #ffff00) 1;
+				}
+
+				40% {
+					border-image: linear-gradient(to right, #ffff00, #55ff7f) 1;
+				}
+
+				60% {
+					border-image: linear-gradient(to right, #55ff7f, #3582ff) 1;
+				}
+
+				80% {
+					border-image: linear-gradient(to right, #3582ff, #5500ff) 1;
+				}
+
+				100% {
+					border-image: linear-gradient(to right, #5500ff, #ff0000) 1;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="animationCanvas"></canvas>
+		<div class="team-intro">
+			<h1>关于我们的团队</h1>
+			<p>这个新版界面是一种对 CSS 技术的尝试和测试，也是对云服务器的考验。</p>
+			<p>我们的团队来自 CUMT 的 CS&CMEE 学院，我们是一群“被卷者”😔。</p>
+			<p>我们的代码都可以在 Github 的仓库里看到，但是截至现在作者（CaiNiaoJian）应该还没有上传，不是因为偷懒，而是暂时搞错了配置文件，密钥找不到了。</p>
+			<p>祝您生活愉快！</p>
+			<p style="font-style: italic; margin-top: 20px;">2024 中国矿业大学大创团队</p>
+		</div>
+		<button class="back-button" onclick="window.location.href='Website_builder.html'">返回旧版</button>
+		<script>
+			const canvas = document.getElementById('animationCanvas');
+			const ctx = canvas.getContext('2d');
+
+			canvas.width = window.innerWidth;
+			canvas.height = window.innerHeight;
+
+			const particlesArray = [];
+			const numberOfParticles = 100;
+			const speedFactor = 0.8; // 速度系数，减慢20%
+
+			class Particle {
+				constructor(x, y, size, color, velocity) {
+					this.x = x;
+					this.y = y;
+					this.size = size;
+					this.color = color;
+					this.velocity = {
+						x: velocity.x * speedFactor,
+						y: velocity.y * speedFactor
+					};
+				}
+
+				draw() {
+					ctx.beginPath();
+					ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+					ctx.fillStyle = this.color;
+					ctx.fill();
+				}
+
+				update() {
+					this.x += this.velocity.x;
+					this.y += this.velocity.y;
+
+					if (this.x > canvas.width || this.x < 0) {
+						this.velocity.x = -this.velocity.x;
+					}
+					if (this.y > canvas.height || this.y < 0) {
+						this.velocity.y = -this.velocity.y;
+					}
+
+					this.draw();
+				}
+			}
+
+			function init() {
+				for (let i = 0; i < numberOfParticles; i++) {
+					const size = Math.random() * 5 + 1;
+					const x = Math.random() * (canvas.width - size * 2) + size;
+					const y = Math.random() * (canvas.height - size * 2) + size;
+					const color = `hsl(${Math.random() * 360}, 100%, 50%)`;
+					const velocity = {
+						x: (Math.random() * 2) - 1,
+						y: (Math.random() * 2) - 1
+					};
+					particlesArray.push(new Particle(x, y, size, color, velocity));
+				}
+			}
+
+			function animate() {
+				ctx.clearRect(0, 0, canvas.width, canvas.height);
+				particlesArray.forEach(particle => particle.update());
+				requestAnimationFrame(animate);
+			}
+
+			init();
+			animate();
+		</script>
+	</body>
+</html>

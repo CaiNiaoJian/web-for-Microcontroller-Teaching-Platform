@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>新闻文章</title>
+		<style>
+			/* 全局样式 */
+			body {
+				font-family: "Microsoft YaHei", sans-serif;
+				margin: 0;
+				padding: 0;
+				background-color: #f0f8ff;
+			}
+
+			/* 头部样式 */
+			header {
+				background-color: rgba(65, 105, 225, 0.8);
+				color: #fff;
+				padding: 20px;
+				text-align: center;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+			}
+
+			header h1 {
+				margin: 0;
+				font-size: 32px;
+			}
+
+			.back-button {
+				background-color: #fff;
+				color: #4169e1;
+				border: none;
+				padding: 10px 20px;
+				font-size: 16px;
+				border-radius: 5px;
+				cursor: pointer;
+				text-decoration: none;
+				transition: background-color 0.3s, color 0.3s;
+			}
+
+			.back-button:hover {
+				background-color: #4169e1;
+				color: #fff;
+			}
+
+			/* 主要内容样式 */
+			main {
+				max-width: 800px;
+				margin: 40px auto;
+				padding: 0 20px;
+			}
+
+			.news-article {
+				background-color: #fff;
+				border-radius: 10px;
+				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+				padding: 40px;
+			}
+
+			.news-article h2 {
+				color: #4169e1;
+				font-size: 28px;
+				margin-bottom: 20px;
+			}
+
+			.news-article .news-meta {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				margin-bottom: 20px;
+				color: #888;
+				font-size: 14px;
+			}
+
+			.news-article .news-meta .news-tag {
+				display: inline-block;
+				padding: 4px 12px;
+				background-color: #4169e1;
+				color: #fff;
+				border-radius: 20px;
+				font-size: 12px;
+			}
+
+			.news-article .news-content {
+				font-size: 16px;
+				line-height: 1.6;
+				color: #333;
+			}
+
+			.news-article .news-content img {
+				max-width: 100%;
+				height: auto;
+				border-radius: 5px;
+				margin: 20px 0;
+			}
+
+			.news-article .news-content p {
+				margin-bottom: 20px;
+			}
+
+			/* 视频框样式 */
+			.news-article .news-content iframe {
+				width: 100%;
+				height: 400px;
+				/* 调整视频框的高度 */
+				border-radius: 5px;
+				margin: 20px 0;
+			}
+
+			/* 评论部分样式 */
+			.comment-section {
+				margin-top: 40px;
+				background-color: #fff;
+				border-radius: 10px;
+				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+				padding: 20px;
+			}
+
+			.comment-section h3 {
+				color: #4169e1;
+				font-size: 20px;
+				margin-bottom: 20px;
+			}
+
+			.comment-form {
+				display: flex;
+				flex-direction: column;
+				margin-bottom: 20px;
+			}
+
+			.comment-form input,
+			.comment-form textarea {
+				padding: 10px;
+				border: 1px solid #ccc;
+				border-radius: 5px;
+				font-size: 16px;
+				margin-bottom: 10px;
+			}
+
+			.comment-form textarea {
+				resize: vertical;
+				min-height: 100px;
+			}
+
+			.comment-form .emoji-picker {
+				display: flex;
+				justify-content: center;
+				margin-bottom: 10px;
+			}
+
+			.comment-form .emoji-picker .emoji {
+				font-size: 24px;
+				margin: 0 5px;
+				cursor: pointer;
+				transition: transform 0.3s;
+			}
+
+			.comment-form .emoji-picker .emoji.selected {
+				transform: scale(1.2);
+			}
+
+			.comment-form button {
+				background-color: #4169e1;
+				color: #fff;
+				border: none;
+				padding: 10px 20px;
+				font-size: 16px;
+				border-radius: 5px;
+				cursor: pointer;
+				transition: background-color 0.3s;
+			}
+
+			.comment-form button:hover {
+				background-color: #1e90ff;
+			}
+
+			.comment {
+				border-top: 1px solid #eee;
+				padding-top: 20px;
+				margin-top: 20px;
+			}
+
+			.comment .comment-author {
+				font-weight: bold;
+				margin-bottom: 5px;
+			}
+
+			.comment .comment-date {
+				color: #888;
+				font-size: 14px;
+				margin-bottom: 10px;
+			}
+
+			.comment .comment-content {
+				font-size: 16px;
+				line-height: 1.6;
+				color: #333;
+				display: flex;
+				align-items: center;
+			}
+
+			.comment .comment-content .emoji {
+				font-size: 24px;
+				margin-right: 10px;
+			}
+
+			.comment .reply-form {
+				margin-top: 10px;
+				display: none;
+			}
+
+			.comment .reply-form input,
+			.comment .reply-form textarea {
+				padding: 5px;
+				border: 1px solid #ccc;
+				border-radius: 5px;
+				font-size: 14px;
+				margin-bottom: 5px;
+			}
+
+			.comment .reply-form button {
+				background-color: #4169e1;
+				color: #fff;
+				border: none;
+				padding: 5px 10px;
+				font-size: 14px;
+				border-radius: 5px;
+				cursor: pointer;
+				transition: background-color 0.3s;
+			}
+
+			.comment .reply-form button:hover {
+				background-color: #1e90ff;
+			}
+
+			/* 页脚样式 */
+			footer {
+				background-color: rgba(65, 105, 225, 0.8);
+				color: #fff;
+				padding: 20px;
+				text-align: center;
+				font-size: 16px;
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<a href="news.html" class="back-button">← 返回</a>
+			<h1>新闻文章</h1>
+		</header>
+
+		<main>
+			<div class="news-article">
+				<h2>苏-57战机中国首秀 落叶飘超短起飞震撼全场！</h2>
+				<div class="news-meta">
+					<span class="news-tag">珠海航展</span>
+					<span class="news-date">2024年11月08日</span>
+				</div>
+				<div class="news-content">
+					<iframe
+						src="//player.bilibili.com/player.html?isOutside=true&aid=113444799908559&bvid=BV1NoD9YwE6g&cid=26662670089&p=1"
+						scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+					<h4>作者：b站up主 LovePlane1</h4>
+					<img src="news_images/苏57.png" />
+				</div>
+			</div>
+
+			<div class="comment-section">
+				<h3>评论</h3>
+				<div class="comment-form">
+					<input type="text" placeholder="姓名" id="comment-name">
+					<textarea placeholder="发表评论..." id="comment-text"></textarea>
+					<div class="emoji-picker">
+						<span class="emoji">😀</span>
+						<span class="emoji">😃</span>
+						<span class="emoji">😄</span>
+						<span class="emoji">😁</span>
+						<span class="emoji">😆</span>
+						<span class="emoji">😅</span>
+						<span class="emoji">😂</span>
+						<span class="emoji">🤣</span>
+					</div>
+					<button id="submit-comment">提交</button>
+				</div>
+				<div id="comments-container">
+					<!-- 评论将动态添加到这里 -->
+				</div>
+			</div>
+		</main>
+
+		<footer>
+			<p>&copy; 2024 中国矿业大学版权所有.</p>
+		</footer>
+
+		<script>
+			// 添加新评论的函数
+			function addComment(name, content, date, emoji) {
+				const commentsContainer = document.getElementById('comments-container');
+				const commentElement = document.createElement('div');
+				commentElement.classList.add('comment');
+
+				commentElement.innerHTML = `
+        <div class="comment-author">${name}</div>
+        <div class="comment-date">${date}</div>
+        <div class="comment-content">
+          <span class="emoji">${emoji}</span>
+          ${content}
+          <div class="reply-form">
+            <input type="text" placeholder="回复" class="reply-input">
+            <button class="reply-button">回复</button>
+          </div>
+          <button class="reply-toggle">回复</button>
+        </div>
+      `;
+
+				commentsContainer.appendChild(commentElement);
+
+				// 添加回复按钮的事件监听器
+				const replyToggle = commentElement.querySelector('.reply-toggle');
+				const replyForm = commentElement.querySelector('.reply-form');
+				replyToggle.addEventListener('click', () => {
+					replyForm.style.display = replyForm.style.display === 'none' ? 'block' : 'none';
+				});
+
+				// 添加回复提交的事件监听器
+				const replyInput = commentElement.querySelector('.reply-input');
+				const replyButton = commentElement.querySelector('.reply-button');
+				replyButton.addEventListener('click', () => {
+					if (replyInput.value.trim() !== '') {
+						const replyContent = replyInput.value;
+						addReply(name, replyContent, new Date().toLocaleString());
+						replyInput.value = '';
+					}
+				});
+			}
+
+			// 添加回复的函数
+			function addReply(name, content, date) {
+				const commentsContainer = document.getElementById('comments-container');
+				const lastComment = commentsContainer.lastElementChild;
+				const replyElement = document.createElement('div');
+				replyElement.classList.add('comment');
+				replyElement.innerHTML = `
+        <div class="comment-author">${name}</div>
+        <div class="comment-date">${date}</div>
+        <div class="comment-content">${content}</div>
+      `;
+				lastComment.appendChild(replyElement);
+			}
+
+			// 提交按钮的事件监听器
+			document.getElementById('submit-comment').addEventListener('click', () => {
+				const nameInput = document.getElementById('comment-name');
+				const commentInput = document.getElementById('comment-text');
+				const emojiPicker = document.querySelectorAll('.emoji-picker .emoji');
+				let selectedEmoji = '😀';
+
+				if (nameInput.value.trim() !== '' && commentInput.value.trim() !== '') {
+					emojiPicker.forEach(emoji => {
+						if (emoji.classList.contains('selected')) {
+							selectedEmoji = emoji.textContent;
+						}
+					});
+
+					const currentDate = new Date().toLocaleString();
+					addComment(nameInput.value, commentInput.value, currentDate, selectedEmoji);
+
+					// 清空输入字段
+					nameInput.value = '';
+					commentInput.value = '';
+					emojiPicker.forEach(emoji => emoji.classList.remove('selected'));
+				}
+			});
+
+			// 表情选择的事件监听器
+			const emojiPicker = document.querySelectorAll('.emoji-picker .emoji');
+			emojiPicker.forEach(emoji => {
+				emoji.addEventListener('click', () => {
+					emojiPicker.forEach(e => e.classList.remove('selected'));
+					emoji.classList.add('selected');
+				});
+			});
+		</script>
+		<script>
+			window.parent.postMessage({
+				action: "ready"
+			}, "*");
+
+			window.console = new Proxy(console, {
+				get(target, prop) {
+					if (['log', 'warn', 'error'].includes(prop)) {
+						return new Proxy(target[prop], {
+							apply(fn, thisArg, args) {
+								fn.apply(thisArg, args);
+								window.parent.postMessage({
+									action: 'console',
+									type: prop,
+									args: args.map((arg) => {
+										try {
+											return JSON.stringify(arg).replace(
+												/^["']|["']$/g, '');
+										} catch (e) {
+											return arg;
+										}
+									})
+								}, '*');
+							}
+						});
+					}
+					return target[prop];
+				}
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理者中心</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="managercenter.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="../../index.html" class="logo">中国矿业大学单片机学习平台</a>
+            <ul class="nav-links">
+                <li><a href="../../blog.html">文章</a></li>
+                <li><a href="../../about.html">关于</a></li>
+                <li><a href="../../relation.html">联系</a></li>
+            </ul>
+            <div class="menu-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <header class="header">
+        <div class="container">
+            <img src="../../images/校徽1.jpg" alt="校徽" class="logo-image">
+            <h1>管理者中心</h1>
+        </div>
+    </header>
+
+    <main class="container">
+        <nav class="sidebar">
+            <ul>
+                <li><a href="#search">搜索文章</a></li>
+                <li><a href="#addpaper">添加文章</a></li>
+                <li><a href="#review">审核</a></li>
+                <li><a href="#status">状态</a></li>
+                <li><a href="#data">数据</a></li>
+                <li><a href="../../index.html">返回首页</a></li>
+            </ul>
+        </nav>
+
+        <div class="content">
+            <section id="search">
+                <h2>搜索文章</h2>
+                <input type="text" id="searchInput" placeholder="输入关键词...">
+                <button id="searchButton">搜索</button>
+                <div id="searchResults"></div>
+            </section>
+            
+            <section id="addpaper">
+                <h2>添加文章</h2>
+                <div id="addArticles"></div>
+            </section>
+
+            <section id="review">
+                <h2>审核</h2>
+                <div id="reviewList">
+                    <!-- 审核列表 -->
+                </div>
+            </section>
+
+            <section id="status">
+                <h2>状态</h2>
+                <div id="statusInfo">
+                    <!-- 状态信息 -->
+                </div>
+            </section>
+
+            <section id="data">
+                <h2>数据</h2>
+                <div id="dataInfo">
+                    <!-- 数据信息 -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 管理者中心</p>
+    </footer>
+
+    <script src="managercenter.js"></script>
+</body>
+</html>

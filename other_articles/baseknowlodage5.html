@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>51单片机模拟电路和ADC/DAC应用</title>
+		<style>
+			/* 全局样式 */
+			body {
+				font-family: Arial, sans-serif;
+				margin: 0;
+				padding: 0;
+				background-color: #f5f5f5;
+			}
+
+			/* 页头样式 */
+			header {
+				background-color: #333;
+				color: #fff;
+				padding: 20px;
+				text-align: center;
+			}
+
+			header h1 {
+				margin: 0;
+			}
+
+			/* 内容区域样式 */
+			.container {
+				max-width: 800px;
+				margin: 0 auto;
+				padding: 40px;
+			}
+
+			.article-content {
+				background-color: #fff;
+				padding: 30px;
+				border-radius: 5px;
+				box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+			}
+
+			.article-content h2 {
+				margin-top: 0;
+			}
+
+			.article-content p {
+				line-height: 1.6;
+				margin-bottom: 20px;
+			}
+
+			.article-content ul {
+				margin-left: 20px;
+				margin-bottom: 20px;
+			}
+
+			.article-content li {
+				margin-bottom: 10px;
+			}
+
+			.article-content pre {
+				background-color: #f5f5f5;
+				padding: 20px;
+				border-radius: 5px;
+				overflow-x: auto;
+			}
+
+			.article-content code {
+				font-family: monospace;
+			}
+
+			.article-content .code-explanation {
+				margin-top: 20px;
+			}
+
+			.article-content .code-explanation h3 {
+				margin-top: 0;
+			}
+
+			.article-content .code-explanation p {
+				margin-bottom: 10px;
+			}
+
+			.article-content .circuit-showcase {
+				margin-top: 40px;
+			}
+
+			.article-content .circuit-showcase h3 {
+				margin-top: 0;
+			}
+
+			.article-content .circuit-showcase .circuit {
+				margin-bottom: 30px;
+			}
+
+			.article-content .circuit-showcase .circuit h4 {
+				margin-top: 0;
+			}
+
+			.article-content .circuit-showcase .circuit p {
+				margin-bottom: 10px;
+			}
+
+			.article-content .circuit-showcase .circuit pre {
+				margin-top: 10px;
+			}
+
+			.back-button {
+				display: inline-block;
+				background-color: #333;
+				color: #fff;
+				padding: 10px 20px;
+				text-decoration: none;
+				border-radius: 5px;
+				margin-top: 20px;
+			}
+
+			.back-button:hover {
+				background-color: #555;
+			}
+
+			/* 页脚样式 */
+			footer {
+				background-color: #333;
+				color: #fff;
+				padding: 20px;
+				text-align: center;
+			}
+
+			footer p {
+				margin: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<h1>51单片机模拟电路和ADC/DAC应用</h1>
+		</header>
+
+		<div class="container">
+			<div class="article-content">
+				<h2>模拟电路基础</h2>
+				<div class="circuit-showcase">
+					<div class="circuit">
+						<h4>运算放大器电路</h4>
+						<p>运算放大器是模拟电路中最基础的元件之一,可用于实现放大、比较、积分、微分等功能。下面是一个简单的运算放大器电路示例:</p>
+						<pre><code>
+                    +Vcc
+                     |
+                     |
+                    +-+
+                    |R1|
+                    +-+
+                     |
+                     |
+                    +-+
+                    |  | 
+                    |  |
+                    +-+ 
+                     |
+                     |
+                    +-+
+                    |R2|
+                    +-+
+                     |
+                    -Vcc
+                    </code></pre>
+						<div class="code-explanation">
+							<h3>电路解析</h3>
+							<p>该电路使用运算放大器实现了一个非反相放大器,其放大倍数为R2/R1。通过调整R1和R2的值,可以得到不同的放大倍数。</p>
+						</div>
+					</div>
+				</div>
+
+				<h2>ADC应用</h2>
+				<div class="circuit-showcase">
+					<div class="circuit">
+						<h4>温度传感器电路</h4>
+						<p>51单片机内置了一个10位ADC(模数转换器),可以用于读取模拟量信号。下面是一个温度传感器电路示例:</p>
+						<pre><code>
+#include &lt;reg51.h&gt;
+
+sbit TEMP_SENSOR = P1^0; // 温度传感器引脚
+
+int read_temperature() {
+    int temp_value;
+    ADCON = 0x8F; // 配置ADC,选择P1.0作为输入通道
+    ADSTART = 1; // 启动ADC转换
+    while (ADBUSY); // 等待转换完成
+    temp_value = ADRESH * 256 + ADRESL; // 读取转换结果
+    return temp_value;
+}
+
+void main() {
+    int temperature;
+    while (1) {
+        temperature = read_temperature();
+        // 将温度值显示或进行其他处理
+    }
+}
+                    </code></pre>
+						<div class="code-explanation">
+							<h3>代码解析</h3>
+							<p>该程序实现了以下功能:</p>
+							<ul>
+								<li>定义P1.0引脚连接温度传感器</li>
+								<li>实现read_temperature()函数,用于读取温度传感器的模拟量并转换为数字量</li>
+								<li>在main()函数中,不断读取温度值并进行处理</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<h2>DAC应用</h2>
+				<div class="circuit-showcase">
+					<div class="circuit">
+						<h4>PWM调光电路</h4>
+						<p>51单片机虽然没有内置DAC(数模转换器),但可以通过PWM输出实现模拟量输出。下面是一个PWM调光电路示例:</p>
+						<pre><code>
+#include &lt;reg51.h&gt;
+
+sbit LED = P1^0; // LED引脚
+
+void pwm_output(int duty_cycle) {
+    TH0 = (65536 - 1000) / 256; // 设置PWM周期为1ms
+    TL0 = (65536 - 1000) % 256;
+    CCAP0H = (1000 * duty_cycle) / 100; // 设置占空比
+    CCAP0L = (1000 * duty_cycle) / 100;
+    TR0 = 1; // 启动Timer0
+}
+
+void main() {
+    int brightness = 0;
+    while (1) {
+        pwm_output(brightness);
+        brightness = (brightness + 5) % 101; // 0~100%循环
+        delay_ms(50);
+    }
+}
+                    </code></pre>
+						<div class="code-explanation">
+							<h3>代码解析</h3>
+							<p>该程序实现了以下功能:</p>
+							<ul>
+								<li>定义P1.0引脚连接LED</li>
+								<li>实现pwm_output()函数,用于输出PWM信号控制LED亮度</li>
+								<li>在main()函数中,不断调整PWM占空比,实现LED亮度的循环变化</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<h2>总结</h2>
+				<p>通过本篇教程,大家应该对51单片机的模拟电路和ADC/DAC应用有了更深入的了解。模拟电路是嵌入式系统中不可或缺的一部分,涉及运算放大器、滤波电路等基础知识。ADC和DAC则是连接模拟量和数字量的关键,在很多应用场景中都有广泛使用。希望这些内容对大家的学习有所帮助。
+				</p>
+				<a href="other-articles.html" class="back-button">返回</a>
+			</div>
+		</div>
+
+		<footer>
+			<p>&copy; 2024 51单片机开发教程. All rights reserved.</p>
+		</footer>
+		<script>
+			window.parent.postMessage({
+				action: "ready"
+			}, "*");
+
+			window.console = new Proxy(console, {
+				get(target, prop) {
+					if (['log', 'warn', 'error'].includes(prop)) {
+						return new Proxy(target[prop], {
+							apply(fn, thisArg, args) {
+								fn.apply(thisArg, args);
+								window.parent.postMessage({
+									action: 'console',
+									type: prop,
+									args: args.map((arg) => {
+										try {
+											return JSON.stringify(arg).replace(
+												/^["']|["']$/g, '');
+										} catch (e) {
+											return arg;
+										}
+									})
+								}, '*');
+							}
+						});
+					}
+					return target[prop];
+				}
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,51 @@
+/* 文章详情样式 */
+.article-detail {
+    margin-bottom: 40px;
+}
+
+.article-detail h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.article-meta {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.article-meta .views,
+.article-meta .date {
+    margin-right: 20px;
+}
+
+/* 代码块样式 */
+.code-block {
+    background-color: #2d2d2d;
+    color: #cccccc;
+    padding: 15px;
+    border-radius: 5px;
+    overflow-x: auto;
+    font-family: 'Courier New', Courier, monospace;
+    margin: 20px 0;
+}
+
+.code-block pre {
+    margin: 0;
+}
+
+.code-block code {
+    display: block;
+    white-space: pre;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .article-detail h1 {
+        font-size: 28px;
+    }
+
+    .article-meta {
+        font-size: 12px;
+    }
+}

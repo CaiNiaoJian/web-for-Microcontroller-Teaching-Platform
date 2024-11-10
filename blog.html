@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>学习</title>
+		<link rel="icon" href="images/标签栏图标.png" type="images/png" sizes="34x32">
+		<link rel="stylesheet" href="styles.css">
+		<link rel="stylesheet" href="blogs.css"> <!-- 新增的样式文件 -->
+		<link rel="stylesheet" href="blog_forum.css"> <!-- 新增的样式文件 -->
+		<link rel="stylesheet" href="styles2.css"><!-- 图片墙 -->
+
+		<!-- 新增的互动小板块样式 -->
+		<style>
+			.interactive-section,
+			.category {
+				background-color: #f9f9f9;
+				border: 2px solid #ddd;
+				border-radius: 10px;
+				padding: 20px;
+				margin: 20px 0;
+				text-align: center;
+				box-shadow: 0 4px 8px rgba(0, 85, 255, 0.1);
+				transition: transform 0.3s ease;
+			}
+
+			.interactive-section:hover,
+			.category:hover {
+				transform: scale(1.05);
+			}
+
+			.interactive-section h2,
+			.category h3 {
+				font-size: 24px;
+				margin-bottom: 20px;
+				color: #333;
+			}
+
+			.interactive-section button {
+				background-color: #007bff;
+				color: white;
+				border: none;
+				padding: 10px 20px;
+				border-radius: 5px;
+				font-size: 16px;
+				cursor: pointer;
+				transition: background-color 0.3s ease;
+			}
+
+			.interactive-section button:hover {
+				background-color: #0056b3;
+			}
+
+			.interactive-section #output {
+				margin-top: 20px;
+				font-size: 18px;
+				color: #555;
+				animation: fadeIn 1s ease;
+			}
+
+			.category p {
+				font-size: 16px;
+				color: #666;
+				margin-bottom: 20px;
+			}
+
+			.category .read-more {
+				background-color: #007bff;
+				color: white;
+				border: none;
+				padding: 10px 20px;
+				border-radius: 5px;
+				font-size: 16px;
+				cursor: pointer;
+				transition: background-color 0.3s ease;
+				text-decoration: none;
+			}
+
+			.category .read-more:hover {
+				background-color: #0056b3;
+			}
+
+			@keyframes fadeIn {
+				from {
+					opacity: 0;
+				}
+
+				to {
+					opacity: 1;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<!-- 导航栏 -->
+		<nav class="navbar">
+			<div class="container">
+				<a href="index.html" class="logo">学习</a>
+				<ul class="nav-links">
+					<li><a href="index.html">首页</a></li>
+					<li class="dropdown">
+						<a href="blog.html" class="dropbtn">文章</a>
+						<div class="dropdown-content">
+							<a href="Paper_Writer/submit.html">文章投稿</a>
+							<a href="Paper_Writer/PaperWriter.html">想法投稿</a>
+							<a href="forum/forum.html">论坛&帖吧</a>
+						</div>
+					</li>
+					<li class="dropdown">
+						<a href="StudySources/Sources.html" class="dropbtn">学习资源</a>
+						<div class="dropdown-content">
+							<a href="StudyAdd/CodeSrc.html">码源</a>
+							<a href="StudyAdd/electronicpart.html">元器件专栏</a>
+							<a href="">机械与电器专栏</a>
+						</div>
+					</li>
+					<li><a href="about.html">关于</a></li>
+					<li><a href="relation.html">联系</a></li>
+					<li><a href="Load/ManagementLoading.html">管理员登陆</a></li>
+				</ul>
+				<div class="menu-toggle" id="mobile-menu">
+					<span class="bar"></span>
+					<span class="bar"></span>
+					<span class="bar"></span>
+				</div>
+			</div>
+		</nav>
+
+		<!-- 主要内容 -->
+		<div class="container main-content">
+			<!-- 分类部分 -->
+			<section class="categories">
+				<h2>文章分类</h2>
+				<div class="category-grid">
+					<div class="category">
+						<h3>基础类</h3>
+						<p>较为简单的知识。</p>
+						<a href="control_articles/control-articles.html" class="read-more">阅读更多</a>
+					</div>
+					<div class="category">
+						<h3>进阶&复杂类</h3>
+						<p>进阶&复杂的项目。</p>
+						<a href="non_control_articles/non-control-articles.html" class="read-more">阅读更多</a>
+					</div>
+					<div class="category">
+						<h3>其他</h3>
+						<p>教程、博客、知识。</p>
+						<a href="other_articles/other-articles.html" class="read-more">阅读更多</a>
+					</div>
+				</div>
+			</section>
+			<!-- 码源及专栏部分 -->
+			<section class="categories">
+				<h2>码源及专栏</h2>
+				<div class="category-grid">
+					<div class="category">
+						<h3>代码仓库</h3>
+						<p>本地 | Github | Gitee | 百度云</p>
+						<a href="StudyAdd/CodeSrc.html" class="read-more">进入</a>
+					</div>
+
+					<!-- 互动小板块 -->
+					<section class="interactive-section">
+						<h2>互动一下吧！</h2>
+						<button id="clickMe">Click Me</button>
+						<div id="output"></div>
+						<script>
+							const emojis = ['😀', '😃', '😄', '😁', '😆', '😅', '🤣', '😂', '🙂', '🙃', '😉', '😊', '😇', '🥰', '😍', '🤩',
+								'😘', '😗', '😚', '😙',
+								'😋', '😛', '😜', '🤪', '😝', '🤑', '🤗', '🤭', '🤫', '🤔', '🤐', '🤨', '😐', '😑', '😶', '😏', '😒',
+								'🙄', '😬', '🤥', '😌', '😔',
+								'😪', '🤤', '😴', '😷', '🤒', '🤕', '🤢', '🤮', '🤧', '🥵', '🥶', '🥴', '😵', '🤯', '🤠', '🥳', '😎',
+								'🤓', '🧐', '😕', '😟', '🙁',
+								'😮', '😯', '😲', '😳', '🥺', '😦', '😧', '😨', '😰', '😥', '😢', '😭', '😱', '😖', '😣', '😞', '😓',
+								'😩', '😫', '🥱', '😤', '😡',
+								'😠', '🤬', '😈', '👿', '💀', '☠️', '💩', '🤡', '👹', '👺', '👻', '👽', '👾', '🤖', '😺', '😸', '😹',
+								'😻', '😼', '😽', '🙀', '😿', '😾'
+							];
+							const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
+							const currentDate = new Date();
+							const timeString = currentDate.toLocaleTimeString();
+							const dateString = currentDate.toLocaleDateString();
+							document.getElementById('clickMe').addEventListener('click', function() {
+								document.getElementById('output').textContent =
+									`${randomEmoji} 现在的时间是 ${timeString} ， ${dateString}.`;
+							});
+						</script>
+					</section>
+
+					<div class="category">
+						<h3>元器件百科</h3>
+						<p>对单一元器件的功能解释和代码解读。</p>
+						<a href="StudyAdd/electronicpart.html" class="read-more">进入</a>
+					</div>
+				</div>
+			</section>
+
+			<!-- 期刊访问链接窗口 -->
+			<section class="journals">
+				<h2>相关期刊</h2>
+				<div class="journal-grid">
+					<div class="journal-item">
+						<h3>单片机</h3>
+						<p>访问单片机相关期刊。</p>
+						<a href="https://example.com/microcontroller-journal" target="_blank" class="read-more">访问期刊</a>
+					</div>
+					<div class="journal-item">
+						<h3>模拟仿真</h3>
+						<p>访问模拟仿真相关期刊。</p>
+						<a href="https://example.com/simulation-journal" target="_blank" class="read-more">访问期刊</a>
+					</div>
+					<div class="journal-item">
+						<h3>机械</h3>
+						<p>访问机械相关期刊。</p>
+						<a href="https://example.com/mechanical-journal" target="_blank" class="read-more">访问期刊</a>
+					</div>
+					<div class="journal-item">
+						<h3>机器人</h3>
+						<p>访问机器人相关期刊。</p>
+						<a href="https://example.com/robotics-journal" target="_blank" class="read-more">访问期刊</a>
+					</div>
+				</div>
+			</section>
+
+			<!-- 论坛&帖吧&仿真入口板块 -->
+			<section class="forum">
+				<h2>论坛 & 仿真实验入口（建设中……）</h2>
+				<div class="forum-grid">
+					<div class="forum-item">
+						<h3>交流社区</h3>
+						<p>这算是一个社区，来交流一下吧！</p>
+						<a href="forum/forum.html" target="_blank" class="read-more">进入</a>
+					</div>
+
+					<div class="forum-grid">
+						<div class="forum-item">
+							<h3>Web端仿真实验</h3>
+							<p>线上做实验！（Building）</p>
+							<a href="zhongzhaunzhan.html" target="_blank" class="read-more">入口</a>
+						</div>
+
+					</div>
+
+			</section>
+
+			<!-- 图片墙 -->
+			<section class="image-wall">
+				<img src="images/专业图4.png" alt="风景1" class="image">
+				<img src="images/专业图5.png" alt="风景2" class="image">
+				<img src="images/专业图3.png" alt="风景3" class="image">
+			</section>
+
+		</div>
+
+		<!-- 页脚 -->
+		<footer class="footer">
+			<div class="container">
+				<p>&copy; 2024 博客. 版权所有归中国矿业大学。来自计算机学院和机电学院。</p>
+			</div>
+		</footer>
+
+		<!-- JavaScript -->
+		<script src="scripts.js"></script>
+		<script src="blogs.js"></script> <!-- 新增的脚本文件 -->
+
+		<script>
+			// 图片墙动态效果
+			const images = document.querySelectorAll('.image-wall img');
+
+			let delay = 0;
+			images.forEach(image => {
+				setTimeout(() => {
+					image.classList.add('show');
+				}, delay);
+				delay += 1000; // 每张图片延迟 2 秒
+			});
+		</script>
+
+	</body>
+</html>

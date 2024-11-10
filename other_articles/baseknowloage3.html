@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>51单片机开发实战和项目案例</title>
+		<style>
+			/* 全局样式 */
+			body {
+				font-family: Arial, sans-serif;
+				margin: 0;
+				padding: 0;
+				background-color: #f5f5f5;
+			}
+
+			/* 页头样式 */
+			header {
+				background-color: #333;
+				color: #fff;
+				padding: 20px;
+				text-align: center;
+			}
+
+			header h1 {
+				margin: 0;
+			}
+
+			/* 内容区域样式 */
+			.container {
+				max-width: 800px;
+				margin: 0 auto;
+				padding: 40px;
+			}
+
+			.article-content {
+				background-color: #fff;
+				padding: 30px;
+				border-radius: 5px;
+				box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+			}
+
+			.article-content h2 {
+				margin-top: 0;
+			}
+
+			.article-content p {
+				line-height: 1.6;
+				margin-bottom: 20px;
+			}
+
+			.article-content ul {
+				margin-left: 20px;
+				margin-bottom: 20px;
+			}
+
+			.article-content li {
+				margin-bottom: 10px;
+			}
+
+			.article-content pre {
+				background-color: #f5f5f5;
+				padding: 20px;
+				border-radius: 5px;
+				overflow-x: auto;
+			}
+
+			.article-content code {
+				font-family: monospace;
+			}
+
+			.article-content .code-explanation {
+				margin-top: 20px;
+			}
+
+			.article-content .code-explanation h3 {
+				margin-top: 0;
+			}
+
+			.article-content .code-explanation p {
+				margin-bottom: 10px;
+			}
+
+			.article-content .project-showcase {
+				margin-top: 40px;
+			}
+
+			.article-content .project-showcase h3 {
+				margin-top: 0;
+			}
+
+			.article-content .project-showcase .project {
+				margin-bottom: 30px;
+			}
+
+			.article-content .project-showcase .project h4 {
+				margin-top: 0;
+			}
+
+			.article-content .project-showcase .project p {
+				margin-bottom: 10px;
+			}
+
+			.article-content .project-showcase .project pre {
+				margin-top: 10px;
+			}
+
+			.back-button {
+				display: inline-block;
+				background-color: #333;
+				color: #fff;
+				padding: 10px 20px;
+				text-decoration: none;
+				border-radius: 5px;
+				margin-top: 20px;
+			}
+
+			.back-button:hover {
+				background-color: #555;
+			}
+
+			/* 页脚样式 */
+			footer {
+				background-color: #333;
+				color: #fff;
+				padding: 20px;
+				text-align: center;
+			}
+
+			footer p {
+				margin: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<h1>51单片机开发实战和项目案例</h1>
+		</header>
+
+		<div class="container">
+			<div class="article-content">
+				<h2>温湿度监控系统</h2>
+				<div class="project-showcase">
+					<div class="project">
+						<h4>项目描述</h4>
+						<p>基于51单片机的温湿度监控系统,可以实时监测环境温度和湿度,并通过LCD显示和串口输出数据。当温度或湿度超出设定范围时,系统会发出警报。</p>
+						<h4>硬件设计</h4>
+						<ul>
+							<li>51单片机(AT89C52)</li>
+							<li>温湿度传感器(DHT11)</li>
+							<li>LCD显示模块</li>
+							<li>蜂鸣器</li>
+							<li>串口通信接口</li>
+						</ul>
+						<h4>软件实现</h4>
+						<pre><code>
+#include &lt;reg51.h&gt;
+#include &lt;dht11.h&gt;
+
+sbit LCD_RS = P2^0;
+sbit LCD_EN = P2^1;
+sbit BUZZER = P1^0;
+
+void lcd_init();
+void lcd_write_cmd(unsigned char cmd);
+void lcd_write_data(unsigned char dat);
+void lcd_display_temp_humi(float temp, float humi);
+
+void main() {
+    float temperature, humidity;
+    lcd_init();
+    while (1) {
+        if (dht11_read_data(&amp;temperature, &amp;humidity) == 0) {
+            lcd_display_temp_humi(temperature, humidity);
+            if (temperature &gt; 30 || humidity &lt; 40) {
+                BUZZER = 1; // 发出警报
+            } else {
+                BUZZER = 0; // 关闭警报
+            }
+            // 通过串口输出温湿度数据
+        }
+    }
+}
+                    </code></pre>
+						<div class="code-explanation">
+							<h3>代码详解</h3>
+							<p>该程序实现了以下功能:</p>
+							<ul>
+								<li>初始化LCD显示模块</li>
+								<li>读取温湿度传感器数据</li>
+								<li>在LCD上显示温湿度数据</li>
+								<li>当温度超过30度或湿度低于40%时,发出警报</li>
+								<li>通过串口输出温湿度数据</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<h2>智能家居控制系统</h2>
+				<div class="project-showcase">
+					<div class="project">
+						<h4>项目描述</h4>
+						<p>基于51单片机的智能家居控制系统,可以通过手机APP或网页远程控制家中的照明、空调、窗帘等设备,并实时监测家中的温湿度、烟雾等环境数据。</p>
+						<h4>硬件设计</h4>
+						<ul>
+							<li>51单片机(AT89C52)</li>
+							<li>温湿度传感器(DHT11)</li>
+							<li>烟雾传感器(MQ-2)</li>
+							<li>继电器模块(用于控制照明、空调等)</li>
+							<li>步进电机(用于控制窗帘)</li>
+							<li>LCD显示模块</li>
+							<li>WIFI模块(用于与手机APP或网页通信)</li>
+						</ul>
+						<h4>软件实现</h4>
+						<pre><code>
+#include &lt;reg51.h&gt;
+#include &lt;dht11.h&gt;
+#include &lt;mq2.h&gt;
+
+sbit LIGHT = P1^0;
+sbit AC = P1^1;
+sbit CURTAIN = P1^2;
+
+void control_device(int device, int state) {
+    switch (device) {
+        case 0: LIGHT = state; break;
+        case 1: AC = state; break;
+        case 2: CURTAIN = state; break;
+    }
+}
+
+void main() {
+    float temperature, humidity;
+    int smoke_level;
+    while (1) {
+        // 读取温湿度和烟雾数据
+        dht11_read_data(&amp;temperature, &amp;humidity);
+        smoke_level = mq2_read_smoke();
+
+        // 通过WIFI模块上传数据到手机APP或网页
+        wifi_send_data(temperature, humidity, smoke_level);
+
+        // 根据手机APP或网页的控制指令操作设备
+        if (wifi_receive_command(&amp;device, &amp;state)) {
+            control_device(device, state);
+        }
+
+        // 在LCD上显示环境数据
+        lcd_display_temp_humi_smoke(temperature, humidity, smoke_level);
+    }
+}
+                    </code></pre>
+						<div class="code-explanation">
+							<h3>代码详解</h3>
+							<p>该程序实现了以下功能:</p>
+							<ul>
+								<li>读取温湿度和烟雾传感器数据</li>
+								<li>通过WIFI模块将数据上传到手机APP或网页</li>
+								<li>接收手机APP或网页发送的控制指令,操作照明、空调、窗帘等设备</li>
+								<li>在LCD上显示环境数据</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<h2>机器人控制系统</h2>
+				<div class="project-showcase">
+					<div class="project">
+						<h4>项目描述</h4>
+						<p>基于51单片机的机器人控制系统,可以通过手柄遥控实现机器人的移动和动作控制。机器人还可以通过超声波传感器检测障碍物,并自动规避。</p>
+						<h4>硬件设计</h4>
+						<ul>
+							<li>51单片机(AT89C52)</li>
+							<li>电机驱动模块(用于控制机器人的移动)</li>
+							<li>舵机模块(用于控制机器人的动作)</li>
+							<li>超声波传感器(用于检测障碍物)</li>
+							<li>无线遥控模块(用于接收手柄指令)</li>
+						</ul>
+						<h4>软件实现</h4>
+						<pre><code>
+#include &lt;reg51.h&gt;
+#include &lt;ultrasonic.h&gt;
+#include &lt;remote_control.h&gt;
+
+sbit MOTOR_L1 = P1^0;
+sbit MOTOR_L2 = P1^1;
+sbit MOTOR_R1 = P1^2;
+sbit MOTOR_R2 = P1^3;
+sbit SERVO = P2^0;
+
+void move_robot(int direction, int speed) {
+    switch (direction) {
+        case 0: // 前进
+            MOTOR_L1 = 1; MOTOR_L2 = 0;
+            MOTOR_R1 = 1; MOTOR_R2 = 0;
+            break;
+        case 1: // 后退
+            MOTOR_L1 = 0; MOTOR_L2 = 1;
+            MOTOR_R1 = 0; MOTOR_R2 = 1;
+            break;
+        case 2: // 左转
+            MOTOR_L1 = 0; MOTOR_L2 = 1;
+            MOTOR_R1 = 1; MOTOR_R2 = 0;
+            break;
+        case 3: // 右转
+            MOTOR_L1 = 1; MOTOR_L2 = 0;
+            MOTOR_R1 = 0; MOTOR_R2 = 1;
+            break;
+    }
+    // 根据speed设置电机速度
+}
+
+void main() {
+    int direction, speed;
+    int distance;
+    while (1) {
+        // 读取手柄遥控指令
+        if (remote_control_read(&amp;direction, &amp;speed)) {
+            move_robot(direction, speed);
+        }
+
+        // 检测障碍物距离
+        distance = ultrasonic_read_distance();
+        if (distance &lt; 20) {
+            // 自动规避障碍物
+            move_robot(3, 50); // 向右转
+            delay_ms(500);
+            move_robot(0, 50); // 前进
+        }
+    }
+}
+                    </code></pre>
+						<div class="code-explanation">
+							<h3>代码详解</h3>
+							<p>该程序实现了以下功能:</p>
+							<ul>
+								<li>根据手柄遥控指令控制机器人的移动和动作</li>
+								<li>通过超声波传感器检测障碍物距离</li>
+								<li>当检测到障碍物时,自动规避障碍物</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<h2>总结</h2>
+				<p>通过以上三篇教程,相信大家已经对51单片机的基础知识、进阶技能以及实际项目开发有了较为全面的了解。51单片机作为一种广泛应用于嵌入式系统的微控制器,具有丰富的外围接口和强大的运算能力,在各种应用场景中都有广泛的应用。希望这些教程能够为大家的51单片机学习和开发提供有益的参考和指导。
+				</p>
+				<a href="other-articles.html" class="back-button">返回</a>
+			</div>
+		</div>
+
+		<footer>
+			<p>&copy; 2024 51单片机开发教程. All rights reserved.</p>
+		</footer>
+		<script>
+			window.parent.postMessage({
+				action: "ready"
+			}, "*");
+
+			window.console = new Proxy(console, {
+				get(target, prop) {
+					if (['log', 'warn', 'error'].includes(prop)) {
+						return new Proxy(target[prop], {
+							apply(fn, thisArg, args) {
+								fn.apply(thisArg, args);
+								window.parent.postMessage({
+									action: 'console',
+									type: prop,
+									args: args.map((arg) => {
+										try {
+											return JSON.stringify(arg).replace(
+												/^["']|["']$/g, '');
+										} catch (e) {
+											return arg;
+										}
+									})
+								}, '*');
+							}
+						});
+					}
+					return target[prop];
+				}
+			});
+		</script>
+	</body>
+</html>

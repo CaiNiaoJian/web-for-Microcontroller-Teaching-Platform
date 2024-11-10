@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>站点正在建设中</title>
+		<link rel="icon" href="images/标签栏图标.png" type="images/png" sizes="34x32">
+		<style>
+			body {
+				font-family: Arial, sans-serif;
+				background-color: #f0f0f0;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				height: 100vh;
+				margin: 0;
+				overflow: hidden;
+				position: relative;
+			}
+
+			.container {
+				text-align: center;
+				background-color: #fff;
+				padding: 40px;
+				border-radius: 10px;
+				box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+				z-index: 1;
+			}
+
+			h1 {
+				font-size: 2.5em;
+				color: #333;
+			}
+
+			p {
+				font-size: 1.2em;
+				color: #666;
+			}
+
+			.countdown {
+				font-size: 1.5em;
+				color: #ff6347;
+				margin-top: 20px;
+			}
+
+			.back-button {
+				margin-top: 20px;
+				padding: 10px 20px;
+				font-size: 1em;
+				color: #fff;
+				background-color: #007bff;
+				border: none;
+				border-radius: 5px;
+				cursor: pointer;
+			}
+
+			.back-button:hover {
+				background-color: #0056b3;
+			}
+
+			.emoji {
+				position: absolute;
+				font-size: 2em;
+				animation: float 10s infinite linear;
+			}
+
+			@keyframes float {
+				0% {
+					transform: translateY(0) rotate(0deg);
+				}
+
+				100% {
+					transform: translateY(-100vh) rotate(360deg);
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<h1>站点正在建设中</h1>
+			<p>我们正在努力建设这个站点，敬请期待！</p>
+			<div class="countdown" id="countdown">15</div>
+			<button class="back-button" onclick="goToBlog()">立即跳转到博客</button>
+		</div>
+
+		<script>
+			const emojis = ['😊', '😄', '😉', '😍', '🤔', '🤗', '🤩', '🤯', '🤪', '🤭'];
+			const emojiCount = 20;
+
+			function createEmojis() {
+				for (let i = 0; i < emojiCount; i++) {
+					const emoji = document.createElement('div');
+					emoji.className = 'emoji';
+					emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+					emoji.style.left = `${Math.random() * 100}vw`;
+					emoji.style.animationDuration = `${5 + Math.random() * 10}s`;
+					document.body.appendChild(emoji);
+				}
+			}
+
+			createEmojis();
+
+			let countdown = 15;
+			const countdownElement = document.getElementById('countdown');
+
+			function updateCountdown() {
+				countdown--;
+				countdownElement.textContent = countdown;
+				if (countdown <= 0) {
+					goToBlog();
+				} else {
+					setTimeout(updateCountdown, 1000);
+				}
+			}
+
+			function goToBlog() {
+				window.location.href = 'blog.html';
+			}
+
+			setTimeout(updateCountdown, 1000);
+		</script>
+	</body>
+</html>

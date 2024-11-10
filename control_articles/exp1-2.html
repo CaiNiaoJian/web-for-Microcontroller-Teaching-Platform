@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>51单片机实验 - 红绿灯控制</title>
+    <style>
+        /* 全局样式 */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        /* 页头样式 */
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+        }
+
+        /* 内容区域样式 */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+        .article-content {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .article-content h2 {
+            margin-top: 0;
+        }
+        .article-content p {
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .article-content ul {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+        .article-content li {
+            margin-bottom: 10px;
+        }
+        .article-content pre {
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .article-content code {
+            font-family: monospace;
+        }
+        .article-content .code-explanation {
+            margin-top: 20px;
+        }
+        .article-content .code-explanation h3 {
+            margin-top: 0;
+        }
+        .article-content .code-explanation p {
+            margin-bottom: 10px;
+        }
+        .article-content .experiment-setup {
+            margin-top: 40px;
+        }
+        .article-content .experiment-setup h3 {
+            margin-top: 0;
+        }
+        .article-content .experiment-setup .setup-step {
+            margin-bottom: 30px;
+        }
+        .article-content .experiment-setup .setup-step h4 {
+            margin-top: 0;
+        }
+        .article-content .experiment-setup .setup-step p {
+            margin-bottom: 10px;
+        }
+        .article-content .experiment-setup .setup-step pre {
+            margin-top: 10px;
+        }
+        .article-content .experiment-result {
+            margin-top: 40px;
+        }
+        .article-content .experiment-result h3 {
+            margin-top: 0;
+        }
+        .article-content .experiment-result .result-step {
+            margin-bottom: 30px;
+        }
+        .article-content .experiment-result .result-step h4 {
+            margin-top: 0;
+        }
+        .article-content .experiment-result .result-step p {
+            margin-bottom: 10px;
+        }
+        .article-content .experiment-result .result-step pre {
+            margin-top: 10px;
+        }
+        .back-button {
+            display: inline-block;
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .back-button:hover {
+            background-color: #555;
+        }
+
+        /* 页脚样式 */
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        footer p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>51单片机实验 - 红绿灯控制</h1>
+    </header>
+
+    <div class="container">
+        <div class="article-content">
+            <h2>实验目的</h2>
+            <p>本实验旨在使用51单片机控制一个简单的红绿灯系统,实现交通信号灯的功能。通过这个实验,学习如何使用51单片机的定时器和I/O口控制LED灯的亮灭,以及如何编写状态机程序实现红绿灯的切换。</p>
+
+            <h2>实验原理</h2>
+            <p>本实验使用51单片机的定时器模块来控制红绿灯的切换时序。通过编程设置定时器中断,在中断服务程序中切换红绿灯的状态。同时,使用I/O口直接控制LED灯的亮灭。整个过程可以抽象为一个简单的状态机,根据当前状态切换到下一个状态。</p>
+
+            <div class="experiment-setup">
+                <h3>实验步骤</h3>
+                <div class="setup-step">
+                    <h4>1. 硬件连接</h4>
+                    <p>将红色LED灯连接到51单片机的P1.0引脚,绿色LED灯连接到P1.1引脚。</p>
+                    <pre><code>
+红色LED - P1.0
+绿色LED - P1.1
+                    </code></pre>
+                </div>
+                <div class="setup-step">
+                    <h4>2. 软件编程</h4>
+                    <p>编写51单片机程序,实现以下功能:</p>
+                    <ul>
+                        <li>初始化定时器,设置中断时间为1秒</li>
+                        <li>在定时器中断服务程序中切换红绿灯的状态</li>
+                        <li>使用I/O口直接控制LED灯的亮灭</li>
+                        <li>编写状态机程序,实现红绿灯的循环切换</li>
+                    </ul>
+                    <pre><code>
+#include &lt;reg51.h&gt;
+
+sbit RED_LED = P1^0;
+sbit GREEN_LED = P1^1;
+
+unsigned char light_state = 0; // 0-红灯 1-绿灯
+
+void timer0_isr() interrupt 1 {
+    TH0 = (65536 - 50000) / 256; // 重载定时器
+    TL0 = (65536 - 50000) % 256;
+    
+    // 切换红绿灯状态
+    if (light_state == 0) {
+        RED_LED = 1;
+        GREEN_LED = 0;
+        light_state = 1;
+    } else {
+        RED_LED = 0;
+        GREEN_LED = 1;
+        light_state = 0;
+    }
+}
+
+void main() {
+    TMOD = 0x01; // 设置定时器0为模式1
+    TH0 = (65536 - 50000) / 256; // 初始化定时器
+    TL0 = (65536 - 50000) % 256;
+    ET0 = 1; // 允许定时器0中断
+    EA = 1; // 开启总中断
+    TR0 = 1; // 启动定时器0
+    
+    while (1) {
+        // 主循环,不需要任何操作
+    }
+}
+                    </code></pre>
+                    <div class="code-explanation">
+                        <h3>代码解析</h3>
+                        <p>该程序实现了以下功能:</p>
+                        <ul>
+                            <li>定义了红色LED和绿色LED的引脚</li>
+                            <li>在timer0_isr()中断服务程序中,切换红绿灯的状态</li>
+                            <li>在main()函数中,初始化定时器0并启动</li>
+                            <li>使用light_state变量记录当前的红绿灯状态</li>
+                        </ul>
+                        <p>在这个程序中,我们使用定时器0以1秒的间隔产生中断,在中断服务程序中切换红绿灯的状态。通过直接控制I/O口,我们可以点亮对应的LED灯。整个过程可以看作是一个简单的状态机,在红灯和绿灯之间循环切换。这种方式可以用于实现各种交通信号灯的控制。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="experiment-result">
+                <h3>实验结果</h3>
+                <div class="result-step">
+                    <h4>红绿灯切换</h4>
+                    <p>实验完成后,红色LED和绿色LED会交替亮灭,模拟交通信号灯的工作。每隔1秒,红灯和绿灯会切换一次。</p>
+                    <pre><code>
+红灯亮 - 绿灯灭
+(1秒后)
+绿灯亮 - 红灯灭
+(1秒后)
+红灯亮 - 绿灯灭
+...
+                    </code></pre>
+                    <p>通过这个实验,我们学会了如何使用51单片机的定时器模块控制LED灯的亮灭,以及如何编写状态机程序实现红绿灯的切换。这些都是51单片机开发中非常基础和重要的知识。</p>
+                </div>
+            </div>
+
+            <a href="article-page-9.html" class="back-button">返回上一篇</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 51单片机开发教程. All rights reserved.</p>
+    </footer>
+<script>window.parent.postMessage({ action: "ready" }, "*"); 
+ 
+window.console = new Proxy(console, {
+  get(target, prop) {
+    if (['log', 'warn', 'error'].includes(prop)) {
+      return new Proxy(target[prop], {
+        apply(fn, thisArg, args) {
+          fn.apply(thisArg, args);
+          window.parent.postMessage({ action: 'console', 
+            type: prop, 
+            args: args.map((arg) => {
+              try {
+                return JSON.stringify(arg).replace(/^["']|["']$/g, '');
+              } catch (e) {
+                return arg;
+              }
+            }) 
+          }, '*');
+        }
+      });
+    }
+    return target[prop];
+  }
+});
+</script></body>
+</html>

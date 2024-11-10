@@ -1,0 +1,43 @@
+/* styles2.css */
+
+/* 图片墙样式 */
+.image-wall {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 40px;
+	overflow: hidden;
+	flex-wrap: wrap;
+	/* 允许图片换行 */
+}
+
+.image-wall img {
+	width: 32%;
+	height: auto;
+	/* 高度自适应 */
+	object-fit: cover;
+	opacity: 0;
+	transform: translateX(-100%);
+	transition: opacity 1s ease, transform 1s ease;
+	margin-bottom: 10px;
+	/* 图片之间的间距 */
+}
+
+.image-wall img.show {
+	opacity: 1;
+	transform: translateX(0);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+	.image-wall img {
+		width: 48%;
+		/* 手机端每行显示两张图片 */
+	}
+}
+
+@media (max-width: 480px) {
+	.image-wall img {
+		width: 100%;
+		/* 手机端每行显示一张图片 */
+	}
+}

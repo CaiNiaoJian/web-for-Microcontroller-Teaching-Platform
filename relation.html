@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>联系 - 博客</title>
+		<link rel="icon" href="images/标签栏图标.png" type="images/png" sizes="34x32">
+		<link rel="stylesheet" href="styles.css">
+		<style>
+			/* 新增加的 CSS 样式 */
+			.contact-table {
+				width: 60%;
+				border-collapse: collapse;
+				margin-top: 20px;
+			}
+
+			.contact-table th,
+			.contact-table td {
+				border: 1px solid #ffffff;
+				padding: 10px;
+				text-align: left;
+			}
+
+			.contact-table th {
+				background-color: #c9ffff;
+			}
+
+			/* 页脚图片样式 */
+			.footer-images {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				margin-top: 20px;
+			}
+
+			.footer-images img {
+				width: 100px;
+				height: 100px;
+				margin: 0 10px;
+				border-radius: 50%;
+				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+			}
+		</style>
+	</head>
+	<body>
+		<!-- 导航栏 -->
+		<nav class="navbar">
+			<div class="container">
+				<a href="index.html" class="logo">博客</a>
+				<ul class="nav-links">
+					<li><a href="index.html">首页</a></li>
+					<li><a href="blog.html">文章</a></li>
+					<li><a href="about.html">关于</a></li>
+					<li><a href="relation.html">联系</a></li>
+				</ul>
+				<div class="menu-toggle" id="mobile-menu">
+					<span class="bar"></span>
+					<span class="bar"></span>
+					<span class="bar"></span>
+				</div>
+			</div>
+		</nav>
+
+		<!-- 主要内容 -->
+		<div class="container main-content">
+			<!-- 联系部分 -->
+			<section class="contact">
+				<h1>联系我们</h1>
+				<p>如果你有任何问题或建议，欢迎通过以下方式联系我：</p>
+				<ul>
+					<li>邮箱：cumtMLP123@163.com</li>
+					<li>电话：待更新</li>
+					<li>地址：1号 大学路，徐州市，中国 | 1 No. University Road, Xuzhou City, China</li>
+				</ul>
+
+				<!-- 新增加的表格 -->
+				<table class="contact-table">
+					<thead>
+						<tr>
+							<th>投稿邮箱</th>
+							<th>邮箱地址</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>官网</td>
+							<td>cumtMLP123@163.com</td>
+						</tr>
+						<tr>
+							<td>CaiNiaoJina</td>
+							<td>2263617544@qq.com</td>
+						</tr>
+						<tr>
+							<td>noobzhang</td>
+							<td>2937674430@qq.com</td>
+						</tr>
+						<tr>
+							<td>Yzj</td>
+							<td>2904619250@qq.com</td>
+						</tr>
+					</tbody>
+				</table>
+			</section>
+		</div>
+
+		<!-- 页脚 -->
+		<footer class="footer">
+			<div class="container">
+				<p>&copy; 2024 博客. 中国矿业大学大创团队版权所有.</p>
+				<div class="footer-images">
+					<img src="images/校徽1.jpg" alt="中国矿业大学校徽">
+					<img src="images/github.jpg" alt="GitHub">
+				</div>
+			</div>
+		</footer>
+
+		<!-- JavaScript -->
+		<script src="scripts.js"></script>
+	</body>
+</html>

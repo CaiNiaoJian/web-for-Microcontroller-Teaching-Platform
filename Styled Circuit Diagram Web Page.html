@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Circuit Diagram</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #e6f7ff;
+            font-family: monospace, sans-serif;
+            padding: 20px;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            display: flex;
+            border: 2px solid #007acc;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .section {
+            margin: 0 20px;
+        }
+
+        .element {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px dashed #007acc;
+            border-radius: 5px;
+        }
+
+        .element h3 {
+            margin-bottom: 10px;
+            color: #003366;
+        }
+
+        .connections {
+            border-top: 2px solid #007acc;
+            padding-top: 10px;
+            margin-top: 10px;
+        }
+
+        .pin {
+            background-color: #cce7ff;
+            border-radius: 3px;
+            padding: 2px 5px;
+            margin: 3px 0;
+        }
+
+        .board {
+            background-color: #f4faff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: inset 0 0 10px #007acc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container board">
+        <div class="section left">
+            <div class="element">
+                <h3>Capacitors</h3>
+                <ul>
+                    <li class="pin"><b>C1:</b> 22pF</li>
+                    <li class="pin"><b>C2:</b> 22pF</li>
+                    <li class="pin"><b>C3:</b> 10uF</li>
+                </ul>
+            </div>
+            <div class="element">
+                <h3>Crystal</h3>
+                <ul>
+                    <li class="pin"><b>X1:</b> 12MHz</li>
+                </ul>
+            </div>
+        </div>
+        <div class="section right">
+            <div class="element">
+                <h3>Microcontroller</h3>
+                <p><b>U1:</b> AT89C51</p>
+                <p><b>Pins & Functions:</b></p>
+                <ul>
+                    <li class="pin">1: RST</li>
+                    <li class="pin">2-9: P1.0-P1.7</li>
+                    <li class="pin">10-17: P3.0-P3.7</li>
+                    <li class="pin">18: GND</li>
+                    <li class="pin">19: XTAL1</li>
+                    <li class="pin">20: XTAL2</li>
+                    <li class="pin">21-28: P2.0-P2.7</li>
+                    <li class="pin">29: ALE</li>
+                    <li class="pin">30: EA</li>
+                    <li class="pin">31: PSEN</li>
+                    <li class="pin">32-39: P0.0-P0.7</li>
+                    <li class="pin">40: VCC</li>
+                </ul>
+            </div>
+            <div class="connections">
+                <h3>Connections</h3>
+                <ul>
+                    <li><b>VCC:</b> Connected to power supply</li>
+                    <li><b>GND:</b> Ground</li>
+                    <li><b>XTAL1 & XTAL2:</b> Connected to crystal</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+<script>window.parent.postMessage({ action: "ready" }, "*"); 
+ 
+window.console = new Proxy(console, {
+  get(target, prop) {
+    if (['log', 'warn', 'error'].includes(prop)) {
+      return new Proxy(target[prop], {
+        apply(fn, thisArg, args) {
+          fn.apply(thisArg, args);
+          window.parent.postMessage({ action: 'console', 
+            type: prop, 
+            args: args.map((arg) => {
+              try {
+                return JSON.stringify(arg).replace(/^["']|["']$/g, '');
+              } catch (e) {
+                return arg;
+              }
+            }) 
+          }, '*');
+        }
+      });
+    }
+    return target[prop];
+  }
+});
+</script></body>
+</html>

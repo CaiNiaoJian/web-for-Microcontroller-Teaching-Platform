@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>网站建设者 - 博客</title>
+		<link rel="icon" href="../images/标签栏图标.png" type="images/png" sizes="34x32">
+		<link rel="stylesheet" href="../styles.css">
+		<link rel="stylesheet" href="../styles2.css" />
+		<style>
+			.back-button {
+				display: inline-block;
+				background-color: #333;
+				color: #fff;
+				padding: 10px 20px;
+				text-decoration: none;
+				border-radius: 5px;
+				margin-top: 20px;
+			}
+
+			.back-button:hover {
+				background-color: #555;
+			}
+
+			/* 新增的 CSS 代码 */
+			.main-content {
+				display: flex;
+				justify-content: space-between;
+			}
+
+			.sidebar-image {
+				width: 33%;
+				/* 调整图片区域的宽度 */
+				margin-right: 2%;
+				/* 添加一些间距 */
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				margin-top: -50px;
+				/* 调整图片位置 */
+				position: relative;
+				/* 确保 z-index 生效 */
+				z-index: 1;
+				/* 确保图片在导航栏之下 */
+			}
+
+			.sidebar-image img {
+				width: 100%;
+				height: auto;
+				border-radius: 10px;
+				/* 可选：添加圆角 */
+				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+				/* 可选：添加阴影 */
+			}
+
+			.website-detail {
+				width: 65%;
+				/* 调整内容区域的宽度 */
+			}
+
+			.image-wall {
+				margin-top: 20px;
+				/* 添加一些间距 */
+			}
+
+			.image-wall img {
+				width: 100%;
+				height: auto;
+				border-radius: 10px;
+				/* 可选：添加圆角 */
+				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+				/* 可选：添加阴影 */
+			}
+
+			.contributor {
+				display: flex;
+				align-items: center;
+				margin-bottom: 20px;
+			}
+
+			.contributor img {
+				width: 50px;
+				height: 50px;
+				border-radius: 50%;
+				/* 圆形头像 */
+				margin-right: 10px;
+			}
+
+			.contributor a {
+				color: #333;
+				text-decoration: none;
+				font-weight: bold;
+			}
+
+			.contributor p {
+				margin: 0;
+				font-size: 14px;
+				color: #666;
+			}
+
+			/* 确保导航栏在边栏图片之上 */
+			.navbar {
+				position: relative;
+				z-index: 2;
+			}
+
+			/* 页脚图片样式 */
+			.footer-images {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				margin-top: 20px;
+			}
+
+			.footer-images img {
+				width: 100px;
+				height: 100px;
+				margin: 0 10px;
+				border-radius: 50%;
+				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+			}
+		</style>
+	</head>
+	<body>
+		<!-- 导航栏 -->
+		<nav class="navbar">
+			<div class="container">
+				<a href="../index.html" class="logo">博客</a>
+				<ul class="nav-links">
+					<li><a href="../websiteNow.html">Back</a></li>
+					<li><a href="../index.html">首页</a></li>
+					<li><a href="../blog.html">文章</a></li>
+					<li><a href="../about.html">关于</a></li>
+					<li><a href="../relation.html">联系</a></li>
+				</ul>
+				<div class="menu-toggle" id="mobile-menu">
+					<span class="bar"></span>
+					<span class="bar"></span>
+					<span class="bar"></span>
+				</div>
+			</div>
+		</nav>
+
+		<!-- 主要内容 -->
+		<div class="container main-content">
+			<!-- 新增的边栏图片 -->
+			<div class="sidebar-image">
+				<img src="../images/边栏风景图1.png" alt="边栏风景图1">
+			</div>
+
+			<!-- 网站建设者详情 -->
+			<section class="website-detail">
+				<a href="new_Website_bulider.html" class="back-button">新版界面</a>
+				<h1>网站建设者</h1>
+				<p>本网站由五位热爱单片机技术的学生和一位经验丰富的老师共同建设。我们希望通过这个平台，与更多单片机爱好者分享知识和经验。</p>
+				<p>具体建设者包括：</p>
+				<ul>
+					<li class="contributor">
+						<img src="../images/CaiNiaoJian.jpg" alt="头像1">
+						<div>
+							<a href="https://github.com/CaiNiaoJian/">CaiNiaoJian</a>
+							<p>介绍文本1</p>
+						</div>
+					</li>
+					<li class="contributor">
+						<img src="../images/noobzhang.jpg" alt="头像2">
+						<div>
+							<a href="#">noobzhang</a>
+							<p>介绍文本2</p>
+						</div>
+					</li>
+					<li class="contributor">
+						<img src="../images/Yzj.jpg" alt="头像3">
+						<div>
+							<a href="#">Yzj</a>
+							<p>介绍文本3</p>
+						</div>
+					</li>
+					<li class="contributor">
+						<img src="../images/头像4.png" alt="头像4">
+						<div>
+							<a href="#">建设者4</a>
+							<p>介绍文本4</p>
+						</div>
+					</li>
+					<li class="contributor">
+						<img src="../images/头像5.png" alt="头像5">
+						<div>
+							<a href="#">建设者5</a>
+							<p>介绍文本5</p>
+						</div>
+					</li>
+					<li class="contributor">
+						<img src="../images/头像6.png" alt="头像6">
+						<div>
+							<a href="#">建设者6</a>
+							<p>介绍文本6</p>
+						</div>
+					</li>
+				</ul>
+
+				<!-- 图片墙 -->
+				<!--
+				<section class="image-wall">
+					<img src="Sol_images/图.png" alt="1" class="image">
+					<img src="" alt="2" class="image">
+					<img src="" alt="3" class="image">
+				</section>
+				-->
+			</section>
+		</div>
+
+		<!-- 页脚 -->
+		<footer class="footer">
+			<div class="container">
+				<p>&copy; 2024 博客. 版权所有归中国矿业大学。来自计算机学院和机电学院。</p>
+				<div class="footer-images">
+					<img src="../images/校徽1.jpg" alt="中国矿业大学校徽">
+					<img src="../images/github.jpg" alt="GitHub">
+				</div>
+			</div>
+		</footer>
+
+		<!-- JavaScript -->
+		<script src="../scripts.js"></script>
+		<!-- JavaScript -->
+		<script src="scripts.js"></script>
+		<script>
+			// 图片墙动态效果
+			const images = document.querySelectorAll('.image-wall img');
+
+			let delay = 0;
+			images.forEach(image => {
+				setTimeout(() => {
+					image.classList.add('show');
+				}, delay);
+				delay += 1800; // 每张图片延迟 2 秒
+			});
+		</script>
+	</body>
+</html>

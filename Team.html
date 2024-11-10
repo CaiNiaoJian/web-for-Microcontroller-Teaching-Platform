@@ -1,0 +1,449 @@
+Team.html��
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Team��cumtmlp</title>
+		<link rel="icon" href="images/��ǩ��ͼ��.png" type="images/png" sizes="34x32">
+		<style>
+			/* Global styles */
+			body {
+				font-family: Georgia, serif;
+				margin: 0;
+				padding: 0;
+				background-color: #f0f8ff;
+				position: relative;
+				overflow-x: hidden;
+			}
+
+			/* Header styles */
+			header {
+				background-color: rgba(65, 105, 225, 0.8);
+				color: #fff;
+				padding: 20px;
+				text-align: center;
+				position: relative;
+				z-index: 1;
+			}
+
+			nav ul {
+				list-style-type: none;
+				margin: 0;
+				padding: 0;
+				display: flex;
+				justify-content: center;
+			}
+
+			nav li {
+				margin: 0 15px;
+			}
+
+			nav a {
+				color: #fff;
+				text-decoration: none;
+				font-size: 18px;
+			}
+
+			/* Main content styles */
+			main {
+				padding: 40px;
+				position: relative;
+				z-index: 1;
+			}
+
+			section {
+				margin-bottom: 40px;
+			}
+
+			h2 {
+				color: #4169e1;
+				font-size: 28px;
+				margin-bottom: 20px;
+			}
+
+			/* Gradient background section */
+			.gradient-bg {
+				background: linear-gradient(to right, #add8e6, #87ceeb, #00bfff, #1e90ff, #4169e1);
+				padding: 40px;
+				text-align: center;
+				color: #fff;
+				border-radius: 10px;
+			}
+
+			.gradient-bg h3 {
+				font-size: 24px;
+				margin-bottom: 10px;
+			}
+
+			/* Image gallery section */
+			.image-gallery {
+				display: grid;
+				grid-template-columns: repeat(3, 1fr);
+				grid-gap: 20px;
+			}
+
+			.image-gallery img {
+				width: 100%;
+				height: auto;
+				border-radius: 5px;
+				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+				transition: transform 0.3s ease-in-out;
+			}
+
+			.image-gallery img:hover {
+				transform: scale(1.1);
+			}
+
+			/* Animation section */
+			.animated-box-container {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				gap: 20px;
+			}
+
+			.animated-box {
+				width: 200px;
+				height: 200px;
+				background-color: rgba(65, 105, 225, 0.8);
+				border-radius: 10px;
+				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				font-size: 24px;
+				font-weight: bold;
+				color: #fff;
+				cursor: pointer;
+				animation: subtle-wave 3s infinite;
+			}
+
+			.animated-box:nth-child(1) {
+				animation-delay: 0s;
+			}
+
+			.animated-box:nth-child(2) {
+				animation-delay: 1s;
+			}
+
+			.animated-box:nth-child(3) {
+				animation-delay: 2s;
+			}
+
+			@keyframes subtle-wave {
+				0% {
+					transform: translateY(0);
+				}
+
+				50% {
+					transform: translateY(-20px);
+				}
+
+				100% {
+					transform: translateY(0);
+				}
+			}
+
+			.animated-box a {
+				color: #fff;
+				text-decoration: none;
+				display: block;
+				width: 100%;
+				height: 100%;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+
+			.animated-box:hover {
+				background-color: rgba(30, 144, 255, 0.8);
+			}
+
+			/* Tooltip section */
+			.tooltip {
+				position: relative;
+				display: inline-block;
+			}
+
+			.tooltip .tooltiptext {
+				visibility: hidden;
+				width: 120px;
+				background-color: rgba(65, 105, 225, 0.8);
+				color: #fff;
+				text-align: center;
+				border-radius: 6px;
+				padding: 5px 0;
+				position: absolute;
+				z-index: 1;
+				bottom: 150%;
+				left: 50%;
+				margin-left: -60px;
+				opacity: 0;
+				transition: opacity 0.3s;
+			}
+
+			.tooltip:hover .tooltiptext {
+				visibility: visible;
+				opacity: 1;
+			}
+
+			/* Blog section */
+			.blog-section {
+				background-color: rgba(65, 105, 225, 0.8);
+				border-radius: 10px;
+				padding: 30px;
+				color: #fff;
+				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+			}
+
+			.blog-section h2 {
+				color: #fff;
+				font-size: 24px;
+				margin-bottom: 20px;
+			}
+
+			.blog-post {
+				margin-bottom: 30px;
+			}
+
+			.blog-post h3 {
+				font-size: 20px;
+				margin-bottom: 10px;
+			}
+
+			.blog-post p {
+				font-size: 16px;
+				line-height: 1.5;
+			}
+
+			.blog-post a {
+				color: #add8e6;
+				text-decoration: none;
+			}
+
+			.blog-post a:hover {
+				color: #87ceeb;
+			}
+
+			/* Video background */
+			.video-background {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				z-index: 0;
+				overflow: hidden;
+			}
+
+			.video-background video {
+				min-width: 100%;
+				min-height: 100%;
+				width: auto;
+				height: auto;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+			}
+
+			/* Interactive section */
+			.interactive-section {
+				background-color: rgba(255, 255, 255, 0.8);
+				border-radius: 10px;
+				padding: 30px;
+				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+				text-align: center;
+			}
+
+			.interactive-section h2 {
+				color: #4169e1;
+				font-size: 24px;
+				margin-bottom: 20px;
+			}
+
+			.interactive-section button {
+				background-color: #4169e1;
+				color: #fff;
+				border: none;
+				padding: 10px 20px;
+				font-size: 16px;
+				border-radius: 5px;
+				cursor: pointer;
+				transition: background-color 0.3s;
+			}
+
+			.interactive-section button:hover {
+				background-color: #1e90ff;
+			}
+
+			.interactive-section #output {
+				margin-top: 20px;
+				font-size: 18px;
+				font-weight: bold;
+			}
+
+			/* Footer styles */
+			footer {
+				background-color: rgba(65, 105, 225, 0.8);
+				color: #fff;
+				padding: 20px;
+				text-align: center;
+				font-size: 16px;
+				position: relative;
+				z-index: 1;
+			}
+		</style>
+	</head>
+	<body>
+		<!--
+  <div class="video-background">
+    <video autoplay loop muted>
+      <source src="/path/to/your/video.mp4" type="video/mp4">
+    </video>
+  </div>
+-->
+
+		<header>
+			<h1>Welcome to Our Web_CUMTer</h1>
+			<nav>
+				<ul>
+					<li><a href="index.html">Home</a></li>
+					<li><a href="about.html">About</a></li>
+					<li><a href="#">Services</a></li>
+					<li><a href="#">Contact</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<main>
+			<div>
+				<section>
+					<h2>Gradient Background Section</h2>
+					<div class="gradient-bg">
+						<h3>Soothing Blue Gradient</h3>
+						<p>This section showcases a calming blue gradient background.</p>
+					</div>
+				</section>
+
+				<section>
+					<h2>Image Gallery</h2>
+					<div class="image-gallery">
+						<img src="forum/forum_function/forum_images/teamFig2.png" alt="Image 1">
+						<img src="forum/forum_function/forum_images/teamFig3.png" alt="Image 2">
+						<img src="forum/forum_function/forum_images/teamFig4.png" alt="Image 3">
+						<img src="forum/forum_function/forum_images/teamFig5.png" alt="Image 4">
+						<img src="forum/forum_function/forum_images/teamFig6.png" alt="Image 5">
+						<img src="forum/forum_function/forum_images/teamFig7.png" alt="Image 6">
+					</div>
+				</section>
+
+				<section>
+					<h2>Animated Boxes</h2>
+					<div class="animated-box-container">
+						<div class="animated-box">
+							<a href="/page1">Happy!</a>
+						</div>
+						<div class="animated-box">
+							<a href="/page2">New!</a>
+						</div>
+						<div class="animated-box">
+							<a href="/page3">Day!</a>
+						</div>
+					</div>
+				</section>
+
+				<section>
+					<h2>Tooltip</h2>
+					<div class="tooltip">Hover over me
+						<span class="tooltiptext">I'm a tooltip!</span>
+					</div>
+				</section>
+
+				<section class="interactive-section">
+					<h2>Interactive Section</h2>
+					<button id="clickMe">Click Me</button>
+					<div id="output"></div>
+					<script>
+						const emojis = ['😀', '😃', '😄', '😁', '😆', '😅', '😂', '🤣', '🥲', '☺️', '😊', '😇', '🙂', '🙃', '😉', '😌',
+							'😍', '🥰', '😘', '😗', '😙', '😚', '😋', '😛', '😝', '😜', '🤪', '🤨', '🧐', '🤓', '😎', '🥸', '🤩',
+							'🥳', '😏', '😒', '😞', '😔', '😟', '😕', '🙁', '☹️', '😣', '😖', '😫', '😩', '🥺', '😢', '😭', '😤',
+							'😠', '😡', '🤬', '🤯', '😳', '🥵', '🥶', '😱', '😨', '😰', '😥', '😓', '🤗', '🤔', '🤭', '🤫', '🤥',
+							'😶', '😐', '😑', '😬', '🙄', '😯', '😦', '😧', '😮', '😲', '🥱', '😴', '🤤', '😪', '😵', '🤐', '🥴',
+							'🤢', '🤮', '🤧', '😷', '🤒', '🤕', '🤑', '🤠'
+						];
+						const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
+						const currentDate = new Date();
+						const timeString = currentDate.toLocaleTimeString();
+						const dateString = currentDate.toLocaleDateString();
+						document.getElementById('clickMe').addEventListener('click', function() {
+							document.getElementById('output').textContent =
+								`${randomEmoji} The current time is ${timeString} on ${dateString}.`;
+						});
+					</script>
+				</section>
+			</div>
+
+			<div class="blog-section">
+				<h2>Blog</h2>
+				<div class="blog-post">
+					<h3>Exploring</h3>
+					<p>In this post, we dive deep into the world of CSS and uncover its powerful capabilities for
+						creating stunning web designs.</p>
+					<a href="#">Read more &rarr;</a>
+				</div>
+				<div class="blog-post">
+					<h3>The Future</h3>
+					<p>Stay ahead of the curve and learn about the latest advancements in HTML, shaping the future of
+						web development.</p>
+					<a href="#">Read more &rarr;</a>
+				</div>
+				<div class="blog-post">
+					<h3>Mastering Responsive Design</h3>
+					<p>Discover the secrets to building websites that adapt seamlessly to any device, ensuring a
+						delightful user experience.</p>
+					<a href="#">Read more &rarr;</a>
+				</div>
+			</div>
+		</main>
+
+		<footer>
+			<p>&copy; 2024 All rights reserved.</p>
+			<a href="https://github.com" target="_blank" rel="noopener noreferrer">
+				<img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub Logo"
+					width="50" height="50">
+			</a>
+		</footer>
+		<script>
+			window.parent.postMessage({
+				action: "ready"
+			}, "*");
+
+			window.console = new Proxy(console, {
+				get(target, prop) {
+					if (['log', 'warn', 'error'].includes(prop)) {
+						return new Proxy(target[prop], {
+							apply(fn, thisArg, args) {
+								fn.apply(thisArg, args);
+								window.parent.postMessage({
+									action: 'console',
+									type: prop,
+									args: args.map((arg) => {
+										try {
+											return JSON.stringify(arg).replace(
+												/^["']|["']$/g, '');
+										} catch (e) {
+											return arg;
+										}
+									})
+								}, '*');
+							}
+						});
+					}
+					return target[prop];
+				}
+			});
+		</script>
+	</body>
+</html>

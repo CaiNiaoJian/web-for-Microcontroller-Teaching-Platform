@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>51单片机定时器和中断处理</title>
+		<style>
+			/* 全局样式 */
+			body {
+				font-family: Arial, sans-serif;
+				margin: 0;
+				padding: 0;
+				background-color: #f5f5f5;
+			}
+
+			/* 页头样式 */
+			header {
+				background-color: #333;
+				color: #fff;
+				padding: 20px;
+				text-align: center;
+			}
+
+			header h1 {
+				margin: 0;
+			}
+
+			/* 内容区域样式 */
+			.container {
+				max-width: 800px;
+				margin: 0 auto;
+				padding: 40px;
+			}
+
+			.article-content {
+				background-color: #fff;
+				padding: 30px;
+				border-radius: 5px;
+				box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+			}
+
+			.article-content h2 {
+				margin-top: 0;
+			}
+
+			.article-content p {
+				line-height: 1.6;
+				margin-bottom: 20px;
+			}
+
+			.article-content ul {
+				margin-left: 20px;
+				margin-bottom: 20px;
+			}
+
+			.article-content li {
+				margin-bottom: 10px;
+			}
+
+			.article-content pre {
+				background-color: #f5f5f5;
+				padding: 20px;
+				border-radius: 5px;
+				overflow-x: auto;
+			}
+
+			.article-content code {
+				font-family: monospace;
+			}
+
+			.article-content .code-explanation {
+				margin-top: 20px;
+			}
+
+			.article-content .code-explanation h3 {
+				margin-top: 0;
+			}
+
+			.article-content .code-explanation p {
+				margin-bottom: 10px;
+			}
+
+			.article-content .timer-showcase {
+				margin-top: 40px;
+			}
+
+			.article-content .timer-showcase h3 {
+				margin-top: 0;
+			}
+
+			.article-content .timer-showcase .timer {
+				margin-bottom: 30px;
+			}
+
+			.article-content .timer-showcase .timer h4 {
+				margin-top: 0;
+			}
+
+			.article-content .timer-showcase .timer p {
+				margin-bottom: 10px;
+			}
+
+			.article-content .timer-showcase .timer pre {
+				margin-top: 10px;
+			}
+
+			.article-content .interrupt-showcase {
+				margin-top: 40px;
+			}
+
+			.article-content .interrupt-showcase h3 {
+				margin-top: 0;
+			}
+
+			.article-content .interrupt-showcase .interrupt {
+				margin-bottom: 30px;
+			}
+
+			.article-content .interrupt-showcase .interrupt h4 {
+				margin-top: 0;
+			}
+
+			.article-content .interrupt-showcase .interrupt p {
+				margin-bottom: 10px;
+			}
+
+			.article-content .interrupt-showcase .interrupt pre {
+				margin-top: 10px;
+			}
+
+			.back-button {
+				display: inline-block;
+				background-color: #333;
+				color: #fff;
+				padding: 10px 20px;
+				text-decoration: none;
+				border-radius: 5px;
+				margin-top: 20px;
+			}
+
+			.back-button:hover {
+				background-color: #555;
+			}
+
+			/* 页脚样式 */
+			footer {
+				background-color: #333;
+				color: #fff;
+				padding: 20px;
+				text-align: center;
+			}
+
+			footer p {
+				margin: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<h1>51单片机定时器和中断处理</h1>
+		</header>
+
+		<div class="container">
+			<div class="article-content">
+				<h2>定时器基础</h2>
+				<p>51单片机内置了多个定时器,可以用于实现各种定时功能。定时器的工作原理是通过内部的时钟信号对计数器进行计数,当计数器的值达到预设的值时,就会产生一个中断信号。下面是一个定时器控制LED灯闪烁的示例:
+				</p>
+				<div class="timer-showcase">
+					<div class="timer">
+						<h4>定时器控制LED灯</h4>
+						<pre><code>
+#include &lt;reg51.h&gt;
+
+sbit LED = P1^0; // 定义LED引脚
+unsigned int count = 0;
+
+void timer0_isr() interrupt 1 {
+    TH0 = (65536 - 50000) / 256; // 重载定时器
+    TL0 = (65536 - 50000) % 256;
+    count++;
+    if (count >= 500) { // 每500次中断翻转一次LED
+        count = 0;
+        LED = ~LED;
+    }
+}
+
+void main() {
+    TMOD = 0x01; // 设置定时器0为模式1
+    TH0 = (65536 - 50000) / 256; // 初始化定时器
+    TL0 = (65536 - 50000) % 256;
+    ET0 = 1; // 允许定时器0中断
+    EA = 1; // 开启总中断
+    TR0 = 1; // 启动定时器0
+    while (1);
+}
+                    </code></pre>
+						<div class="code-explanation">
+							<h3>代码解析</h3>
+							<p>该程序实现了以下功能:</p>
+							<ul>
+								<li>定义一个LED引脚,连接到P1.0端口</li>
+								<li>在timer0_isr()中断服务程序中,重载定时器并计数</li>
+								<li>每500次中断,翻转一次LED的状态</li>
+								<li>在main()函数中,初始化定时器0并启动</li>
+							</ul>
+							<p>在这个示例中,我们使用定时器0以50ms的间隔产生中断,并在中断服务程序中控制LED的状态。这样就可以实现LED灯每秒闪烁10次的效果。</p>
+						</div>
+					</div>
+				</div>
+
+				<h2>外部中断</h2>
+				<p>除了定时器中断,51单片机还支持外部中断。外部中断可以用于响应外部输入信号,如按键、传感器等。下面是一个外部中断处理按键的示例:</p>
+				<div class="interrupt-showcase">
+					<div class="interrupt">
+						<h4>外部中断处理</h4>
+						<pre><code>
+#include &lt;reg51.h&gt;
+
+sbit KEY = P3^3; // 定义按键引脚
+sbit LED = P1^0; // 定义LED引脚
+
+void ext0_isr() interrupt 0 {
+    // 外部中断0服务程序
+    LED = ~LED; // 翻转LED状态
+}
+
+void main() {
+    IT0 = 1; // 设置外部中断0为下降沿触发
+    EX0 = 1; // 允许外部中断0
+    EA = 1; // 开启总中断
+    while (1) {
+        // 主循环
+    }
+}
+                    </code></pre>
+						<div class="code-explanation">
+							<h3>代码解析</h3>
+							<p>该程序实现了以下功能:</p>
+							<ul>
+								<li>定义一个按键引脚,连接到P3.3端口</li>
+								<li>在ext0_isr()中断服务程序中,翻转LED的状态</li>
+								<li>在main()函数中,设置外部中断0为下降沿触发,并开启中断</li>
+							</ul>
+							<p>在这个示例中,当按键被按下时,会触发外部中断0,进入中断服务程序并翻转LED的状态。这种方式可以用于实现各种基于外部输入的功能,如检测传感器状态、响应用户操作等。</p>
+						</div>
+					</div>
+				</div>
+
+				<h2>定时器应用</h2>
+				<p>除了简单的LED控制,定时器还可以用于更复杂的应用,如PWM输出、脉冲测量等。下面是一个使用定时器实现PWM输出的示例:</p>
+				<div class="timer-showcase">
+					<div class="timer">
+						<h4>定时器实现PWM输出</h4>
+						<pre><code>
+#include &lt;reg51.h&gt;
+
+sbit PWM_OUT = P1^0; // PWM输出引脚
+unsigned int pwm_value = 0; // PWM占空比
+
+void timer0_isr() interrupt 1 {
+    TH0 = (65536 - 1000) / 256; // 重载定时器
+    TL0 = (65536 - 1000) % 256;
+    if (pwm_value > 0) {
+        PWM_OUT = 1; // 输出高电平
+        pwm_value--;
+    } else {
+        PWM_OUT = 0; // 输出低电平
+    }
+}
+
+void main() {
+    TMOD = 0x01; // 设置定时器0为模式1
+    TH0 = (65536 - 1000) / 256; // 初始化定时器
+    TL0 = (65536 - 1000) % 256;
+    ET0 = 1; // 允许定时器0中断
+    EA = 1; // 开启总中断
+    TR0 = 1; // 启动定时器0
+    while (1) {
+        // 在主循环中调整PWM占空比
+        pwm_value = 500; // 设置PWM占空比为50%
+    }
+}
+                    </code></pre>
+						<div class="code-explanation">
+							<h3>代码解析</h3>
+							<p>该程序实现了以下功能:</p>
+							<ul>
+								<li>定义一个PWM输出引脚,连接到P1.0端口</li>
+								<li>在timer0_isr()中断服务程序中,根据pwm_value的值控制PWM输出</li>
+								<li>在main()函数中,初始化定时器0并启动,同时在主循环中调整PWM占空比</li>
+							</ul>
+							<p>在这个示例中,我们使用定时器0以1ms的间隔产生中断,在中断服务程序中根据pwm_value的值控制PWM输出引脚的状态。通过在主循环中调整pwm_value的值,就可以实现PWM输出的占空比控制。这种方式可以用于控制电机速度、调节LED亮度等应用。
+							</p>
+						</div>
+					</div>
+				</div>
+
+				<h2>总结</h2>
+				<p>通过本篇教程,大家应该对51单片机的定时器和中断处理有了更深入的了解。定时器是单片机中非常重要的功能模块,可以用于实现各种定时功能,如LED灯闪烁、PWM输出等。中断处理则可以帮助单片机更好地响应外部事件,提高系统的实时性。掌握这些基础知识对于后续的项目开发非常重要。
+				</p>
+				<a href="article-page-8.html" class="back-button">返回上一篇</a>
+			</div>
+		</div>
+
+		<footer>
+			<p>&copy; 2024 51单片机开发教程. All rights reserved.</p>
+		</footer>
+		<script>
+			window.parent.postMessage({
+				action: "ready"
+			}, "*");
+
+			window.console = new Proxy(console, {
+				get(target, prop) {
+					if (['log', 'warn', 'error'].includes(prop)) {
+						return new Proxy(target[prop], {
+							apply(fn, thisArg, args) {
+								fn.apply(thisArg, args);
+								window.parent.postMessage({
+									action: 'console',
+									type: prop,
+									args: args.map((arg) => {
+										try {
+											return JSON.stringify(arg).replace(
+												/^["']|["']$/g, '');
+										} catch (e) {
+											return arg;
+										}
+									})
+								}, '*');
+							}
+						});
+					}
+					return target[prop];
+				}
+			});
+		</script>
+	</body>
+</html>

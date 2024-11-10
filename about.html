@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>关于 - 博客</title>
+		<link rel="icon" href="images/标签栏图标.png" type="images/png" sizes="34x32">
+		<link rel="stylesheet" href="styles.css">
+		<link rel="stylesheet" href="styles_about.css">
+	</head>
+	<body>
+		<!-- 导航栏 -->
+		<nav class="navbar">
+			<div class="container">
+				<a href="index.html" class="logo">博客</a>
+				<ul class="nav-links">
+					<li><a href="index.html">首页</a></li>
+					<li><a href="blog.html">文章</a></li>
+					<li><a href="about.html">关于</a></li>
+					<li><a href="relation.html">联系</a></li>
+				</ul>
+				<div class="menu-toggle" id="mobile-menu">
+					<span class="bar"></span>
+					<span class="bar"></span>
+					<span class="bar"></span>
+				</div>
+			</div>
+		</nav>
+
+		<!-- 主要内容 -->
+		<div class="container main-content">
+			<!-- 关于部分 -->
+			<section class="about">
+				<h2>关于我们</h2>
+				<p>我们是一群热爱分享的人，喜欢写作和探索新知识。希望通过这个博客与大家交流和学习。</p>
+				<p>我们的博客致力于提供高质量的技术文章、教程和资源，帮助读者提升技能、解决问题，并激发创新思维。无论你是初学者还是经验丰富的专业人士，我们都欢迎你加入我们的社区，共同成长。</p>
+
+				<h3>我们的团队</h3>
+				<p>我们的团队由一群充满激情和经验丰富的专业人士组成，涵盖了多个技术领域，包括软件开发、数据科学、人工智能、网络安全等。我们相信，通过分享知识和经验，我们可以共同推动技术的发展和应用。</p>
+
+				<h3>我们的目标</h3>
+				<p>我们的目标是创建一个开放、包容和充满活力的社区，让每个人都能在这里找到有价值的信息和资源。我们希望通过我们的努力，帮助更多的人掌握技术，实现个人和职业的成长。</p>
+
+				<h3>我们的愿景</h3>
+				<p>我们的愿景是成为技术领域的领先博客，为读者提供最新、最全面的技术资讯和资源。我们希望通过持续的努力和创新，推动技术的发展，并为社会带来积极的影响。</p>
+			</section>
+
+			<!-- 图片 -->
+			<img src="images/封面图.jpg" alt="封面图" class="center-image">
+
+			<!-- 评论区 -->
+			<section class="comment-section">
+				<h2>评论区</h2>
+				<div class="comment-form">
+					<textarea id="comment-input" placeholder="写下你的留言..."></textarea>
+					<div class="emoji-picker">
+						<!-- 表情包选择器 -->
+						<span class="emoji" data-emoji="😀">😀</span>
+						<span class="emoji" data-emoji="😂">😂</span>
+						<span class="emoji" data-emoji="😍">😍</span>
+						<span class="emoji" data-emoji="👍">👍</span>
+						<span class="emoji" data-emoji="👏">👏</span>
+						<span class="emoji" data-emoji="🤔">🤔</span>
+						<span class="emoji" data-emoji="😊">😊</span>
+						<span class="emoji" data-emoji="😎">😎</span>
+						<span class="emoji" data-emoji="😢">😢</span>
+						<span class="emoji" data-emoji="😡">😡</span>
+					</div>
+					<button id="submit-comment">发布</button>
+				</div>
+				<div class="comments">
+					<!-- 评论列表 -->
+				</div>
+			</section>
+		</div>
+
+		<!-- 页脚 -->
+		<footer class="footer">
+			<div class="container">
+				<p>&copy; 2024 博客. 版权所有.</p>
+			</div>
+		</footer>
+
+		<!-- JavaScript -->
+		<script src="scripts.js"></script>
+		<script src="comments.js"></script>
+	</body>
+</html>

@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>源代码与资源下载</title>
+		<link rel="icon" href="images/标签栏图标.png" type="images/png" sizes="34x32">
+		<link rel="stylesheet" href="styles.css">
+		<link rel="stylesheet" href="styles2.css">
+
+		<style>
+			/* 基本样式 */
+			body {
+				font-family: Arial, sans-serif;
+				margin: 0;
+				padding: 0;
+				line-height: 1.6;
+				display: flex;
+				flex-direction: column;
+				min-height: 100vh;
+			}
+
+			.container {
+				width: 80%;
+				margin: 0 auto;
+			}
+
+			/* 导航栏样式 */
+			.navbar {
+				background-color: #333;
+				color: #fff;
+				padding: 10px 0;
+			}
+
+			.navbar .logo {
+				font-size: 24px;
+				font-weight: bold;
+				color: #fff;
+				text-decoration: none;
+			}
+
+			.nav-links {
+				list-style: none;
+				display: flex;
+				margin: 0;
+				padding: 0;
+			}
+
+			.nav-links li {
+				margin-left: 20px;
+			}
+
+			.nav-links a {
+				color: #fff;
+				text-decoration: none;
+			}
+
+			.menu-toggle {
+				display: none;
+				flex-direction: column;
+				cursor: pointer;
+			}
+
+			.menu-toggle .bar {
+				height: 3px;
+				width: 25px;
+				background-color: #fff;
+				margin: 4px 0;
+			}
+
+			/* 主要内容样式 */
+			.main-content {
+				flex: 1;
+				margin-top: 20px;
+			}
+
+			.repo-header {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				margin-bottom: 20px;
+				border-bottom: 1px solid #e1e4e8;
+				padding-bottom: 20px;
+			}
+
+			.repo-header h1 {
+				font-size: 36px;
+				margin: 0;
+			}
+
+			.repo-header .repo-links a {
+				margin-left: 10px;
+				color: #0366d6;
+				text-decoration: none;
+			}
+
+			.repo-header .repo-links a:hover {
+				text-decoration: underline;
+			}
+
+			.repo-description {
+				margin-bottom: 40px;
+				border-bottom: 1px solid #e1e4e8;
+				padding-bottom: 20px;
+			}
+
+			.repo-description p {
+				font-size: 18px;
+				color: #586069;
+			}
+
+			.repo-files {
+				margin-bottom: 40px;
+			}
+
+			.repo-files h2 {
+				font-size: 24px;
+				margin-bottom: 20px;
+			}
+
+			.repo-files ul {
+				list-style: none;
+				padding: 0;
+			}
+
+			.repo-files li {
+				margin-bottom: 10px;
+				padding: 10px;
+				border: 1px solid #e1e4e8;
+				border-radius: 6px;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				flex-wrap: wrap;
+			}
+
+			.repo-files a {
+				color: #0366d6;
+				text-decoration: none;
+				font-size: 18px;
+			}
+
+			.repo-files a:hover {
+				text-decoration: underline;
+			}
+
+			.repo-files .file-info {
+				font-size: 14px;
+				color: #586069;
+				margin-left: 10px;
+			}
+
+			.download-buttons {
+				display: flex;
+				gap: 10px;
+				margin-top: 10px;
+			}
+
+			.download-buttons a {
+				display: inline-block;
+				padding: 5px 10px;
+				border: 1px solid #e1e4e8;
+				border-radius: 4px;
+				color: #fff;
+				text-decoration: none;
+				font-size: 14px;
+				flex: 1;
+				text-align: center;
+			}
+
+			.download-buttons a:hover {
+				background-color: #f6f8fa;
+			}
+
+			.download-buttons .local {
+				background-color: #28a745;
+			}
+
+			.download-buttons .github {
+				background-color: #24292e;
+			}
+
+			.download-buttons .gitee {
+				background-color: #c71d23;
+			}
+
+			.download-buttons .baidu {
+				background-color: #239ed8;
+			}
+
+			/* 页脚样式 */
+			.footer {
+				background-color: #333;
+				color: #fff;
+				text-align: center;
+				padding: 10px 0;
+				margin-top: auto;
+				/* 确保页脚固定在底部 */
+			}
+
+			.footer-content {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				flex-wrap: wrap;
+			}
+
+			.footer-images {
+				display: flex;
+				gap: 10px;
+				margin-right: 20px;
+			}
+
+			.footer-images img {
+				width: 50px;
+				height: 50px;
+				border-radius: 50%;
+				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+			}
+
+			/* 搜索框样式 */
+			.search-container {
+				display: flex;
+				align-items: center;
+				margin-bottom: 20px;
+			}
+
+			.search-container input[type="text"] {
+				padding: 10px;
+				border: 2px solid #00aaff;
+				/* 增加边框宽度并改变颜色 */
+				border-radius: 6px;
+				font-size: 16px;
+				width: 250px;
+				box-shadow: 0 2px 4px rgba(0, 255, 255, 0.1);
+				/* 增加阴影效果 */
+				transition: border-color 0.3s ease, box-shadow 0.3s ease;
+				/* 添加过渡效果 */
+			}
+
+			.search-container input[type="text"]:focus {
+				border-color: #005cbf;
+				/* 聚焦时的边框颜色 */
+				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+				/* 聚焦时的阴影效果 */
+				outline: none;
+				/* 移除默认的聚焦轮廓 */
+			}
+
+			.search-container button {
+				padding: 10px 15px;
+				border: 2px solid #0366d6;
+				/* 增加边框宽度并改变颜色 */
+				border-radius: 6px;
+				background-color: #0366d6;
+				/* 改变背景颜色 */
+				color: #fff;
+				/* 改变文字颜色 */
+				cursor: pointer;
+				margin-left: 10px;
+				box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+				/* 增加阴影效果 */
+				transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+				/* 添加过渡效果 */
+			}
+
+			.search-container button:hover {
+				background-color: #005cbf;
+				/* 悬停时的背景颜色 */
+				border-color: #005cbf;
+				/* 悬停时的边框颜色 */
+				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+				/* 悬停时的阴影效果 */
+			}
+
+			.search-container button:active {
+				background-color: #004080;
+				/* 点击时的背景颜色 */
+				border-color: #004080;
+				/* 点击时的边框颜色 */
+				box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+				/* 点击时的阴影效果 */
+			}
+
+			/* 响应式设计 */
+			@media (max-width: 768px) {
+				.nav-links {
+					display: none;
+					flex-direction: column;
+					width: 100%;
+				}
+
+				.nav-links.active {
+					display: flex;
+				}
+
+				.menu-toggle {
+					display: flex;
+				}
+
+				.repo-header {
+					flex-direction: column;
+					align-items: flex-start;
+				}
+
+				.repo-header .repo-links {
+					margin-top: 10px;
+				}
+
+				.repo-files li {
+					flex-direction: column;
+					align-items: flex-start;
+				}
+
+				.repo-files .file-info {
+					margin-top: 5px;
+				}
+
+				.download-buttons {
+					flex-direction: column;
+				}
+
+				.footer-content {
+					flex-direction: column;
+					align-items: center;
+				}
+
+				.footer-images {
+					margin-right: 0;
+					margin-bottom: 10px;
+				}
+
+				.search-container {
+					flex-direction: column;
+					align-items: flex-start;
+				}
+
+				.search-container input[type="text"] {
+					width: 100%;
+					margin-bottom: 10px;
+				}
+
+				.search-container button {
+					margin-left: 0;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<!-- 导航栏 -->
+		<nav class="navbar">
+			<div class="container">
+				<a href="index.html" class="logo">中国矿业大学单片机学习平台</a>
+				<ul class="nav-links">
+					<li><a href="../index.html">首页</a></li>
+					<li><a href="../blog.html">文章</a></li>
+					<li><a href="../about.html">关于</a></li>
+					<li><a href="../relation.html">联系</a></li>
+					<li><a href="../StudySources/Sources.html">资源</a></li>
+					<li><a href="../Team.html">团队</a></li>
+				</ul>
+				<div class="menu-toggle" id="mobile-menu">
+					<span class="bar"></span>
+					<span class="bar"></span>
+					<span class="bar"></span>
+				</div>
+			</div>
+		</nav>
+
+		<!-- 主要内容 -->
+		<div class="container main-content">
+			<!-- 仓库头部 -->
+			<section class="repo-header">
+				<h1>源代码与资源下载</h1>
+				<div class="repo-links">
+					<a href="https://github.com/your-repo-url" target="_blank">GitHub</a>
+					<a href="https://gitee.com/your-repo-url" target="_blank">Gitee</a>
+					<a href="https://pan.baidu.com/s/your-repo-url" target="_blank">百度网盘</a>
+				</div>
+			</section>
+
+			<!-- 仓库描述 -->
+			<section class="repo-description">
+				<p>欢迎访问中国矿业大学单片机学习平台的源代码与资源下载页面。这里提供了项目的源代码、打包文件以及其他相关资源。您可以通过以下链接访问和下载这些资源。</p>
+			</section>
+
+			<!-- 搜索框 -->
+			<div class="search-container">
+				<input type="text" id="search-input" placeholder="搜索文件名(全称)...">
+				<button id="clear-search">×</button>
+			</div>
+
+			<!-- 仓库文件列表 -->
+			<section class="repo-files">
+				<h2>文件列表</h2>
+				<ul id="file-list">
+					<li>
+						<a href="../downloadPac/file1.zip" download>file1.zip</a>
+						<span class="file-info">大小: 10MB | 更新时间: 2024-10-01</span>
+						<div class="download-buttons">
+							<a href="../downloadPac/file1.zip" download class="local">本地下载</a>
+							<a href="https://github.com/your-repo-url/file1.zip" target="_blank"
+								class="github">GitHub</a>
+							<a href="https://gitee.com/your-repo-url/file1.zip" target="_blank" class="gitee">Gitee</a>
+							<a href="https://pan.baidu.com/s/your-repo-url/file1.zip" target="_blank"
+								class="baidu">百度云</a>
+						</div>
+					</li>
+					<li>
+						<a href="../downloadPac/file2.zip" download>file2.zip</a>
+						<span class="file-info">大小: 5MB | 更新时间: 2024-11-05</span>
+						<div class="download-buttons">
+							<a href="../downloadPac/file2.zip" download class="local">本地下载</a>
+							<a href="https://github.com/your-repo-url/file2.zip" target="_blank"
+								class="github">GitHub</a>
+							<a href="https://gitee.com/your-repo-url/file2.zip" target="_blank" class="gitee">Gitee</a>
+							<a href="https://pan.baidu.com/s/your-repo-url/file2.zip" target="_blank"
+								class="baidu">百度云</a>
+						</div>
+					</li>
+					<li>
+						<a href="../downloadPac/file3.zip" download>file3.zip</a>
+						<span class="file-info">大小: 20MB | 更新时间: 2024-11-08</span>
+						<div class="download-buttons">
+							<a href="../downloadPac/file3.zip" download class="local">本地下载</a>
+							<a href="https://github.com/your-repo-url/file3.zip" target="_blank"
+								class="github">GitHub</a>
+							<a href="https://gitee.com/your-repo-url/file3.zip" target="_blank" class="gitee">Gitee</a>
+							<a href="https://pan.baidu.com/s/your-repo-url/file3.zip" target="_blank"
+								class="baidu">百度云</a>
+						</div>
+					</li>
+					<li>
+						<a href="../downloadPac/file3.zip" download>file4.zip</a>
+						<span class="file-info">大小: 20MB | 更新时间: 2024-11-10</span>
+						<div class="download-buttons">
+							<a href="../downloadPac/file3.zip" download class="local">本地下载</a>
+							<a href="https://github.com/your-repo-url/file3.zip" target="_blank"
+								class="github">GitHub</a>
+							<a href="https://gitee.com/your-repo-url/file3.zip" target="_blank" class="gitee">Gitee</a>
+							<a href="https://pan.baidu.com/s/your-repo-url/file3.zip" target="_blank"
+								class="baidu">百度云</a>
+						</div>
+					</li>
+					<!-- 添加更多文件链接 -->
+				</ul>
+			</section>
+		</div>
+
+		<!-- 页脚 -->
+		<footer class="footer">
+			<div class="container footer-content">
+				<div class="footer-images">
+					<img src="../images/校徽1.jpg" alt="中国矿业大学校徽">
+					<img src="../images/github.jpg" alt="GitHub">
+				</div>
+				<p>&copy; 2024 博客. 版权所有归中国矿业大学。来自计算机学院和机电学院。</p>
+			</div>
+		</footer>
+
+		<!-- JavaScript -->
+		<script>
+			document.addEventListener('DOMContentLoaded', function() {
+				const fileList = document.getElementById('file-list');
+				const searchInput = document.getElementById('search-input');
+				const clearSearch = document.getElementById('clear-search');
+				const fileItems = fileList.getElementsByTagName('li');
+				const fileNames = Array.from(fileItems).map(item => item.querySelector('a').textContent);
+
+				searchInput.addEventListener('keyup', function(event) {
+					if (event.key === 'Enter') {
+						const searchTerm = searchInput.value.toLowerCase();
+						Array.from(fileItems).forEach(item => {
+							const fileName = item.querySelector('a').textContent.toLowerCase();
+							if (fileName.includes(searchTerm)) {
+								item.style.display = 'flex';
+							} else {
+								item.style.display = 'none';
+							}
+						});
+					}
+				});
+
+				clearSearch.addEventListener('click', function() {
+					searchInput.value = '';
+					Array.from(fileItems).forEach(item => {
+						item.style.display = 'flex';
+					});
+				});
+			});
+		</script>
+	</body>
+</html>

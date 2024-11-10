@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>单片机元器件详解</title>
+		<!-- 引入Bootstrap CSS -->
+		<link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+		<!-- 引入自定义CSS -->
+		<link href="electronicparts.css" rel="stylesheet">
+
+		<style>
+			/* 页脚样式 */
+			.footer {
+				background-color: #007bff;
+				/* 深灰色背景 */
+				color: #ffffff;
+				/* 白色文字 */
+				font-size: 14px;
+				/* 字体大小 */
+				border-top: 3px solid #007bff;
+				/* 顶部蓝色边框 */
+			}
+
+			.footer p {
+				margin: 0;
+				/* 去除默认的段落间距 */
+			}
+
+			.footer a {
+				color: #17a2b8;
+				/* 链接颜色 */
+				text-decoration: none;
+				/* 去除下划线 */
+			}
+
+			.footer a:hover {
+				color: #138496;
+				/* 鼠标悬停时的链接颜色 */
+				text-decoration: underline;
+				/* 悬停时显示下划线 */
+			}
+		</style>
+	</head>
+	<body>
+
+		<nav class="navbar navbar-expand-lg navbar-light">
+			<a class="navbar-brand" href="#">单片机元器件详解</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+				aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav">
+					<li class="nav-item">
+						<a class="nav-link" href="../blog.html">返回菜单</a>
+					</li>
+				</ul>
+				<form class="form-inline ml-auto">
+					<input class="form-control mr-sm-2" type="search" id="searchInput" placeholder="搜索元器件"
+						aria-label="Search">
+				</form>
+			</div>
+		</nav>
+
+		<div class="container">
+			<h1 class="text-center mt-4 mb-4">单片机元器件详解</h1>
+
+			<div class="table-responsive">
+				<table class="table table-bordered table-hover">
+					<thead class="thead-dark">
+						<tr>
+							<th>元器件名称</th>
+							<th>用法介绍</th>
+							<th>编程设计代码</th>
+							<th>官方文档</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>电阻 (Resistor)</td>
+							<td>用于限制电流或分压。</td>
+							<td>
+								<pre>
+#define RESISTOR_VALUE 1000  // 1kΩ
+int main() {
+    int voltage = 5;  // 5V
+    int current = voltage / RESISTOR_VALUE;
+    printf("Current: %d mA\n", current);
+    return 0;
+}</pre>
+							</td>
+							<td><a href="https://www.example.com/resistor-doc" target="_blank">查看文档</a></td>
+						</tr>
+						<tr>
+							<td>电容 (Capacitor)</td>
+							<td>用于存储电荷，平滑电压波动。</td>
+							<td>
+								<pre>
+#define CAPACITOR_VALUE 10e-6  // 10μF
+int main() {
+    float time_constant = RESISTOR_VALUE * CAPACITOR_VALUE;
+    printf("Time Constant: %.2f seconds\n", time_constant);
+    return 0;
+}</pre>
+							</td>
+							<td><a href="https://www.example.com/capacitor-doc" target="_blank">查看文档</a></td>
+						</tr>
+						<tr>
+							<td>二极管 (Diode)</td>
+							<td>用于单向导电，防止电流反向流动。</td>
+							<td>
+								<pre>
+#define DIODE_FORWARD_VOLTAGE 0.7  // 0.7V
+int main() {
+    float output_voltage = 5 - DIODE_FORWARD_VOLTAGE;
+    printf("Output Voltage: %.2f V\n", output_voltage);
+    return 0;
+}</pre>
+							</td>
+							<td><a href="https://www.example.com/diode-doc" target="_blank">查看文档</a></td>
+						</tr>
+						<tr>
+							<td>晶体管 (Transistor)</td>
+							<td>用于放大电流或作为开关。</td>
+							<td>
+								<pre>
+#define BASE_CURRENT 10e-3  // 10mA
+#define GAIN 100  // 放大倍数
+int main() {
+    float collector_current = BASE_CURRENT * GAIN;
+    printf("Collector Current: %.2f A\n", collector_current);
+    return 0;
+}</pre>
+							</td>
+							<td><a href="https://www.example.com/transistor-doc" target="_blank">查看文档</a></td>
+						</tr>
+						<tr>
+							<td>LED (Light Emitting Diode)</td>
+							<td>用于发光，常用于指示灯。</td>
+							<td>
+								<pre>
+#define LED_FORWARD_VOLTAGE 2.0  // 2.0V
+#define RESISTOR_VALUE 330  // 330Ω
+int main() {
+    float current = (5 - LED_FORWARD_VOLTAGE) / RESISTOR_VALUE;
+    printf("LED Current: %.2f mA\n", current * 1000);
+    return 0;
+}</pre>
+							</td>
+							<td><a href="https://www.example.com/led-doc" target="_blank">查看文档</a></td>
+						</tr>
+						<tr>
+							<td>电感 (Inductor)</td>
+							<td>用于存储磁场能量，常用于滤波和振荡电路。</td>
+							<td>
+								<pre>
+#define INDUCTOR_VALUE 10e-3  // 10mH
+int main() {
+    float time_constant = INDUCTOR_VALUE / RESISTOR_VALUE;
+    printf("Time Constant: %.2f seconds\n", time_constant);
+    return 0;
+}</pre>
+							</td>
+							<td><a href="https://www.example.com/inductor-doc" target="_blank">查看文档</a></td>
+						</tr>
+						<tr>
+							<td>晶振 (Crystal Oscillator)</td>
+							<td>用于提供稳定的时钟信号，常用于单片机时钟源。</td>
+							<td>
+								<pre>
+#define CRYSTAL_FREQUENCY 12e6  // 12MHz
+int main() {
+    printf("Crystal Frequency: %.0f Hz\n", CRYSTAL_FREQUENCY);
+    return 0;
+}</pre>
+							</td>
+							<td><a href="https://www.example.com/crystal-doc" target="_blank">查看文档</a></td>
+						</tr>
+						<tr>
+							<td>继电器 (Relay)</td>
+							<td>用于控制高电压或大电流的开关。</td>
+							<td>
+								<pre>
+#define RELAY_COIL_RESISTANCE 200  // 200Ω
+int main() {
+    float current = 5 / RELAY_COIL_RESISTANCE;
+    printf("Relay Coil Current: %.2f mA\n", current * 1000);
+    return 0;
+}</pre>
+							</td>
+							<td><a href="https://www.example.com/relay-doc" target="_blank">查看文档</a></td>
+						</tr>
+						<tr>
+							<td>传感器 (Sensor)</td>
+							<td>用于检测环境参数，如温度、湿度等。</td>
+							<td>
+								<pre>
+#define SENSOR_PIN A0
+int main() {
+    int sensor_value = analogRead(SENSOR_PIN);
+    printf("Sensor Value: %d\n", sensor_value);
+    return 0;
+}</pre>
+							</td>
+							<td><a href="https://www.example.com/sensor-doc" target="_blank">查看文档</a></td>
+						</tr>
+						<tr>
+							<td>蜂鸣器 (Buzzer)</td>
+							<td>用于发出声音，常用于报警或提示。</td>
+							<td>
+								<pre>
+#define BUZZER_PIN 9
+int main() {
+    pinMode(BUZZER_PIN, OUTPUT);
+    digitalWrite(BUZZER_PIN, HIGH);
+    delay(1000);
+    digitalWrite(BUZZER_PIN, LOW);
+    return 0;
+}</pre>
+							</td>
+							<td><a href="https://www.example.com/buzzer-doc" target="_blank">查看文档</a></td>
+						</tr>
+						<tr>
+							<td>Arduino Uno</td>
+							<td>常用的开源微控制器主板，基于ATmega328P芯片。</td>
+							<td>
+								<pre>
+#define LED_PIN 13
+void setup() {
+pinMode(LED_PIN, OUTPUT);
+}
+void loop() {
+digitalWrite(LED_PIN, HIGH);
+delay(1000);
+digitalWrite(LED_PIN, LOW);
+delay(1000);
+}</pre>
+							</td>
+							<td><a href="https://www.arduino.cc/en/Guide/ArduinoUno" target="_blank">查看文档</a></td>
+						</tr>
+						<tr>
+							<td>Raspberry Pi</td>
+							<td>基于ARM架构的单板计算机，广泛用于物联网和嵌入式系统。</td>
+							<td>
+								<pre>
+import RPi.GPIO as GPIO
+import time
+
+LED_PIN = 18
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(LED_PIN, GPIO.OUT)
+						
+try:
+while True:
+GPIO.output(LED_PIN, GPIO.HIGH)
+		time.sleep(1)
+GPIO.output(LED_PIN, GPIO.LOW)
+        time.sleep(1)
+except KeyboardInterrupt:
+GPIO.cleanup()
+						</pre>
+							</td>
+							<td><a href="https://www.raspberrypi.org/documentation/" target="_blank">查看文档</a></td>
+						</tr>
+						<tr>
+							<td>74HC595 Shift Register</td>
+							<td>用于扩展微控制器的输出引脚，通过串行输入并行输出。</td>
+							<td>
+								<pre>
+#define DATA_PIN 2
+#define LATCH_PIN 3
+#define CLOCK_PIN 4
+						
+void setup() {
+    pinMode(DATA_PIN, OUTPUT);
+    pinMode(LATCH_PIN, OUTPUT);
+    pinMode(CLOCK_PIN, OUTPUT);
+}
+						
+void loop() {
+    for (int i = 0; i < 256; i++) {
+        digitalWrite(LATCH_PIN, LOW);
+        shiftOut(DATA_PIN, CLOCK_PIN, MSBFIRST, i);
+        digitalWrite(LATCH_PIN, HIGH);
+        delay(500);
+	}
+}</pre>
+							</td>
+							<td><a href="https://www.ti.com/lit/ds/symlink/sn74hc595.pdf" target="_blank">查看文档</a></td>
+						</tr>
+						<tr>
+							<td>LM35 Temperature Sensor</td>
+							<td>线性温度传感器，输出电压与温度成正比。</td>
+							<td>
+								<pre>
+#define SENSOR_PIN A0
+						
+void setup() {
+    Serial.begin(9600);
+}
+						
+void loop() {
+    int sensorValue = analogRead(SENSOR_PIN);
+    float voltage = sensorValue * (5.0 / 1023.0);
+    float temperature = voltage * 100;
+    Serial.print("Temperature: ");
+    Serial.print(temperature);
+    Serial.println(" C");
+    delay(1000);
+}</pre>
+							</td>
+							<td><a href="https://www.ti.com/lit/ds/symlink/lm35.pdf" target="_blank">查看文档</a></td>
+						</tr>
+						<tr>
+							<td>HC-SR04 Ultrasonic Sensor</td>
+							<td>用于测量距离的超声波传感器。</td>
+							<td>
+								<pre>
+#define TRIG_PIN 9
+#define ECHO_PIN 10
+						
+void setup() {
+    Serial.begin(9600);
+    pinMode(TRIG_PIN, OUTPUT);
+    pinMode(ECHO_PIN, INPUT);
+}
+						
+void loop() {
+    digitalWrite(TRIG_PIN, LOW);
+    delayMicroseconds(2);
+    digitalWrite(TRIG_PIN, HIGH);
+    delayMicroseconds(10);
+    digitalWrite(TRIG_PIN, LOW);
+						
+    long duration = pulseIn(ECHO_PIN, HIGH);
+    float distance = duration * 0.034 / 2;
+						
+    Serial.print("Distance: ");
+    Serial.print(distance);
+    Serial.println(" cm");
+    delay(1000);
+}</pre>
+							</td>
+							<td><a href="https://cdn.sparkfun.com/datasheets/Sensors/Proximity/HCSR04.pdf"
+									target="_blank">查看文档</a></td>
+						</tr>
+
+
+
+
+
+
+					</tbody>
+				</table>
+			</div>
+
+			<div class="footer text-center mt-4 p-3">
+				<p>2024 版权归CUMT所有</p>
+			</div>
+		</div>
+
+		<!-- 引入Bootstrap JS和依赖 -->
+		<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
+		<script src="https://cdn.bootcdn.net/ajax/libs/popper.js/2.5.4/umd/popper.min.js"></script>
+		<script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js"></script>
+		<!-- 引入自定义JS -->
+		<script src="electronicparts.js"></script>
+
+	</body>
+</html>

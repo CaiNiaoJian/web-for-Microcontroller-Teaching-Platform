@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>51单片机实时操作系统和多任务应用</title>
+		<style>
+			/* 全局样式 */
+			body {
+				font-family: Arial, sans-serif;
+				margin: 0;
+				padding: 0;
+				background-color: #f5f5f5;
+			}
+
+			/* 页头样式 */
+			header {
+				background-color: #333;
+				color: #fff;
+				padding: 20px;
+				text-align: center;
+			}
+
+			header h1 {
+				margin: 0;
+			}
+
+			/* 内容区域样式 */
+			.container {
+				max-width: 800px;
+				margin: 0 auto;
+				padding: 40px;
+			}
+
+			.article-content {
+				background-color: #fff;
+				padding: 30px;
+				border-radius: 5px;
+				box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+			}
+
+			.article-content h2 {
+				margin-top: 0;
+			}
+
+			.article-content p {
+				line-height: 1.6;
+				margin-bottom: 20px;
+			}
+
+			.article-content ul {
+				margin-left: 20px;
+				margin-bottom: 20px;
+			}
+
+			.article-content li {
+				margin-bottom: 10px;
+			}
+
+			.article-content pre {
+				background-color: #f5f5f5;
+				padding: 20px;
+				border-radius: 5px;
+				overflow-x: auto;
+			}
+
+			.article-content code {
+				font-family: monospace;
+			}
+
+			.article-content .code-explanation {
+				margin-top: 20px;
+			}
+
+			.article-content .code-explanation h3 {
+				margin-top: 0;
+			}
+
+			.article-content .code-explanation p {
+				margin-bottom: 10px;
+			}
+
+			.article-content .rtos-showcase {
+				margin-top: 40px;
+			}
+
+			.article-content .rtos-showcase h3 {
+				margin-top: 0;
+			}
+
+			.article-content .rtos-showcase .rtos {
+				margin-bottom: 30px;
+			}
+
+			.article-content .rtos-showcase .rtos h4 {
+				margin-top: 0;
+			}
+
+			.article-content .rtos-showcase .rtos p {
+				margin-bottom: 10px;
+			}
+
+			.article-content .rtos-showcase .rtos pre {
+				margin-top: 10px;
+			}
+
+			.back-button {
+				display: inline-block;
+				background-color: #333;
+				color: #fff;
+				padding: 10px 20px;
+				text-decoration: none;
+				border-radius: 5px;
+				margin-top: 20px;
+			}
+
+			.back-button:hover {
+				background-color: #555;
+			}
+
+			/* 页脚样式 */
+			footer {
+				background-color: #333;
+				color: #fff;
+				padding: 20px;
+				text-align: center;
+			}
+
+			footer p {
+				margin: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<h1>51单片机实时操作系统和多任务应用</h1>
+		</header>
+
+		<div class="container">
+			<div class="article-content">
+				<h2>实时操作系统简介</h2>
+				<p>实时操作系统(RTOS)是嵌入式系统中常用的一种操作系统,它能够保证系统在严格的时间约束下正确运行。RTOS通常具有任务调度、中断管理、时间管理等功能,可以帮助开发者更好地管理系统资源和实现多任务并发。
+				</p>
+
+				<h2>FreeRTOS简介</h2>
+				<div class="rtos-showcase">
+					<div class="rtos">
+						<h4>FreeRTOS任务管理</h4>
+						<p>FreeRTOS是一款广泛使用的开源RTOS,适用于各种嵌入式系统,包括51单片机。下面是一个FreeRTOS任务管理的示例:</p>
+						<pre><code>
+#include &lt;reg51.h&gt;
+#include "FreeRTOS.h"
+#include "task.h"
+
+void task1(void *pvParameters) {
+    while (1) {
+        // 任务1的代码
+        vTaskDelay(1000); // 延迟1秒
+    }
+}
+
+void task2(void *pvParameters) {
+    while (1) {
+        // 任务2的代码
+        vTaskDelay(2000); // 延迟2秒
+    }
+}
+
+void main() {
+    xTaskCreate(task1, "Task1", 128, NULL, 1, NULL);
+    xTaskCreate(task2, "Task2", 128, NULL, 1, NULL);
+    vTaskStartScheduler(); // 启动FreeRTOS调度器
+}
+                    </code></pre>
+						<div class="code-explanation">
+							<h3>代码解析</h3>
+							<p>该程序实现了以下功能:</p>
+							<ul>
+								<li>定义两个任务task1和task2,分别执行不同的代码逻辑</li>
+								<li>在main()函数中,创建这两个任务并启动FreeRTOS调度器</li>
+								<li>FreeRTOS会自动在这两个任务之间进行切换,实现并发执行</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<h2>FreeRTOS中断管理</h2>
+				<div class="rtos-showcase">
+					<div class="rtos">
+						<h4>FreeRTOS中断处理</h4>
+						<p>FreeRTOS提供了强大的中断管理机制,可以帮助开发者更好地处理中断事件。下面是一个FreeRTOS中断处理的示例:</p>
+						<pre><code>
+#include &lt;reg51.h&gt;
+#include "FreeRTOS.h"
+#include "task.h"
+#include "queue.h"
+
+QueueHandle_t queue;
+
+void interrupt_handler() interrupt 0 {
+    unsigned char data = 0x55;
+    xQueueSendFromISR(queue, &data, NULL); // 向队列发送数据
+}
+
+void task_process_interrupt(void *pvParameters) {
+    unsigned char data;
+    while (1) {
+        if (xQueueReceive(queue, &data, portMAX_DELAY) == pdPASS) {
+            // 处理从中断服务程序发送的数据
+        }
+    }
+}
+
+void main() {
+    queue = xQueueCreate(10, sizeof(unsigned char)); // 创建队列
+    xTaskCreate(task_process_interrupt, "Interrupt Task", 128, NULL, 2, NULL);
+    EA = 1; // 开启总中断
+    EX0 = 1; // 开启外部中断0
+    vTaskStartScheduler(); // 启动FreeRTOS调度器
+}
+                    </code></pre>
+						<div class="code-explanation">
+							<h3>代码解析</h3>
+							<p>该程序实现了以下功能:</p>
+							<ul>
+								<li>定义一个中断服务程序interrupt_handler(),用于处理外部中断0</li>
+								<li>在中断服务程序中,将数据发送到一个FreeRTOS队列中</li>
+								<li>创建一个任务task_process_interrupt(),用于从队列中读取数据并进行处理</li>
+								<li>在main()函数中,创建队列和任务,并开启总中断和外部中断0</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<h2>总结</h2>
+				<p>通过本篇教程,大家应该对51单片机的实时操作系统和多任务应用有了更深入的了解。RTOS是嵌入式系统中非常重要的一部分,它能够帮助开发者更好地管理系统资源,实现多任务并发。FreeRTOS是一款广泛使用的开源RTOS,提供了任务管理、中断管理等丰富的功能。掌握这些知识对于后续的项目开发非常重要。
+				</p>
+				<a href="other-articles.html" class="back-button">返回</a>
+			</div>
+		</div>
+
+		<footer>
+			<p>&copy; 2024 51单片机开发教程. All rights reserved.</p>
+		</footer>
+		<script>
+			window.parent.postMessage({
+				action: "ready"
+			}, "*");
+
+			window.console = new Proxy(console, {
+				get(target, prop) {
+					if (['log', 'warn', 'error'].includes(prop)) {
+						return new Proxy(target[prop], {
+							apply(fn, thisArg, args) {
+								fn.apply(thisArg, args);
+								window.parent.postMessage({
+									action: 'console',
+									type: prop,
+									args: args.map((arg) => {
+										try {
+											return JSON.stringify(arg).replace(
+												/^["']|["']$/g, '');
+										} catch (e) {
+											return arg;
+										}
+									})
+								}, '*');
+							}
+						});
+					}
+					return target[prop];
+				}
+			});
+		</script>
+	</body>
+</html>
