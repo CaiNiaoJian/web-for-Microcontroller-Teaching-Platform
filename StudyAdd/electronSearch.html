@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>元器件搜索引擎</title>
+		<!-- 引入Bootstrap CSS -->
+		<link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+		<!-- 引入自定义CSS -->
+		<link href="electronicparts.css" rel="stylesheet">
+		<style>
+			body {
+				background-color: #f8f9fa;
+			}
+
+			.search-container {
+				margin-top: 100px;
+			}
+
+			.search-input {
+				width: 100%;
+				max-width: 600px;
+				border-radius: 24px;
+				padding: 15px 20px;
+				font-size: 18px;
+				border: 1px solid #ced4da;
+				box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
+			}
+
+			.search-input:focus {
+				outline: none;
+				box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
+			}
+
+			.search-button {
+				border-radius: 24px;
+				padding: 10px 20px;
+				font-size: 16px;
+				background-color: #4285f4;
+				border: 1px solid #4285f4;
+				color: white;
+			}
+
+			.search-button:hover {
+				background-color: #357ae8;
+				border: 1px solid #357ae8;
+			}
+
+			.search-results {
+				margin-top: 40px;
+			}
+
+			.advanced-search-form {
+				margin-top: 20px;
+				display: none;
+			}
+
+			.advanced-search-form input {
+				margin-right: 10px;
+			}
+		</style>
+	</head>
+	<body>
+
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<a class="navbar-brand" href="#">元器件搜索引擎</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+				aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav">
+					<li class="nav-item">
+						<a class="nav-link" href="../blog.html">返回菜单</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+
+		<div class="container search-container">
+			<div class="row justify-content-center">
+				<div class="col-md-8">
+					<h1 class="text-center mb-4">元器件搜索引擎</h1>
+					<form id="searchForm" class="form-inline justify-content-center">
+						<input class="form-control search-input mr-sm-2" type="search" id="searchInput"
+							placeholder="搜索元器件" aria-label="Search">
+						<button class="btn search-button my-2 my-sm-0" type="submit">搜索</button>
+						<button class="btn btn-link my-2 my-sm-0" id="advancedSearchToggle">高级检索</button>
+					</form>
+					<form id="advancedSearchForm" class="form-inline advanced-search-form">
+						<input class="form-control mr-sm-2" type="text" id="advancedSearchName" placeholder="元器件名称">
+						<input class="form-control mr-sm-2" type="text" id="advancedSearchUsage" placeholder="用法关键字">
+						<input class="form-control mr-sm-2" type="text" id="advancedSearchCode" placeholder="代码部分">
+						<button class="btn search-button my-2 my-sm-0" type="submit">高级搜索</button>
+					</form>
+				</div>
+			</div>
+
+			<div class="row justify-content-center search-results">
+				<div class="col-md-8">
+					<div id="searchResults" class="list-group"></div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 引入Bootstrap JS和依赖 -->
+		<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
+		<script src="https://cdn.bootcdn.net/ajax/libs/popper.js/2.5.4/umd/popper.min.js"></script>
+		<script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js"></script>
+		<!-- 引入自定义JS -->
+		<script src="electronSearch.js"></script>
+
+	</body>
+</html>
