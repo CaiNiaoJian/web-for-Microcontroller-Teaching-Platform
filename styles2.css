@@ -3,11 +3,16 @@
 /* 图片墙样式 */
 .image-wall {
 	display: flex;
-	justify-content: space-between;
+	justify-content: flex-start;
 	margin-bottom: 40px;
-	overflow: hidden;
-	flex-wrap: wrap;
-	/* 允许图片换行 */
+	overflow-x: auto;
+	/* 允许水平滚动 */
+	scroll-snap-type: x mandatory;
+	/* 滚动时对齐到图片 */
+	scroll-behavior: smooth;
+	/* 平滑滚动 */
+	-webkit-overflow-scrolling: touch;
+	/* 为iOS设备启用平滑滚动 */
 }
 
 .image-wall img {
@@ -18,8 +23,12 @@
 	opacity: 0;
 	transform: translateX(-100%);
 	transition: opacity 1s ease, transform 1s ease;
-	margin-bottom: 10px;
+	margin-right: 10px;
 	/* 图片之间的间距 */
+	scroll-snap-align: start;
+	/* 滚动时对齐到图片 */
+	flex: 0 0 auto;
+	/* 防止图片被压缩 */
 }
 
 .image-wall img.show {
@@ -37,7 +46,7 @@
 
 @media (max-width: 480px) {
 	.image-wall img {
-		width: 100%;
+		width: 80%;
 		/* 手机端每行显示一张图片 */
 	}
 }

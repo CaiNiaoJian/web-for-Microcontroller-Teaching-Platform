@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>仿真实验平台</title>
+		<style>
+			body {
+				font-family: Arial, sans-serif;
+				margin: 0;
+				padding: 0;
+			}
+
+			.navbar {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				background-color: #333;
+				color: white;
+				padding: 10px 20px;
+			}
+
+			.navbar .logo {
+				font-size: 24px;
+				font-weight: bold;
+			}
+
+			.nav-links {
+				list-style: none;
+				display: flex;
+				gap: 20px;
+			}
+
+			.nav-links li {
+				display: inline;
+			}
+
+			.nav-links a {
+				color: white;
+				text-decoration: none;
+			}
+
+			.experiment-list,
+			.help {
+				padding: 20px;
+			}
+
+			.experiment-cards {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 20px;
+			}
+
+			.experiment-card {
+				border: 1px solid #ccc;
+				padding: 20px;
+				border-radius: 8px;
+				width: 200px;
+				text-align: center;
+			}
+
+			.experiment-card button {
+				margin-top: 10px;
+				padding: 10px 20px;
+				background-color: #007BFF;
+				color: white;
+				border: none;
+				border-radius: 5px;
+				cursor: pointer;
+			}
+
+			.user-info-modal {
+				display: none;
+				position: fixed;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				background-color: white;
+				padding: 20px;
+				border-radius: 8px;
+				box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+				z-index: 1000;
+			}
+
+			.user-info-modal h3 {
+				margin-top: 0;
+			}
+
+			.user-info-modal p {
+				margin: 10px 0;
+			}
+
+			.user-info-modal button {
+				padding: 10px 20px;
+				background-color: #007BFF;
+				color: white;
+				border: none;
+				border-radius: 5px;
+				cursor: pointer;
+			}
+		</style>
+	</head>
+	<body>
+		<nav class="navbar">
+			<div class="logo">仿真实验平台</div>
+			<ul class="nav-links">
+				<li><a href="#experiments">实验列表</a></li>
+				<li><a href="#" id="user-center-link">用户中心</a></li>
+				<li><a href="#help">帮助</a></li>
+				<li><input type="text" placeholder="搜索实验..."></li>
+			</ul>
+		</nav>
+
+		<section id="experiments" class="experiment-list">
+			<h2>实验列表</h2>
+			<div class="experiment-cards">
+				<div class="experiment-card" data-id="1">
+					<h3>实验1</h3>
+					<p>这是一个简单的实验，适合初学者。</p>
+					<button class="start-experiment">开始实验</button>
+				</div>
+				<div class="experiment-card" data-id="2">
+					<h3>实验2</h3>
+					<p>这是一个进阶实验，需要一定的基础知识。</p>
+					<button class="start-experiment">开始实验</button>
+				</div>
+				<div class="experiment-card" data-id="3">
+					<h3>实验3</h3>
+					<p>这是一个进阶实验，需要一定的基础知识。</p>
+					<button class="start-experiment">开始实验</button>
+				</div>
+				<div class="experiment-card" data-id="4">
+					<h3>实验4</h3>
+					<p>这是一个进阶实验，需要一定的基础知识。</p>
+					<button class="start-experiment">开始实验</button>
+				</div>
+				<div class="experiment-card" data-id="5">
+					<h3>实验5</h3>
+					<p>这是一个进阶实验，需要一定的基础知识。</p>
+					<button class="start-experiment">开始实验</button>
+				</div>
+				<div class="experiment-card" data-id="6">
+					<h3>实验6</h3>
+					<p>这是一个进阶实验，需要一定的基础知识。</p>
+					<button class="start-experiment">开始实验</button>
+				</div>
+				<div class="experiment-card" data-id="7">
+					<h3>实验7</h3>
+					<p>这是一个进阶实验，需要一定的基础知识。</p>
+					<button class="start-experiment">开始实验</button>
+				</div>
+				<div class="experiment-card" data-id="8">
+					<h3>实验8</h3>
+					<p>这是一个进阶实验，需要一定的基础知识。</p>
+					<button class="start-experiment">开始实验</button>
+				</div>
+				<div class="experiment-card" data-id="9">
+					<h3>实验9</h3>
+					<p>这是一个进阶实验，需要一定的基础知识。</p>
+					<button class="start-experiment">开始实验</button>
+				</div>
+			</div>
+		</section>
+
+		<section id="help" class="help">
+			<h2>帮助与支持</h2>
+			<div class="help-content">
+				<h3>常见问题</h3>
+				<p>这里是常见问题的解答。</p>
+			</div>
+		</section>
+
+		<!-- 用户信息弹出框 -->
+		<div id="user-info-modal" class="user-info-modal">
+			<h3>个人信息</h3>
+			<p>用户名: 张三</p>
+			<p>邮箱: zhangsan@example.com</p>
+			<button id="close-modal">关闭</button>
+		</div>
+
+		<script>
+			document.addEventListener('DOMContentLoaded', () => {
+				const experimentCards = document.querySelectorAll('.experiment-card');
+				const userCenterLink = document.getElementById('user-center-link');
+				const userInfoModal = document.getElementById('user-info-modal');
+				const closeModalButton = document.getElementById('close-modal');
+
+				experimentCards.forEach(card => {
+					card.querySelector('.start-experiment').addEventListener('click', () => {
+						const experimentId = card.getAttribute('data-id');
+						window.location.href = `simulation.html?id=${experimentId}`;
+					});
+				});
+
+				userCenterLink.addEventListener('click', (event) => {
+					event.preventDefault();
+					userInfoModal.style.display = 'block';
+				});
+
+				closeModalButton.addEventListener('click', () => {
+					userInfoModal.style.display = 'none';
+				});
+			});
+		</script>
+	</body>
+</html>
