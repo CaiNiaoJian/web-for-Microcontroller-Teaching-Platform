@@ -1,6 +1,6 @@
 // 模拟元器件数据
 const partsData = [
-	// 原有数据
+	// 数据
 	{
 		name: '电阻 (Resistor)',
 		usage_description: '用于限制电流或分压。<br><img src="electronicImages/resistor.png" alt="开关示意图" style="max-width:100%;">',
@@ -233,28 +233,38 @@ function displayResults(results) {
 }
 
 $(document).ready(function() {
+	console.log('Document is ready!');
+	console.log('jQuery is loaded and ready!');
+
 	// 搜索表单提交事件
 	$('#searchForm').on('submit', function(e) {
+		console.log('Search form submitted!');
 		e.preventDefault();
 		let query = $('#searchInput').val().trim();
+		console.log('Query:', query);
 		if (query) {
 			let results = searchParts(query);
+			console.log('Results:', results);
 			displayResults(results);
 		}
 	});
 
 	// 高级搜索表单提交事件
 	$('#advancedSearchForm').on('submit', function(e) {
+		console.log('Advanced search form submitted!');
 		e.preventDefault();
 		let name = $('#advancedSearchName').val().trim();
 		let usage = $('#advancedSearchUsage').val().trim();
 		let code = $('#advancedSearchCode').val().trim();
+		console.log('Name:', name, 'Usage:', usage, 'Code:', code);
 		let results = advancedSearchParts(name, usage, code);
+		console.log('Results:', results);
 		displayResults(results);
 	});
 
 	// 高级检索按钮点击事件
 	$('#advancedSearchToggle').on('click', function() {
+		console.log('Advanced search toggle clicked!');
 		$('#advancedSearchForm').toggle();
 	});
 });

@@ -1,0 +1,7 @@
+bootstrap.min.js:1 
+        
+        
+       Failed to load resource: net::ERR_INCOMPLETE_CHUNKED_ENCODING
+electronSearch.js:235 Uncaught ReferenceError: $ is not defined
+    at electronSearch.js:235:1
+(anonymous) @ electronSearch.js:235
