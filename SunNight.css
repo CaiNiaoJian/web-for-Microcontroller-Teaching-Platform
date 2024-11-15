@@ -1,0 +1,152 @@
+/* SunNight.css */
+
+:root {
+	--background-color: #ffffff;
+	--text-color: #000000;
+	--link-color: #007bff;
+	--header-background: #f8f9fa;
+	--header-text-color: #333333;
+	--button-background: #007bff;
+	--button-text-color: #ffffff;
+	--nav-item-background: #f9f9f9;
+	--nav-item-text-color: #333333;
+	--interactive-section-background: #f9f9f9;
+	--interactive-section-text-color: #333333;
+	--category-background: #f9f9f9;
+	--category-text-color: #333333;
+	--journal-item-background: #f9f9f9;
+	--journal-item-text-color: #333333;
+	--website-item-background: #f0f8ff;
+	--website-item-text-color: #333333;
+	--resource-item-background: #f9f9f9;
+	--resource-item-text-color: #333333;
+}
+
+.dark-theme {
+	--background-color: #000000;
+	--text-color: #ffffff;
+	--link-color: #bb86fc;
+	--header-background: #1e1e1e;
+	--header-text-color: #ffffff;
+	--button-background: #bb86fc;
+	--button-text-color: #000000;
+	--nav-item-background: #333333;
+	--nav-item-text-color: #ffffff;
+	--interactive-section-background: #333333;
+	--interactive-section-text-color: #ffffff;
+	--category-background: #333333;
+	--category-text-color: #ffffff;
+	--journal-item-background: #333333;
+	--journal-item-text-color: #ffffff;
+	--website-item-background: #333333;
+	--website-item-text-color: #ffffff;
+	--resource-item-background: #333333;
+	--resource-item-text-color: #ffffff;
+}
+
+body {
+	background-color: var(--background-color);
+	color: var(--text-color);
+}
+
+a {
+	color: var(--link-color);
+}
+
+header {
+	background-color: var(--header-background);
+	color: var(--header-text-color);
+}
+
+/* 按钮样式 */
+.theme-toggle-button {
+	background-color: var(--button-background);
+	color: var(--button-text-color);
+	border: none;
+	padding: 10px 20px;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 16px;
+	transition: background-color 0.3s, color 0.3s;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	z-index: 1000;
+}
+
+.theme-toggle-button:hover {
+	background-color: var(--button-text-color);
+	color: var(--button-background);
+}
+
+/* 快捷导航模块样式 */
+.nav-item {
+	background-color: var(--nav-item-background);
+	color: var(--nav-item-text-color);
+}
+
+.nav-item h3,
+.nav-item p,
+.nav-item a {
+	color: var(--nav-item-text-color);
+}
+
+/* 互动小板块样式 */
+.interactive-section {
+	background-color: var(--interactive-section-background);
+	color: var(--interactive-section-text-color);
+}
+
+.interactive-section h2,
+.interactive-section button,
+.interactive-section #output {
+	color: var(--interactive-section-text-color);
+}
+
+/* 分类模块样式 */
+.category {
+	background-color: var(--category-background);
+	color: var(--category-text-color);
+}
+
+.category h3,
+.category p,
+.category .read-more {
+	color: var(--category-text-color);
+}
+
+/* 期刊模块样式 */
+.journal-item {
+	background-color: var(--journal-item-background);
+	color: var(--journal-item-text-color);
+}
+
+.journal-item h3,
+.journal-item p,
+.journal-item .read-more {
+	color: var(--journal-item-text-color);
+}
+
+/* 网站建设模块样式 */
+.website-item {
+	background-color: var(--website-item-background);
+	color: var(--website-item-text-color);
+}
+
+.website-item h2,
+.website-item p,
+.website-item a {
+	color: var(--website-item-text-color);
+}
+
+/* 资源模块样式 */
+.resource-item {
+	background-color: var(--resource-item-background);
+	color: var(--resource-item-text-color);
+}
+
+.resource-item h4,
+.resource-item p,
+.resource-item a {
+	color: var(--resource-item-text-color);
+}
