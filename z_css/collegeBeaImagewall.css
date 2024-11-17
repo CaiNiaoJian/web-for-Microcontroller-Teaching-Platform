@@ -1,0 +1,75 @@
+/* z_css/collegeBeaImagewall.css */
+
+/* 图片墙样式 */
+.image-wall {
+	display: flex;
+	justify-content: flex-start;
+	margin-bottom: 40px;
+	overflow-x: auto;
+	/* 允许水平滚动 */
+	scroll-snap-type: x mandatory;
+	/* 滚动时对齐到图片 */
+	scroll-behavior: smooth;
+	/* 平滑滚动 */
+	-webkit-overflow-scrolling: touch;
+	/* 为iOS设备启用平滑滚动 */
+}
+
+.image-wall img {
+	width: 300px;
+	/* 缩小图片宽度 */
+	height: auto;
+	scroll-snap-align: start;
+	flex-shrink: 0;
+	margin-right: 10px;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 媒体查询 */
+@media (max-width: 768px) {
+	.image-wall img {
+		width: 200px;
+		/* 手机端缩小图片宽度 */
+	}
+}
+
+/* z_css/collegeBeaImagewall.css */
+
+.college-beauty-image-wall {
+	display: flex;
+	overflow-x: auto;
+	scroll-snap-type: x mandatory;
+	-webkit-overflow-scrolling: touch;
+	scrollbar-width: none;
+	/* Firefox */
+	-ms-overflow-style: none;
+	/* IE and Edge */
+	margin-top: 20px;
+	padding-bottom: 20px;
+	/* 添加底部内边距以显示滑轨 */
+}
+
+.college-beauty-image-wall::-webkit-scrollbar {
+	display: none;
+	/* Chrome, Safari, and Opera */
+}
+
+.college-beauty-image-wall img {
+	width: 300px;
+	/* 缩小图片宽度 */
+	height: auto;
+	scroll-snap-align: start;
+	flex-shrink: 0;
+	margin-right: 10px;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 媒体查询 */
+@media (max-width: 768px) {
+	.college-beauty-image-wall img {
+		width: 200px;
+		/* 手机端缩小图片宽度 */
+	}
+}

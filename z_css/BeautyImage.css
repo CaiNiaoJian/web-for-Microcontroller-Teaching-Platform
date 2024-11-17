@@ -1,0 +1,80 @@
+/* z_css/BeautyImage.css */
+
+.beauty-image-wall {
+	display: flex;
+	overflow-x: auto;
+	scroll-snap-type: x mandatory;
+	-webkit-overflow-scrolling: touch;
+	scrollbar-width: none;
+	/* Firefox */
+	-ms-overflow-style: none;
+	/* IE and Edge */
+	margin-top: 20px;
+	padding-bottom: 20px;
+	/* 添加底部内边距以显示滑轨 */
+}
+
+.beauty-image-wall::-webkit-scrollbar {
+	display: none;
+	/* Chrome, Safari, and Opera */
+}
+
+.beauty-image-wall img {
+	width: 300px;
+	/* 缩小图片宽度 */
+	height: auto;
+	scroll-snap-align: start;
+	flex-shrink: 0;
+	margin-right: 10px;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.image-wall.vertical {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 20px;
+}
+
+.image-wall.vertical .image-with-text {
+	display: flex;
+	align-items: center;
+	margin-bottom: 40px;
+	/* 增加间隙 */
+	background-color: rgba(178, 223, 230, 0.5);
+	/* 浅蓝色背景，半透明 */
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	width: 80%;
+	/* 设置宽度为80% */
+	margin: 0 auto;
+	/* 居中 */
+}
+
+.image-wall.vertical .image-with-text img {
+	width: 388px;
+	/* 增大20% */
+	height: auto;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	margin-right: 20px;
+}
+
+.image-wall.vertical .image-with-text .text {
+	font-size: 18px;
+	color: #333;
+	text-align: center;
+}
+
+/* 调整图片和文字的位置 */
+.image-wall.vertical .image-with-text:nth-child(odd) {
+	justify-content: flex-start;
+	/* 奇数项靠左 */
+}
+
+.image-wall.vertical .image-with-text:nth-child(even) {
+	justify-content: flex-end;
+	/* 偶数项靠右 */
+}

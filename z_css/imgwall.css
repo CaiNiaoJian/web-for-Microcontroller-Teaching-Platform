@@ -1,0 +1,61 @@
+/* z_css/imgwall.css */
+
+.image-wall {
+	display: flex;
+	overflow-x: auto;
+	scroll-snap-type: x mandatory;
+	-webkit-overflow-scrolling: touch;
+	scrollbar-width: none;
+	/* Firefox */
+	-ms-overflow-style: none;
+	/* IE and Edge */
+	margin-top: 20px;
+}
+
+.image-wall::-webkit-scrollbar {
+	display: none;
+	/* Chrome, Safari, and Opera */
+}
+
+.image-wall img {
+	width: 300px;
+	/* 缩小图片宽度 */
+	height: auto;
+	scroll-snap-align: start;
+	flex-shrink: 0;
+	margin-right: 10px;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.image-wall.fixed-width img {
+	width: 33.33%;
+	height: auto;
+}
+
+.image-wall.vertical {
+	flex-direction: column;
+	align-items: center;
+}
+
+.image-wall.vertical img {
+	width: 100%;
+	margin-bottom: 20px;
+}
+
+.image-wall.vertical .image-with-text {
+	display: flex;
+	align-items: center;
+	margin-bottom: 20px;
+}
+
+.image-wall.vertical .image-with-text img {
+	width: 50%;
+	margin-right: 20px;
+}
+
+.image-wall.vertical .image-with-text .text {
+	width: 50%;
+	font-size: 18px;
+	color: #333;
+}
