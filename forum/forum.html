@@ -6,6 +6,8 @@
 		<title>论坛 - 博客</title>
 		<link rel="icon" href="../images/标签栏图标.png" type="images/png" sizes="34x32">
 		<link rel="stylesheet" href="forum.css">
+		<link rel="stylesheet" href="forum_function/css/manager.css">
+		<link rel="stylesheet" href="forum_function/css/attention.css">
 	</head>
 	<body>
 		<!-- 导航栏 -->
@@ -23,8 +25,30 @@
 					<span class="bar"></span>
 					<span class="bar"></span>
 				</div>
+				<!-- 管理员登录按钮 -->
+				<button class="manager-login-button" id="manager-login-button">管理员登录</button>
 			</div>
 		</nav>
+
+		<!-- 管理员登录表单 -->
+		<div class="manager-login-form" id="manager-login-form">
+			<h2>管理员登录</h2>
+			<form id="manager-form">
+				<div class="form-group">
+					<label for="manager-username">用户名</label>
+					<input type="text" id="manager-username" name="manager-username" required>
+				</div>
+				<div class="form-group">
+					<label for="manager-password">密码</label>
+					<input type="password" id="manager-password" name="manager-password" required>
+				</div>
+				<div class="form-group">
+					<label for="manager-key">管理员识别密钥</label>
+					<input type="text" id="manager-key" name="manager-key" required>
+				</div>
+				<button type="submit">登录</button>
+			</form>
+		</div>
 
 		<!-- 主要内容 -->
 		<div class="container forum-content">
@@ -35,7 +59,7 @@
 					<li><a href="#">技术讨论</a></li>
 					<li><a href="#">生活分享</a></li>
 					<li><a href="#">学术交流</a></li>
-					<li><a href="#">学习资源</a></li>
+					<li><a href="../StudySources/Sources.html">学习资源</a></li>
 				</ul>
 			</aside>
 
@@ -46,31 +70,6 @@
 					<ul class="forum-posts" id="forum-posts">
 						<!-- 帖子将通过 AJAX 加载 -->
 					</ul>
-				</div>
-
-				<!-- 编辑区 -->
-				<div class="forum-editor">
-					<h2>发布新帖子</h2>
-					<form id="post-form">
-						<div class="form-group">
-							<label for="post-title">标题</label>
-							<input type="text" id="post-title" name="post-title" required>
-						</div>
-						<div class="form-group">
-							<label for="post-content">内容</label>
-							<textarea id="post-content" name="post-content" rows="5" required></textarea>
-						</div>
-						<div class="form-group">
-							<label for="post-emojis">表情包</label>
-							<select id="post-emojis" name="post-emojis">
-								<option value="😀">😀</option>
-								<option value="😂">😂</option>
-								<option value="👍">👍</option>
-								<option value="❤️">❤️</option>
-							</select>
-						</div>
-						<button type="submit">发布</button>
-					</form>
 				</div>
 			</main>
 
@@ -94,6 +93,57 @@
 			</aside>
 		</div>
 
+		<!-- 发布帖子按钮 -->
+		<div class="post-button" id="post-button">+</div>
+
+		<!-- 发布帖子编辑框 -->
+		<div class="post-editor" id="post-editor">
+			<h2>发布新帖子</h2>
+			<button class="close-button" id="close-button">×</button>
+			<form id="post-form">
+				<div class="form-group">
+					<label for="post-title">标题</label>
+					<input type="text" id="post-title" name="post-title" required>
+				</div>
+				<div class="form-group">
+					<label for="post-content">内容</label>
+					<textarea id="post-content" name="post-content" rows="5" required></textarea>
+				</div>
+				<div class="form-group">
+					<label for="post-emojis">表情包</label>
+					<select id="post-emojis" name="post-emojis">
+						<option value="😀">😀</option>
+						<option value="😂">😂</option>
+						<option value="👍">👍</option>
+						<option value="❤️">❤️</option>
+					</select>
+				</div>
+				<button type="submit">发布</button>
+			</form>
+		</div>
+
+		<!-- 回复帖子编辑框 -->
+		<div class="reply-editor" id="reply-editor">
+			<h2>回复帖子</h2>
+			<button class="close-button" id="reply-close-button">×</button>
+			<form id="reply-form">
+				<div class="form-group">
+					<label for="reply-content">内容</label>
+					<textarea id="reply-content" name="reply-content" rows="5" required></textarea>
+				</div>
+				<div class="form-group">
+					<label for="reply-emojis">表情包</label>
+					<select id="reply-emojis" name="reply-emojis">
+						<option value="😀">😀</option>
+						<option value="😂">😂</option>
+						<option value="👍">👍</option>
+						<option value="❤️">❤️</option>
+					</select>
+				</div>
+				<button type="submit">回复</button>
+			</form>
+		</div>
+
 		<!-- 页脚 -->
 		<footer class="footer">
 			<div class="container">
@@ -102,6 +152,11 @@
 		</footer>
 
 		<!-- JavaScript -->
-		<script src="forum.js"></script>
+		<script src="forum_function/js/forum.js"></script>
+		<script src="forum_function/js/common.js"></script>
+		<script src="forum_function/js/delete.js"></script>
+		<script src="forum_function/js/manager.js"></script>
+		<script src="forum_function/js/attention.js"></script>
+		<script src="forum_function/js/forumsorting.js"></script>
 	</body>
 </html>

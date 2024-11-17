@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理员系统在该时段已经被关闭，任何操作权限都被暂停</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+
+      .emoji {
+            position: absolute;
+            font-size: 2rem;
+        }
+
+      .message {
+            text-align: center;
+            z-index: 1;
+        }
+
+      .message h1 {
+            font-size: 2.5rem;
+            margin: 0;
+        }
+
+      .message p {
+            font-size: 1.2rem;
+            margin: 10px 0 20px;
+        }
+
+      .button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            color: white;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+      .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="message">
+        <h1>管理员系统在该时段已经被关闭，任何操作权限都被暂停</h1>
+        <p>我们正在对管理员系统进行维护和升级，以提供更好的服务。</p>
+        <p>请稍后再试，感谢您的理解和支持！</p>
+        <button class="button" onclick="window.location.href='index.html'">返回首页</button>
+    </div>
+
+    <script>
+        const emojis = ['😕', '😲', '😢', '😂', '😎', '🤔', '😱', '😊', '😶‍🌫', '️🥵'];
+        const emojiCount = 10;
+        const emojiSize = 2;
+        const speed = 0.05;
+
+        function createEmoji() {
+            const emoji = document.createElement('div');
+            emoji.className = 'emoji';
+            emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+            emoji.style.left = `${Math.random() * 100}vw`;
+            emoji.style.top = `${Math.random() * 100}vh`;
+            emoji.style.fontSize = `${emojiSize}rem`;
+            document.body.appendChild(emoji);
+            return emoji;
+        }
+
+        function moveEmoji(emoji) {
+            let xDirection = Math.random() > 0.5? 1 : -1;
+            let yDirection = Math.random() > 0.5? 1 : -1;
+
+            setInterval(() => {
+                const left = parseFloat(emoji.style.left);
+                const top = parseFloat(emoji.style.top);
+
+                if (left <= 0 || left >= 100) xDirection *= -1;
+                if (top <= 0 || top >= 100) yDirection *= -1;
+
+                emoji.style.left = `${left + speed * xDirection}vw`;
+                emoji.style.top = `${top + speed * yDirection}vh`;
+            }, 50);
+        }
+
+        for (let i = 0; i < emojiCount; i++) {
+            const emoji = createEmoji();
+            moveEmoji(emoji);
+        }
+    </script>
+</body>
+</html>

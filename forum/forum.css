@@ -131,9 +131,7 @@ body {
 /* 帖子展示区样式 */
 .forum-posts-container {
 	max-height: 400px;
-	/* 设置最大高度以便显示滚动条 */
 	overflow-y: auto;
-	/* 添加垂直滚动条 */
 	border: 1px solid #ccc;
 	padding: 20px;
 	border-radius: 5px;
@@ -141,33 +139,175 @@ body {
 	background-color: #f9f9f9;
 }
 
-/* 编辑区样式 */
-.forum-editor {
-	margin-top: 20px;
-	border-top: 1px solid #ccc;
-	padding-top: 20px;
+.forum-posts li {
+	margin-bottom: 20px;
+	padding-bottom: 20px;
+	border-bottom: 1px solid #ddd;
 }
 
-.forum-editor h2 {
+.forum-posts li:last-child {
+	border-bottom: none;
+	padding-bottom: 0;
+}
+
+.forum-posts h3 {
+	font-size: 18px;
+	color: #333;
+	margin-bottom: 10px;
+}
+
+.forum-posts p {
+	font-size: 16px;
+	color: #555;
+	margin-bottom: 10px;
+}
+
+.forum-posts .post-meta {
+	font-size: 12px;
+	color: #888;
+	margin-bottom: 10px;
+}
+
+.forum-posts .reply-button,
+.forum-posts .delete-button {
+	margin-right: 10px;
+	padding: 5px 10px;
+	background-color: #333;
+	color: #fff;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 14px;
+	transition: background-color 0.3s ease;
+}
+
+.forum-posts .reply-button:hover,
+.forum-posts .delete-button:hover {
+	background-color: #555;
+}
+
+.forum-posts .reply {
+	margin-top: 20px;
+	padding-left: 20px;
+	border-left: 2px solid #ddd;
+}
+
+.forum-posts .reply p {
+	font-size: 14px;
+	color: #666;
+	margin-bottom: 5px;
+}
+
+.forum-posts .reply .post-meta {
+	font-size: 10px;
+	color: #999;
+	margin-bottom: 5px;
+}
+
+.forum-posts .reply .delete-reply-button {
+	margin-right: 10px;
+	padding: 5px 10px;
+	background-color: #f44336;
+	color: #fff;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 12px;
+	transition: background-color 0.3s ease;
+}
+
+.forum-posts .reply .delete-reply-button:hover {
+	background-color: #da190b;
+}
+
+/* 发布帖子按钮样式 */
+.post-button {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	width: 60px;
+	height: 60px;
+	background-color: #ffcc00;
+	color: #333;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 36px;
+	cursor: pointer;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+	transition: background-color 0.3s ease, transform 0.3s ease;
+	animation: pulse 2s infinite;
+}
+
+.post-button:hover {
+	background-color: #ffdb4d;
+	transform: scale(1.1);
+}
+
+@keyframes pulse {
+	0% {
+		transform: scale(1);
+	}
+
+	50% {
+		transform: scale(1.1);
+	}
+
+	100% {
+		transform: scale(1);
+	}
+}
+
+/* 发布帖子编辑框样式 */
+.post-editor,
+.reply-editor {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	width: 300px;
+	background-color: #fff;
+	padding: 20px;
+	border-radius: 5px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+	display: none;
+	flex-direction: column;
+	transform: translateX(100%);
+	transition: transform 0.3s ease;
+}
+
+.post-editor.active,
+.reply-editor.active {
+	display: flex;
+	transform: translateX(0);
+}
+
+.post-editor h2,
+.reply-editor h2 {
 	margin-bottom: 20px;
 	font-size: 24px;
 	color: #333;
 }
 
-.forum-editor .form-group {
+.post-editor .form-group,
+.reply-editor .form-group {
 	margin-bottom: 20px;
 }
 
-.forum-editor label {
+.post-editor label,
+.reply-editor label {
 	display: block;
 	margin-bottom: 5px;
 	font-weight: bold;
 	color: #333;
 }
 
-.forum-editor input,
-.forum-editor textarea,
-.forum-editor select {
+.post-editor input,
+.post-editor textarea,
+.post-editor select,
+.reply-editor input,
+.reply-editor textarea,
+.reply-editor select {
 	width: 100%;
 	padding: 10px;
 	border: 1px solid #ccc;
@@ -175,7 +315,8 @@ body {
 	font-size: 16px;
 }
 
-.forum-editor button {
+.post-editor button,
+.reply-editor button {
 	padding: 10px 20px;
 	background-color: #333;
 	color: #fff;
@@ -186,8 +327,25 @@ body {
 	transition: background-color 0.3s ease;
 }
 
-.forum-editor button:hover {
+.post-editor button:hover,
+.reply-editor button:hover {
 	background-color: #555;
+}
+
+/* 关闭按钮样式 */
+.close-button {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	background: none;
+	border: none;
+	font-size: 20px;
+	cursor: pointer;
+	color: #333;
+}
+
+.close-button:hover {
+	color: #555;
 }
 
 /* 页脚样式 */

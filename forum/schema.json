@@ -1,9 +1,9 @@
 {
-	"bsonType": "object", // 固定节点
+	"bsonType": "object", 
 	"description": "该表的描述",
-	"required": ["title", "content", "author"], // 必填字段列表
-	"properties": { // 该表的字段清单
-		"_id": { // 字段名称，每个表都会带有_id字段
+	"required": ["title", "content", "author"], 
+	"properties": { 
+		"_id": { 
 			"description": "ID，系统自动生成",
 			"bsonType": "objectId"
 		},

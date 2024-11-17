@@ -37,7 +37,7 @@
 		<!-- 页脚 -->
 		<footer class="footer">
 			<div class="container">
-				<p>&copy; 2023 博客. 版权所有归中国矿业大学。来自计算机学院和机电学院。</p>
+				<p>&copy; 2024 博客. 版权所有归中国矿业大学。来自计算机学院和机电学院。</p>
 			</div>
 		</footer>
 
@@ -54,7 +54,8 @@
 				// 验证用户信息
 				if (user && user.username === username && user.password === password) {
 					alert('登录成功');
-					window.location.href = '../Load/ManagerCenter/managercenter.html'; // 跳转到 managercenter.html
+					//window.location.href = '../Load/ManagerCenter/managercenter.html'; // 跳转到 managercenter.html
+					window.location.href = '../systemtimeout.html'; // 跳转到 ManagerCenter.html
 				} else {
 					alert('用户名或密码错误');
 				}
