@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>计算机、机械、电器专栏</title>
+		<link rel="stylesheet" href="css/column.css">
+		<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+	</head>
+	<body>
+		<div id="app">
+			<header>
+				<h1>计算机、机械、电器专栏</h1>
+				<nav>
+					<ul>
+						<li><a href="#computer">计算机</a></li>
+						<li><a href="#mechanical">机械</a></li>
+						<li><a href="#electrical">电器</a></li>
+						<li><a href="ColumnMore/about.html">关于我们</a></li>
+						<li><a href="blog.html">返回博客主页</a></li>
+					</ul>
+				</nav>
+				<ToggleModeComponent @toggle-mode="toggleMode"></ToggleModeComponent> <!-- 切换模式的按钮 -->
+			</header>
+
+			<section id="computer">
+				<h2>计算机</h2>
+				<ArticleComponent :data="computerData"></ArticleComponent>
+			</section>
+
+			<section id="mechanical">
+				<h2>机械</h2>
+				<ArticleComponent :data="mechanicalData"></ArticleComponent>
+			</section>
+
+			<section id="electrical">
+				<h2>电器</h2>
+				<ArticleComponent :data="electricalData"></ArticleComponent>
+			</section>
+
+			<footer>
+				<p>&copy; 2023 计算机、机械、电器专栏</p>
+			</footer>
+		</div>
+
+		<script src="js/column.js"></script>
+	</body>
+</html>

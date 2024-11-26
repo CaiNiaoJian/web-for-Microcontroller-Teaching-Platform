@@ -1,72 +1,118 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>非控制类文章 - 博客</title>
-    <link rel="stylesheet" href="../styles.css">
-</head>
-<body>
-    <!-- 导航栏 -->
-    <nav class="navbar">
-        <div class="container">
-            <a href="../index.html" class="logo">博客</a>
-            <ul class="nav-links">
-                <li><a href="../index.html">首页</a></li>
-                <li><a href="../blog.html">文章</a></li>
-                <li><a href="../about.html">关于</a></li>
-                <li><a href="../relation.html">联系</a></li>
-				<li><a href="../Paper_Writer/submit.html">写作投稿</a></li>
-				<li><a href="../admin.html">管理员登陆</a></li>
-            </ul>
-            <div class="menu-toggle" id="mobile-menu">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-        </div>
-    </nav>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>非控制类文章 - 博客</title>
+		<link rel="stylesheet" href="../styles.css">
+		<link rel="stylesheet" href="other-art.css">
+		<link rel="stylesheet" href="articleSearch.css"> <!-- 新增搜索框样式 -->
+	</head>
+	<body>
+		<!-- 导航栏 -->
+		<nav class="navbar">
+			<div class="container">
+				<a href="../index.html" class="logo">博客</a>
+				<ul class="nav-links">
+					<li><a href="../index.html">首页</a></li>
+					<li><a href="../blog.html">文章</a></li>
+					<li><a href="../about.html">关于</a></li>
+					<li><a href="../relation.html">联系</a></li>
+					<li><a href="../Paper_Writer/submit.html">写作投稿</a></li>
+					<li><a href="../admin.html">管理员登陆</a></li>
+				</ul>
+				<div class="menu-toggle" id="mobile-menu">
+					<span class="bar"></span>
+					<span class="bar"></span>
+					<span class="bar"></span>
+				</div>
+			</div>
+		</nav>
 
-    <!-- 主要内容 -->
-    <div class="container main-content">
-        <!-- 非控制类文章列表 -->
-        <section class="articles">
-            <h2>非控制类文章列表</h2>
-            <article class="article" data-views="0" data-date="2023-10-04">
-                <h3><a href="non-control-article1.html">非控制类文章标题 1</a></h3>
-                <p>这是非控制类文章的摘要内容。这是非控制类文章的摘要内容。这是非控制类文章的摘要内容。</p>
-                <div class="article-meta">
-                    <span class="views">阅读次数: <span class="view-count">0</span></span>
-                    <span class="date">发布时间: <span class="publish-date">2023-10-04</span></span>
-                </div>
-            </article>
-            <article class="article" data-views="0" data-date="2023-10-05">
-                <h3><a href="non-control-article2.html">非控制类文章标题 2</a></h3>
-                <p>这是非控制类文章的摘要内容。这是非控制类文章的摘要内容。这是非控制类文章的摘要内容。</p>
-                <div class="article-meta">
-                    <span class="views">阅读次数: <span class="view-count">0</span></span>
-                    <span class="date">发布时间: <span class="publish-date">2023-10-05</span></span>
-                </div>
-            </article>
-            <article class="article" data-views="0" data-date="2023-10-06">
-                <h3><a href="non-control-article3.html">非控制类文章标题 3</a></h3>
-                <p>这是非控制类文章的摘要内容。这是非控制类文章的摘要内容。这是非控制类文章的摘要内容。</p>
-                <div class="article-meta">
-                    <span class="views">阅读次数: <span class="view-count">0</span></span>
-                    <span class="date">发布时间: <span class="publish-date">2023-10-06</span></span>
-                </div>
-            </article>
-        </section>
-    </div>
+		<!-- 搜索框 -->
+		<div class="search-container">
+			<input type="text" id="search-box" placeholder="搜索文章标题...">
+			<button id="search-button">搜索</button>
+		</div>
 
-    <!-- 页脚 -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2023 博客. 版权所有归中国矿业大学。来自计算机学院和机电学院。</p>
-        </div>
-    </footer>
+		<!-- 主要内容 -->
+		<div class="container main-content">
+			<div id="app">
+				<article-list></article-list>
+			</div>
+		</div>
 
-    <!-- JavaScript -->
-    <script src="../scripts.js"></script>
-</body>
+		<!-- 页脚 -->
+		<footer class="footer">
+			<div class="container">
+				<p>&copy; 2024 博客. 版权所有归大创团队。来自cumt计算机学院和机电学院。</p>
+			</div>
+		</footer>
+
+		<!-- JavaScript -->
+		<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+		<script src="../scripts.js"></script>
+		<script src="articleSearch.js"></script>
+		<script>
+			// 注册 Vue 组件
+			Vue.component('article-list', {
+				template: `
+                <div class="articles">
+                    <h2>非控制类文章列表</h2>
+                    <article v-for="article in articles" :key="article.title" class="article">
+                        <h3><a :href="article.url">{{ article.title }}</a></h3>
+                        <p>{{ article.summary }}</p>
+                        <div class="article-meta">
+                            <span class="views">阅读次数: <span class="view-count">{{ article.views }}</span></span>
+                            <span class="date">发布时间: <span class="publish-date">{{ article.date }}</span></span>
+                        </div>
+                        <div class="like-section">
+                            <button class="like-button" @click="likeArticle(article)">点赞</button>
+                            <span class="like-count">{{ article.likes }}</span>
+                        </div>
+                    </article>
+                </div>
+            `,
+				data() {
+					return {
+						articles: [{
+								title: "非控制类文章标题 1",
+								url: "non-control-article1.html",
+								summary: "这是非控制类文章的摘要内容。这是非控制类文章的摘要内容。这是非控制类文章的摘要内容。",
+								views: 0,
+								date: "2023-10-04",
+								likes: 0
+							},
+							{
+								title: "非控制类文章标题 2",
+								url: "non-control-article2.html",
+								summary: "这是非控制类文章的摘要内容。这是非控制类文章的摘要内容。这是非控制类文章的摘要内容。",
+								views: 0,
+								date: "2023-10-05",
+								likes: 0
+							},
+							{
+								title: "非控制类文章标题 3",
+								url: "non-control-article3.html",
+								summary: "这是非控制类文章的摘要内容。这是非控制类文章的摘要内容。这是非控制类文章的摘要内容。",
+								views: 0,
+								date: "2023-10-06",
+								likes: 0
+							}
+						]
+					};
+				},
+				methods: {
+					likeArticle(article) {
+						article.likes++;
+					}
+				}
+			});
+
+			// 创建 Vue 实例
+			new Vue({
+				el: '#app'
+			});
+		</script>
+	</body>
 </html>

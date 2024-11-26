@@ -1,0 +1,32 @@
+body {
+	background: linear-gradient(135deg, #f4f4f4, #e0e0e0);
+}
+
+header {
+	background: linear-gradient(135deg, #1a1a1a, #333);
+}
+
+nav ul li a {
+	transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+	color: #ff6f61;
+}
+
+section {
+	background: linear-gradient(135deg, #ffffff, #f0f0f0);
+	transition: transform 0.3s ease;
+}
+
+section:hover {
+	transform: scale(1.02);
+}
+
+h2 {
+	color: #ff6f61;
+}
+
+footer {
+	background: linear-gradient(135deg, #1a1a1a, #333);
+}

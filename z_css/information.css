@@ -1,0 +1,49 @@
+/* z_css/information.css */
+
+/* 设置整个模块的背景为淡蓝色 */
+.image-wall.vertical {
+	background-color: #E0F7FA;
+	/* 淡蓝色 */
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 设置图片和文字的容器 */
+.image-with-text {
+	display: flex;
+	align-items: center;
+	margin-bottom: 20px;
+}
+
+/* 设置图片的样式 */
+.image-with-text img {
+	width: 150px;
+	/* 你可以根据需要调整图片的宽度 */
+	height: auto;
+	border-radius: 10px;
+	margin-right: 20px;
+	/* 图片和文字之间的间距 */
+}
+
+/* 设置文字部分的半透明效果 */
+.image-with-text .text {
+	background-color: rgba(255, 255, 255, 0.8);
+	/* 白色半透明背景 */
+	padding: 10px;
+	border-radius: 10px;
+	flex: 1;
+	/* 让文字部分占据剩余的空间 */
+}
+
+/* 设置文字部分的标题和段落样式 */
+.image-with-text .text h3 {
+	margin: 0;
+	font-size: 1.5em;
+	color: #333;
+}
+
+.image-with-text .text p {
+	margin: 0;
+	color: #666;
+}

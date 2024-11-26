@@ -6,6 +6,7 @@
 		<title>控制类文章 - 博客</title>
 		<link rel="stylesheet" href="../styles.css">
 		<link rel="stylesheet" href="control_articles.css">
+		<link rel="stylesheet" href="articleSearch.css">
 	</head>
 	<body>
 		<!-- 导航栏 -->
@@ -27,11 +28,18 @@
 			</div>
 		</nav>
 
+		<!-- 搜索框 -->
+		<div class="search-container">
+			<input type="text" id="search-box" placeholder="搜索文章标题...">
+			<button id="search-button">搜索</button>
+		</div>
+
+
 		<!-- 主要内容 -->
 		<div class="container main-content">
 			<!-- 文章列表 -->
 			<section class="articles">
-				<article class="article">
+				<article class="article" id="articles-list">
 					<h2>音乐展示器设计实验</h2>
 					<p>学习蜂鸣器的工作模式，掌握音乐展示器工作模式的配置方式、工作状态的控制。</p>
 					<div class="like-section">
@@ -89,5 +97,6 @@
 		<!-- JavaScript -->
 		<script src="../scripts.js"></script>
 		<script src="control_articles.js"></script>
+		<script src="articleSearch.js"></script>
 	</body>
 </html>

@@ -1,0 +1,29 @@
+body {
+	background: #121212;
+	color: #e0e0e0;
+}
+
+header {
+	background: #1a1a1a;
+}
+
+nav ul li a {
+	color: #e0e0e0;
+}
+
+nav ul li a:hover {
+	color: #ff6f61;
+}
+
+section {
+	background: #1e1e1e;
+	color: #e0e0e0;
+}
+
+h2 {
+	color: #ff6f61;
+}
+
+footer {
+	background: #1a1a1a;
+}
