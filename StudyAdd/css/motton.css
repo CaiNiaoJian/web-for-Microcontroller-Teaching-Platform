@@ -1,0 +1,35 @@
+/* motton.css */
+
+/* Day-night toggle button styles */
+#theme-toggle-btn {
+	position: fixed;
+	top: 20px;
+	right: 20px;
+	background-color: #3498db;
+	color: #fff;
+	font-size: 1.2rem;
+	padding: 15px;
+	border-radius: 50%;
+	border: none;
+	cursor: pointer;
+	transition: background-color 0.3s ease, transform 0.3s ease;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+#theme-toggle-btn:hover {
+	background-color: #2980b9;
+	transform: scale(1.1);
+}
+
+#theme-toggle-btn:focus {
+	outline: none;
+}
+
+#theme-toggle-btn i {
+	font-size: 1.6rem;
+}
+
+/* Add an animation for smooth theme transition */
+body {
+	transition: background-color 0.3s ease, color 0.3s ease;
+}

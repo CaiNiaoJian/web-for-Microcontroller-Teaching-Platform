@@ -1,29 +1,28 @@
-body {
-	background: #121212;
-	color: #e0e0e0;
+/* dark-mode.css */
+
+/* Add dark mode styles if the user has the dark-mode preference */
+body.dark-mode {
+	background-color: #121212;
+	color: #ecf0f1;
 }
 
-header {
-	background: #1a1a1a;
+body.dark-mode header {
+	background-color: #34495e;
 }
 
-nav ul li a {
-	color: #e0e0e0;
+body.dark-mode nav ul li a {
+	color: #ecf0f1;
 }
 
-nav ul li a:hover {
-	color: #ff6f61;
+body.dark-mode nav ul li a:hover {
+	color: #3498db;
 }
 
-section {
-	background: #1e1e1e;
-	color: #e0e0e0;
+body.dark-mode section {
+	background-color: #1e1e1e;
+	border-radius: 8px;
 }
 
-h2 {
-	color: #ff6f61;
-}
-
-footer {
-	background: #1a1a1a;
+body.dark-mode footer {
+	background-color: #34495e;
 }

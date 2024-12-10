@@ -5,11 +5,15 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>计算机、机械、电器专栏</title>
 		<link rel="stylesheet" href="css/column.css">
-		<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+		<link rel="stylesheet" href="css/dark-mode.css">
+		<link rel="stylesheet" href="css/motton.css">
+		<link rel="stylesheet" href="css/dynamic.css"> <!-- New Dynamic CSS -->
+		<script src="js/column.js" defer></script>
+		<script src="js/dynamic.js" defer></script> <!-- New Dynamic JS -->
 	</head>
 	<body>
 		<div id="app">
-			<header>
+			<header class="glass-effect">
 				<h1>计算机、机械、电器专栏</h1>
 				<nav>
 					<ul>
@@ -17,32 +21,35 @@
 						<li><a href="#mechanical">机械</a></li>
 						<li><a href="#electrical">电器</a></li>
 						<li><a href="ColumnMore/about.html">关于我们</a></li>
-						<li><a href="blog.html">返回博客主页</a></li>
+						<li><a href="../blog.html">返回博客主页</a></li>
 					</ul>
 				</nav>
-				<ToggleModeComponent @toggle-mode="toggleMode"></ToggleModeComponent> <!-- 切换模式的按钮 -->
 			</header>
 
-			<section id="computer">
+			<section id="computer" class="glass-effect">
 				<h2>计算机</h2>
-				<ArticleComponent :data="computerData"></ArticleComponent>
+				<!-- Article cards will be injected here by JavaScript -->
 			</section>
 
-			<section id="mechanical">
+			<section id="mechanical" class="glass-effect">
 				<h2>机械</h2>
-				<ArticleComponent :data="mechanicalData"></ArticleComponent>
+				<!-- Article cards will be injected here by JavaScript -->
 			</section>
 
-			<section id="electrical">
+			<section id="electrical" class="glass-effect">
 				<h2>电器</h2>
-				<ArticleComponent :data="electricalData"></ArticleComponent>
+				<!-- Article cards will be injected here by JavaScript -->
 			</section>
 
-			<footer>
-				<p>&copy; 2023 计算机、机械、电器专栏</p>
+			<footer class="glass-effect">
+				<p>&copy; 2024 计算机、机械、电器专栏</p>
+				<p><a href="#">隐私政策</a> | <a href="#">联系我们</a> | <a href="#">社交媒体</a></p>
 			</footer>
-		</div>
 
-		<script src="js/column.js"></script>
+			<!-- Theme toggle button -->
+			<button id="theme-toggle-btn">
+				<i class="fas fa-moon"></i>
+			</button>
+		</div>
 	</body>
 </html>

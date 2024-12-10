@@ -1,0 +1,68 @@
+/* dynamic.css */
+
+/* Smooth scrolling for anchor links */
+html {
+	scroll-behavior: smooth;
+}
+
+/* Gradient background for page */
+body {
+	background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+	transition: background 0.3s ease;
+}
+
+/* Footer fixed to the bottom */
+footer {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	background-color: #2980b9;
+	color: white;
+	padding: 15px;
+	text-align: center;
+	z-index: 1000;
+	box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Card hover effect: adding shadow and slight lift */
+.article-card {
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.article-card:hover {
+	transform: translateY(-5px);
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Loading Animation for cards */
+@keyframes loading {
+	0% {
+		opacity: 0.5;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
+.article-card.loading {
+	animation: loading 1s infinite alternate;
+}
+
+/* Media Query for small screens */
+@media (max-width: 768px) {
+	#app {
+		flex-direction: column;
+	}
+
+	section {
+		max-width: 100%;
+		margin: 10px;
+	}
+
+	footer {
+		position: relative;
+		box-shadow: none;
+	}
+}

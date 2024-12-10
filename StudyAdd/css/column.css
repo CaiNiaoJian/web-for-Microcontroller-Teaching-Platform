@@ -1,52 +1,195 @@
-body {
-	font-family: 'Roboto', sans-serif;
-	background-color: #f4f4f4;
-	color: #333;
+/* column.css */
+
+/* Reset some default styles */
+* {
 	margin: 0;
 	padding: 0;
+	box-sizing: border-box;
 }
 
-header {
-	background-color: #333;
-	color: white;
-	padding: 1em 0;
-	text-align: center;
+/* Body and basic layout */
+body {
+	font-family: 'Arial', sans-serif;
+	background-color: #f4f4f4;
+	color: #333;
+	line-height: 1.6;
 	display: flex;
+	justify-content: center;
+	padding: 20px;
+	transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Flex container for horizontal layout */
+#app {
+	display: flex;
+	flex-wrap: wrap;
 	justify-content: space-between;
-	align-items: center;
+	max-width: 1200px;
+	width: 100%;
+}
+
+/* Header Styles */
+header {
+	background-color: #2c3e50;
+	color: white;
+	padding: 20px;
+	text-align: center;
+	width: 100%;
+}
+
+header h1 {
+	font-size: 2.5rem;
+	margin-bottom: 10px;
 }
 
 nav ul {
-	list-style-type: none;
+	list-style: none;
 	padding: 0;
-	display: flex;
-	gap: 15px;
+	text-align: center;
+}
+
+nav ul li {
+	display: inline-block;
+	margin: 0 15px;
 }
 
 nav ul li a {
 	color: white;
 	text-decoration: none;
-	font-weight: bold;
+	font-size: 1.2rem;
+	transition: color 0.3s ease;
 }
 
+nav ul li a:hover {
+	color: #3498db;
+}
+
+/* Section Styles for horizontal layout with glassmorphism effect */
 section {
-	padding: 2em;
-	margin: 2em 0;
-	background-color: white;
-	border-radius: 8px;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	flex: 1;
+	min-width: 320px;
+	max-width: 380px;
+	padding: 20px;
+	margin: 20px;
+	background-color: rgba(255, 255, 255, 0.1);
+	backdrop-filter: blur(10px);
+	/* Glass effect */
+	border-radius: 12px;
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+	position: relative;
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-h2 {
-	color: #333;
+section h2 {
+	font-size: 2rem;
+	margin-bottom: 20px;
+	color: #ecf0f1;
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.article-card {
+	background-color: rgba(255, 255, 255, 0.2);
+	backdrop-filter: blur(8px);
+	border-radius: 8px;
+	padding: 15px;
+	margin-bottom: 20px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.article-card:hover {
+	transform: translateY(-5px);
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.article-card h3 {
+	font-size: 1.6rem;
+	color: #3498db;
+}
+
+.article-card p {
+	font-size: 1.1rem;
+	color: rgba(255, 255, 255, 0.7);
 }
 
 footer {
 	text-align: center;
-	padding: 1em 0;
-	background-color: #333;
+	background-color: #2c3e50;
 	color: white;
-	position: fixed;
+	padding: 15px 0;
+	position: relative;
+	margin-top: 40px;
 	width: 100%;
-	bottom: 0;
+}
+
+/* White day theme - Modern colors */
+body {
+	background-color: #ecf0f1;
+	/* Light background for day theme */
+	color: #333;
+}
+
+body.day-mode section {
+	background-color: rgba(255, 255, 255, 0.3);
+}
+
+body.day-mode header {
+	background-color: #2980b9;
+}
+
+body.day-mode nav ul li a {
+	color: #fff;
+}
+
+body.day-mode nav ul li a:hover {
+	color: #3498db;
+}
+
+body.day-mode footer {
+	background-color: #2980b9;
+}
+
+/* Dark Mode */
+body.dark-mode {
+	background-color: #121212;
+	color: #ecf0f1;
+}
+
+body.dark-mode header {
+	background-color: #34495e;
+}
+
+body.dark-mode nav ul li a {
+	color: #ecf0f1;
+}
+
+body.dark-mode nav ul li a:hover {
+	color: #3498db;
+}
+
+body.dark-mode section {
+	background-color: rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode footer {
+	background-color: #34495e;
+}
+
+.glass-effect {
+	background: rgba(255, 255, 255, 0.2);
+	backdrop-filter: blur(8px);
+	border-radius: 10px;
+	padding: 20px;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive Design for Small Screens */
+@media (max-width: 768px) {
+	#app {
+		flex-direction: column;
+	}
+
+	section {
+		max-width: 100%;
+	}
 }
