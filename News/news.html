@@ -3,50 +3,72 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>新闻动态 - 博客</title>
+		<title>新闻动态 - MCU Learn</title>
 		<link rel="icon" href="../images/标签栏图标.png" type="images/png" sizes="34x32">
-		<link rel="stylesheet" href="../styles.css">
+		<!-- 保留原有样式表但注释掉 -->
+		<!-- <link rel="stylesheet" href="../styles.css">
 		<link rel="stylesheet" href="css/newstyle.css">
-		<link rel="stylesheet" href="../SunNight.css">
+		<link rel="stylesheet" href="../SunNight.css"> -->
+		
+		<!-- 新的现代化样式 -->
+		<link rel="stylesheet" href="../z_css/modern-style.css">
+		<link rel="stylesheet" href="news-modern.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+		<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
 	</head>
 	<body>
 		<!-- 导航栏 -->
-		<nav class="navbar">
-			<div class="container">
-				<a href="../index.html" class="logo">博客</a>
+		<nav class="nav-wrapper">
+			<div class="nav-content">
+				<a href="../indexmodern.html" class="logo">MCU Learn</a>
 				<ul class="nav-links">
-					<li><a href="../index.html">首页</a></li>
-					<li><a href="../blog.html">文章</a></li>
-					<li><a href="../about.html">关于</a></li>
-					<li><a href="../relation.html">联系</a></li>
+					<li><a href="../indexmodern.html">首页</a></li>
+					<li><a href="../pages/blognew.html">学习</a></li>
+					<li><a href="../pages/source.html">资源</a></li>
+					<li><a href="news.html" class="active">新闻</a></li>
+					<li><a href="../indexmodern.html#community">社区</a></li>
+					<li><a href="../indexmodern.html#contact">联系我们</a></li>
 				</ul>
-				<div class="menu-toggle" id="mobile-menu">
-					<span class="bar"></span>
-					<span class="bar"></span>
-					<span class="bar"></span>
-				</div>
+				<button class="theme-toggle">
+					<i class="fas fa-moon"></i>
+				</button>
 			</div>
 		</nav>
-		<header></header>
+
+		<!-- 页面标题 -->
+		<section class="blog-hero">
+			<div class="hero-content" data-aos="fade-up">
+				<h1>新闻动态</h1>
+				<p>了解最新资讯，把握发展动向</p>
+			</div>
+		</section>
+
 		<!-- 主要内容 -->
 		<div class="container main-content">
 			<!-- 新闻栏目 -->
 			<section class="news-section">
-				<h2>新闻动态</h2>
 				<div class="news-list">
-					<article class="news-item">
+					<article class="news-item" data-aos="fade-up">
 						<div class="news-header">
-							<h3><a href="gonggao1.html">网站建设的近况【顶置】</a></h3>
+							<h3><a href="../websiteNow.html">网站建设的近况【顶置】</a></h3>
 							<span class="news-date">2024-11-02</span>
 						</div>
 						<p>目前我们正在做什么；我们未来会怎么做；我们下一步要更新的内容。</p>
 					</article>
-					<article class="news-item">
+					<!-- 保持其他新闻条目不变，只添加动画效果 -->
+					<article class="news-item" data-aos="fade-up">
 						<div class="news-header">
 							<h3><a href="../404.html">Q&A【顶置】</a></h3>
 							<span class="news-date">2024-11-07</span>
 						</div>
 						<p>Question and Answer。</p>
+					</article>
+					<article class="news-item">
+						<div class="news-header">
+							<h3><a href="new20241215.html">对网站的现代化改造</a></h3>
+							<span class="news-date">2024-12-15</span>
+						</div>
+						<p>关于对我们的网站MCU learn的现代化改造的通知。</p>
 					</article>
 					<article class="news-item">
 						<div class="news-header">
@@ -123,26 +145,57 @@
 
 			<!-- 图片栏 -->
 			<section class="image-section">
-				<h2>图片栏</h2>
-				<div class="image-slider">
-
+				<h2 data-aos="fade-up">精选图片</h2>
+				<div class="image-slider" data-aos="fade-up">
 					<img src="../images/风景7.png" alt="new">
 					<img src="../images/风景8.png" alt="new">
 					<img src="../images/风景9.png" alt="new">
-					<!-- 未来会实现动态滑动切换效果 -->
 				</div>
 			</section>
 		</div>
 
 		<!-- 页脚 -->
 		<footer class="footer">
-			<div class="container">
-				<p>&copy; 2024 博客. 版权所有归中国矿业大学。来自计算机学院和机电学院。</p>
+			<div class="footer-content">
+				<div class="footer-logo">
+					<h3>MCU Learn</h3>
+					<p>探索创新科技的无限可能</p>
+				</div>
+				<div class="footer-links">
+					<div class="footer-section">
+						<h4>快速链接</h4>
+						<ul>
+							<li><a href="../indexmodern.html">首页</a></li>
+							<li><a href="../pages/blognew.html">学习</a></li>
+							<li><a href="../pages/source.html">资源</a></li>
+							<li><a href="news.html">新闻</a></li>
+						</ul>
+					</div>
+					<div class="footer-section">
+						<h4>关注我们</h4>
+						<ul>
+							<li><a href="#">GitHub</a></li>
+							<li><a href="#">微信公众号</a></li>
+							<li><a href="#">知乎专栏</a></li>
+							<li><a href="#">技术社区</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="footer-bottom">
+				<p>&copy; 2024 MCU Learn. All rights reserved.</p>
 			</div>
 		</footer>
 
 		<!-- JavaScript -->
-		<script src="../scripts.js"></script>
-		<script src="../SunNight.js"></script>
+		<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+		<script src="../z_js/modern-script.js"></script>
+		<script>
+			// 初始化 AOS
+			AOS.init({
+				duration: 800,
+				once: true
+			});
+		</script>
 	</body>
 </html>

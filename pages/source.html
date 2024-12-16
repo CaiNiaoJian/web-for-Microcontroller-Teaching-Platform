@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学术资源 - MCU Learn</title>
+    <link rel="stylesheet" href="../z_css/modern-style.css">
+    <link rel="stylesheet" href="../z_css/blog-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+    <style>
+        .journal-section {
+            padding: 40px 0;
+        }
+        .journal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        .journal-category {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .journal-category:hover {
+            transform: translateY(-5px);
+        }
+        .journal-category h3 {
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .journal-list {
+            list-style: none;
+            padding: 0;
+        }
+        .journal-item {
+            margin-bottom: 15px;
+            padding: 12px;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        .journal-item:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+        .journal-item a {
+            color: inherit;
+            text-decoration: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .journal-item .impact-factor {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+        .search-bar {
+            margin: 20px auto;
+            max-width: 600px;
+            position: relative;
+        }
+        .search-bar input {
+            width: 100%;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 30px;
+            background: var(--card-bg);
+            color: var(--text-primary);
+            font-size: 1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .search-bar i {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+        }
+        .tools-section {
+            padding: 40px 0;
+            background: var(--bg-secondary);
+        }
+        .tool-tag {
+            font-size: 0.8em;
+            padding: 4px 8px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 4px;
+            opacity: 0.9;
+        }
+        .journal-item:hover .tool-tag {
+            background: white;
+            color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="nav-wrapper">
+        <div class="nav-content">
+            <a href="../indexmodern.html" class="logo">MCU Learn</a>
+            <ul class="nav-links">
+                <li><a href="../indexmodern.html">首页</a></li>
+                <li><a href="blognew.html">学习</a></li>
+                <li><a href="knowledge.html" id="knowledgeEngine">分享</a></li>
+                <li><a href="source.html" class="active">期刊</a></li>
+                <li><a href="../StudySources/Sources.html">资源</a></li>
+                <li><a href="pages/community.html">社区</a></li>
+                <li><a href="../relation.html">联系我们</a></li>
+            </ul>
+            <button class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- 页面标题 -->
+    <section class="blog-hero">
+        <div class="hero-content" data-aos="fade-up">
+            <h1>学术期刊资源</h1>
+            <p>探索顶级学术期刊，获取前沿研究动态</p>
+        </div>
+    </section>
+
+    <!-- 搜索栏 -->
+    <div class="container">
+        <div class="search-bar" data-aos="fade-up">
+            <input type="text" placeholder="搜索期刊...">
+            <i class="fas fa-search"></i>
+        </div>
+    </div>
+
+    <!-- 期刊资源 -->
+    <section class="journal-section">
+        <div class="container">
+            <div class="journal-grid">
+                <!-- 计算机科学期刊 -->
+                <div class="journal-category" data-aos="fade-up">
+                    <h3><i class="fas fa-laptop-code"></i> 计算机科学</h3>
+                    <ul class="journal-list">
+                        <li class="journal-item">
+                            <a href="#">
+                                <span>IEEE Transactions on Computers</span>
+                                <span class="impact-factor">IF: 3.131</span>
+                            </a>
+                        </li>
+                        <li class="journal-item">
+                            <a href="#">
+                                <span>ACM Computing Surveys</span>
+                                <span class="impact-factor">IF: 14.324</span>
+                            </a>
+                        </li>
+                        <li class="journal-item">
+                            <a href="#">
+                                <span>Journal of Computer Science and Technology</span>
+                                <span class="impact-factor">IF: 2.247</span>
+                            </a>
+                        </li>
+                        <li class="journal-item">
+                            <a href="#">
+                                <span>IEEE Software</span>
+                                <span class="impact-factor">IF: 2.589</span>
+                            </a>
+                        </li>
+                        <li class="journal-item">
+                            <a href="#">
+                                <span>Information Sciences</span>
+                                <span class="impact-factor">IF: 8.233</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 机械工程期刊 -->
+                <div class="journal-category" data-aos="fade-up" data-aos-delay="100">
+                    <h3><i class="fas fa-cogs"></i> 机械工程</h3>
+                    <ul class="journal-list">
+                        <li class="journal-item">
+                            <a href="#">
+                                <span>Journal of Mechanical Design</span>
+                                <span class="impact-factor">IF: 3.187</span>
+                            </a>
+                        </li>
+                        <li class="journal-item">
+                            <a href="#">
+                                <span>机械工程学报</span>
+                                <span class="impact-factor">IF: 2.037</span>
+                            </a>
+                        </li>
+                        <li class="journal-item">
+                            <a href="#">
+                                <span>Mechanism and Machine Theory</span>
+                                <span class="impact-factor">IF: 4.930</span>
+                            </a>
+                        </li>
+                        <li class="journal-item">
+                            <a href="#">
+                                <span>International Journal of Machine Tools</span>
+                                <span class="impact-factor">IF: 5.064</span>
+                            </a>
+                        </li>
+                        <li class="journal-item">
+                            <a href="#">
+                                <span>Robotics and Computer-Integrated Manufacturing</span>
+                                <span class="impact-factor">IF: 7.645</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 电气工程期刊 -->
+                <div class="journal-category" data-aos="fade-up" data-aos-delay="200">
+                    <h3><i class="fas fa-bolt"></i> 电气工程</h3>
+                    <ul class="journal-list">
+                        <li class="journal-item">
+                            <a href="#">
+                                <span>IEEE Transactions on Power Electronics</span>
+                                <span class="impact-factor">IF: 5.547</span>
+                            </a>
+                        </li>
+                        <li class="journal-item">
+                            <a href="#">
+                                <span>中国电机工程学报</span>
+                                <span class="impact-factor">IF: 2.458</span>
+                            </a>
+                        </li>
+                        <li class="journal-item">
+                            <a href="#">
+                                <span>IEEE Transactions on Industrial Electronics</span>
+                                <span class="impact-factor">IF: 8.236</span>
+                            </a>
+                        </li>
+                        <li class="journal-item">
+                            <a href="#">
+                                <span>Electric Power Systems Research</span>
+                                <span class="impact-factor">IF: 4.725</span>
+                            </a>
+                        </li>
+                        <li class="journal-item">
+                            <a href="#">
+                                <span>IEEE Transactions on Energy Conversion</span>
+                                <span class="impact-factor">IF: 4.908</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 人工智能期刊 -->
+                <div class="journal-category" data-aos="fade-up" data-aos-delay="300">
+                    <h3><i class="fas fa-brain"></i> 人工智能</h3>
+                    <ul class="journal-list">
+                        <li class="journal-item">
+                            <a href="#">
+                                <span>IEEE Transactions on Pattern Analysis</span>
+                                <span class="impact-factor">IF: 16.389</span>
+                            </a>
+                        </li>
+                        <li class="journal-item">
+                            <a href="#">
+                                <span>Artificial Intelligence</span>
+                                <span class="impact-factor">IF: 9.088</span>
+                            </a>
+                        </li>
+                        <li class="journal-item">
+                            <a href="#">
+                                <span>Journal of Machine Learning Research</span>
+                                <span class="impact-factor">IF: 4.411</span>
+                            </a>
+                        </li>
+                        <li class="journal-item">
+                            <a href="#">
+                                <span>Neural Networks</span>
+                                <span class="impact-factor">IF: 9.657</span>
+                            </a>
+                        </li>
+                        <li class="journal-item">
+                            <a href="#">
+                                <span>IEEE Transactions on Neural Networks</span>
+                                <span class="impact-factor">IF: 10.451</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 开发工具和��档资源 -->
+    <section class="tools-section">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">开发工具与文档</h2>
+            <div class="journal-grid">
+                <!-- IDE和编辑器 -->
+                <div class="journal-category" data-aos="fade-up">
+                    <h3><i class="fas fa-code-branch"></i> IDE与编辑器</h3>
+                    <ul class="journal-list">
+                        <li class="journal-item">
+                            <a href="https://www.keil.com/download/" target="_blank">
+                                <span>Keil MDK</span>
+                                <span class="tool-tag">单片机IDE</span>
+                            </a>
+                        </li>
+                        <li class="journal-item">
+                            <a href="https://www.st.com/en/development-tools/stm32cubeide.html" target="_blank">
+                                <span>STM32CubeIDE</span>
+                                <span class="tool-tag">STM32开发</span>
+                            </a>
+                        </li>
+                        <li class="journal-item">
+                            <a href="https://code.visualstudio.com/" target="_blank">
+                                <span>Visual Studio Code</span>
+                                <span class="tool-tag">通用编辑器</span>
+                            </a>
+                        </li>
+                        <li class="journal-item">
+                            <a href="https://www.eclipse.org/downloads/" target="_blank">
+                                <span>Eclipse IDE</span>
+                                <span class="tool-tag">Java/C++</span>
+                            </a>
+                        </li>
+                        <li class="journal-item">
+                            <a href="https://www.iar.com/ewarm" target="_blank">
+                                <span>IAR Embedded Workbench</span>
+                                <span class="tool-tag">嵌入式IDE</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 调试工具 -->
+                <div class="journal-category" data-aos="fade-up" data-aos-delay="100">
+                    <h3><i class="fas fa-bug"></i> 调试工具</h3>
+                    <ul class="journal-list">
+                        <li class="journal-item">
+                            <a href="https://www.segger.com/products/debug-probes/j-link/" target="_blank">
+                                <span>J-Link</span>
+                                <span class="tool-tag">调试器</span>
+                            </a>
+                        </li>
+                        <li class="journal-item">
+                            <a href="https://www.st.com/en/development-tools/st-link-v2.html" target="_blank">
+                                <span>ST-Link</span>
+                                <span class="tool-tag">STM32调试</span>
+                            </a>
+                        </li>
+                        <li class="journal-item">
+                            <a href="https://www.wireshark.org/" target="_blank">
+                                <span>Wireshark</span>
+                                <span class="tool-tag">网络分析</span>
+                            </a>
+                        </li>
+                        <li class="journal-item">
+                            <a href="https://www.saleae.com/" target="_blank">
+                                <span>Logic Analyzer</span>
+                                <span class="tool-tag">逻辑分析</span>
+                            </a>
+                        </li>
+                        <li class="journal-item">
+                            <a href="https://www.putty.org/" target="_blank">
+                                <span>PuTTY</span>
+                                <span class="tool-tag">串口工具</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 开发文档 -->
+                <div class="journal-category" data-aos="fade-up" data-aos-delay="200">
+                    <h3><i class="fas fa-book"></i> 官方文档</h3>
+                    <ul class="journal-list">
+                        <li class="journal-item">
+                            <a href="https://www.st.com/content/st_com/en/support/documentation.html" target="_blank">
+                                <span>STM32文档中心</span>
+                                <span class="tool-tag">STM32</span>
+                            </a>
+                        </li>
+                        <li class="journal-item">
+                            <a href="https://docs.microsoft.com/zh-cn/" target="_blank">
+                                <span>Microsoft Docs</span>
+                                <span class="tool-tag">微软文档</span>
+                            </a>
+                        </li>
+                        <li class="journal-item">
+                            <a href="https://www.kernel.org/doc/html/latest/" target="_blank">
+                                <span>Linux内核文档</span>
+                                <span class="tool-tag">Linux</span>
+                            </a>
+                        </li>
+                        <li class="journal-item">
+                            <a href="https://developer.arm.com/documentation" target="_blank">
+                                <span>ARM文档中心</span>
+                                <span class="tool-tag">ARM架构</span>
+                            </a>
+                        </li>
+                        <li class="journal-item">
+                            <a href="https://www.arduino.cc/reference/" target="_blank">
+                                <span>Arduino参考文档</span>
+                                <span class="tool-tag">Arduino</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 开发框架和工具 -->
+                <div class="journal-category" data-aos="fade-up" data-aos-delay="300">
+                    <h3><i class="fas fa-tools"></i> 开发框架与工具</h3>
+                    <ul class="journal-list">
+                        <li class="journal-item">
+                            <a href="https://www.qt.io/" target="_blank">
+                                <span>Qt Framework</span>
+                                <span class="tool-tag">GUI开发</span>
+                            </a>
+                        </li>
+                        <li class="journal-item">
+                            <a href="https://cmake.org/" target="_blank">
+                                <span>CMake</span>
+                                <span class="tool-tag">构建工具</span>
+                            </a>
+                        </li>
+                        <li class="journal-item">
+                            <a href="https://git-scm.com/" target="_blank">
+                                <span>Git</span>
+                                <span class="tool-tag">版本控制</span>
+                            </a>
+                        </li>
+                        <li class="journal-item">
+                            <a href="https://www.docker.com/" target="_blank">
+                                <span>Docker</span>
+                                <span class="tool-tag">容器化</span>
+                            </a>
+                        </li>
+                        <li class="journal-item">
+                            <a href="https://www.jenkins.io/" target="_blank">
+                                <span>Jenkins</span>
+                                <span class="tool-tag">CI/CD</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 科学计算与编程工具 -->
+                <div class="journal-category" data-aos="fade-up" data-aos-delay="400">
+                    <h3><i class="fas fa-calculator"></i> 科学计算与编程工具</h3>
+                    <ul class="journal-list">
+                        <li class="journal-item">
+                            <a href="https://www.python.org/" target="_blank">
+                                <span>Python</span>
+                                <span class="tool-tag">编程语言</span>
+                            </a>
+                        </li>
+                        <li class="journal-item">
+                            <a href="https://www.mathworks.com/products/matlab.html" target="_blank">
+                                <span>MATLAB</span>
+                                <span class="tool-tag">科学计算</span>
+                            </a>
+                        </li>
+                        <li class="journal-item">
+                            <a href="https://numpy.org/" target="_blank">
+                                <span>NumPy</span>
+                                <span class="tool-tag">数值计算</span>
+                            </a>
+                        </li>
+                        <li class="journal-item">
+                            <a href="https://www.anaconda.com/" target="_blank">
+                                <span>Anaconda</span>
+                                <span class="tool-tag">Python环境</span>
+                            </a>
+                        </li>
+                        <li class="journal-item">
+                            <a href="https://jupyter.org/" target="_blank">
+                                <span>Jupyter Notebook</span>
+                                <span class="tool-tag">交互式开发</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 仿真与建模工具 -->
+                <div class="journal-category" data-aos="fade-up" data-aos-delay="500">
+                    <h3><i class="fas fa-project-diagram"></i> 仿真与建模工具</h3>
+                    <ul class="journal-list">
+                        <li class="journal-item">
+                            <a href="https://www.mathworks.com/products/simulink.html" target="_blank">
+                                <span>Simulink</span>
+                                <span class="tool-tag">系统仿真</span>
+                            </a>
+                        </li>
+                        <li class="journal-item">
+                            <a href="https://www.labcenter.com/" target="_blank">
+                                <span>Proteus</span>
+                                <span class="tool-tag">电路仿真</span>
+                            </a>
+                        </li>
+                        <li class="journal-item">
+                            <a href="https://www.ni.com/en/support/downloads/software-products/download.multisim.html" target="_blank">
+                                <span>Multisim</span>
+                                <span class="tool-tag">电路设计</span>
+                            </a>
+                        </li>
+                        <li class="journal-item">
+                            <a href="https://www.ansys.com/" target="_blank">
+                                <span>ANSYS</span>
+                                <span class="tool-tag">工程仿真</span>
+                            </a>
+                        </li>
+                        <li class="journal-item">
+                            <a href="https://www.plm.automation.siemens.com/global/en/products/simcenter/" target="_blank">
+                                <span>Simcenter</span>
+                                <span class="tool-tag">系统建模</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <h3>MCU Learn</h3>
+                <p>探索创新科技的无限可能</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-section">
+                    <h4>快速链接</h4>
+                    <ul>
+                        <li><a href="../indexmodern.html">首页</a></li>
+                        <li><a href="blognew.html">学习</a></li>
+                        <li><a href="source.html">资源</a></li>
+                        <li><a href="../indexmodern.html#community">社区</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>学习资源</h4>
+                    <ul>
+                        <li><a href="#">教程</a></li>
+                        <li><a href="#">文档</a></li>
+                        <li><a href="#">项目案例</a></li>
+                        <li><a href="#">技术博客</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>关注���们</h4>
+                    <ul>
+                        <li><a href="#">GitHub</a></li>
+                        <li><a href="#">微信公众号</a></li>
+                        <li><a href="#">知乎专栏</a></li>
+                        <li><a href="#">技术社</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 MCU Learn. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="../z_js/modern-script.js"></script>
+    <script>
+        // 初始化 AOS
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+
+        // 搜索功能
+        const searchInput = document.querySelector('.search-bar input');
+        const journalItems = document.querySelectorAll('.journal-item');
+
+        searchInput.addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+
+            journalItems.forEach(item => {
+                const journalName = item.querySelector('span').textContent.toLowerCase();
+                if (journalName.includes(searchTerm)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

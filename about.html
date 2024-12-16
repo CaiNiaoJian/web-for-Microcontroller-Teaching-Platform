@@ -3,86 +3,161 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>关于 - 博客</title>
+		<title>关于我们 - MCU Learn</title>
 		<link rel="icon" href="images/标签栏图标.png" type="images/png" sizes="34x32">
-		<link rel="stylesheet" href="styles.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+		<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+		<!--<link rel="stylesheet" href="styles.css">-->
 		<link rel="stylesheet" href="z_css/styles_about.css">
 	</head>
 	<body>
 		<!-- 导航栏 -->
-		<nav class="navbar">
-			<div class="container">
-				<a href="index.html" class="logo">博客</a>
+		<nav class="nav-wrapper">
+			<div class="nav-content">
+				<a href="indexmodern.html" class="logo">MCU Learn</a>
 				<ul class="nav-links">
-					<li><a href="index.html">首页</a></li>
-					<li><a href="blog.html">文章</a></li>
-					<li><a href="about.html">关于</a></li>
-					<li><a href="relation.html">联系</a></li>
+					<li><a href="indexmodern.html">首页</a></li>
+					<li><a href="pages/blognew.html">学习</a></li>
+					<li><a href="pages/source.html">期刊</a></li>
+					<li><a href="StudySources/Sources.html">资源</a></li>
+					<li><a href="News/news.html">新闻</a></li>
+					<li><a href="pages/community.html">社区</a></li>
+					<li><a href="relation.html">联系我们</a></li>
 				</ul>
-				<div class="menu-toggle" id="mobile-menu">
-					<span class="bar"></span>
-					<span class="bar"></span>
-					<span class="bar"></span>
-				</div>
+				<button class="theme-toggle">
+					<i class="fas fa-moon"></i>
+				</button>
 			</div>
 		</nav>
 
 		<!-- 主要内容 -->
-		<div class="container main-content">
-			<!-- 关于部分 -->
-			<section class="about">
-				<h2>关于我们</h2>
-				<p>我们是一群热爱分享的人，喜欢写作和探索新知识。希望通过这个博客与大家交流和学习。</p>
-				<p>我们的博客致力于提供高质量的技术文章、教程和资源，帮助读者提升技能、解决问题，并激发创新思维。无论你是初学者还是经验丰富的专业人士，我们都欢迎你加入我们的社区，共同成长。</p>
-
-				<h3>我们的团队</h3>
-				<p>我们的团队由一群充满激情和经验丰富的专业人士组成，涵盖了多个技术领域，包括软件开发、数据科学、人工智能、网络安全等。我们相信，通过分享知识和经验，我们可以共同推动技术的发展和应用。</p>
-
-				<h3>我们的目标</h3>
-				<p>我们的目标是创建一个开放、包容和充满活力的社区，让每个人都能在这里找到有价值的信息和资源。我们希望通过我们的努力，帮助更多的人掌握技术，实现个人和职业的成长。</p>
-
-				<h3>我们的愿景</h3>
-				<p>我们的愿景是成为技术领域的领先博客，为读者提供最新、最全面的技术资讯和资源。我们希望通过持续的努力和创新，推动技术的发展，并为社会带来积极的影响。</p>
+		<div class="about-container">
+			<!-- 英雄区域 -->
+			<section class="about-hero" data-aos="fade-up">
+				<h1>关于 MCU Learn</h1>
+				<p>我们致力于为单片机学习者提供最优质的学习资源和技术支持，打造一个开放、包容、充满活力的技术社区。</p>
 			</section>
 
-			<!-- 图片 -->
-			<img src="images/封面图.jpg" alt="封面图" class="center-image">
+			<!-- 团队介绍 -->
+			<section class="team-section">
+				<div class="team-card" data-aos="fade-up">
+					<h3>我们的团队</h3>
+					<p>我们的团队由一群充满激情和经验丰富的专业人士组成，涵盖了嵌入式开发、单片机应用、物联网技术等多个领域。每位成员都致力于分享知识和经验，帮助更多人掌握单片机技术。</p>
+				</div>
+				<div class="team-card" data-aos="fade-up" data-aos-delay="100">
+					<h3>教学理念</h3>
+					<p>我们相信，通过实践和互动学习是掌握单片机技术的最佳方式。我们提供详实的教程、丰富的实例和完整的项目案例，帮助学习者从入门到精通。</p>
+				</div>
+				<div class="team-card" data-aos="fade-up" data-aos-delay="200">
+					<h3>技术支持</h3>
+					<p>我们提供全面的技术支持，包括代码审查、问题解答和项目指导。我们的社区成员随时准备帮助你解决学习过程中遇到的各种问题。</p>
+				</div>
+			</section>
+
+			<!-- 目标和愿景 -->
+			<section class="vision-section">
+				<div class="vision-card" data-aos="fade-right">
+					<h3>我们的目标</h3>
+					<p>我们的目标是创建一个开放、包容和充满活力的学习社区，让每个人都能在这里找到适合自己的学习路径。我们希望通过我们的努力，帮助更多的人掌握单片机技术，实现个人和职业的成长。</p>
+				</div>
+				<div class="vision-card" data-aos="fade-left">
+					<h3>我们的愿景</h3>
+					<p>我们的愿景是成为单片机教育领域的领先平台，为学习者提供最新、最全面的技术资讯和资源。我们希望通过持续的努力和创新，推动单片机技术的发展，并为社会培养更多优秀的嵌入式开发人才。</p>
+				</div>
+			</section>
 
 			<!-- 评论区 -->
-			<section class="comment-section">
-				<h2>评论区</h2>
+			<section class="comment-section" data-aos="fade-up">
+				<h2>留言板</h2>
 				<div class="comment-form">
-					<textarea id="comment-input" placeholder="写下你的留言..."></textarea>
+					<textarea id="comment-input" placeholder="分享你的想法..."></textarea>
 					<div class="emoji-picker">
-						<!-- 表情包选择器 -->
 						<span class="emoji" data-emoji="😀">😀</span>
-						<span class="emoji" data-emoji="😂">😂</span>
-						<span class="emoji" data-emoji="😍">😍</span>
-						<span class="emoji" data-emoji="👍">👍</span>
-						<span class="emoji" data-emoji="👏">👏</span>
-						<span class="emoji" data-emoji="🤔">🤔</span>
 						<span class="emoji" data-emoji="😊">😊</span>
-						<span class="emoji" data-emoji="😎">😎</span>
-						<span class="emoji" data-emoji="😢">😢</span>
-						<span class="emoji" data-emoji="😡">😡</span>
+						<span class="emoji" data-emoji="👍">👍</span>
+						<span class="emoji" data-emoji="🎉">🎉</span>
+						<span class="emoji" data-emoji="💡">💡</span>
+						<span class="emoji" data-emoji="🚀">🚀</span>
+						<span class="emoji" data-emoji="💪">💪</span>
+						<span class="emoji" data-emoji="🌟">🌟</span>
+						<span class="emoji" data-emoji="❤️">❤️</span>
+						<span class="emoji" data-emoji="🤝">🤝</span>
 					</div>
-					<button id="submit-comment">发布</button>
+					<button id="submit-comment">发布留言</button>
 				</div>
 				<div class="comments">
-					<!-- 评论列表 -->
+					<!-- 评论列表将通过 JavaScript 动态加载 -->
 				</div>
 			</section>
 		</div>
 
 		<!-- 页脚 -->
 		<footer class="footer">
-			<div class="container">
-				<p>&copy; 2024 博客. 版权所有.</p>
+			<div class="footer-content">
+				<div class="footer-logo">
+					<h3>MCU Learn</h3>
+					<p>探索创新科技的无限可能</p>
+				</div>
+				<div class="footer-links">
+					<div class="footer-section">
+						<h4>快速链接</h4>
+						<ul>
+							<li><a href="indexmodern.html">首页</a></li>
+							<li><a href="pages/blognew.html">学习</a></li>
+							<li><a href="pages/source.html">资源</a></li>
+							<li><a href="News/news.html">新闻</a></li>
+						</ul>
+					</div>
+					<div class="footer-section">
+						<h4>关注我们</h4>
+						<ul>
+							<li><a href="#">GitHub</a></li>
+							<li><a href="#">微信公众号</a></li>
+							<li><a href="#">知乎专栏</a></li>
+							<li><a href="#">技术社区</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="footer-bottom">
+				<p>&copy; 2024 MCU Learn. All rights reserved.</p>
 			</div>
 		</footer>
 
 		<!-- JavaScript -->
-		<script src="scripts.js"></script>
+		<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 		<script src="z_js/comments.js"></script>
+		<script>
+			// 初始化 AOS 动画库
+			AOS.init({
+				duration: 800,
+				once: true
+			});
+
+			// 暗色模式切换
+			const themeToggle = document.querySelector('.theme-toggle');
+			themeToggle.addEventListener('click', () => {
+				document.body.classList.toggle('dark-mode');
+				const icon = themeToggle.querySelector('i');
+				if (document.body.classList.contains('dark-mode')) {
+					icon.classList.remove('fa-moon');
+					icon.classList.add('fa-sun');
+				} else {
+					icon.classList.remove('fa-sun');
+					icon.classList.add('fa-moon');
+				}
+			});
+
+			// 表情选择器
+			const emojiPicker = document.querySelector('.emoji-picker');
+			const commentInput = document.querySelector('#comment-input');
+			
+			emojiPicker.addEventListener('click', (e) => {
+				if (e.target.classList.contains('emoji')) {
+					const emoji = e.target.dataset.emoji;
+					commentInput.value += emoji;
+				}
+			});
+		</script>
 	</body>
 </html>

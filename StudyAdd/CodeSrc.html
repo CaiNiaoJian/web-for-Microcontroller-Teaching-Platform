@@ -3,491 +3,548 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>源代码与资源下载</title>
-		<link rel="icon" href="images/标签栏图标.png" type="images/png" sizes="34x32">
-		<link rel="stylesheet" href="styles.css">
-		<link rel="stylesheet" href="styles2.css">
-
+		<title>源代码与资源下载 - MCU Learn</title>
+		<link rel="stylesheet" href="../z_css/modern-style.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+		<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
 		<style>
-			/* 基本样式 */
-			body {
-				font-family: Arial, sans-serif;
-				margin: 0;
-				padding: 0;
-				line-height: 1.6;
-				display: flex;
-				flex-direction: column;
-				min-height: 100vh;
-			}
-
-			.container {
-				width: 80%;
-				margin: 0 auto;
-			}
-
-			/* 导航栏样式 */
-			.navbar {
-				background-color: #333;
-				color: #fff;
-				padding: 10px 0;
-			}
-
-			.navbar .logo {
-				font-size: 24px;
-				font-weight: bold;
-				color: #fff;
-				text-decoration: none;
-			}
-
-			.nav-links {
-				list-style: none;
-				display: flex;
-				margin: 0;
-				padding: 0;
-			}
-
-			.nav-links li {
-				margin-left: 20px;
-			}
-
-			.nav-links a {
-				color: #fff;
-				text-decoration: none;
-			}
-
-			.menu-toggle {
-				display: none;
-				flex-direction: column;
-				cursor: pointer;
-			}
-
-			.menu-toggle .bar {
-				height: 3px;
-				width: 25px;
-				background-color: #fff;
-				margin: 4px 0;
-			}
-
-			/* 主要内容样式 */
-			.main-content {
-				flex: 1;
-				margin-top: 20px;
+			/* 页面特定样式 */
+			.repo-section {
+				max-width: 1200px;
+				margin: 40px auto;
+				padding: 0 20px;
 			}
 
 			.repo-header {
-				display: flex;
-				justify-content: space-between;
-				align-items: center;
-				margin-bottom: 20px;
-				border-bottom: 1px solid #e1e4e8;
-				padding-bottom: 20px;
+				text-align: center;
+				margin-bottom: 60px;
+				padding-top: 100px;
 			}
 
 			.repo-header h1 {
-				font-size: 36px;
-				margin: 0;
-			}
-
-			.repo-header .repo-links a {
-				margin-left: 10px;
-				color: #0366d6;
-				text-decoration: none;
-			}
-
-			.repo-header .repo-links a:hover {
-				text-decoration: underline;
-			}
-
-			.repo-description {
-				margin-bottom: 40px;
-				border-bottom: 1px solid #e1e4e8;
-				padding-bottom: 20px;
-			}
-
-			.repo-description p {
-				font-size: 18px;
-				color: #586069;
-			}
-
-			.repo-files {
-				margin-bottom: 40px;
-			}
-
-			.repo-files h2 {
-				font-size: 24px;
+				font-size: 2.5rem;
+				color: var(--text-color);
 				margin-bottom: 20px;
 			}
 
-			.repo-files ul {
-				list-style: none;
-				padding: 0;
+			.repo-header p {
+				font-size: 1.1rem;
+				color: var(--text-color);
+				opacity: 0.8;
+				max-width: 800px;
+				margin: 0 auto;
 			}
 
-			.repo-files li {
-				margin-bottom: 10px;
-				padding: 10px;
-				border: 1px solid #e1e4e8;
-				border-radius: 6px;
+			.repo-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+				gap: 30px;
+				margin-top: 40px;
+			}
+
+			.repo-card {
+				background: var(--card-bg);
+				border-radius: 15px;
+				padding: 25px;
+				box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+				transition: transform 0.3s ease, box-shadow 0.3s ease;
+			}
+
+			.repo-card:hover {
+				transform: translateY(-5px);
+				box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+			}
+
+			.repo-card h3 {
+				font-size: 1.3rem;
+				color: var(--text-color);
+				margin-bottom: 15px;
+			}
+
+			.repo-card p {
+				color: var(--text-color);
+				opacity: 0.8;
+				margin-bottom: 20px;
+				line-height: 1.6;
+			}
+
+			.repo-meta {
 				display: flex;
-				justify-content: space-between;
 				align-items: center;
+				gap: 15px;
+				margin-bottom: 20px;
+				color: var(--text-color);
+				opacity: 0.7;
+				font-size: 0.9rem;
+			}
+
+			.repo-meta span {
+				display: flex;
+				align-items: center;
+				gap: 5px;
+			}
+
+			.download-options {
+				display: flex;
+				gap: 10px;
 				flex-wrap: wrap;
 			}
 
-			.repo-files a {
-				color: #0366d6;
-				text-decoration: none;
-				font-size: 18px;
-			}
-
-			.repo-files a:hover {
-				text-decoration: underline;
-			}
-
-			.repo-files .file-info {
-				font-size: 14px;
-				color: #586069;
-				margin-left: 10px;
-			}
-
-			.download-buttons {
-				display: flex;
-				gap: 10px;
-				margin-top: 10px;
-			}
-
-			.download-buttons a {
-				display: inline-block;
-				padding: 5px 10px;
-				border: 1px solid #e1e4e8;
-				border-radius: 4px;
-				color: #fff;
-				text-decoration: none;
-				font-size: 14px;
+			.download-btn {
 				flex: 1;
+				min-width: 120px;
+				padding: 10px 15px;
+				border-radius: 8px;
 				text-align: center;
-			}
-
-			.download-buttons a:hover {
-				background-color: #f6f8fa;
-			}
-
-			.download-buttons .local {
-				background-color: #28a745;
-			}
-
-			.download-buttons .github {
-				background-color: #24292e;
-			}
-
-			.download-buttons .gitee {
-				background-color: #c71d23;
-			}
-
-			.download-buttons .baidu {
-				background-color: #239ed8;
-			}
-
-			/* 页脚样式 */
-			.footer {
-				background-color: #333;
 				color: #fff;
-				text-align: center;
-				padding: 10px 0;
-				margin-top: auto;
-				/* 确保页脚固定在底部 */
-			}
-
-			.footer-content {
+				text-decoration: none;
+				font-weight: 500;
+				transition: opacity 0.3s ease;
 				display: flex;
 				align-items: center;
 				justify-content: center;
+				gap: 8px;
+			}
+
+			.download-btn:hover {
+				opacity: 0.9;
+			}
+
+			.download-btn.github {
+				background: #24292e;
+			}
+
+			.download-btn.gitee {
+				background: #c71d23;
+			}
+
+			.download-btn.local {
+				background: #28a745;
+			}
+
+			.download-btn.baidu {
+				background: #2932e1;
+			}
+
+			.search-container {
+				max-width: 600px;
+				margin: 40px auto;
+				padding: 0 20px;
+			}
+
+			.search-box {
+				width: 100%;
+				padding: 15px 20px;
+				border: 2px solid var(--primary-color);
+				border-radius: 12px;
+				font-size: 1rem;
+				background: var(--card-bg);
+				color: var(--text-color);
+				transition: all 0.3s ease;
+			}
+
+			.search-box:focus {
+				outline: none;
+				box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+			}
+
+			.tags-container {
+				display: flex;
+				gap: 10px;
+				margin-top: 20px;
 				flex-wrap: wrap;
 			}
 
-			.footer-images {
-				display: flex;
-				gap: 10px;
-				margin-right: 20px;
-			}
-
-			.footer-images img {
-				width: 50px;
-				height: 50px;
-				border-radius: 50%;
-				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-			}
-
-			/* 搜索框样式 */
-			.search-container {
-				display: flex;
-				align-items: center;
-				margin-bottom: 20px;
-			}
-
-			.search-container input[type="text"] {
-				padding: 10px;
-				border: 2px solid #00aaff;
-				/* 增加边框宽度并改变颜色 */
-				border-radius: 6px;
-				font-size: 16px;
-				width: 250px;
-				box-shadow: 0 2px 4px rgba(0, 255, 255, 0.1);
-				/* 增加阴影效果 */
-				transition: border-color 0.3s ease, box-shadow 0.3s ease;
-				/* 添加过渡效果 */
-			}
-
-			.search-container input[type="text"]:focus {
-				border-color: #005cbf;
-				/* 聚焦时的边框颜色 */
-				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-				/* 聚焦时的阴影效果 */
-				outline: none;
-				/* 移除默认的聚焦轮廓 */
-			}
-
-			.search-container button {
-				padding: 10px 15px;
-				border: 2px solid #0366d6;
-				/* 增加边框宽度并改变颜色 */
-				border-radius: 6px;
-				background-color: #0366d6;
-				/* 改变背景颜色 */
-				color: #fff;
-				/* 改变文字颜色 */
+			.tag {
+				padding: 6px 12px;
+				border-radius: 20px;
+				background: var(--card-bg);
+				color: var(--text-color);
+				font-size: 0.9rem;
 				cursor: pointer;
-				margin-left: 10px;
-				box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-				/* 增加阴影效果 */
-				transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-				/* 添加过渡效果 */
+				transition: all 0.3s ease;
+				border: 1px solid var(--primary-color);
 			}
 
-			.search-container button:hover {
-				background-color: #005cbf;
-				/* 悬停时的背景颜色 */
-				border-color: #005cbf;
-				/* 悬停时的边框颜色 */
-				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-				/* 悬停时的阴影效果 */
+			.tag:hover, .tag.active {
+				background: var(--primary-color);
+				color: #fff;
 			}
 
-			.search-container button:active {
-				background-color: #004080;
-				/* 点击时的背景颜色 */
-				border-color: #004080;
-				/* 点击时的边框颜色 */
-				box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-				/* 点击时的阴影效果 */
-			}
-
-			/* 响应式设计 */
 			@media (max-width: 768px) {
-				.nav-links {
-					display: none;
+				.repo-grid {
+					grid-template-columns: 1fr;
+				}
+
+				.download-options {
 					flex-direction: column;
+				}
+
+				.download-btn {
 					width: 100%;
 				}
+			}
 
-				.nav-links.active {
-					display: flex;
-				}
+			/* 暗色模式适配 */
+			body.dark-mode .repo-card {
+				background: var(--card-bg);
+			}
 
-				.menu-toggle {
-					display: flex;
-				}
+			body.dark-mode .search-box {
+				background: var(--card-bg);
+				color: var(--text-color);
+			}
 
-				.repo-header {
-					flex-direction: column;
-					align-items: flex-start;
-				}
+			/* 维护通知条样式 */
+			.maintenance-banner {
+				background: linear-gradient(135deg, #ff4444, #ff6b6b);
+				color: white;
+				padding: 15px 20px;
+				text-align: center;
+				position: relative;
+				z-index: 1000;
+				animation: slideDown 0.5s ease-out;
+				margin-bottom: 20px;
+				box-shadow: 0 4px 12px rgba(255, 68, 68, 0.2);
+			}
 
-				.repo-header .repo-links {
-					margin-top: 10px;
-				}
+			.maintenance-banner i {
+				margin-right: 8px;
+				animation: pulse 2s infinite;
+			}
 
-				.repo-files li {
-					flex-direction: column;
-					align-items: flex-start;
-				}
+			#current-time {
+				margin-left: 10px;
+				font-weight: 500;
+			}
 
-				.repo-files .file-info {
-					margin-top: 5px;
-				}
+			@keyframes pulse {
+				0% { transform: scale(1); }
+				50% { transform: scale(1.1); }
+				100% { transform: scale(1); }
+			}
 
-				.download-buttons {
-					flex-direction: column;
-				}
+			@keyframes slideDown {
+				from { transform: translateY(-100%); }
+				to { transform: translateY(0); }
+			}
 
-				.footer-content {
-					flex-direction: column;
-					align-items: center;
-				}
-
-				.footer-images {
-					margin-right: 0;
-					margin-bottom: 10px;
-				}
-
-				.search-container {
-					flex-direction: column;
-					align-items: flex-start;
-				}
-
-				.search-container input[type="text"] {
-					width: 100%;
-					margin-bottom: 10px;
-				}
-
-				.search-container button {
-					margin-left: 0;
-				}
+			/* 暗色模式适配 */
+			body.dark-mode .maintenance-banner {
+				background: linear-gradient(135deg, #ff4444, #ff6b6b);
+				color: white;
 			}
 		</style>
 	</head>
 	<body>
+		
+
 		<!-- 导航栏 -->
-		<nav class="navbar">
-			<div class="container">
-				<a href="index.html" class="logo">中国矿业大学单片机学习平台</a>
+		<nav class="nav-wrapper">
+			<div class="nav-content">
+				<a href="../indexmodern.html" class="logo">MCU Learn</a>
 				<ul class="nav-links">
-					<li><a href="../index.html">首页</a></li>
-					<li><a href="../blog.html">文章</a></li>
-					<li><a href="../about.html">关于</a></li>
-					<li><a href="../relation.html">联系</a></li>
-					<li><a href="../StudySources/Sources.html">资源</a></li>
-					<li><a href="../Team.html">团队</a></li>
+					<li><a href="../indexmodern.html">首页</a></li>
+					<li><a href="../pages/blognew.html">学习</a></li>
+					<li><a href="../pages/source.html">资源</a></li>
+					<li><a href="../News/news.html">新闻</a></li>
+					<li><a href="../indexmodern.html#community">社区</a></li>
+					<li><a href="../indexmodern.html#contact">联系我们</a></li>
 				</ul>
-				<div class="menu-toggle" id="mobile-menu">
-					<span class="bar"></span>
-					<span class="bar"></span>
-					<span class="bar"></span>
-				</div>
+				<button class="theme-toggle">
+					<i class="fas fa-moon"></i>
+				</button>
 			</div>
 		</nav>
 
-		<!-- 主要内容 -->
-		<div class="container main-content">
-			<!-- 仓库头部 -->
-			<section class="repo-header">
-				<h1>源代码与资源下载</h1>
-				<div class="repo-links">
-					<a href="https://github.com/your-repo-url" target="_blank">GitHub</a>
-					<a href="https://gitee.com/your-repo-url" target="_blank">Gitee</a>
-					<a href="https://pan.baidu.com/s/your-repo-url" target="_blank">百度网盘</a>
+
+
+		<!-- 页面标题和搜索 -->
+		<div class="repo-header">
+			<h1 data-aos="fade-up">源代码与资源下载</h1>
+			<p data-aos="fade-up" data-aos-delay="100">探索我们精心准备的源代码和学习资源，加速你的单片机开发之旅</p>
+			
+			<div class="search-container" data-aos="fade-up" data-aos-delay="200">
+				<input type="text" class="search-box" placeholder="搜索资源...">
+				<div class="tags-container">
+					<span class="tag active">全部</span>
+					<span class="tag">基础实验</span>
+					<span class="tag">进阶项目</span>
+					<span class="tag">示例代码</span>
+					<span class="tag">开发工具</span>
 				</div>
-			</section>
-
-			<!-- 仓库描述 -->
-			<section class="repo-description">
-				<p>欢迎访问中国矿业大学单片机学习平台的源代码与资源下载页面。这里提供了项目的源代码、打包文件以及其他相关资源。您可以通过以下链接访问和下载这些资源。</p>
-			</section>
-
-			<!-- 搜索框 -->
-			<div class="search-container">
-				<input type="text" id="search-input" placeholder="搜索文件名(全称)...">
-				<button id="clear-search">×</button>
 			</div>
-
-			<!-- 仓库文件列表 -->
-			<section class="repo-files">
-				<h2>文件列表</h2>
-				<ul id="file-list">
-					<li>
-						<a href="../downloadPac/file1.zip" download>file1.zip</a>
-						<span class="file-info">大小: 10MB | 更新时间: 2024-10-01</span>
-						<div class="download-buttons">
-							<a href="../downloadPac/file1.zip" download class="local">本地下载</a>
-							<a href="https://github.com/your-repo-url/file1.zip" target="_blank"
-								class="github">GitHub</a>
-							<a href="https://gitee.com/your-repo-url/file1.zip" target="_blank" class="gitee">Gitee</a>
-							<a href="https://pan.baidu.com/s/your-repo-url/file1.zip" target="_blank"
-								class="baidu">百度云</a>
-						</div>
-					</li>
-					<li>
-						<a href="../downloadPac/file2.zip" download>file2.zip</a>
-						<span class="file-info">大小: 5MB | 更新时间: 2024-11-05</span>
-						<div class="download-buttons">
-							<a href="../downloadPac/file2.zip" download class="local">本地下载</a>
-							<a href="https://github.com/your-repo-url/file2.zip" target="_blank"
-								class="github">GitHub</a>
-							<a href="https://gitee.com/your-repo-url/file2.zip" target="_blank" class="gitee">Gitee</a>
-							<a href="https://pan.baidu.com/s/your-repo-url/file2.zip" target="_blank"
-								class="baidu">百度云</a>
-						</div>
-					</li>
-					<li>
-						<a href="../downloadPac/file3.zip" download>file3.zip</a>
-						<span class="file-info">大小: 20MB | 更新时间: 2024-11-08</span>
-						<div class="download-buttons">
-							<a href="../downloadPac/file3.zip" download class="local">本地下载</a>
-							<a href="https://github.com/your-repo-url/file3.zip" target="_blank"
-								class="github">GitHub</a>
-							<a href="https://gitee.com/your-repo-url/file3.zip" target="_blank" class="gitee">Gitee</a>
-							<a href="https://pan.baidu.com/s/your-repo-url/file3.zip" target="_blank"
-								class="baidu">百度云</a>
-						</div>
-					</li>
-					<li>
-						<a href="../downloadPac/file3.zip" download>file4.zip</a>
-						<span class="file-info">大小: 20MB | 更新时间: 2024-11-10</span>
-						<div class="download-buttons">
-							<a href="../downloadPac/file3.zip" download class="local">本地下载</a>
-							<a href="https://github.com/your-repo-url/file3.zip" target="_blank"
-								class="github">GitHub</a>
-							<a href="https://gitee.com/your-repo-url/file3.zip" target="_blank" class="gitee">Gitee</a>
-							<a href="https://pan.baidu.com/s/your-repo-url/file3.zip" target="_blank"
-								class="baidu">百度云</a>
-						</div>
-					</li>
-					<!-- 添加更多文件链接 -->
-				</ul>
-			</section>
 		</div>
+		<!-- 维护通知条 -->
+		<div class="maintenance-banner" data-aos="fade-down">
+			<i class="fas fa-exclamation-triangle"></i>
+			系统维护中，暂时无法下载代码内容。我们正在努力升级系统，请稍后再试。
+			<span id="current-time"></span>
+		</div>
+		<!-- 资源列表 -->
+		<section class="repo-section">
+			<div class="repo-grid">
+				<!-- 基础实验代码 -->
+				<div class="repo-card" data-aos="fade-up">
+					<h3>基础实验源代码</h3>
+					<p>包含LED闪烁、按键控制、定时器等基础实验的完整源代码和详细注释。</p>
+					<div class="repo-meta">
+						<span><i class="fas fa-code"></i> C</span>
+						<span><i class="fas fa-file"></i> 15个文件</span>
+					</div>
+					<div class="download-options">
+						<a href="#" class="download-btn github">
+							<i class="fab fa-github"></i> GitHub
+						</a>
+						<a href="#" class="download-btn local">
+							<i class="fas fa-download"></i> 本地下载
+						</a>
+					</div>
+				</div>
+
+				<!-- 进阶项目代码 -->
+				<div class="repo-card" data-aos="fade-up" data-aos-delay="100">
+					<h3>进阶项目源代码</h3>
+					<p>包含RTOS应用、通信协议、传感器应用等进阶项目的完整工程文件。</p>
+					<div class="repo-meta">
+						<span><i class="fas fa-code"></i> C/C++</span>
+						<span><i class="fas fa-file"></i> 25个文件</span>
+					</div>
+					<div class="download-options">
+						<a href="#" class="download-btn github">
+							<i class="fab fa-github"></i> GitHub
+						</a>
+						<a href="#" class="download-btn local">
+							<i class="fas fa-download"></i> 本地下载
+						</a>
+					</div>
+				</div>
+
+				<!-- 开发工具包 -->
+				<div class="repo-card" data-aos="fade-up" data-aos-delay="200">
+					<h3>开发工具包</h3>
+					<p>包含IDE、编译器、烧录工具等开发必备��件，助你快速搭建开发环境。</p>
+					<div class="repo-meta">
+						<span><i class="fas fa-tools"></i> 工具集</span>
+						<span><i class="fas fa-download"></i> 2.5GB</span>
+					</div>
+					<div class="download-options">
+						<a href="#" class="download-btn baidu">
+							<i class="fas fa-cloud-download-alt"></i> 百度网盘
+						</a>
+						<a href="#" class="download-btn local">
+							<i class="fas fa-download"></i> 本地下载
+						</a>
+					</div>
+				</div>
+
+				<!-- 示例项目合集 -->
+				<div class="repo-card" data-aos="fade-up" data-aos-delay="300">
+					<h3>示例项目合集</h3>
+					<p>精选的实用项目示例，包含完整的代码、电路图和详细的开发文档。</p>
+					<div class="repo-meta">
+						<span><i class="fas fa-folder"></i> 项目集</span>
+						<span><i class="fas fa-file"></i> 10个项目</span>
+					</div>
+					<div class="download-options">
+						<a href="#" class="download-btn gitee">
+							<i class="fab fa-git-alt"></i> Gitee
+						</a>
+						<a href="#" class="download-btn local">
+							<i class="fas fa-download"></i> 本地下载
+						</a>
+					</div>
+				</div>
+
+				<!-- 学习资料包 -->
+				<div class="repo-card" data-aos="fade-up" data-aos-delay="400">
+					<h3>学习资料包</h3>
+					<p>包含教程文档、技术手册、数据手册等学习资料的完整合集。</p>
+					<div class="repo-meta">
+						<span><i class="fas fa-book"></i> 文档</span>
+						<span><i class="fas fa-file-pdf"></i> 50+ PDF</span>
+					</div>
+					<div class="download-options">
+						<a href="#" class="download-btn baidu">
+							<i class="fas fa-cloud-download-alt"></i> 百度网盘
+						</a>
+						<a href="#" class="download-btn local">
+							<i class="fas fa-download"></i> 本地下载
+						</a>
+					</div>
+				</div>
+
+				<!-- 开源项目模板 -->
+				<div class="repo-card" data-aos="fade-up" data-aos-delay="500">
+					<h3>开源项目模板</h3>
+					<p>标准的项目模板，包含基础框架、常用功能模块和开发规范文档。</p>
+					<div class="repo-meta">
+						<span><i class="fas fa-code"></i> 模板</span>
+						<span><i class="fas fa-star"></i> 4.8分</span>
+					</div>
+					<div class="download-options">
+						<a href="#" class="download-btn github">
+							<i class="fab fa-github"></i> GitHub
+						</a>
+						<a href="#" class="download-btn gitee">
+							<i class="fab fa-git-alt"></i> Gitee
+						</a>
+					</div>
+				</div>
+			</div>
+		</section>
 
 		<!-- 页脚 -->
 		<footer class="footer">
-			<div class="container footer-content">
-				<div class="footer-images">
-					<img src="../images/校徽1.jpg" alt="中国矿业大学校徽">
-					<img src="../images/github.jpg" alt="GitHub">
+			<div class="footer-content">
+				<div class="footer-logo">
+					<h3>MCU Learn</h3>
+					<p>探索创新科技的无限可能</p>
 				</div>
-				<p>&copy; 2024 博客. 版权所有归中国矿业大学。来自计算机学院和机电学院。</p>
+				<div class="footer-links">
+					<div class="footer-section">
+						<h4>快速链接</h4>
+						<ul>
+							<li><a href="../indexmodern.html">首页</a></li>
+							<li><a href="../pages/blognew.html">学习资源</a></li>
+							<li><a href="../pages/source.html">学术资源</a></li>
+							<li><a href="../News/news.html">新闻动态</a></li>
+						</ul>
+					</div>
+					<div class="footer-section">
+						<h4>社区支持</h4>
+						<ul>
+							<li><a href="../indexmodern.html#community">社区讨论</a></li>
+							<li><a href="../indexmodern.html#contact">联系我们</a></li>
+							<li><a href="../about.html">关于我们</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="footer-bottom">
+				<p>&copy; 2024 MCU Learn. 保留所有权利。</p>
 			</div>
 		</footer>
 
-		<!-- JavaScript -->
+		<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 		<script>
-			document.addEventListener('DOMContentLoaded', function() {
-				const fileList = document.getElementById('file-list');
-				const searchInput = document.getElementById('search-input');
-				const clearSearch = document.getElementById('clear-search');
-				const fileItems = fileList.getElementsByTagName('li');
-				const fileNames = Array.from(fileItems).map(item => item.querySelector('a').textContent);
+			// 添加动态时间显示功能
+			function updateTime() {
+				const timeElement = document.getElementById('current-time');
+				const now = new Date();
+				const options = {
+					timeZone: 'Asia/Shanghai',
+					year: 'numeric',
+					month: '2-digit',
+					day: '2-digit',
+					hour: '2-digit',
+					minute: '2-digit',
+					second: '2-digit',
+					hour12: false
+				};
+				timeElement.textContent = ' - ' + now.toLocaleString('zh-CN', options);
+			}
 
-				searchInput.addEventListener('keyup', function(event) {
-					if (event.key === 'Enter') {
-						const searchTerm = searchInput.value.toLowerCase();
-						Array.from(fileItems).forEach(item => {
-							const fileName = item.querySelector('a').textContent.toLowerCase();
-							if (fileName.includes(searchTerm)) {
-								item.style.display = 'flex';
+			// 初始更新时间
+			updateTime();
+			// 每秒更新一次时间
+			setInterval(updateTime, 1000);
+
+			// 初始化 AOS
+			AOS.init({
+				duration: 800,
+				offset: 100,
+				once: true
+			});
+
+			// 暗色模式切换
+			const themeToggle = document.querySelector('.theme-toggle');
+			const body = document.body;
+			const icon = themeToggle.querySelector('i');
+
+			// 检查本地存储中的主题设置
+			const savedTheme = localStorage.getItem('theme');
+			if (savedTheme === 'dark') {
+				body.classList.add('dark-mode');
+				icon.classList.remove('fa-moon');
+				icon.classList.add('fa-sun');
+				document.documentElement.setAttribute('data-theme', 'dark');
+			} else {
+				document.documentElement.setAttribute('data-theme', 'light');
+			}
+
+			themeToggle.addEventListener('click', () => {
+				body.classList.toggle('dark-mode');
+				if (body.classList.contains('dark-mode')) {
+					icon.classList.remove('fa-moon');
+					icon.classList.add('fa-sun');
+					localStorage.setItem('theme', 'dark');
+					document.documentElement.setAttribute('data-theme', 'dark');
+				} else {
+					icon.classList.remove('fa-sun');
+					icon.classList.add('fa-moon');
+					localStorage.setItem('theme', 'light');
+					document.documentElement.setAttribute('data-theme', 'light');
+				}
+			});
+
+			// 标签切换功能
+			const tags = document.querySelectorAll('.tag');
+			const repoCards = document.querySelectorAll('.repo-card');
+
+			tags.forEach(tag => {
+				tag.addEventListener('click', () => {
+					// 移除所有标签的激活状态
+					tags.forEach(t => t.classList.remove('active'));
+					// 添加当前标签的激活状态
+					tag.classList.add('active');
+
+					// 实现筛选逻辑
+					const category = tag.textContent.toLowerCase();
+					if (category === '全部') {
+						repoCards.forEach(card => {
+							card.style.display = 'block';
+							card.style.animation = 'fadeIn 0.5s ease';
+						});
+					} else {
+						repoCards.forEach(card => {
+							const cardTitle = card.querySelector('h3').textContent.toLowerCase();
+							if (cardTitle.includes(category)) {
+								card.style.display = 'block';
+								card.style.animation = 'fadeIn 0.5s ease';
 							} else {
-								item.style.display = 'none';
+								card.style.display = 'none';
 							}
 						});
 					}
 				});
+			});
 
-				clearSearch.addEventListener('click', function() {
-					searchInput.value = '';
-					Array.from(fileItems).forEach(item => {
-						item.style.display = 'flex';
-					});
+			// 搜索功能
+			const searchBox = document.querySelector('.search-box');
+			searchBox.addEventListener('input', () => {
+				const searchTerm = searchBox.value.toLowerCase();
+				repoCards.forEach(card => {
+					const title = card.querySelector('h3').textContent.toLowerCase();
+					const description = card.querySelector('p').textContent.toLowerCase();
+					if (title.includes(searchTerm) || description.includes(searchTerm)) {
+						card.style.display = 'block';
+						card.style.animation = 'fadeIn 0.5s ease';
+					} else {
+						card.style.display = 'none';
+					}
 				});
 			});
+
+			// 添加淡入动画
+			const style = document.createElement('style');
+			style.textContent = `
+				@keyframes fadeIn {
+					from { opacity: 0; transform: translateY(20px); }
+					to { opacity: 1; transform: translateY(0); }
+				}
+			`;
+			document.head.appendChild(style);
 		</script>
 	</body>
 </html>

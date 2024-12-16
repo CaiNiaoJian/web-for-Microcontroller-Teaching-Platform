@@ -8,6 +8,34 @@
     <link rel="stylesheet" href="../z_css/blog-style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+    <style>
+        /* 提示框样式 */
+        .coming-soon-toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .coming-soon-toast.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* 添加鼠标样式 */
+        .coming-soon {
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
     <!-- 导航栏 -->
@@ -17,10 +45,11 @@
             <ul class="nav-links">
                 <li><a href="../indexmodern.html">首页</a></li>
                 <li><a href="blognew.html" class="active">学习</a></li>
-                <li><a href="#" id="knowledgeEngine">知识引擎</a></li>
-                <li><a href="../indexmodern.html#resources">资源</a></li>
-                <li><a href="../indexmodern.html#community">社区</a></li>
-                <li><a href="../indexmodern.html#contact">联系我们</a></li>
+                <li><a href="knowledge.html" id="knowledgeEngine">知识分享</a></li>
+                <li><a href="source.html">期刊文档</a></li>
+                <li><a href="../StudySources/Sources.html">学习中心</a></li>
+                <li><a href="community.html">社区</a></li>
+                <li><a href="../about.html">联系我们</a></li>
             </ul>
             <button class="theme-toggle">
                 <i class="fas fa-moon"></i>
@@ -36,922 +65,101 @@
         </div>
     </section>
 
-    <!-- 课程分类 -->
-    <section class="course-categories">
-        <div class="container">
-            <div class="category-grid">
-                <div class="category-card" data-aos="fade-up">
-                    <div class="category-icon">
-                        <i class="fas fa-microchip"></i>
-                    </div>
-                    <h3>基础入门</h3>
-                    <p>适合零基础学习者的入门课程</p>
-                    <a href="#" class="category-link">开始学习 <i class="fas fa-arrow-right"></i></a>
-                </div>
-                <div class="category-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="category-icon">
-                        <i class="fas fa-code"></i>
-                    </div>
-                    <h3>进阶开发</h3>
-                    <p>深入学习单片机开发技术</p>
-                    <a href="#" class="category-link">查看课程 <i class="fas fa-arrow-right"></i></a>
-                </div>
-                <div class="category-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="category-icon">
-                        <i class="fas fa-project-diagram"></i>
-                    </div>
-                    <h3>项目实战</h3>
-                    <p>真实项目开发经验分享</p>
-                    <a href="#" class="category-link">浏览项目 <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 教程和学习路径区域 -->
-    <section class="tutorials-and-paths">
-        <div class="container">
-            <div class="content-grid">
-                <!-- 最新教程 -->
-                <div class="tutorials-section" data-aos="fade-right">
-                    <h2 class="section-title">最新教程</h2>
-                    <div class="tutorial-list">
-                        <article class="tutorial-card">
-                            <div class="tutorial-image">
-                                <img src="../images/modern/tutorial-1.png" alt="单片机基础教程">
-                                <span class="tutorial-tag">基础</span>
-                            </div>
-                            <div class="tutorial-content">
-                                <h3>单片机开发环境搭建详解</h3>
-                                <p>学习如何正确配置单片机开发环境，包括IDE安装和动配置等内容。</p>
-                                <div class="tutorial-meta">
-                                    <span><i class="fas fa-clock"></i> 30分钟</span>
-                                    <span><i class="fas fa-user"></i> 初学者</span>
-                                </div>
-                                <a href="#" class="read-more">阅读教程 <i class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </article>
-                        <article class="tutorial-card">
-                            <div class="tutorial-image">
-                                <img src="../images/modern/tutorial-2.png" alt="GPIO编程">
-                                <span class="tutorial-tag">进阶</span>
-                            </div>
-                            <div class="tutorial-content">
-                                <h3>GPIO端口编程实战</h3>
-                                <p>深入理解GPIO的工作原理和编程技巧，实现LED闪烁等基础项目。</p>
-                                <div class="tutorial-meta">
-                                    <span><i class="fas fa-clock"></i> 45分钟</span>
-                                    <span><i class="fas fa-user"></i> 中级</span>
-                                </div>
-                                <a href="#" class="read-more">阅读教程 <i class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </article>
-                    </div>
-                </div>
-
-                <!-- 推荐学习路径 -->
-                <div class="paths-section" data-aos="fade-left">
-                    <h2 class="section-title">推荐学习路径</h2>
-                    <div class="path-list">
-                        <div class="path-card">
-                            <div class="path-header">
-                                <h3>单片机入门工程师</h3>
-                                <span class="duration">3个月</span>
-                            </div>
-                            <div class="path-content">
-                                <ul class="path-steps">
-                                    <li><i class="fas fa-check-circle"></i> 单片机基础知识</li>
-                                    <li><i class="fas fa-check-circle"></i> C语言编程基础</li>
-                                    <li><i class="fas fa-check-circle"></i> 开发环境使用</li>
-                                    <li><i class="fas fa-check-circle"></i> 基础项目实践</li>
-                                </ul>
-                                <a href="#" class="path-button">开始学习</a>
-                            </div>
-                        </div>
-                        <div class="path-card">
-                            <div class="path-header">
-                                <h3>嵌入式系统专家</h3>
-                                <span class="duration">6个月</span>
-                            </div>
-                            <div class="path-content">
-                                <ul class="path-steps">
-                                    <li><i class="fas fa-check-circle"></i> RTOS实时操作系统</li>
-                                    <li><i class="fas fa-check-circle"></i> 通信协议开发</li>
-                                    <li><i class="fas fa-check-circle"></i> 驱动程序编写</li>
-                                    <li><i class="fas fa-check-circle"></i> 项目实战开发</li>
-                                </ul>
-                                <a href="#" class="path-button">开始学习</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <style>
-            .tutorials-and-paths {
-                padding: 60px 0;
-                background-color: var(--section-bg);
-            }
-
-            .content-grid {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 40px;
-                max-width: 1200px;
-                margin: 0 auto;
-                padding: 0 20px;
-            }
-
-            .tutorials-section,
-            .paths-section {
-                background: var(--card-bg);
-                border-radius: 12px;
-                padding: 30px;
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-                border: 1px solid var(--border-color);
-            }
-
-            .tutorials-and-paths .section-title {
-                font-size: 28px;
-                color: var(--text-color);
-                margin-bottom: 25px;
-                text-align: left;
-                font-weight: 600;
-                position: relative;
-                padding-bottom: 10px;
-            }
-
-            .tutorials-and-paths .section-title::after {
-                content: '';
-                position: absolute;
-                bottom: 0;
-                left: 0;
-                width: 60px;
-                height: 3px;
-                background: var(--primary-color);
-                border-radius: 3px;
-            }
-
-            /* 教程卡片样式 */
-            .tutorial-list {
-                display: flex;
-                flex-direction: column;
-                gap: 20px;
-            }
-
-            .tutorial-card {
-                border: 1px solid var(--border-color);
-                border-radius: 8px;
-                overflow: hidden;
-                transition: transform 0.3s ease;
-                background: var(--card-bg);
-            }
-
-            .tutorial-card:hover {
-                transform: translateY(-5px);
-            }
-
-            .tutorial-image {
-                position: relative;
-                height: 200px;
-                overflow: hidden;
-            }
-
-            .tutorial-image img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
-
-            .tutorial-tag {
-                position: absolute;
-                top: 10px;
-                right: 10px;
-                background: #007aff;
-                color: white;
-                padding: 4px 12px;
-                border-radius: 20px;
-                font-size: 12px;
-            }
-
-            .tutorial-content {
-                padding: 20px;
-            }
-
-            .tutorial-content h3 {
-                margin: 0 0 10px 0;
-                font-size: 18px;
-                color: var(--text-color);
-            }
-
-            .tutorial-content p {
-                color: var(--text-secondary);
-                margin-bottom: 15px;
-                line-height: 1.5;
-            }
-
-            .tutorial-meta {
-                display: flex;
-                gap: 15px;
-                color: var(--text-secondary);
-                font-size: 14px;
-                margin-bottom: 15px;
-            }
-
-            .read-more {
-                display: inline-flex;
-                align-items: center;
-                gap: 5px;
-                color: #007aff;
-                text-decoration: none;
-                font-weight: 500;
-                transition: gap 0.3s ease;
-            }
-
-            .read-more:hover {
-                gap: 10px;
-            }
-
-            /* 学习路径样式 */
-            .path-list {
-                display: flex;
-                flex-direction: column;
-                gap: 20px;
-            }
-
-            .path-card {
-                border: 1px solid var(--border-color);
-                border-radius: 8px;
-                overflow: hidden;
-                transition: transform 0.3s ease;
-                background: var(--card-bg);
-            }
-
-            .path-card:hover {
-                transform: translateY(-5px);
-            }
-
-            .path-header {
-                background: var(--card-header-bg);
-                padding: 15px 20px;
-                border-bottom: 1px solid var(--border-color);
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-            }
-
-            .path-header h3 {
-                margin: 0;
-                font-size: 18px;
-                color: var(--text-color);
-            }
-
-            .duration {
-                background: #e8f5ff;
-                color: #007aff;
-                padding: 4px 12px;
-                border-radius: 20px;
-                font-size: 12px;
-            }
-
-            .path-content {
-                padding: 20px;
-            }
-
-            .path-steps {
-                list-style: none;
-                padding: 0;
-                margin: 0 0 20px 0;
-            }
-
-            .path-steps li {
-                display: flex;
-                align-items: center;
-                gap: 10px;
-                color: var(--text-secondary);
-                margin-bottom: 10px;
-            }
-
-            .path-steps i {
-                color: var(--success-color);
-            }
-
-            .path-button {
-                display: inline-block;
-                background: #007aff;
-                color: white;
-                padding: 8px 20px;
-                border-radius: 6px;
-                text-decoration: none;
-                transition: background-color 0.3s ease;
-            }
-
-            .path-button:hover {
-                background: #0056b3;
-            }
-
-            @media (max-width: 992px) {
-                .content-grid {
-                    grid-template-columns: 1fr;
-                    gap: 30px;
-                }
-            }
-
-            @media (max-width: 768px) {
-                .tutorials-and-paths {
-                    padding: 40px 0;
-                }
-
-                .tutorials-section,
-                .paths-section {
-                    padding: 20px;
-                }
-
-                .tutorial-image {
-                    height: 160px;
-                }
-            }
-
-            /* 添加CSS变量定义 */
-            :root {
-                /* 浅色主题 */
-                --section-bg: #f8f9fa;
-                --card-bg: #ffffff;
-                --card-header-bg: #f8f9fa;
-                --input-bg: #ffffff;
-                --text-color: #333333;
-                --text-secondary: #666666;
-                --border-color: #e0e0e0;
-                --primary-color: #007aff;
-                --primary-hover: #0056b3;
-                --primary-shadow: rgba(0, 122, 255, 0.1);
-                --danger-color: #ff4d4f;
-                --tag-bg: #f5f5f5;
-                --tag-hover-bg: #e0e0e0;
-                --code-bg: #f8f9fa;
-                --code-color: #333333;
-            }
-
-            /* 深色主题 */
-            [data-theme="dark"] {
-                --section-bg: #1a1a1a;
-                --card-bg: #2d2d2d;
-                --card-header-bg: #252525;
-                --input-bg: #333333;
-                --text-color: #ffffff;
-                --text-secondary: #b0b0b0;
-                --border-color: #404040;
-                --primary-color: #3a8fff;
-                --primary-hover: #1c6fdb;
-                --primary-shadow: rgba(58, 143, 255, 0.2);
-                --danger-color: #ff4d4f;
-                --tag-bg: #363636;
-                --tag-hover-bg: #404040;
-                --code-bg: #1e1e1e;
-                --code-color: #e0e0e0;
-            }
-        </style>
-    </section>
-
-    <!-- 学习资源 -->
-    <section class="resources">
+    <!-- 主要学习资源入口 -->
+    <section class="learning-resources">
         <div class="container">
             <h2 class="section-title" data-aos="fade-up">学习资源</h2>
-            <div class="resource-grid">
+            <div class="resources-grid">
+                <!-- 基础实验入口 -->
                 <div class="resource-card" data-aos="fade-up">
-                    <i class="fas fa-book"></i>
-                    <h3>技术文档</h3>
-                    <p>完整的技术文档和API参考</p>
-                    <a href="#" class="resource-link">查看文档</a>
+                    <div class="resource-icon">
+                        <i class="fas fa-microchip"></i>
+                    </div>
+                    <h3>基础实验</h3>
+                    <p>单片机基础知识与实验</p>
+                    <ul class="resource-features">
+                        <li><i class="fas fa-check"></i> 开发环境搭建</li>
+                        <li><i class="fas fa-check"></i> 音乐盒编程实验</li>
+                        <li><i class="fas fa-check"></i> 示波器实验</li>
+                    </ul>
+                    <a href="../control_articles/control-articles.html" class="resource-link">开始学习 <i class="fas fa-arrow-right"></i></a>
                 </div>
+
+                <!-- 进阶实验入口 -->
                 <div class="resource-card" data-aos="fade-up" data-aos-delay="100">
-                    <i class="fas fa-video"></i>
-                    <h3>视频教程</h3>
-                    <p>详细视频教学内容</p>
-                    <a href="#" class="resource-link">看视频</a>
+                    <div class="resource-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>进阶实验</h3>
+                    <p>深入单片机高级应用</p>
+                    <ul class="resource-features">
+                        <li><i class="fas fa-check"></i> 通信协议实验</li>
+                        <li><i class="fas fa-check"></i> RTOS应用开发</li>
+                        <li><i class="fas fa-check"></i> 传感器应用</li>
+                    </ul>
+                    <a href="../non_control_articles/non-control-articles.html" class="resource-link">进入学习 <i class="fas fa-arrow-right"></i></a>
                 </div>
+
+                <!-- 技术文档入口 -->
                 <div class="resource-card" data-aos="fade-up" data-aos-delay="200">
-                    <i class="fas fa-code"></i>
-                    <h3>示例代码</h3>
-                    <p>丰富的代码示例和项目</p>
-                    <a href="#" class="resource-link">获取代码</a>
-                </div>
-            </div>
-
-            <!-- 开源项目模块 -->
-            <div class="opensource-section">
-                <h3 class="section-subtitle" data-aos="fade-up">开源项目推荐</h3>
-                <div class="project-grid">
-                    <div class="project-card" data-aos="fade-up">
-                        <div class="project-header">
-                            <i class="fab fa-github"></i>
-                            <div class="project-stats">
-                                <span><i class="fas fa-star"></i> 1.2k</span>
-                                <span><i class="fas fa-code-branch"></i> 280</span>
-                            </div>
-                        </div>
-                        <h4>Arduino 智能家居</h4>
-                        <p>基于 Arduino 的开源智能家居解决方案，包含多种传感器应用和远程控制功能。</p>
-                        <div class="project-tags">
-                            <span>Arduino</span>
-                            <span>IoT</span>
-                            <span>C++</span>
-                        </div>
-                        <a href="#" class="project-link">查看项目 <i class="fas fa-arrow-right"></i></a>
+                    <div class="resource-icon">
+                        <i class="fas fa-book"></i>
                     </div>
-
-                    <div class="project-card" data-aos="fade-up" data-aos-delay="100">
-                        <div class="project-header">
-                            <i class="fab fa-github"></i>
-                            <div class="project-stats">
-                                <span><i class="fas fa-star"></i> 856</span>
-                                <span><i class="fas fa-code-branch"></i> 150</span>
-                            </div>
-                        </div>
-                        <h4>STM32 开发框架</h4>
-                        <p>轻量级 STM32 开发框架，提供丰富的外设驱动和示例代码。</p>
-                        <div class="project-tags">
-                            <span>STM32</span>
-                            <span>C</span>
-                            <span>HAL</span>
-                        </div>
-                        <a href="#" class="project-link">查看项目 <i class="fas fa-arrow-right"></i></a>
-                    </div>
-
-                    <div class="project-card" data-aos="fade-up" data-aos-delay="200">
-                        <div class="project-header">
-                            <i class="fab fa-github"></i>
-                            <div class="project-stats">
-                                <span><i class="fas fa-star"></i> 623</span>
-                                <span><i class="fas fa-code-branch"></i> 95</span>
-                            </div>
-                        </div>
-                        <h4>单片机在线仿真</h4>
-                        <p>基于 Web 的单片机在线仿真平台，支持多种型号的单片机仿真。</p>
-                        <div class="project-tags">
-                            <span>JavaScript</span>
-                            <span>WebAssembly</span>
-                            <span>Simulation</span>
-                        </div>
-                        <a href="#" class="project-link">查看项目 <i class="fas fa-arrow-right"></i></a>
-                    </div>
+                    <h3>其他文章</h3>
+                    <p>其他类的参考资料</p>
+                    <ul class="resource-features">
+                        <li><i class="fas fa-check"></i> 文章博客</li>
+                        <li><i class="fas fa-check"></i> 编程指南</li>
+                        <li><i class="fas fa-check"></i> 论文参考</li>
+                    </ul>
+                    <a href="../other_articles/other-articles.html" class="resource-link">查看文档 <i class="fas fa-arrow-right"></i></a>
                 </div>
 
-                <div class="view-more" data-aos="fade-up">
-                    <a href="#" class="view-more-link">
-                        查看更多开源项目
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 电子元器件搜索引擎 -->
-    <section class="component-search">
-        <div class="container">
-            <h2 class="section-title" data-aos="fade-up">元器件搜索</h2>
-            <div class="search-box" data-aos="fade-up">
-                <div class="search-input-group">
-                    <div class="search-input-wrapper">
-                        <i class="fas fa-search search-icon"></i>
-                        <input type="text" id="componentSearch" placeholder="搜索电子元器件，例如：STM32、温度传感器、通信模块...">
-                        <div id="searchSuggestions" class="search-suggestions"></div>
+                <!-- 开源��目入口 -->
+                <div class="resource-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="resource-icon">
+                        <i class="fas fa-code-branch"></i>
                     </div>
-                    <select id="componentCategory" class="category-select">
-                        <option value="all">所有类别</option>
-                        <option value="mcu">单片机</option>
-                        <option value="ic">集成电路</option>
-                        <option value="resistor">电阻</option>
-                        <option value="capacitor">电容</option>
-                        <option value="transistor">晶体管</option>
-                        <option value="sensor">传感器</option>
-                        <option value="communication">通信模块</option>
-                        <option value="display">显示器件</option>
-                        <option value="power">电源管理</option>
-                    </select>
-                    <button class="search-btn">搜索</button>
+                    <h3>开源项目</h3>
+                    <p>优质开源项目和示例</p>
+                    <ul class="resource-features">
+                        <li><i class="fas fa-check"></i> 示例代码</li>
+                        <li><i class="fas fa-check"></i> 项目实战</li>
+                        <li><i class="fas fa-check"></i> 社区贡献</li>
+                    </ul>
+                    <a href="../StudyAdd/CodeSrc.html" class="resource-link">浏览项目 <i class="fas fa-arrow-right"></i></a>
                 </div>
-                <div class="quick-filters">
-                    <span class="filter-label">快速筛选：</span>
-                    <div class="filter-tags">
-                        <button class="filter-tag" data-type="mcu">单片机</button>
-                        <button class="filter-tag" data-type="sensor">传感器</button>
-                        <button class="filter-tag" data-type="communication">通信</button>
-                        <button class="filter-tag" data-type="display">显示</button>
-                        <button class="filter-tag" data-type="power">电源</button>
+
+                <!-- 其他类文章入口 -->
+                <div class="resource-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="resource-icon">
+                        <i class="fas fa-newspaper"></i>
                     </div>
+                    <h3>技术专栏</h3>
+                    <p>深度技术文章与经验分享</p>
+                    <ul class="resource-features">
+                        <li><i class="fas fa-check"></i> 技术分析</li>
+                        <li><i class="fas fa-check"></i> 经验总结</li>
+                        <li><i class="fas fa-check"></i> 行业动态</li>
+                    </ul>
+                    <a href="#" class="resource-link">阅读文章 <i class="fas fa-arrow-right"></i></a>
                 </div>
-                <div class="popular-tags">
-                    <span class="tag-label">热门搜索：</span>
-                    <a href="#" class="tag">STM32</a>
-                    <a href="#" class="tag">Arduino</a>
-                    <a href="#" class="tag">ESP32</a>
-                    <a href="#" class="tag">温度传感器</a>
-                    <a href="#" class="tag">OLED</a>
-                    <a href="#" class="tag">WiFi模块</a>
-                    <a href="#" class="tag">LED</a>
+
+                <!-- 元器件搜索入口 -->
+                <div class="resource-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="resource-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>元器件搜索</h3>
+                    <p>快速查找和了解各类电子元器件</p>
+                    <ul class="resource-features">
+                        <li><i class="fas fa-check"></i> MCU芯片检索</li>
+                        <li><i class="fas fa-check"></i> 传感器模块</li>
+                        <li><i class="fas fa-check"></i> 技术参数</li>
+                    </ul>
+                    <a href="search.html" class="resource-link">开始搜索 <i class="fas fa-arrow-right"></i></a>
                 </div>
-                <div id="searchResults" class="search-results">
-                    <div class="results-header">
-                        <h3 class="results-title">搜索结果</h3>
-                        <button class="close-results" onclick="toggleSearchResults()" title="关闭搜索结果">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
-                    <div class="results-content">
-                        <!-- 搜索结果将在这里动态显示 -->
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <style>
-            .component-search {
-                padding: 60px 0;
-                background-color: var(--section-bg);
-                color: var(--text-color);
-            }
-
-            .search-box {
-                max-width: 1200px;
-                margin: 0 auto;
-                padding: 30px;
-                background: var(--card-bg);
-                border-radius: 12px;
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-                border: 1px solid var(--border-color);
-            }
-
-            .search-input-group {
-                display: flex;
-                gap: 15px;
-                margin-bottom: 20px;
-            }
-
-            .search-input-wrapper {
-                position: relative;
-                flex: 1;
-            }
-
-            .search-icon {
-                position: absolute;
-                left: 20px;
-                top: 50%;
-                transform: translateY(-50%);
-                color: #666;
-                font-size: 18px;
-            }
-
-            #componentSearch {
-                width: 100%;
-                padding: 16px 20px 16px 50px;
-                font-size: 16px;
-                border: 2px solid var(--border-color);
-                border-radius: 8px;
-                transition: all 0.3s ease;
-                min-width: 400px;
-                color: var(--text-color);
-                background: var(--input-bg);
-            }
-
-            #componentSearch::placeholder {
-                color: var(--text-secondary);
-            }
-
-            #componentSearch:focus {
-                border-color: var(--primary-color);
-                box-shadow: 0 0 0 3px var(--primary-shadow);
-                outline: none;
-            }
-
-            .category-select {
-                min-width: 160px;
-                padding: 12px 16px;
-                font-size: 16px;
-                border: 2px solid var(--border-color);
-                border-radius: 8px;
-                background-color: var(--input-bg);
-                cursor: pointer;
-                transition: all 0.3s ease;
-                color: var(--text-color);
-            }
-
-            .category-select:focus {
-                border-color: var(--primary-color);
-                box-shadow: 0 0 0 3px var(--primary-shadow);
-                outline: none;
-            }
-
-            .search-btn {
-                padding: 12px 30px;
-                font-size: 16px;
-                color: white;
-                background-color: var(--primary-color);
-                border: none;
-                border-radius: 8px;
-                cursor: pointer;
-                transition: all 0.3s ease;
-            }
-
-            .search-btn:hover {
-                background-color: var(--primary-hover);
-                transform: translateY(-1px);
-            }
-
-            .filter-label, .tag-label {
-                color: var(--text-secondary);
-                font-weight: 500;
-                font-size: 15px;
-            }
-
-            .quick-filters {
-                margin: 20px 0;
-                padding: 15px 0;
-                border-top: 1px solid var(--border-color);
-            }
-
-            .filter-tags {
-                display: flex;
-                gap: 12px;
-                flex-wrap: wrap;
-                margin-top: 10px;
-            }
-
-            .filter-tag {
-                padding: 8px 20px;
-                font-size: 14px;
-                border: 1px solid var(--border-color);
-                border-radius: 20px;
-                background: var(--card-bg);
-                cursor: pointer;
-                transition: all 0.3s;
-                color: var(--text-secondary);
-            }
-
-            .filter-tag:hover,
-            .filter-tag.active {
-                background: var(--primary-color);
-                color: white;
-                border-color: var(--primary-color);
-            }
-
-            .popular-tags {
-                margin: 20px 0;
-                padding: 15px 0;
-                border-top: 1px solid var(--border-color);
-            }
-
-            .popular-tags .tag {
-                display: inline-block;
-                padding: 6px 16px;
-                margin: 5px;
-                font-size: 14px;
-                color: var(--text-secondary);
-                background: var(--tag-bg);
-                border-radius: 16px;
-                text-decoration: none;
-                transition: all 0.3s;
-            }
-
-            .popular-tags .tag:hover {
-                background: var(--tag-hover-bg);
-                color: var(--text-color);
-            }
-
-            .search-results {
-                margin-top: 30px;
-                display: none;
-            }
-
-            .search-results.active {
-                display: block;
-            }
-
-            .results-header {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                margin-bottom: 20px;
-                padding: 15px;
-                background-color: var(--card-header-bg);
-                border-radius: 8px;
-                border: 1px solid var(--border-color);
-            }
-
-            .results-title {
-                margin: 0;
-                color: var(--text-color);
-                font-size: 18px;
-                font-weight: 500;
-            }
-
-            .close-results {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                width: 32px;
-                height: 32px;
-                background: var(--card-bg);
-                border: 1px solid var(--border-color);
-                border-radius: 50%;
-                color: var(--text-secondary);
-                cursor: pointer;
-                padding: 0;
-                font-size: 16px;
-                transition: all 0.3s ease;
-            }
-
-            .close-results:hover {
-                background-color: var(--danger-color);
-                color: white;
-                border-color: var(--danger-color);
-                transform: rotate(90deg);
-            }
-
-            .result-card {
-                background: var(--card-bg);
-                border-radius: 10px;
-                padding: 20px;
-                margin-bottom: 20px;
-                box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-                transition: transform 0.3s ease;
-                border: 1px solid var(--border-color);
-            }
-
-            .result-card:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            }
-
-            .result-card h3 {
-                margin: 0 0 15px 0;
-                color: var(--text-color);
-                font-size: 20px;
-            }
-
-            .result-card p {
-                margin: 0 0 15px 0;
-                color: var(--text-secondary);
-                line-height: 1.6;
-            }
-
-            .result-card .tag {
-                background: var(--tag-bg);
-                padding: 4px 12px;
-                border-radius: 16px;
-                font-size: 13px;
-                color: var(--text-secondary);
-            }
-
-            .result-card pre {
-                background: var(--code-bg);
-                padding: 15px;
-                border-radius: 8px;
-                overflow-x: auto;
-                font-size: 14px;
-                line-height: 1.5;
-                color: var(--code-color);
-                border: 1px solid var(--border-color);
-            }
-
-            .result-card code {
-                color: var(--code-color);
-            }
-
-            /* 添加关闭提示 */
-            .results-header .close-hint {
-                font-size: 12px;
-                color: #999;
-                margin-right: 10px;
-            }
-
-            @media (max-width: 768px) {
-                .search-input-group {
-                    flex-direction: column;
-                }
-
-                #componentSearch {
-                    min-width: unset;
-                }
-
-                .category-select {
-                    width: 100%;
-                }
-
-                .search-btn {
-                    width: 100%;
-                }
-
-                .results-header {
-                    padding: 10px;
-                }
-
-                .close-results {
-                    width: 28px;
-                    height: 28px;
-                    font-size: 14px;
-                }
-            }
-        </style>
-
-        <script>
-            function toggleSearchResults() {
-                const resultsDiv = document.getElementById('searchResults');
-                if (resultsDiv.classList.contains('active')) {
-                    resultsDiv.classList.remove('active');
-                    // 延迟隐藏，等待动画完成
-                    setTimeout(() => {
-                        if (!resultsDiv.classList.contains('active')) {
-                            resultsDiv.style.display = 'none';
-                        }
-                    }, 300);
-                } else {
-                    resultsDiv.style.display = 'block';
-                    // 强制重排，触发动画
-                    resultsDiv.offsetHeight;
-                    resultsDiv.classList.add('active');
-                }
-            }
-
-            // 在执行搜索时显示结果
-            document.querySelector('.search-btn').addEventListener('click', function() {
-                const resultsDiv = document.getElementById('searchResults');
-                resultsDiv.style.display = 'block';
-                // 强制重排，触发动画
-                resultsDiv.offsetHeight;
-                resultsDiv.classList.add('active');
-            });
-
-            // 添加ESC键关闭功能
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape') {
-                    const resultsDiv = document.getElementById('searchResults');
-                    if (resultsDiv.classList.contains('active')) {
-                        toggleSearchResults();
-                    }
-                }
-            });
-        </script>
-    </section>
-
-    <!-- 其他类文章 -->
-    <section class="other-articles">
-        <div class="container">
-            <h2 class="section-title" data-aos="fade-up">探索专栏</h2>
-            <div class="articles-grid">
-                <article class="article-card featured" data-aos="fade-up">
-                    <div class="article-image">
-                        <img src="../images/modern/article-1.jpg" alt="文章配图">
-                        <span class="article-category">心得分享</span>
-                    </div>
-                    <div class="article-content">
-                        <h3>从入门到精通：我的单片机学习之路</h3>
-                        <p>分享一个普通程序员的单片机学习经验和心得体会，希望能给大家一些启发...</p>
-                        <div class="article-meta">
-                            <span class="author"><i class="fas fa-user"></i> 张三</span>
-                            <span class="date"><i class="fas fa-calendar"></i> 2024-01-20</span>
-                            <span class="views"><i class="fas fa-eye"></i> 1.2k</span>
-                        </div>
-                    </div>
-                </article>
-
-                <div class="articles-sidebar">
-                    <article class="article-card" data-aos="fade-up" data-aos-delay="100">
-                        <div class="article-content">
-                            <span class="article-category">技术评论</span>
-                            <h3>2024年值得关注的嵌入式技术趋势</h3>
-                            <div class="article-meta">
-                                <span class="date">2024-01-18</span>
-                                <span class="views">823 阅读</span>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="article-card" data-aos="fade-up" data-aos-delay="200">
-                        <div class="article-content">
-                            <span class="article-category">行业动态</span>
-                            <h3>物联网时代的单片机应用展望</h3>
-                            <div class="article-meta">
-                                <span class="date">2024-01-15</span>
-                                <span class="views">654 阅读</span>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="article-card" data-aos="fade-up" data-aos-delay="300">
-                        <div class="article-content">
-                            <span class="article-category">经验分享</span>
-                            <h3>如何避免单片机开发中的常见陷阱</h3>
-                            <div class="article-meta">
-                                <span class="date">2024-01-12</span>
-                                <span class="views">932 阅读</span>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-            </div>
+            </div>  
         </div>
     </section>
 
@@ -989,6 +197,90 @@
             </div>
         </div>
     </section>
+
+    <!-- 推荐教程和学习路径（底部） -->
+    <section class="tutorials-and-paths">
+        <div class="container">
+            <div class="content-grid">
+                <!-- 最新教程 -->
+                <div class="tutorials-section" data-aos="fade-right">
+                    <h2 class="section-title">推荐教程</h2>
+                    <div class="tutorial-list">
+                        <article class="tutorial-card">
+                            <div class="tutorial-image">
+                                <img src="../images/modern/tutorial-1.png" alt="单片机基础教程">
+                                <span class="tutorial-tag">基础</span>
+                            </div>
+                            <div class="tutorial-content">
+                                <h3>单片机开发环境搭建详解</h3>
+                                <p>学习如何正确配置单片机开发环境，包括IDE安装和配置等内容。</p>
+                                <div class="tutorial-meta">
+                                    <span><i class="fas fa-clock"></i> 30分钟</span>
+                                    <span><i class="fas fa-user"></i> 初学者</span>
+                                </div>
+                                <a href="javascript:void(0)" class="read-more coming-soon">阅读教程 <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </article>
+                        <article class="tutorial-card">
+                            <div class="tutorial-image">
+                                <img src="../images/modern/tutorial-2.png" alt="GPIO编程">
+                                <span class="tutorial-tag">进阶</span>
+                            </div>
+                            <div class="tutorial-content">
+                                <h3>GPIO端口编程实战</h3>
+                                <p>深入理解GPIO的工作原理和编程技巧，实现LED闪烁等基础项目。</p>
+                                <div class="tutorial-meta">
+                                    <span><i class="fas fa-clock"></i> 45分钟</span>
+                                    <span><i class="fas fa-user"></i> 中级</span>
+                                </div>
+                                <a href="javascript:void(0)" class="read-more coming-soon">阅读教程 <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+
+                <!-- 推荐学习路径 -->
+                <div class="paths-section" data-aos="fade-left">
+                    <h2 class="section-title">学习路径</h2>
+                    <div class="path-list">
+                        <div class="path-card">
+                            <div class="path-header">
+                                <h3>单片机入门工程师</h3>
+                                <span class="duration">3个月</span>
+                            </div>
+                            <div class="path-content">
+                                <ul class="path-steps">
+                                    <li><i class="fas fa-check-circle"></i> 单片机基础知识</li>
+                                    <li><i class="fas fa-check-circle"></i> C语言编程基础</li>
+                                    <li><i class="fas fa-check-circle"></i> 开发环境使用</li>
+                                    <li><i class="fas fa-check-circle"></i> 基础项目实践</li>
+                                </ul>
+                                <a href="javascript:void(0)" class="path-button coming-soon">开始学习</a>
+                            </div>
+                        </div>
+                        <div class="path-card">
+                            <div class="path-header">
+                                <h3>嵌入式系统专家</h3>
+                                <span class="duration">6个月</span>
+                            </div>
+                            <div class="path-content">
+                                <ul class="path-steps">
+                                    <li><i class="fas fa-check-circle"></i> RTOS实时操作系统</li>
+                                    <li><i class="fas fa-check-circle"></i> 通信协议开发</li>
+                                    <li><i class="fas fa-check-circle"></i> 驱动程序编写</li>
+                                    <li><i class="fas fa-check-circle"></i> 项目实战开发</li>
+                                </ul>
+                                <a href="javascript:void(0)" class="path-button coming-soon">开始学习</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 提示框 -->
+    <div class="coming-soon-toast" id="comingSoonToast">敬请期待</div>
 
     <!-- 页脚 -->
     <footer class="footer">
@@ -1036,6 +328,33 @@
     <script src="../z_js/modern-script.js"></script>
     <script src="../z_js/weather.js"></script>
     <script src="../z_js/emoji-fountain.js"></script>
-    <script src="../z_js/component-search.js"></script>
+    <script>
+        // 提示功能
+        document.addEventListener('DOMContentLoaded', function() {
+            const comingSoonElements = document.querySelectorAll('.coming-soon');
+            const toast = document.getElementById('comingSoonToast');
+            let toastTimeout;
+
+            comingSoonElements.forEach(element => {
+                element.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // 清除之前的定时器
+                    if (toastTimeout) {
+                        clearTimeout(toastTimeout);
+                        toast.classList.remove('show');
+                    }
+
+                    // 显示提示
+                    toast.classList.add('show');
+
+                    // 2秒后隐藏提示
+                    toastTimeout = setTimeout(() => {
+                        toast.classList.remove('show');
+                    }, 2000);
+                });
+            });
+        });
+    </script>
 </body>
 </html> 

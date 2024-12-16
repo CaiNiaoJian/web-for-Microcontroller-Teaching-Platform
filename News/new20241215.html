@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>对网站的现代化改造 - MCU Learn</title>
+		<style>
+			/* 全局样式 */
+			body {
+				font-family: "Microsoft YaHei", sans-serif;
+				margin: 0;
+				padding: 0;
+				background-color: #f0f8ff;
+			}
+
+			/* 头部样式 */
+			header {
+				background-color: rgba(65, 105, 225, 0.8);
+				color: #fff;
+				padding: 20px;
+				text-align: center;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+			}
+
+			header h1 {
+				margin: 0;
+				font-size: 32px;
+			}
+
+			.back-button {
+				background-color: #fff;
+				color: #4169e1;
+				border: none;
+				padding: 10px 20px;
+				font-size: 16px;
+				border-radius: 5px;
+				cursor: pointer;
+				text-decoration: none;
+				transition: background-color 0.3s, color 0.3s;
+			}
+
+			.back-button:hover {
+				background-color: #4169e1;
+				color: #fff;
+			}
+
+			/* 主要内容样式 */
+			main {
+				max-width: 800px;
+				margin: 40px auto;
+				padding: 0 20px;
+			}
+
+			.news-article {
+				background-color: #fff;
+				border-radius: 10px;
+				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+				padding: 40px;
+			}
+
+			.news-article h2 {
+				color: #4169e1;
+				font-size: 28px;
+				margin-bottom: 20px;
+			}
+
+			.news-article .news-meta {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				margin-bottom: 20px;
+				color: #888;
+				font-size: 14px;
+			}
+
+			.news-article .news-meta .news-tag {
+				display: inline-block;
+				padding: 4px 12px;
+				background-color: #4169e1;
+				color: #fff;
+				border-radius: 20px;
+				font-size: 12px;
+			}
+
+			.news-article .news-content {
+				font-size: 16px;
+				line-height: 1.6;
+				color: #333;
+			}
+
+			.news-article .news-content img {
+				max-width: 100%;
+				height: auto;
+				border-radius: 5px;
+				margin: 20px 0;
+			}
+
+			.news-article .news-content p {
+				margin-bottom: 20px;
+			}
+
+			/* 评论部分样式 */
+			.comment-section {
+				margin-top: 40px;
+				background-color: #fff;
+				border-radius: 10px;
+				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+				padding: 20px;
+			}
+
+			.comment-section h3 {
+				color: #4169e1;
+				font-size: 20px;
+				margin-bottom: 20px;
+			}
+
+			.comment-form {
+				display: flex;
+				flex-direction: column;
+				margin-bottom: 20px;
+			}
+
+			.comment-form input,
+			.comment-form textarea {
+				padding: 10px;
+				border: 1px solid #ccc;
+				border-radius: 5px;
+				font-size: 16px;
+				margin-bottom: 10px;
+			}
+
+			.comment-form textarea {
+				resize: vertical;
+				min-height: 100px;
+			}
+
+			.comment-form .emoji-picker {
+				display: flex;
+				justify-content: center;
+				margin-bottom: 10px;
+			}
+
+			.comment-form .emoji-picker .emoji {
+				font-size: 24px;
+				margin: 0 5px;
+				cursor: pointer;
+				transition: transform 0.3s;
+			}
+
+			.comment-form .emoji-picker .emoji.selected {
+				transform: scale(1.2);
+			}
+
+			.comment-form button {
+				background-color: #4169e1;
+				color: #fff;
+				border: none;
+				padding: 10px 20px;
+				font-size: 16px;
+				border-radius: 5px;
+				cursor: pointer;
+				transition: background-color 0.3s;
+			}
+
+			.comment-form button:hover {
+				background-color: #1e90ff;
+			}
+
+			.comment {
+				border-top: 1px solid #eee;
+				padding-top: 20px;
+				margin-top: 20px;
+			}
+
+			.comment .comment-author {
+				font-weight: bold;
+				margin-bottom: 5px;
+			}
+
+			.comment .comment-date {
+				color: #888;
+				font-size: 14px;
+				margin-bottom: 10px;
+			}
+
+			.comment .comment-content {
+				font-size: 16px;
+				line-height: 1.6;
+				color: #333;
+				display: flex;
+				align-items: center;
+			}
+
+			.comment .comment-content .emoji {
+				font-size: 24px;
+				margin-right: 10px;
+			}
+
+			.comment .reply-form {
+				margin-top: 10px;
+				display: none;
+			}
+
+			.comment .reply-form input,
+			.comment .reply-form textarea {
+				padding: 5px;
+				border: 1px solid #ccc;
+				border-radius: 5px;
+				font-size: 14px;
+				margin-bottom: 5px;
+			}
+
+			.comment .reply-form button {
+				background-color: #4169e1;
+				color: #fff;
+				border: none;
+				padding: 5px 10px;
+				font-size: 14px;
+				border-radius: 5px;
+				cursor: pointer;
+				transition: background-color 0.3s;
+			}
+
+			.comment .reply-form button:hover {
+				background-color: #1e90ff;
+			}
+
+			/* 页脚样式 */
+			footer {
+				background-color: rgba(65, 105, 225, 0.8);
+				color: #fff;
+				padding: 20px;
+				text-align: center;
+				font-size: 16px;
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<a href="news.html" class="back-button">← 返回</a>
+			<h1>新闻文章</h1>
+		</header>
+
+		<main>
+			<div class="news-article">
+				<h2>对网站的现代化改造</h2>
+				<div class="news-meta">
+					<span class="news-tag">网站更新</span>
+					<span>发布时间：2024-12-15</span>
+				</div>
+				<div class="news-content">
+					<p>亲爱的用户们：</p>
+					
+					<p>为了给大家提供更好的学习体验，我们很高兴地宣布，MCU Learn网站将开始全面的现代化改造。这次改造不仅仅是视觉上的更新，更是对整个平台功能和用户体验的全面提升。</p>
+
+					<h3>主要更新内容：</h3>
+					
+					<p><strong>1. 界面设计升级</strong></p>
+					<ul>
+						<li>采用了更现代的响应式设计</li>
+						<li>优化了色彩方案和视觉层次</li>
+						<li>增加了平滑的动画效果</li>
+						<li>支持深色模式，保护夜间使用者的眼睛</li>
+					</ul>
+
+					<p><strong>2. 功能性提升</strong></p>
+					<ul>
+						<li>重构了学习资源的展示方式</li>
+						<li>优化了搜索功能，提供更精准的检索结果</li>
+						<li>改进了代码展示模块，支持语法高亮</li>
+						<li>新增了学习进度追踪功能</li>
+					</ul>
+
+					<p><strong>3. 性能优化</strong></p>
+					<ul>
+						<li>提升了页面加载速度</li>
+						<li>优化了移动端适配</li>
+						<li>改进了服务器响应效率</li>
+						<li>增强了网站安全性</li>
+					</ul>
+
+					<p><strong>4. 内容更新</strong></p>
+					<ul>
+						<li>重新组织了学习路径，更适合循序渐进的学习</li>
+						<li>增加了更多实践项目案例</li>
+						<li>更新了技术文档和教程内容</li>
+						<li>新增了常见问题解答板块</li>
+					</ul>
+
+					<p>在这次改版过程中，我们认真听取了用户的反馈和建议，努力打造一个更好的学习平台。我们相信，新版本的MCU Learn将为大家带来更优质的学习体验。</p>
+
+					<p>后续计划：</p>
+					<ul>
+						<li>继续优化和完善现有功能</li>
+						<li>定期更新学习资源和教程内容</li>
+					</ul>
+
+					<p>感谢大家一直以来的支持和理解。如果您在使用过程中遇到任何问题，或有任何建议，欢迎随时与我们联系。</p>
+
+					<p>特别说明：社区系统目前正在进行维护升级，暂时无法使用，我们会尽快完成升级工作，给大家带来不便，敬请谅解。</p>
+
+					<p style="text-align: right;">MCU Learn 开发团队<br>2024年12月15日</p>
+				</div>
+			</div>
+
+			<div class="comment-section">
+				<h3>评论</h3>
+				<div class="comment-form">
+					<input type="text" placeholder="你的昵称">
+					<textarea placeholder="写下你的评论..."></textarea>
+					<div class="emoji-picker">
+						<span class="emoji" data-emoji="👍">👍</span>
+						<span class="emoji" data-emoji="❤️">❤️</span>
+						<span class="emoji" data-emoji="🎉">🎉</span>
+						<span class="emoji" data-emoji="💡">💡</span>
+						<span class="emoji" data-emoji="🚀">🚀</span>
+					</div>
+					<button>发表评论</button>
+				</div>
+			</div>
+		</main>
+
+		<footer>
+			<p>&copy; 2024 MCU Learn. All rights reserved.</p>
+		</footer>
+	</body>
+</html>

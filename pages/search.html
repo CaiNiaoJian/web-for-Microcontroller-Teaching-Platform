@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>元器件搜索引擎 - MCU Learn</title>
+    <link rel="stylesheet" href="../z_css/modern-style.css">
+    <link rel="stylesheet" href="../z_css/search-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="nav-wrapper">
+        <div class="nav-content">
+            <a href="../indexmodern.html" class="logo">MCU Learn</a>
+            <ul class="nav-links">
+                <li><a href="../indexmodern.html">首页</a></li>
+                <li><a href="blognew.html">学习</a></li>
+                <li><a href="knowledge.html" id="knowledgeEngine">知识分享</a></li>
+                <li><a href="search.html" class="active">元器件搜索</a></li>
+                <li><a href="StudySources/Sources.html">资源</a></li>
+                <li><a href="pages/source.html">期刊</a></li>
+                <li><a href="pages/community.html">社区</a></li>
+            </ul>
+            <button class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- 搜索引擎主界面 -->
+    <section class="search-hero">
+        <div class="hero-content" data-aos="fade-up">
+            <h1>元器件搜索引擎</h1>
+            <p>快速查找电子元器件数据、参数和替代方案</p>
+            <div class="search-container">
+                <div class="search-box">
+                    <div class="search-input-group">
+                        <div class="search-input-wrapper">
+                            <i class="fas fa-search search-icon"></i>
+                            <input type="text" id="componentSearch" placeholder="输入元器件型号、名称或关键词...">
+                            <button class="voice-search-btn" title="语音搜索">
+                                <i class="fas fa-microphone"></i>
+                            </button>
+                        </div>
+                        <div class="search-filters">
+                            <select id="componentCategory" class="category-select">
+                                <option value="all">所有类别</option>
+                                <option value="mcu">单片机/处理器</option>
+                                <option value="sensor">传感器</option>
+                                <option value="communication">通信模块</option>
+                                <option value="power">电源管理</option>
+                                <option value="analog">模拟器件</option>
+                                <option value="digital">数字器件</option>
+                                <option value="display">显示器件</option>
+                                <option value="passive">无源器件</option>
+                            </select>
+                            <button class="advanced-search-btn" onclick="toggleAdvancedSearch()">
+                                <i class="fas fa-sliders-h"></i>
+                                高级搜索
+                            </button>
+                        </div>
+                        <button class="search-btn">搜索</button>
+                    </div>
+                </div>
+                <!-- 高级搜索选项 -->
+                <div id="advancedSearch" class="advanced-search-panel">
+                    <div class="advanced-filters">
+                        <div class="filter-group">
+                            <label>制造商</label>
+                            <select multiple id="manufacturers">
+                                <option value="st">ST</option>
+                                <option value="ti">Texas Instruments</option>
+                                <option value="nxp">NXP</option>
+                                <option value="microchip">Microchip</option>
+                                <option value="analog">Analog Devices</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>封装类型</label>
+                            <select multiple id="packages">
+                                <option value="dip">DIP</option>
+                                <option value="sop">SOP</option>
+                                <option value="qfp">QFP</option>
+                                <option value="bga">BGA</option>
+                                <option value="qfn">QFN</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>工作温度范围</label>
+                            <div class="range-inputs">
+                                <input type="number" placeholder="最小值" id="tempMin">
+                                <span>至</span>
+                                <input type="number" placeholder="最大值" id="tempMax">
+                                <span>℃</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 快速筛选标签 -->
+    <section class="quick-filters">
+        <div class="container">
+            <div class="filter-tags" data-aos="fade-up">
+                <span class="filter-label">热门搜索：</span>
+                <button class="filter-tag" data-type="stm32">STM32</button>
+                <button class="filter-tag" data-type="esp32">ESP32</button>
+                <button class="filter-tag" data-type="arduino">Arduino</button>
+                <button class="filter-tag" data-type="temperature">温度传感器</button>
+                <button class="filter-tag" data-type="wifi">WiFi模块</button>
+                <button class="filter-tag" data-type="lcd">LCD显示屏</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 搜索结果区域 -->
+    <section class="search-results" id="searchResults">
+        <div class="container">
+            <div class="results-header">
+                <div class="results-info">
+                    <h2>搜索结果</h2>
+                    <span class="results-count">找到 <strong>0</strong> 个结果</span>
+                </div>
+                <div class="results-sort">
+                    <select id="sortResults">
+                        <option value="relevance">相关度排序</option>
+                        <option value="name-asc">名称升序</option>
+                        <option value="name-desc">名称降序</option>
+                        <option value="manufacturer">制造商</option>
+                    </select>
+                </div>
+            </div>
+            <div class="results-grid" id="resultsGrid">
+                <!-- 搜索结果将通过JavaScript动态添加 -->
+            </div>
+            <div class="results-pagination">
+                <button class="pagination-btn" disabled><i class="fas fa-chevron-left"></i></button>
+                <span class="pagination-info">第 1 页，共 1 页</span>
+                <button class="pagination-btn" disabled><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <h3>MCU Learn</h3>
+                <p>探索创新科技的无限可能</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-section">
+                    <h4>快速链接</h4>
+                    <ul>
+                        <li><a href="../indexmodern.html">首页</a></li>
+                        <li><a href="blognew.html">学习</a></li>
+                        <li><a href="search.html">元器件搜索</a></li>
+                        <li><a href="../indexmodern.html#community">社区</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>资源中心</h4>
+                    <ul>
+                        <li><a href="#">数据手册</a></li>
+                        <li><a href="#">应用笔记</a></li>
+                        <li><a href="#">参考设计</a></li>
+                        <li><a href="#">技术支持</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>关注我们</h4>
+                    <ul>
+                        <li><a href="#">GitHub</a></li>
+                        <li><a href="#">微信公众号</a></li>
+                        <li><a href="#">知乎专栏</a></li>
+                        <li><a href="#">技术社区</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 MCU Learn. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="../z_js/modern-script.js"></script>
+    <script src="../z_js/search-engine.js"></script>
+</body>
+</html> 

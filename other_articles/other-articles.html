@@ -3,175 +3,329 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>其他类文章 - 博客</title>
-		<link rel="stylesheet" href="../styles.css">
+		<title>其他类文章 - MCU Learn</title>
 		<link rel="stylesheet" href="other_articles.css">
 		<link rel="stylesheet" href="articleSearch.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+		<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
 	</head>
 	<body>
 		<!-- 导航栏 -->
-		<nav class="navbar">
-			<div class="container">
-				<a href="../index.html" class="logo">首页</a>
+		<nav class="nav-wrapper">
+			<div class="nav-content">
+				<a href="../indexmodern.html" class="logo">MCU Learn</a>
 				<ul class="nav-links">
-					<li><a href="../index.html">首页</a></li>
-					<li><a href="../blog.html">文章</a></li>
-					<li><a href="../StudySources/Sources.html">学习资源</a></li>
-					<li><a href="../about.html">关于</a></li>
-					<li><a href="../relation.html">联系</a></li>
+					<li><a href="../indexmodern.html">首页</a></li>
+					<li><a href="../pages/blognew.html">学习</a></li>
+					<li><a href="../pages/source.html">资源</a></li>
+					<li><a href="../News/news.html">新闻</a></li>
+					<li><a href="../indexmodern.html#community">社区</a></li>
+					<li><a href="../indexmodern.html#contact">联系我们</a></li>
 				</ul>
-				<div class="menu-toggle" id="mobile-menu">
-					<span class="bar"></span>
-					<span class="bar"></span>
-					<span class="bar"></span>
-				</div>
+				<button class="theme-toggle">
+					<i class="fas fa-moon"></i>
+				</button>
 			</div>
 		</nav>
 
-		<!-- 搜索框 -->
+		<!-- 搜索区域 -->
 		<div class="search-container">
-			<input type="text" id="search-box" placeholder="搜索文章标题...">
-			<button id="search-button">搜索</button>
+			<div class="search-wrapper">
+				<input type="text" id="search-box" placeholder="搜索文章标题...">
+				<button id="search-button">
+					<i class="fas fa-search"></i>
+					搜索
+				</button>
+			</div>
+			<div class="search-filters">
+				<span class="filter-tag active" data-tag="all">全部</span>
+				<span class="filter-tag" data-tag="basic">基础知识</span>
+				<span class="filter-tag" data-tag="advanced">进阶教程</span>
+				<span class="filter-tag" data-tag="project">项目实战</span>
+				<span class="filter-tag" data-tag="database">数据库</span>
+			</div>
+			<div class="search-results"></div>
 		</div>
 
 		<!-- 主要内容 -->
-		<div class="container main-content">
+		<div class="main-content">
 			<!-- 文章列表 -->
 			<section class="articles" id="articles-list">
-				<article class="article">
+				<article class="article pinned" data-aos="fade-up" data-tags="basic">
 					<h2>我们的初心【顶置】🌹</h2>
 					<p>单片机教育在现代高等教育中具有重要的必要性，这主要体现在以下几个方面...</p>
-					<div class="like-section">
-						<button class="like-button">点赞</button>
-						<span class="like-count">0</span>
-					</div>
-					<a href="OurFollowedHeart.html" class="read-more">阅读更多</a>
+					<a href="OurFollowedHeart.html" class="read-more">
+						阅读更多
+						<i class="fas fa-arrow-right"></i>
+					</a>
 				</article>
 
-				<article class="article">
+				<article class="article" data-aos="fade-up" data-aos-delay="100" data-tags="basic">
 					<h2>51单片机开发基础知识和嵌入式C语言入门[1]</h2>
 					<p>51单片机开发基础知识和嵌入式C语言入门。</p>
-					<div class="like-section">
-						<button class="like-button">点赞</button>
-						<span class="like-count">0</span>
-					</div>
-					<a href="baseknowloage.html" class="read-more">阅读更多</a>
+					<a href="baseknowloage.html" class="read-more">
+						阅读更多
+						<i class="fas fa-arrow-right"></i>
+					</a>
 				</article>
-				<article class="article">
+
+				<article class="article" data-aos="fade-up" data-aos-delay="200" data-tags="basic">
 					<h2>51单片机开发基础知识和嵌入式C语言入门[2]</h2>
 					<p>51单片机开发基础知识和嵌入式C语言入门。</p>
-					<div class="like-section">
-						<button class="like-button">点赞</button>
-						<span class="like-count">0</span>
-					</div>
-					<a href="baseknowloage2.html" class="read-more">阅读更多</a>
+					<a href="baseknowloage2.html" class="read-more">
+						阅读更多
+						<i class="fas fa-arrow-right"></i>
+					</a>
 				</article>
-				<article class="article">
+
+				<article class="article" data-aos="fade-up" data-aos-delay="300" data-tags="basic">
 					<h2>51单片机开发基础知识和嵌入式C语言入门[3]</h2>
 					<p>51单片机开发基础知识和嵌入式C语言入门。</p>
-					<div class="like-section">
-						<button class="like-button">点赞</button>
-						<span class="like-count">0</span>
-					</div>
-					<a href="baseknowloage3.html" class="read-more">阅读更多</a>
+					<a href="baseknowloage3.html" class="read-more">
+						阅读更多
+						<i class="fas fa-arrow-right"></i>
+					</a>
 				</article>
-				<article class="article">
+
+				<article class="article" data-aos="fade-up" data-tags="advanced">
 					<h2>51单片机开发基础知识和嵌入式C语言入门[4]</h2>
 					<p>51单片机开发实战和项目案例。</p>
-					<div class="like-section">
-						<button class="like-button">点赞</button>
-						<span class="like-count">0</span>
-					</div>
-					<a href="baseknowloage3.html" class="read-more">阅读更多</a>
+					<a href="baseknowloage4.html" class="read-more">
+						阅读更多
+						<i class="fas fa-arrow-right"></i>
+					</a>
 				</article>
-				<article class="article">
+
+				<article class="article" data-aos="fade-up" data-tags="advanced">
 					<h2>51单片机开发基础知识和嵌入式C语言入门[5]</h2>
 					<p>51单片机模拟电路和ADC/DAC应用。</p>
-					<div class="like-section">
-						<button class="like-button">点赞</button>
-						<span class="like-count">0</span>
-					</div>
-					<a href="baseknowlodage5.html" class="read-more">阅读更多</a>
+					<a href="baseknowlodage5.html" class="read-more">
+						阅读更多
+						<i class="fas fa-arrow-right"></i>
+					</a>
 				</article>
-				<article class="article">
+
+				<article class="article" data-aos="fade-up" data-tags="advanced">
 					<h2>51单片机开发基础知识和嵌入式C语言入门[6]</h2>
 					<p>51单片机外设接口和驱动程序开发。</p>
-					<div class="like-section">
-						<button class="like-button">点赞</button>
-						<span class="like-count">0</span>
-					</div>
-					<a href="baseknowlodage6.html" class="read-more">阅读更多</a>
+					<a href="baseknowlodage6.html" class="read-more">
+						阅读更多
+						<i class="fas fa-arrow-right"></i>
+					</a>
 				</article>
-				<article class="article">
+
+				<article class="article" data-aos="fade-up" data-tags="project">
 					<h2>51单片机开发基础知识和嵌入式C语言入门[7]</h2>
 					<p>51单片机通信协议和网络应用。</p>
-					<div class="like-section">
-						<button class="like-button">点赞</button>
-						<span class="like-count">0</span>
-					</div>
-					<a href="baseknowlodage7.html" class="read-more">阅读更多</a>
+					<a href="baseknowlodage7.html" class="read-more">
+						阅读更多
+						<i class="fas fa-arrow-right"></i>
+					</a>
 				</article>
-				<article class="article">
+
+				<article class="article" data-aos="fade-up" data-tags="project">
 					<h2>51单片机开发基础知识和嵌入式C语言入门[8]</h2>
 					<p>51单片机实时操作系统和多任务应用。</p>
-					<div class="like-section">
-						<button class="like-button">点赞</button>
-						<span class="like-count">0</span>
-					</div>
-					<a href="baseknowlodage8.html" class="read-more">阅读更多</a>
+					<a href="baseknowlodage8.html" class="read-more">
+						阅读更多
+						<i class="fas fa-arrow-right"></i>
+					</a>
 				</article>
-				<article class="article">
+
+				<article class="article" data-aos="fade-up" data-tags="project">
 					<h2>51单片机开发基础知识和嵌入式C语言入门[9]</h2>
 					<p>51单片机定时器和中断处理。</p>
-					<div class="like-section">
-						<button class="like-button">点赞</button>
-						<span class="like-count">0</span>
-					</div>
-					<a href="baseknowlodage9.html" class="read-more">阅读更多</a>
+					<a href="baseknowlodage9.html" class="read-more">
+						阅读更多
+						<i class="fas fa-arrow-right"></i>
+					</a>
 				</article>
 
-				<article class="article">
+				<article class="article" data-aos="fade-up" data-tags="database">
 					<h2>数据库的建立一</h2>
 					<p>简单介绍一下网站数据库的知识</p>
-					<div class="like-section">
-						<button class="like-button">点赞</button>
-						<span class="like-count">0</span>
-					</div>
-					<a href="database-setup.html" class="read-more">阅读更多</a>
+					<a href="database-setup.html" class="read-more">
+						阅读更多
+						<i class="fas fa-arrow-right"></i>
+					</a>
 				</article>
-				<article class="article">
+
+				<article class="article" data-aos="fade-up" data-tags="database">
 					<h2>数据库的建立二</h2>
 					<p>简单介绍一下网站数据库的知识</p>
-					<div class="like-section">
-						<button class="like-button">点赞</button>
-						<span class="like-count">0</span>
-					</div>
-					<a href="database-setup2.html" class="read-more">阅读更多</a>
+					<a href="database-setup2.html" class="read-more">
+						阅读更多
+						<i class="fas fa-arrow-right"></i>
+					</a>
 				</article>
 
-				<article class="article">
+				<article class="article" data-aos="fade-up" data-tags="project">
 					<h2>其他类文章标题 3</h2>
 					<p>这是其他类文章的详细内容。这是其他类文章的详细内容。这是其他类文章的详细内容。</p>
-					<div class="like-section">
-						<button class="like-button">点赞</button>
-						<span class="like-count">0</span>
-					</div>
-					<a href="other-article3.html" class="read-more">阅读更多</a>
+					<a href="other-article3.html" class="read-more">
+						阅读更多
+						<i class="fas fa-arrow-right"></i>
+					</a>
 				</article>
-
 			</section>
 		</div>
 
 		<!-- 页脚 -->
 		<footer class="footer">
-			<div class="container">
-				<p>&copy; 2024 博客. 版权所有归中国矿业大学。来自计算机学院和机电学院。</p>
+			<div class="footer-content">
+				<div class="footer-logo">
+					<h3>MCU Learn</h3>
+					<p>探索创新科技的无限可能</p>
+				</div>
+				<div class="footer-links">
+					<div class="footer-section">
+						<h4>快速链接</h4>
+						<ul>
+							<li><a href="../indexmodern.html">首页</a></li>
+							<li><a href="../pages/blognew.html">学习资源</a></li>
+							<li><a href="../pages/source.html">学术资源</a></li>
+							<li><a href="../News/news.html">新闻动态</a></li>
+						</ul>
+					</div>
+					<div class="footer-section">
+						<h4>社区支持</h4>
+						<ul>
+							<li><a href="../indexmodern.html#community">社区讨论</a></li>
+							<li><a href="../indexmodern.html#contact">联系我们</a></li>
+							<li><a href="../about.html">关于我们</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="footer-bottom">
+				<p>&copy; 2024 MCU Learn. 保留所有权利。</p>
 			</div>
 		</footer>
 
 		<!-- JavaScript -->
-		<script src="../scripts.js"></script>
-		<script src="other_articles.js"></script>
-		<script src="articleSearch.js"></script>
+		<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+		<script>
+			AOS.init({
+				duration: 800,
+				offset: 100,
+				once: true
+			});
+
+			// 暗色模式切换
+			const themeToggle = document.querySelector('.theme-toggle');
+			const body = document.body;
+			const icon = themeToggle.querySelector('i');
+
+			// 检查本地存储中的主题设置
+			const savedTheme = localStorage.getItem('theme');
+			if (savedTheme === 'dark') {
+				body.classList.add('dark-mode');
+				icon.classList.remove('fa-moon');
+				icon.classList.add('fa-sun');
+			}
+
+			themeToggle.addEventListener('click', () => {
+				body.classList.toggle('dark-mode');
+				if (body.classList.contains('dark-mode')) {
+					icon.classList.remove('fa-moon');
+					icon.classList.add('fa-sun');
+					localStorage.setItem('theme', 'dark');
+				} else {
+					icon.classList.remove('fa-sun');
+					icon.classList.add('fa-moon');
+					localStorage.setItem('theme', 'light');
+				}
+			});
+
+			// 搜索功能
+			const searchBox = document.getElementById('search-box');
+			const searchButton = document.getElementById('search-button');
+			const searchResults = document.querySelector('.search-results');
+			const articles = document.querySelectorAll('.article');
+
+			function performSearch() {
+				const searchTerm = searchBox.value.toLowerCase();
+				const results = Array.from(articles).filter(article => {
+					const title = article.querySelector('h2').textContent.toLowerCase();
+					const content = article.querySelector('p').textContent.toLowerCase();
+					return title.includes(searchTerm) || content.includes(searchTerm);
+				});
+
+				searchResults.innerHTML = '';
+				if (searchTerm.length > 0) {
+					searchResults.classList.add('active');
+					if (results.length > 0) {
+						results.forEach(result => {
+							const title = result.querySelector('h2').textContent;
+							const link = result.querySelector('a').getAttribute('href');
+							const resultItem = document.createElement('div');
+							resultItem.classList.add('search-result-item');
+							resultItem.innerHTML = `
+								<a href="${link}">
+									<h3>${title}</h3>
+								</a>
+							`;
+							searchResults.appendChild(resultItem);
+						});
+					} else {
+						searchResults.innerHTML = '<div class="no-results">未找到相关结果</div>';
+					}
+				} else {
+					searchResults.classList.remove('active');
+				}
+			}
+
+			searchButton.addEventListener('click', performSearch);
+
+			// 点击外部关闭搜索结果
+			document.addEventListener('click', (e) => {
+				if (!searchResults.contains(e.target) && !searchBox.contains(e.target) && !searchButton.contains(e.target)) {
+					searchResults.classList.remove('active');
+				}
+			});
+
+			// 标签过滤功能
+			const filterTags = document.querySelectorAll('.filter-tag');
+			filterTags.forEach(tag => {
+				tag.addEventListener('click', () => {
+					const selectedTag = tag.getAttribute('data-tag');
+					
+					// 如果点击的是当前激活的标签，则取消选择
+					if (tag.classList.contains('active') && selectedTag !== 'all') {
+						tag.classList.remove('active');
+						document.querySelector('[data-tag="all"]').classList.add('active');
+						filterArticles('all');
+					} else {
+						// 移除其他标签的激活状态
+						filterTags.forEach(t => t.classList.remove('active'));
+						// 激活当前标签
+						tag.classList.add('active');
+						filterArticles(selectedTag);
+					}
+				});
+			});
+
+			function filterArticles(tag) {
+				articles.forEach(article => {
+					const articleTags = article.getAttribute('data-tags');
+					if (tag === 'all' || articleTags === tag) {
+						article.style.display = 'block';
+						article.style.animation = 'fadeIn 0.5s ease';
+					} else {
+						article.style.display = 'none';
+					}
+				});
+			}
+
+			// 添加淡入动画
+			const style = document.createElement('style');
+			style.textContent = `
+				@keyframes fadeIn {
+					from { opacity: 0; transform: translateY(20px); }
+					to { opacity: 1; transform: translateY(0); }
+				}
+			`;
+			document.head.appendChild(style);
+		</script>
 	</body>
 </html>

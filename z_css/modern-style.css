@@ -856,4 +856,50 @@ body {
         transition-duration: 0.01ms !important;
         scroll-behavior: auto !important;
     }
+}
+
+/* 维护公告条样式 */
+.maintenance-notice {
+    background-color: rgba(255, 59, 48, 0.1);
+    border-left: 4px solid #ff3b30;
+    padding: 15px 20px;
+    margin: 20px 0 30px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    animation: pulse 2s infinite;
+}
+
+.maintenance-notice i {
+    color: #ff3b30;
+    font-size: 1.2rem;
+}
+
+.maintenance-notice span {
+    color: #ff3b30;
+    font-weight: 500;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 59, 48, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(255, 59, 48, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 59, 48, 0);
+    }
+}
+
+/* 暗色模式适配 */
+body.dark-mode .maintenance-notice {
+    background-color: rgba(255, 59, 48, 0.15);
+    border-left-color: #ff453a;
+}
+
+body.dark-mode .maintenance-notice i,
+body.dark-mode .maintenance-notice span {
+    color: #ff453a;
 } 

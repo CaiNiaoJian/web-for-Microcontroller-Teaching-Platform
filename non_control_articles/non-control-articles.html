@@ -3,115 +3,201 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>非控制类文章 - 博客</title>
-		<link rel="stylesheet" href="../styles.css">
-		<link rel="stylesheet" href="other-art.css">
-		<link rel="stylesheet" href="articleSearch.css"> <!-- 新增搜索框样式 -->
+		<title>项目实战文章 - MCU Learn</title>
+		<!-- 新的现代化样式 -->
+		<link rel="stylesheet" href="../z_css/modern-style.css">
+		<link rel="stylesheet" href="../z_css/articles-modern.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+		<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
 	</head>
 	<body>
 		<!-- 导航栏 -->
-		<nav class="navbar">
-			<div class="container">
-				<a href="../index.html" class="logo">博客</a>
+		<nav class="nav-wrapper">
+			<div class="nav-content">
+				<a href="../indexmodern.html" class="logo">MCU Learn</a>
 				<ul class="nav-links">
-					<li><a href="../index.html">首页</a></li>
-					<li><a href="../blog.html">文章</a></li>
-					<li><a href="../about.html">关于</a></li>
-					<li><a href="../relation.html">联系</a></li>
-					<li><a href="../Paper_Writer/submit.html">写作投稿</a></li>
-					<li><a href="../admin.html">管理员登陆</a></li>
+					<li><a href="../indexmodern.html">首页</a></li>
+					<li><a href="../pages/blognew.html">学习</a></li>
+					<li><a href="../pages/source.html">资源</a></li>
+					<li><a href="../News/news.html">新闻</a></li>
+					<li><a href="../indexmodern.html#community">社区</a></li>
+					<li><a href="../indexmodern.html#contact">联系我们</a></li>
 				</ul>
-				<div class="menu-toggle" id="mobile-menu">
-					<span class="bar"></span>
-					<span class="bar"></span>
-					<span class="bar"></span>
-				</div>
+				<button class="theme-toggle">
+					<i class="fas fa-moon"></i>
+				</button>
 			</div>
 		</nav>
 
-		<!-- 搜索框 -->
-		<div class="search-container">
-			<input type="text" id="search-box" placeholder="搜索文章标题...">
-			<button id="search-button">搜索</button>
-		</div>
-
-		<!-- 主要内容 -->
-		<div class="container main-content">
-			<div id="app">
-				<article-list></article-list>
+		<!-- 页面标题 -->
+		<section class="blog-hero">
+			<div class="hero-content" data-aos="fade-up">
+				<h1>项目实战文章</h1>
+				<p>实践出真知，动手做项目</p>
 			</div>
-		</div>
+		</section>
+
+		<!-- 文章筛选和搜索 -->
+		<section class="filter-section">
+			<div class="search-bar" data-aos="fade-up">
+				<input type="text" placeholder="搜索文章...">
+				<i class="fas fa-search"></i>
+			</div>
+			<div class="filter-buttons" data-aos="fade-up">
+				<button class="filter-button active">全部</button>
+				<button class="filter-button">智能家居</button>
+				<button class="filter-button">机器人</button>
+				<button class="filter-button">物联网</button>
+			</div>
+		</section>
+
+		<!-- 文章列表 -->
+		<section class="articles-section">
+			<div class="articles-grid">
+				<!-- 文章卡片 -->
+				<article class="article-card" data-aos="fade-up">
+					<div class="article-image">
+						<img src="../images/modern/project1.jpg" alt="智能家居">
+					</div>
+					<div class="article-content">
+						<div class="article-tags">
+							<span class="tag intermediate">中级</span>
+							<span class="tag">智能家居</span>
+						</div>
+						<h3 class="article-title">智能家居控制系统设计</h3>
+						<p class="article-description">基于单片机的智能家居控制系统，实现温度监控、灯光控制等功能。</p>
+						<div class="article-meta">
+							<span><i class="fas fa-clock"></i> 2小时</span>
+							<span><i class="fas fa-user"></i> 中级开发者</span>
+						</div>
+						<a href="smart-home.html" class="article-link">
+							阅读更多 <i class="fas fa-arrow-right"></i>
+						</a>
+					</div>
+				</article>
+
+				<article class="article-card" data-aos="fade-up" data-aos-delay="100">
+					<div class="article-image">
+						<img src="../images/modern/project2.jpg" alt="机器人项目">
+					</div>
+					<div class="article-content">
+						<div class="article-tags">
+							<span class="tag advanced">高级</span>
+							<span class="tag">机器人</span>
+						</div>
+						<h3 class="article-title">简单机器人制作教程</h3>
+						<p class="article-description">学习如何制作一个基于单片机的简单机器人，包括电机控制和传感器应用。</p>
+						<div class="article-meta">
+							<span><i class="fas fa-clock"></i> 3小时</span>
+							<span><i class="fas fa-user"></i> 高级开发者</span>
+						</div>
+						<a href="robot.html" class="article-link">
+							阅读更多 <i class="fas fa-arrow-right"></i>
+						</a>
+					</div>
+				</article>
+
+				<article class="article-card" data-aos="fade-up" data-aos-delay="200">
+					<div class="article-image">
+						<img src="../images/modern/project3.jpg" alt="物联网项目">
+					</div>
+					<div class="article-content">
+						<div class="article-tags">
+							<span class="tag intermediate">中级</span>
+							<span class="tag">物联网</span>
+						</div>
+						<h3 class="article-title">物联网监控系统开发</h3>
+						<p class="article-description">开发一个基于WiFi的环境监控系统，实现数据采集和远程监控。</p>
+						<div class="article-meta">
+							<span><i class="fas fa-clock"></i> 2.5小时</span>
+							<span><i class="fas fa-user"></i> 中级开发者</span>
+						</div>
+						<a href="iot.html" class="article-link">
+							阅读更多 <i class="fas fa-arrow-right"></i>
+						</a>
+					</div>
+				</article>
+
+				<!-- 继续添加其他文章卡片... -->
+			</div>
+		</section>
 
 		<!-- 页脚 -->
 		<footer class="footer">
-			<div class="container">
-				<p>&copy; 2024 博客. 版权所有归大创团队。来自cumt计算机学院和机电学院。</p>
+			<div class="footer-content">
+				<div class="footer-logo">
+					<h3>MCU Learn</h3>
+					<p>探索创新科技的无限可能</p>
+				</div>
+				<div class="footer-links">
+					<div class="footer-section">
+						<h4>快速链接</h4>
+						<ul>
+							<li><a href="../indexmodern.html">首页</a></li>
+							<li><a href="../pages/blognew.html">学习</a></li>
+							<li><a href="../pages/source.html">资源</a></li>
+							<li><a href="../News/news.html">新闻</a></li>
+						</ul>
+					</div>
+					<div class="footer-section">
+						<h4>关注我们</h4>
+						<ul>
+							<li><a href="#">GitHub</a></li>
+							<li><a href="#">微信公众号</a></li>
+							<li><a href="#">知乎专栏</a></li>
+							<li><a href="#">技术社区</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="footer-bottom">
+				<p>&copy; 2024 MCU Learn. All rights reserved.</p>
 			</div>
 		</footer>
 
 		<!-- JavaScript -->
-		<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
-		<script src="../scripts.js"></script>
-		<script src="articleSearch.js"></script>
+		<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+		<script src="../z_js/modern-script.js"></script>
 		<script>
-			// 注册 Vue 组件
-			Vue.component('article-list', {
-				template: `
-                <div class="articles">
-                    <h2>非控制类文章列表</h2>
-                    <article v-for="article in articles" :key="article.title" class="article">
-                        <h3><a :href="article.url">{{ article.title }}</a></h3>
-                        <p>{{ article.summary }}</p>
-                        <div class="article-meta">
-                            <span class="views">阅读次数: <span class="view-count">{{ article.views }}</span></span>
-                            <span class="date">发布时间: <span class="publish-date">{{ article.date }}</span></span>
-                        </div>
-                        <div class="like-section">
-                            <button class="like-button" @click="likeArticle(article)">点赞</button>
-                            <span class="like-count">{{ article.likes }}</span>
-                        </div>
-                    </article>
-                </div>
-            `,
-				data() {
-					return {
-						articles: [{
-								title: "非控制类文章标题 1",
-								url: "non-control-article1.html",
-								summary: "这是非控制类文章的摘要内容。这是非控制类文章的摘要内容。这是非控制类文章的摘要内容。",
-								views: 0,
-								date: "2023-10-04",
-								likes: 0
-							},
-							{
-								title: "非控制类文章标题 2",
-								url: "non-control-article2.html",
-								summary: "这是非控制类文章的摘要内容。这是非控制类文章的摘要内容。这是非控制类文章的摘要内容。",
-								views: 0,
-								date: "2023-10-05",
-								likes: 0
-							},
-							{
-								title: "非控制类文章标题 3",
-								url: "non-control-article3.html",
-								summary: "这是非控制类文章的摘要内容。这是非控制类文章的摘要内容。这是非控制类文章的摘要内容。",
-								views: 0,
-								date: "2023-10-06",
-								likes: 0
-							}
-						]
-					};
-				},
-				methods: {
-					likeArticle(article) {
-						article.likes++;
-					}
-				}
+			// 初始化 AOS
+			AOS.init({
+				duration: 800,
+				once: true
 			});
 
-			// 创建 Vue 实例
-			new Vue({
-				el: '#app'
+			// 文章搜索功能
+			const searchInput = document.querySelector('.search-bar input');
+			const articleCards = document.querySelectorAll('.article-card');
+
+			searchInput.addEventListener('input', function(e) {
+				const searchTerm = e.target.value.toLowerCase();
+
+				articleCards.forEach(card => {
+					const title = card.querySelector('.article-title').textContent.toLowerCase();
+					const description = card.querySelector('.article-description').textContent.toLowerCase();
+
+					if (title.includes(searchTerm) || description.includes(searchTerm)) {
+						card.style.display = 'block';
+					} else {
+						card.style.display = 'none';
+					}
+				});
+			});
+
+			// 分类筛选功能
+			const filterButtons = document.querySelectorAll('.filter-button');
+
+			filterButtons.forEach(button => {
+				button.addEventListener('click', function() {
+					// 移除所有按钮的active类
+					filterButtons.forEach(btn => btn.classList.remove('active'));
+					// 添加当前按钮的active类
+					this.classList.add('active');
+
+					// 这里添加筛选逻辑
+					const category = this.textContent;
+					// ... 根据类别筛选文章
+				});
 			});
 		</script>
 	</body>

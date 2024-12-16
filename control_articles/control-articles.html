@@ -3,100 +3,303 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>控制类文章 - 博客</title>
-		<link rel="stylesheet" href="../styles.css">
-		<link rel="stylesheet" href="control_articles.css">
-		<link rel="stylesheet" href="articleSearch.css">
+		<title>控制类文章 - MCU Learn</title>
+		<!-- 新的现代化样式 -->
+		<link rel="stylesheet" href="../z_css/modern-style.css">
+		<link rel="stylesheet" href="../z_css/articles-modern.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+		<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
 	</head>
 	<body>
 		<!-- 导航栏 -->
-		<nav class="navbar">
-			<div class="container">
-				<a href="../index.html" class="logo">基础类文章</a>
+		<nav class="nav-wrapper">
+			<div class="nav-content">
+				<a href="../indexmodern.html" class="logo">MCU Learn</a>
 				<ul class="nav-links">
-					<li><a href="../index.html">首页</a></li>
-					<li><a href="../blog.html">文章</a></li>
-					<li><a href="../StudySources/Sources.html">学习资源</a></li>
-					<li><a href="../about.html">关于</a></li>
-					<li><a href="../relation.html">联系</a></li>
+					<li><a href="../indexmodern.html">首页</a></li>
+					<li><a href="../pages/blognew.html">学习</a></li>
+					<li><a href="../pages/source.html">资源</a></li>
+					<li><a href="../News/news.html">新闻</a></li>
+					<li><a href="../indexmodern.html#community">社区</a></li>
+					<li><a href="../indexmodern.html#contact">联系我们</a></li>
 				</ul>
-				<div class="menu-toggle" id="mobile-menu">
-					<span class="bar"></span>
-					<span class="bar"></span>
-					<span class="bar"></span>
-				</div>
+				<button class="theme-toggle">
+					<i class="fas fa-moon"></i>
+				</button>
 			</div>
 		</nav>
 
-		<!-- 搜索框 -->
-		<div class="search-container">
-			<input type="text" id="search-box" placeholder="搜索文章标题...">
-			<button id="search-button">搜索</button>
-		</div>
+		<!-- 页面标题 -->
+		<section class="blog-hero">
+			<div class="hero-content" data-aos="fade-up">
+				<h1>控制类文章</h1>
+				<p>探索单片机控制技术的精彩世界</p>
+			</div>
+		</section>
 
+		<!-- 文章筛选和搜索 -->
+		<section class="filter-section">
+			<div class="search-bar" data-aos="fade-up">
+				<input type="text" placeholder="搜索文章...">
+				<i class="fas fa-search"></i>
+			</div>
+			<div class="filter-buttons" data-aos="fade-up">
+				<button class="filter-button active">全部</button>
+				<button class="filter-button">基础教程</button>
+				<button class="filter-button">进阶技术</button>
+				<button class="filter-button">项目实战</button>
+			</div>
+		</section>
 
-		<!-- 主要内容 -->
-		<div class="container main-content">
-			<!-- 文章列表 -->
-			<section class="articles">
-				<article class="article" id="articles-list">
-					<h2>音乐展示器设计实验</h2>
-					<p>学习蜂鸣器的工作模式，掌握音乐展示器工作模式的配置方式、工作状态的控制。</p>
-					<div class="like-section">
-						<button class="like-button">点赞</button>
-						<span class="like-count">5</span>
+		<!-- 文章列表 -->
+		<section class="articles-section">
+			<div class="articles-grid">
+				<!-- 文章卡片 -->
+				<article class="article-card" data-aos="fade-up">
+					<div class="article-image">
+						<img src="../images/modern/article1.jpg" alt="GPIO编程">
 					</div>
-					<a href="musicshower.html" class="read-more">阅读更多</a>
-				</article>
-				<article class="article">
-					<h2>波形发生器设计实验</h2>
-					<p>学习定时器的工作模式，掌握定时器工作模式的配置方式、工作状态的控制以及对应中断的控制。</p>
-					<div class="like-section">
-						<button class="like-button">点赞</button>
-						<span class="like-count">0</span>
+					<div class="article-content">
+						<div class="article-tags">
+							<span class="tag beginner">入门</span>
+						</div>
+						<h3 class="article-title">GPIO编程基础</h3>
+						<p class="article-description">学习单片机GPIO的基本操作和编程技巧，实现LED控制等基础功能。</p>
+						<div class="article-meta">
+							<span><i class="fas fa-clock"></i> 30分钟</span>
+							<span><i class="fas fa-user"></i> 初学者</span>
+						</div>
+						<a href="gpio.html" class="article-link">
+							阅读更多 <i class="fas fa-arrow-right"></i>
+						</a>
 					</div>
-					<a href="control-article1.html" class="read-more">阅读更多</a>
 				</article>
-				<article class="article">
-					<h2>串口通信</h2>
-					<p>串口通信。</p>
-					<div class="like-section">
-						<button class="like-button">点赞</button>
-						<span class="like-count">0</span>
+
+				<article class="article-card" data-aos="fade-up" data-aos-delay="100">
+					<div class="article-image">
+						<img src="../images/modern/article2.jpg" alt="中断编程">
 					</div>
-					<a href="exp1-3.html" class="read-more">阅读更多</a>
-				</article>
-				<article class="article">
-					<h2>红绿灯</h2>
-					<p>红绿灯控制。</p>
-					<div class="like-section">
-						<button class="like-button">点赞</button>
-						<span class="like-count">0</span>
+					<div class="article-content">
+						<div class="article-tags">
+							<span class="tag intermediate">进阶</span>
+						</div>
+						<h3 class="article-title">中断编程详解</h3>
+						<p class="article-description">深入理解单片机中断机制，掌握中断服务程序的编写方法。</p>
+						<div class="article-meta">
+							<span><i class="fas fa-clock"></i> 45��钟</span>
+							<span><i class="fas fa-user"></i> 中级</span>
+						</div>
+						<a href="interrupt.html" class="article-link">
+							阅读更多 <i class="fas fa-arrow-right"></i>
+						</a>
 					</div>
-					<a href="exp1-2.html" class="read-more">阅读更多</a>
 				</article>
-				<article class="article">
-					<h2>51单片机实验 - 温度传感器与LCD显示</h2>
-					<p>温度传感器与LCD显示。</p>
-					<div class="like-section">
-						<button class="like-button">点赞</button>
-						<span class="like-count">0</span>
+
+				<article class="article-card" data-aos="fade-up" data-aos-delay="200">
+					<div class="article-image">
+						<img src="../images/modern/article3.jpg" alt="定时器">
 					</div>
-					<a href="exp1-1.html" class="read-more">阅读更多</a>
+					<div class="article-content">
+						<div class="article-tags">
+							<span class="tag intermediate">进阶</span>
+						</div>
+						<h3 class="article-title">定时器应用实战</h3>
+						<p class="article-description">掌握定时器的配置和使用，实现精确的时间控制功能。</p>
+						<div class="article-meta">
+							<span><i class="fas fa-clock"></i> 40分钟</span>
+							<span><i class="fas fa-user"></i> 中级</span>
+						</div>
+						<a href="timer.html" class="article-link">
+							阅读更多 <i class="fas fa-arrow-right"></i>
+						</a>
+					</div>
 				</article>
-			</section>
-		</div>
+
+				<!-- 继续添加其他文章卡片... -->
+				<article class="article-card" data-aos="fade-up" data-aos-delay="300">
+					<div class="article-image">
+						<img src="../images/modern/music.jpg" alt="音乐展示器">
+					</div>
+					<div class="article-content">
+						<div class="article-tags">
+							<span class="tag intermediate">进阶</span>
+							<span class="tag">硬件控制</span>
+						</div>
+						<h3 class="article-title">音乐展示器设计实验</h3>
+						<p class="article-description">学习蜂鸣器的工作模式，掌握音乐展示器工作模式的配置方式、工作状态的控制。</p>
+						<div class="article-meta">
+							<span><i class="fas fa-clock"></i> 1.5小时</span>
+							<span><i class="fas fa-user"></i> 中级</span>
+						</div>
+						<a href="musicshower.html" class="article-link">
+							阅读更多 <i class="fas fa-arrow-right"></i>
+						</a>
+					</div>
+				</article>
+
+				<article class="article-card" data-aos="fade-up" data-aos-delay="400">
+					<div class="article-image">
+						<img src="../images/modern/wave.jpg" alt="波形发生器">
+					</div>
+					<div class="article-content">
+						<div class="article-tags">
+							<span class="tag intermediate">进阶</span>
+							<span class="tag">定时器</span>
+						</div>
+						<h3 class="article-title">波形发生器设计实验</h3>
+						<p class="article-description">学习定时器的工作模式，掌握定时器工作模式的配置方式、工作状态的控制以及对应中断的控制。</p>
+						<div class="article-meta">
+							<span><i class="fas fa-clock"></i> 2小时</span>
+							<span><i class="fas fa-user"></i> 中级</span>
+						</div>
+						<a href="control-article1.html" class="article-link">
+							阅读更多 <i class="fas fa-arrow-right"></i>
+						</a>
+					</div>
+				</article>
+
+				<article class="article-card" data-aos="fade-up" data-aos-delay="500">
+					<div class="article-image">
+						<img src="../images/modern/uart.jpg" alt="串口通信">
+					</div>
+					<div class="article-content">
+						<div class="article-tags">
+							<span class="tag beginner">入门</span>
+							<span class="tag">通信</span>
+						</div>
+						<h3 class="article-title">串口通信实验</h3>
+						<p class="article-description">掌握单片机串口通信的基本原理和编程方法，实现与计算机的数据交互。</p>
+						<div class="article-meta">
+							<span><i class="fas fa-clock"></i> 1小时</span>
+							<span><i class="fas fa-user"></i> 初学者</span>
+						</div>
+						<a href="exp1-3.html" class="article-link">
+							阅读更多 <i class="fas fa-arrow-right"></i>
+						</a>
+					</div>
+				</article>
+
+				<article class="article-card" data-aos="fade-up" data-aos-delay="600">
+					<div class="article-image">
+						<img src="../images/modern/traffic.jpg" alt="红绿灯">
+					</div>
+					<div class="article-content">
+						<div class="article-tags">
+							<span class="tag beginner">入门</span>
+							<span class="tag">GPIO</span>
+						</div>
+						<h3 class="article-title">红绿灯控制实验</h3>
+						<p class="article-description">通过红绿灯控制项目，学习GPIO输出控制和定时器应用的基础知识。</p>
+						<div class="article-meta">
+							<span><i class="fas fa-clock"></i> 45分钟</span>
+							<span><i class="fas fa-user"></i> 初学者</span>
+						</div>
+						<a href="exp1-2.html" class="article-link">
+							阅读更多 <i class="fas fa-arrow-right"></i>
+						</a>
+					</div>
+				</article>
+
+				<article class="article-card" data-aos="fade-up" data-aos-delay="700">
+					<div class="article-image">
+						<img src="../images/modern/temperature.jpg" alt="温度传感器">
+					</div>
+					<div class="article-content">
+						<div class="article-tags">
+							<span class="tag intermediate">进阶</span>
+							<span class="tag">传感器</span>
+						</div>
+						<h3 class="article-title">51单片机实验 - 温度传感器与LCD显示</h3>
+						<p class="article-description">学习温度传感器的使用和LCD显示屏的驱动方法，实现温度监测和显示功能。</p>
+						<div class="article-meta">
+							<span><i class="fas fa-clock"></i> 2小时</span>
+							<span><i class="fas fa-user"></i> 中级</span>
+						</div>
+						<a href="exp1-1.html" class="article-link">
+							阅读更多 <i class="fas fa-arrow-right"></i>
+						</a>
+					</div>
+				</article>
+			</div>
+		</section>
 
 		<!-- 页脚 -->
 		<footer class="footer">
-			<div class="container">
-				<p>&copy; 2024 博客. 版权所有归中国矿业大学。来自计算机学院和机电学院。</p>
+			<div class="footer-content">
+				<div class="footer-logo">
+					<h3>MCU Learn</h3>
+					<p>探索创新科技的无限可能</p>
+				</div>
+				<div class="footer-links">
+					<div class="footer-section">
+						<h4>快速链接</h4>
+						<ul>
+							<li><a href="../indexmodern.html">首页</a></li>
+							<li><a href="../pages/blognew.html">学习</a></li>
+							<li><a href="../pages/source.html">资源</a></li>
+							<li><a href="../News/news.html">新闻</a></li>
+						</ul>
+					</div>
+					<div class="footer-section">
+						<h4>关注我们</h4>
+						<ul>
+							<li><a href="#">GitHub</a></li>
+							<li><a href="#">微信公众号</a></li>
+							<li><a href="#">知乎专栏</a></li>
+							<li><a href="#">技术社区</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="footer-bottom">
+				<p>&copy; 2024 MCU Learn. All rights reserved.</p>
 			</div>
 		</footer>
 
 		<!-- JavaScript -->
-		<script src="../scripts.js"></script>
-		<script src="control_articles.js"></script>
-		<script src="articleSearch.js"></script>
+		<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+		<script src="../z_js/modern-script.js"></script>
+		<script>
+			// 初始化 AOS
+			AOS.init({
+				duration: 800,
+				once: true
+			});
+
+			// 文章搜索功能
+			const searchInput = document.querySelector('.search-bar input');
+			const articleCards = document.querySelectorAll('.article-card');
+
+			searchInput.addEventListener('input', function(e) {
+				const searchTerm = e.target.value.toLowerCase();
+
+				articleCards.forEach(card => {
+					const title = card.querySelector('.article-title').textContent.toLowerCase();
+					const description = card.querySelector('.article-description').textContent.toLowerCase();
+
+					if (title.includes(searchTerm) || description.includes(searchTerm)) {
+						card.style.display = 'block';
+					} else {
+						card.style.display = 'none';
+					}
+				});
+			});
+
+			// 分类筛选功能
+			const filterButtons = document.querySelectorAll('.filter-button');
+
+			filterButtons.forEach(button => {
+				button.addEventListener('click', function() {
+					// 移除所有按钮的active类
+					filterButtons.forEach(btn => btn.classList.remove('active'));
+					// 添加当前按钮的active类
+					this.classList.add('active');
+
+					// 这里添加筛选逻辑
+					const category = this.textContent;
+					// ... 根据类别���选文章
+				});
+			});
+		</script>
 	</body>
 </html>

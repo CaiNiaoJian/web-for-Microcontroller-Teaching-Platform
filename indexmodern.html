@@ -1,264 +1,428 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>单片机学习平台 - 探索创新科技</title>
-    <link rel="stylesheet" href="z_css/modern-style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
-</head>
-<body>
-    <!-- 导航栏 -->
-    <nav class="nav-wrapper">
-        <div class="nav-content">
-            <a href="#" class="logo">MCU Learn</a>
-            <ul class="nav-links">
-                <li><a href="#intro">简介</a></li>
-                <li><a href="pages/blognew.html">学习</a></li>
-                <li><a href="#resources">资源</a></li>
-                <li><a href="#community">社区</a></li>
-                <li><a href="#contact">联系我们</a></li>
-            </ul>
-            <button class="theme-toggle">
-                <i class="fas fa-moon"></i>
-            </button>
-        </div>
-    </nav>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>单片机学习平台 - 探索创新科技</title>
+		<link rel="stylesheet" href="z_css/modern-style.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+		<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+		<style>
+			/* Cookie同意提示样式 */
+			.cookie-consent {
+				position: fixed;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				background: #ffffff;
+				padding: 20px;
+				box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15);
+				z-index: 1000;
+				display: none;
+				animation: slideUp 0.5s ease-out;
+				border-top: 1px solid #e0e0e0;
+			}
 
-    <!-- 英雄区域 -->
-    <section class="hero">
-        <div class="hero-content" data-aos="fade-up">
-            <h1>探索单片机的无限可能</h1>
-            <h2>从入门到精通，打造你的嵌入式世界</h2>
-            <a href="#courses" class="cta-button">开始学习</a>
-        </div>
-        <div class="scroll-indicator">
-            <div class="mouse"></div>
-            <p>向下滚动探索更多</p>
-        </div>
-    </section>
+			.cookie-content {
+				max-width: 1200px;
+				margin: 0 auto;
+				display: flex;
+				justify-content: space-between;
+				
+				align-items: center;
+				gap: 20px;
+				flex-wrap: wrap;
+			}
 
-    <!-- 特色课程 -->
-    <section class="featured-courses" id="courses">
-        <div class="section-content">
-            <h2 class="section-title" data-aos="fade-up">实验课程</h2>
-            <div class="course-grid">
-                <div class="course-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="course-image">
-                        <img src="images/modern/course-basic.png" alt="基础课程">
-                    </div>
-                    <div class="course-info">
-                        <h3>单片机基础入门</h3>
-                        <p>从零开始，掌握单片机基础知识</p>
-                        <a href="#" class="learn-more">了解更多 <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-                <div class="course-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="course-image">
-                        <img src="images/modern/course-advanced.png" alt="进阶课程">
-                    </div>
-                    <div class="course-info">
-                        <h3>项目实战进阶</h3>
-                        <p>真实项目驱动学习</p>
-                        <a href="#" class="learn-more">了解更多 <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+			.cookie-text {
+				flex-grow: 1;
+				color: #333333;
+			}
 
-    <!-- 学习路径 -->
-    <section class="learning-path" id="resources">
-        <div class="section-content">
-            <h2 class="section-title" data-aos="fade-up">学习路径</h2>
-            <div class="path-timeline">
-                <div class="path-item" data-aos="fade-right">
-                    <div class="path-icon">
-                        <i class="fas fa-microchip"></i>
-                    </div>
-                    <div class="path-content">
-                        <h3>基础知识</h3>
-                        <p>掌握单片机基本概念和开发环境</p>
-                    </div>
-                </div>
-                <div class="path-item" data-aos="fade-left">
-                    <div class="path-icon">
-                        <i class="fas fa-code"></i>
-                    </div>
-                    <div class="path-content">
-                        <h3>编程技能</h3>
-                        <p>学习C语言和单片机编程基础</p>
-                    </div>
-                </div>
-                <div class="path-item" data-aos="fade-right">
-                    <div class="path-icon">
-                        <i class="fas fa-project-diagram"></i>
-                    </div>
-                    <div class="path-content">
-                        <h3>项目实践</h3>
-                        <p>动手实现各类单片机项目</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+			.cookie-text p {
+				margin: 5px 0;
+				line-height: 1.6;
+			}
 
-    <!-- 新闻板块 -->
-    <section class="news-section" id="news">
-        <div class="section-content">
-            <h2 class="section-title" data-aos="fade-up">最新动态</h2>
-            <div class="news-grid">
-                <article class="news-card main-news" data-aos="fade-up">
-                    <div class="news-image">
-                        <img src="images/modern/news-main.png" alt="主要新闻">
-                    </div>
-                    <div class="news-content">
-                        <span class="news-tag">热门</span>
-                        <h3>2024年单片机技术发展趋势</h3>
-                        <p>探索最新的单片机技术发展方向，了解行业动态和未来趋势。人工智能和物联网的融合将为单片机开发带来新的机遇和挑战。</p>
-                        <div class="news-meta">
-                            <span class="date">2024-01-20</span>
-                            <a href="#" class="read-more">阅读更多 <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </article>
-                
-                <div class="news-sidebar">
-                    <article class="news-card" data-aos="fade-up" data-aos-delay="100">
-                        <div class="news-image">
-                            <img src="images/modern/news-1.png" alt="新闻1">
-                        </div>
-                        <div class="news-content">
-                            <span class="news-tag">教程</span>
-                            <h3>零基础入门单片机编程</h3>
-                            <div class="news-meta">
-                                <span class="date">2024-01-18</span>
-                            </div>
-                        </div>
-                    </article>
+			.cookie-text strong {
+				color: var(--primary-color);
+			}
 
-                    <article class="news-card" data-aos="fade-up" data-aos-delay="200">
-                        <div class="news-image">
-                            <img src="images/modern/news-2.png" alt="新闻2">
-                        </div>
-                        <div class="news-content">
-                            <span class="news-tag">项目</span>
-                            <h3>基于单片机的智能家居系统设计</h3>
-                            <div class="news-meta">
-                                <span class="date">2024-01-15</span>
-                            </div>
-                        </div>
-                    </article>
+			.cookie-text a {
+				color: var(--primary-color);
+				text-decoration: none;
+			}
 
-                    <article class="news-card" data-aos="fade-up" data-aos-delay="300">
-                        <div class="news-image">
-                            <img src="images/modern/news-3.png" alt="新闻3">
-                        </div>
-                        <div class="news-content">
-                            <span class="news-tag">活动</span>
-                            <h3>2024年度单片机创新大赛启动</h3>
-                            <div class="news-meta">
-                                <span class="date">2024-01-12</span>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-            </div>
-        </div>
-    </section>
+			.cookie-text a:hover {
+				text-decoration: underline;
+			}
 
-    <!-- 社区展示 -->
-    <section class="community" id="community">
-        <div class="section-content">
-            <h2 class="section-title" data-aos="fade-up">加入社区</h2>
-            <div class="community-grid">
-                <div class="community-card" data-aos="zoom-in">
-                    <i class="fas fa-users"></i>
-                    <h3>技术交流</h3>
-                    <p>与其他开发者分享经验</p>
-                </div>
-                <div class="community-card" data-aos="zoom-in" data-aos-delay="100">
-                    <i class="fas fa-book-reader"></i>
-                    <h3>在线资源</h3>
-                    <p>获取最新学习资料</p>
-                </div>
-                <div class="community-card" data-aos="zoom-in" data-aos-delay="200">
-                    <i class="fas fa-hands-helping"></i>
-                    <h3>项目协作</h3>
-                    <p>参与开源项目开发</p>
-                </div>
-            </div>
-        </div>
-    </section>
+			.cookie-buttons {
+				display: flex;
+				gap: 10px;
+			}
 
-    <!-- 联系我们 -->
-    <section class="contact" id="contact">
-        <div class="section-content">
-            <h2 class="section-title" data-aos="fade-up">联系我们</h2>
-            <div class="contact-content">
-                <div class="contact-info" data-aos="fade-right">
-                    <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
-                        <p>cumtMLP@163.com</p>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <p>中国矿业大学机电与计算机学院</p>
-                    </div>
-                    <div class="contact-social">
-                        <a href="#"><i class="fab fa-github"></i></a>
-                        <a href="#"><i class="fab fa-weixin"></i></a>
-                        <a href="#"><i class="fab fa-weibo"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+			.cookie-btn {
+				padding: 10px 20px;
+				border-radius: 8px;
+				cursor: pointer;
+				border: none;
+				font-weight: 500;
+				transition: all 0.3s ease;
+			}
 
-    <!-- 页脚 -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-logo">
-                <h3>MCU Learn</h3>
-                <p>探索创新科技的无限可能</p>
-            </div>
-            <div class="footer-links">
-                <div class="footer-section">
-                    <h4>快速链接</h4>
-                    <ul>
-                        <li><a href="#intro">关于我们</a></li>
-                        <li><a href="#courses">课程</a></li>
-                        <li><a href="#resources">资源</a></li>
-                        <li><a href="#community">社区</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>学习资源</h4>
-                    <ul>
-                        <li><a href="#">教程</a></li>
-                        <li><a href="#">文档</a></li>
-                        <li><a href="#">项目案例</a></li>
-                        <li><a href="#">技术博客</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>关注我们</h4>
-                    <ul>
-                        <li><a href="#">GitHub</a></li>
-                        <li><a href="#">微信公众号</a></li>
-                        <li><a href="#">知乎专栏</a></li>
-                        <li><a href="#">技术社区</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2024 MCU Learn. All rights reserved.</p>
-        </div>
-    </footer>
+			.cookie-btn.accept {
+				background: var(--primary-color);
+				color: white;
+			}
 
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <script src="z_js/modern-script.js"></script>
-</body>
-</html> 
+			.cookie-btn.accept:hover {
+				opacity: 0.9;
+			}
+
+			.cookie-btn.decline {
+				background: transparent;
+				color: var(--text-color);
+				border: 1px solid var(--text-color);
+			}
+
+			.cookie-btn.decline:hover {
+				background: rgba(0, 0, 0, 0.1);
+			}
+
+			@keyframes slideUp {
+				from {
+					transform: translateY(100%);
+				}
+				to {
+					transform: translateY(0);
+				}
+			}
+
+			/* 暗色模式适配 */
+			body.dark-mode .cookie-consent {
+				background: #2c2c2c;
+				border-color: #3a3a3a;
+			}
+
+			body.dark-mode .cookie-text {
+				color: #ffffff;
+			}
+
+			body.dark-mode .cookie-btn.decline {
+				border-color: #ffffff;
+				color: #ffffff;
+				background: transparent;
+			}
+
+			body.dark-mode .cookie-btn.decline:hover {
+				background: rgba(255, 255, 255, 0.1);
+			}
+		</style>
+	</head>
+	<body>
+		<!-- 导航栏 -->
+		<nav class="nav-wrapper">
+			<div class="nav-content">
+				<a href="index.html" class="logo">MCU Learn</a>
+				<ul class="nav-links">
+					<li><a href="about.html">简介</a></li>
+					<li><a href="pages/blognew.html">学习</a></li>
+					<li><a href="pages/source.html">期刊</a></li>
+					<li><a href="StudySources/Sources.html">资源</a></li>
+					<li><a href="News/news.html">新闻</a></li>
+					<li><a href="systemclose.html">社区</a></li>
+					<li><a href="relation.html">联系我们</a></li>
+				</ul>
+				<button class="theme-toggle">
+					<i class="fas fa-moon"></i>
+				</button>
+			</div>
+		</nav>
+
+		<!-- 英雄区域 -->
+		<section class="hero">
+			<div class="hero-content" data-aos="fade-up">
+				<h1>探索单片机的无限可能</h1>
+				<h2>从入门到精通，打造你的嵌入式世界</h2>
+				<a href="pages/blognew.html" class="cta-button">开始学习</a>
+			</div>
+			<div class="scroll-indicator">
+				<div class="mouse"></div>
+				<p>向下滚动探索更多</p>
+			</div>
+		</section>
+
+		
+		<!-- 学习路径 -->
+		<section class="learning-path" id="resources">
+			<div class="section-content">
+				<h2 class="section-title" data-aos="fade-up">我们能为你做什么？</h2>
+				<div class="path-timeline">
+					<div class="path-item" data-aos="fade-right">
+						<div class="path-icon">
+							<i class="fas fa-microchip"></i>
+						</div>
+						<div class="path-content">
+							<h3>基础知识</h3>
+							<p>掌握单片机基本概念和开发环境</p>
+						</div>
+					</div>
+					<div class="path-item" data-aos="fade-left">
+						<div class="path-icon">
+							<i class="fas fa-code"></i>
+						</div>
+						<div class="path-content">
+							<h3>编程技能</h3>
+							<p>学习C语言和单片机编程基础</p>
+						</div>
+					</div>
+					<div class="path-item" data-aos="fade-right">
+						<div class="path-icon">
+							<i class="fas fa-project-diagram"></i>
+						</div>
+						<div class="path-content">
+							<h3>项目实践</h3>
+							<p>动手实现各类单片机项目</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- 特色课程 -->
+		<section class="featured-courses" id="courses">
+			<div class="section-content">
+				<h2 class="section-title" data-aos="fade-up">实验课程</h2>
+				<div class="course-grid">
+					<div class="course-card" data-aos="fade-up" data-aos-delay="100">
+						<div class="course-image">
+							<img src="images/modern/course-basic.png" alt="基础课程">
+						</div>
+						<div class="course-info">
+							<h3>单片机基础入门</h3>
+							<p>从零开始，掌握单片机基础知识</p>
+							<a href="control_articles/control-articles.html" class="learn-more">了解更多 <i class="fas fa-arrow-right"></i></a>
+						</div>
+					</div>
+					<div class="course-card" data-aos="fade-up" data-aos-delay="200">
+						<div class="course-image">
+							<img src="images/modern/course-advanced.png" alt="进阶课程">
+						</div>
+						<div class="course-info">
+							<h3>项目实战进阶</h3>
+							<p>真实项目驱动学习</p>
+							<a href="non_control_articles/non-control-articles.html" class="learn-more">了解更多 <i class="fas fa-arrow-right"></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- 新闻板块 -->
+		<section class="news-section" id="news">
+			<div class="section-content">
+				<h2 class="section-title" data-aos="fade-up">最新动态</h2>
+				<div class="news-grid">
+					<article class="news-card main-news" data-aos="fade-up">
+						<div class="news-image">
+							<img src="images/modern/news-main.png" alt="主要新闻">
+						</div>
+						<div class="news-content">
+							<span class="news-tag">热门</span>
+							<h3>2024年单片机技术发展趋势</h3>
+							<p>探索最新的单片机技术发展方向，了解行业动态和未来趋势。人工智能和物联网的融合将为单片机开发带来新的机遇和挑战。</p>
+							<div class="news-meta">
+								<span class="date">2024-01-20</span>
+								<a href="#" class="read-more">阅读更多 <i class="fas fa-arrow-right"></i></a>
+							</div>
+						</div>
+					</article>
+
+					<div class="news-sidebar">
+						<article class="news-card" data-aos="fade-up" data-aos-delay="100">
+							<div class="news-image">
+								<img src="images/modern/news-1.png" alt="新闻1">
+							</div>
+							<div class="news-content">
+								<span class="news-tag">教程</span>
+								<h3>零基础入门单片机编程</h3>
+								<div class="news-meta">
+									<span class="date">2024-01-18</span>
+								</div>
+							</div>
+						</article>
+
+						<article class="news-card" data-aos="fade-up" data-aos-delay="200">
+							<div class="news-image">
+								<img src="images/modern/news-2.png" alt="新闻2">
+							</div>
+							<div class="news-content">
+								<span class="news-tag">项目</span>
+								<h3>基于单片机的智能家居系统设计</h3>
+								<div class="news-meta">
+									<span class="date">2024-01-15</span>
+								</div>
+							</div>
+						</article>
+
+						<article class="news-card" data-aos="fade-up" data-aos-delay="300">
+							<div class="news-image">
+								<img src="images/modern/news-3.png" alt="新闻3">
+							</div>
+							<div class="news-content">
+								<span class="news-tag">活动</span>
+								<h3>2024年度单片机创新大赛启动</h3>
+								<div class="news-meta">
+									<span class="date">2024-01-12</span>
+								</div>
+							</div>
+						</article>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- 社区展示 -->
+		<section class="community" id="community">
+			<div class="section-content">
+				<h2 class="section-title" data-aos="fade-up">加入社区</h2>
+				<!-- 维护公告条 -->
+				<div class="maintenance-notice" data-aos="fade-up">
+					<i class="fas fa-exclamation-circle"></i>
+					<span>社区系统关闭维护暂不提供服务</span>
+				</div>
+				<div class="community-grid">
+					<div class="community-card" data-aos="zoom-in">
+						<i class="fas fa-users"></i>
+						<h3>技术交流</h3>
+						<p>与其他开发者分享经验</p>
+					</div>
+					<div class="community-card" data-aos="zoom-in" data-aos-delay="100">
+						<i class="fas fa-book-reader"></i>
+						<h3>在线资源</h3>
+						<p>获取最新学习资料</p>
+					</div>
+					<div class="community-card" data-aos="zoom-in" data-aos-delay="200">
+						<i class="fas fa-hands-helping"></i>
+						<h3>项目协作</h3>
+						<p>参与开源项目开发</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- 联系我们 -->
+		<section class="contact" id="contact">
+			<div class="section-content">
+				<h2 class="section-title" data-aos="fade-up">联系我们</h2>
+				<div class="contact-content">
+					<div class="contact-info" data-aos="fade-right">
+						<div class="contact-item">
+							<i class="fas fa-envelope"></i>
+							<p>cumtMLP123@163.com</p>
+						</div>
+						<div class="contact-item">
+							<i class="fas fa-map-marker-alt"></i>
+							<p>中国矿业大学机电与计算机学院</p>
+						</div>
+						<div class="contact-social">
+							<a href="#"><i class="fab fa-github"></i></a>
+							<a href="#"><i class="fab fa-weixin"></i></a>
+							<a href="#"><i class="fab fa-weibo"></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- 页脚 -->
+		<footer class="footer">
+			<div class="footer-content">
+				<div class="footer-logo">
+					<h3>MCU Learn</h3>
+					<p>探索创新科技的无限可能</p>
+				</div>
+				<div class="footer-links">
+					<div class="footer-section">
+						<h4>快速链接</h4>
+						<ul>
+							<li><a href="about.html">关于我们</a></li>
+							<li><a href="pages/blognew.html">课程</a></li>
+							<li><a href="pages/source.html">资源</a></li>
+							<li><a href="pages/community.html">社区</a></li>
+						</ul>
+					</div>
+					<div class="footer-section">
+						<h4>学习资源</h4>
+						<ul>
+							<li><a href="#">教程</a></li>
+							<li><a href="#">文档</a></li>
+							<li><a href="#">项目案例</a></li>
+							<li><a href="#">技术博客</a></li>
+						</ul>
+					</div>
+					<div class="footer-section">
+						<h4>关注我们</h4>
+						<ul>
+							<li><a href="#">GitHub</a></li>
+							<li><a href="#">微信公众号</a></li>
+							<li><a href="#">知乎专栏</a></li>
+							<li><a href="websiteNow.html">网站建设进度</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="footer-bottom">
+				<p>&copy; 2024 MCU Learn. All rights reserved.</p>
+			</div>
+		</footer>
+
+		<!-- Cookie同意提示 -->
+		<div class="cookie-consent" id="cookieConsent">
+			<div class="cookie-content">
+				<div class="cookie-text">
+					<p><strong>温馨提示：</strong></p>
+					<p>🖥️ 为了获得最佳浏览体验，我们建议您使用电脑端访问本网站。</p>
+					<p>⚠️ 本网站目前处于测试阶段，部分功能可能不够完善，我们正在持续优化中。</p>
+					<p>🤝 请文明使用网站资源，共同维护良好的学习环境。继续使用即表示您同意遵守我们的<a href="#">使用条款</a>和<a href="#">社区规范</a>。</p>
+				</div>
+				<div class="cookie-buttons">
+					<button class="cookie-btn accept" id="acceptCookie">我知道了</button>
+					<button class="cookie-btn decline" id="declineCookie">稍后提醒</button>
+				</div>
+			</div>
+		</div>
+
+		<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+		<script src="z_js/modern-script.js"></script>
+		<script>
+			// Cookie提示功能
+			document.addEventListener('DOMContentLoaded', () => {
+				const cookieConsent = document.getElementById('cookieConsent');
+				const cookieAccepted = localStorage.getItem('sitePreferencesAccepted');
+
+				if (!cookieAccepted) {
+					setTimeout(() => {
+						cookieConsent.style.display = 'block';
+					}, 1000);
+				}
+
+				document.getElementById('acceptCookie').addEventListener('click', () => {
+					localStorage.setItem('sitePreferencesAccepted', 'true');
+					cookieConsent.style.opacity = '0';
+					setTimeout(() => {
+						cookieConsent.style.display = 'none';
+					}, 300);
+				});
+
+				document.getElementById('declineCookie').addEventListener('click', () => {
+					cookieConsent.style.opacity = '0';
+					setTimeout(() => {
+						cookieConsent.style.display = 'none';
+					}, 300);
+				});
+			});
+		</script>
+	</body>
+</html>

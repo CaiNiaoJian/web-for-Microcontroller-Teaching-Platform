@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>知识分享 - MCU Learn</title>
+    <link rel="stylesheet" href="../z_css/modern-style.css">
+    <link rel="stylesheet" href="../z_css/modern-knowledge.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="nav-wrapper">
+        <div class="nav-content">
+            <a href="../indexmodern.html" class="logo">MCU Learn</a>
+            <ul class="nav-links">
+                <li><a href="../indexmodern.html">首页</a></li>
+                <li><a href="blognew.html">学习</a></li>
+                <li><a href="knowledge.html" class="active">知识分享</a></li>
+                <li><a href="source.html">期刊</a></li>
+                <li><a href="StudySources/Sources.html">资源</a></li>
+                <li><a href="../News/news.html">新闻</a></li>
+                <li><a href="community.html">社区</a></li>
+                <li><a href="../relation.html">联系我们</a></li>
+            </ul>
+            <button class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- 英雄区域 -->
+    <section class="knowledge-hero">
+        <div class="hero-content" data-aos="fade-up">
+            <h1>分享你的知识</h1>
+            <p>在这里，每个想法都值得被听见</p>
+            <div class="contribution-stats">
+                <div class="stat">
+                    <span class="number">10+</span>
+                    <span class="label">实验案例</span>
+                </div>
+                <div class="stat">
+                    <span class="number">10+</span>
+                    <span class="label">博客文章</span>
+                </div>
+                <div class="stat">
+                    <span class="number">10+</span>
+                    <span class="label">创意想法</span>
+                </div>
+            </div>
+        </div>
+        <div class="floating-cards">
+            <div class="float-card" data-aos="fade-left" data-aos-delay="100">
+                <i class="fas fa-flask"></i>
+                <span>实验发布</span>
+            </div>
+            <div class="float-card" data-aos="fade-left" data-aos-delay="200">
+                <i class="fas fa-blog"></i>
+                <span>博客提交</span>
+            </div>
+            <div class="float-card" data-aos="fade-left" data-aos-delay="300">
+                <i class="fas fa-lightbulb"></i>
+                <span>想法投稿</span>
+            </div>
+            <div class="float-card" data-aos="fade-left" data-aos-delay="400">
+                <i class="fas fa-envelope"></i>
+                <span>邮箱投稿</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 警告公示条 -->
+    <div class="alert-banner">
+        <div class="alert-content">
+            <div class="alert-icon">
+                <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <div class="alert-message">
+                <strong>系统维护公告：</strong>
+                <span>服务器正在维护中，系统暂时不提供推送服务，请使用邮箱投稿。</span>
+            </div>
+            <div class="beijing-time">
+                <i class="fas fa-clock"></i>
+                <span id="current-time">加载中...</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 主要内容区域 -->
+    <main class="content-wrapper">
+        <!-- 切换标签 -->
+        <div class="tabs-container" data-aos="fade-up">
+            <div class="tab active" data-tab="experiment">
+                <i class="fas fa-flask"></i>
+                实验发布
+            </div>
+            <div class="tab" data-tab="blog">
+                <i class="fas fa-blog"></i>
+                博客提交
+            </div>
+            <div class="tab" data-tab="idea">
+                <i class="fas fa-lightbulb"></i>
+                想法投稿
+            </div>
+            <div class="tab" data-tab="email">
+                <i class="fas fa-envelope"></i>
+                邮箱投稿
+            </div>
+        </div>
+
+        <!-- 实验发布表单 -->
+        <div class="tab-content active" id="experiment-content" data-aos="fade-up">
+            <div class="form-container">
+                <h2>发布新实验</h2>
+                <form class="modern-form">
+                    <div class="form-group">
+                        <label>实验标题</label>
+                        <input type="text" placeholder="输入实验标题" required>
+                    </div>
+                    <div class="form-group">
+                        <label>实验类别</label>
+                        <select required>
+                            <option value="">选择实验类别</option>
+                            <option value="hardware">硬件实验</option>
+                            <option value="software">软件实验</option>
+                            <option value="embedded">嵌入式实验</option>
+                            <option value="simulation">仿真实验</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>实验难度</label>
+                        <div class="difficulty-selector">
+                            <input type="radio" id="easy" name="difficulty" value="easy">
+                            <label for="easy">入门</label>
+                            <input type="radio" id="medium" name="difficulty" value="medium">
+                            <label for="medium">进阶</label>
+                            <input type="radio" id="hard" name="difficulty" value="hard">
+                            <label for="hard">高级</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>实验描述</label>
+                        <textarea placeholder="详细描述实验内容、目标和步骤" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>上传附件</label>
+                        <div class="file-upload">
+                            <input type="file" id="experiment-file" multiple>
+                            <label for="experiment-file">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <span>点击或拖拽文件到此处</span>
+                            </label>
+                        </div>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane"></i>
+                        发布实验
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- 博客提交表单 -->
+        <div class="tab-content" id="blog-content" data-aos="fade-up">
+            <div class="form-container">
+                <h2>提交博客文章</h2>
+                <form class="modern-form">
+                    <div class="form-group">
+                        <label>文章标题</label>
+                        <input type="text" placeholder="输入文章标题" required>
+                    </div>
+                    <div class="form-group">
+                        <label>文章分类</label>
+                        <div class="tag-input">
+                            <input type="text" placeholder="输入标签后按回车">
+                            <div class="tags"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>文章摘要</label>
+                        <textarea placeholder="简短描述文章主要内容" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>文章内容</label>
+                        <div class="rich-editor">
+                            <div class="editor-toolbar">
+                                <button type="button"><i class="fas fa-bold"></i></button>
+                                <button type="button"><i class="fas fa-italic"></i></button>
+                                <button type="button"><i class="fas fa-link"></i></button>
+                                <button type="button"><i class="fas fa-image"></i></button>
+                                <button type="button"><i class="fas fa-code"></i></button>
+                            </div>
+                            <textarea placeholder="在此输入文章内容，支持Markdown格式" required></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>封面图片</label>
+                        <div class="image-upload">
+                            <input type="file" id="cover-image" accept="image/*">
+                            <label for="cover-image">
+                                <i class="fas fa-image"></i>
+                                <span>选择封面图片</span>
+                            </label>
+                        </div>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane"></i>
+                        提交文章
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- 想法投稿表单 -->
+        <div class="tab-content" id="idea-content" data-aos="fade-up">
+            <div class="form-container">
+                <h2>分享你的想法</h2>
+                <form class="modern-form">
+                    <div class="form-group">
+                        <label>想法主题</label>
+                        <input type="text" placeholder="用一句话描述你的想法" required>
+                    </div>
+                    <div class="form-group">
+                        <label>创新领域</label>
+                        <div class="innovation-tags">
+                            <label class="tag-chip">
+                                <input type="checkbox" value="hardware">
+                                <span>硬件创新</span>
+                            </label>
+                            <label class="tag-chip">
+                                <input type="checkbox" value="software">
+                                <span>软件创新</span>
+                            </label>
+                            <label class="tag-chip">
+                                <input type="checkbox" value="algorithm">
+                                <span>算法优化</span>
+                            </label>
+                            <label class="tag-chip">
+                                <input type="checkbox" value="interaction">
+                                <span>交互设计</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>详细描述</label>
+                        <textarea placeholder="详细描述你的想法、实现方式和潜在价值" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>参考资料</label>
+                        <div class="reference-links">
+                            <div class="link-input">
+                                <input type="url" placeholder="添加参考链接">
+                                <button type="button" class="add-link">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                            <div class="links-list"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>附件上传</label>
+                        <div class="file-upload">
+                            <input type="file" id="idea-attachments" multiple>
+                            <label for="idea-attachments">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <span>上传相关文档或图片</span>
+                            </label>
+                        </div>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane"></i>
+                        提交想法
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- 邮箱投稿说明 -->
+        <div class="tab-content" id="email-content" data-aos="fade-up">
+            <div class="form-container">
+                <h2>邮箱投稿指南</h2>
+                <div class="email-guide">
+                    <div class="guide-section">
+                        <h3><i class="fas fa-info-circle"></i> 投稿说明</h3>
+                        <p>我们推荐使用邮箱投稿方式，这样可以更好地保证您的内容格式和附件的完整性。请按照以下格式进行投稿：</p>
+                        <div class="email-format">
+                            <h4>邮件格式要求：</h4>
+                            <ul>
+                                <li>主题格式：[投稿类型]-标题</li>
+                                <li>投稿类型：实验/博客/想���</li>
+                                <li>正文需包含：作者信息、内容简介</li>
+                                <li>附件命名：作者名-文件名</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="guide-section">
+                        <h3><i class="fas fa-envelope-open-text"></i> 投稿邮箱</h3>
+                        <div class="email-addresses">
+                            <div class="email-card">
+                                <i class="fas fa-envelope"></i>
+                                <div class="email-info">
+                                    <span class="email-type">主要投稿邮箱</span>
+                                    <a href="mailto:submit@mculean.com" class="email-link">submit@mculean.com</a>
+                                </div>
+                            </div>
+                            <div class="email-card">
+                                <i class="fas fa-envelope"></i>
+                                <div class="email-info">
+                                    <span class="email-type">备用投稿邮箱</span>
+                                    <a href="mailto:backup@mculean.com" class="email-link">backup@mculean.com</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="guide-section">
+                        <h3><i class="fas fa-external-link-alt"></i> 快速投稿入口</h3>
+                        <div class="quick-submit">
+                            <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=submit@mculean.com" class="mail-btn qq-mail" target="_blank">
+                                <i class="fas fa-envelope"></i>
+                                QQ邮箱投稿
+                            </a>
+                            <a href="https://mail.163.com/js6/main.jsp?sid=mail163#compose" class="mail-btn netease-mail" target="_blank">
+                                <i class="fas fa-envelope"></i>
+                                网易邮箱投稿
+                            </a>
+                            <a href="https://outlook.live.com/mail/0/deeplink/compose" class="mail-btn outlook-mail" target="_blank">
+                                <i class="fas fa-envelope"></i>
+                                Outlook投稿
+                            </a>
+                            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=submit@mculean.com" class="mail-btn gmail" target="_blank">
+                                <i class="fas fa-envelope"></i>
+                                Gmail投稿
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="guide-section">
+                        <h3><i class="fas fa-exclamation-circle"></i> 注意事项</h3>
+                        <div class="notice-list">
+                            <div class="notice-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>请确保邮件大小不超过20MB</span>
+                            </div>
+                            <div class="notice-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>大文件请使用网盘链接分享</span>
+                            </div>
+                            <div class="notice-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>投稿后24小时内会收到确认回复</span>
+                            </div>
+                            <div class="notice-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>如有特殊需求请在邮件中注明</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <h3>MCU Learn</h3>
+                <p>探索创新科技的无限可能</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-section">
+                    <h4>快速链接</h4>
+                    <ul>
+                        <li><a href="../indexmodern.html">首页</a></li>
+                        <li><a href="blognew.html">学习资源</a></li>
+                        <li><a href="source.html">学术资源</a></li>
+                        <li><a href="../News/news.html">新闻动态</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>关注我们</h4>
+                    <ul>
+                        <li><a href="#">GitHub</a></li>
+                        <li><a href="#">微信公众号</a></li>
+                        <li><a href="#">知乎专栏</a></li>
+                        <li><a href="#">技术社区</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 MCU Learn. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="../z_js/knowledge.js"></script>
+</body>
+</html> 

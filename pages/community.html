@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>社区 - MCU Learn</title>
+    <link rel="stylesheet" href="../z_css/modern-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+    <style>
+        /* 页面特定样式 */
+        .community-hero {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: #fff;
+            padding: 120px 0 80px;
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .community-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('../images/modern/circuit-pattern.png') repeat;
+            opacity: 0.1;
+        }
+
+        .community-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .community-hero p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .community-nav {
+            background: var(--card-bg);
+            padding: 15px 0;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: var(--nav-height);
+            z-index: 100;
+        }
+
+        .community-nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .community-tabs {
+            display: flex;
+            gap: 20px;
+        }
+
+        .community-tab {
+            padding: 8px 16px;
+            border-radius: 20px;
+            color: var(--text-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .community-tab.active,
+        .community-tab:hover {
+            background: var(--primary-color);
+            color: #fff;
+        }
+
+        .community-search {
+            position: relative;
+            width: 300px;
+        }
+
+        .community-search input {
+            width: 100%;
+            padding: 10px 40px 10px 15px;
+            border: 2px solid transparent;
+            border-radius: 20px;
+            background: var(--light-bg);
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+
+        .community-search input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+
+        .community-search i {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-color);
+            opacity: 0.5;
+        }
+
+        .community-main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            gap: 40px;
+        }
+
+        .posts-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .post-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .post-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .post-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .post-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .post-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .post-meta {
+            flex-grow: 1;
+        }
+
+        .post-author {
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: 4px;
+        }
+
+        .post-time {
+            font-size: 0.9rem;
+            color: var(--text-color);
+            opacity: 0.6;
+        }
+
+        .post-content h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--text-color);
+        }
+
+        .post-content p {
+            color: var(--text-color);
+            opacity: 0.8;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .post-tags {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .post-tag {
+            padding: 4px 12px;
+            border-radius: 15px;
+            background: var(--light-bg);
+            color: var(--text-color);
+            font-size: 0.9rem;
+        }
+
+        .post-actions {
+            display: flex;
+            gap: 20px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .post-action {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-color);
+            opacity: 0.6;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .post-action:hover {
+            opacity: 1;
+            color: var(--primary-color);
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .sidebar-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: var(--text-color);
+        }
+
+        .trending-topics {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .trending-topic {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px;
+            border-radius: 8px;
+            transition: background 0.3s ease;
+            cursor: pointer;
+        }
+
+        .trending-topic:hover {
+            background: var(--light-bg);
+        }
+
+        .trending-topic i {
+            color: var(--primary-color);
+        }
+
+        .trending-topic span {
+            color: var(--text-color);
+            font-size: 0.95rem;
+        }
+
+        .create-post {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--primary-color);
+            color: #fff;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .create-post:hover {
+            transform: scale(1.1);
+        }
+
+        .post-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .post-modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            animation: modalFadeIn 0.3s ease-out;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 24px;
+            color: var(--text-color);
+            cursor: pointer;
+            opacity: 0.6;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-close:hover {
+            opacity: 1;
+        }
+
+        .post-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .post-form input,
+        .post-form textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid transparent;
+            border-radius: 8px;
+            background: var(--light-bg);
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+
+        .post-form input:focus,
+        .post-form textarea:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+
+        .post-form textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .post-form button {
+            padding: 12px 24px;
+            background: var(--primary-color);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .post-form button:hover {
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            .community-main {
+                grid-template-columns: 1fr;
+            }
+
+            .community-nav-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .community-search {
+                width: 100%;
+            }
+
+            .community-tabs {
+                width: 100%;
+                overflow-x: auto;
+                padding-bottom: 5px;
+            }
+
+            .post-actions {
+                flex-wrap: wrap;
+            }
+        }
+
+        /* 暗色模式适配 */
+        :root {
+            --primary-color: #007aff;
+            --secondary-color: #5856d6;
+            --text-color: #333;
+            --light-bg: #f5f5f7;
+            --card-bg: #ffffff;
+            --modal-bg: #ffffff;
+            --input-bg: #f5f5f7;
+            --border-color: rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-mode {
+            --text-color: #ffffff;
+            --light-bg: #1a1a1a;
+            --card-bg: #2c2c2c;
+            --modal-bg: #2c2c2c;
+            --input-bg: #3a3a3a;
+            --border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        body.dark-mode .post-card,
+        body.dark-mode .sidebar-card,
+        body.dark-mode .community-nav,
+        body.dark-mode .modal-content,
+        body.dark-mode .maintenance-banner,
+        body.dark-mode .cookie-consent,
+        body.dark-mode .announcement-banner {
+            background: var(--card-bg);
+            color: var(--text-color);
+        }
+
+        body.dark-mode .post-form input,
+        body.dark-mode .post-form textarea {
+            background: var(--input-bg);
+            color: var(--text-color);
+            border-color: var(--border-color);
+        }
+
+        body.dark-mode .post-form input:focus,
+        body.dark-mode .post-form textarea:focus {
+            border-color: var(--primary-color);
+        }
+
+        body.dark-mode .modal-content {
+            background: var(--modal-bg);
+        }
+
+        body.dark-mode .modal-close {
+            color: var(--text-color);
+        }
+
+        body.dark-mode h2,
+        body.dark-mode h3,
+        body.dark-mode p {
+            color: var(--text-color);
+        }
+
+        /* 修复模态框样式 */
+        .post-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.75);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        .modal-content {
+            background: var(--modal-bg);
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: modalFadeIn 0.3s ease-out;
+            border: 1px solid var(--border-color);
+        }
+
+        .modal-content h2 {
+            color: var(--text-color);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .post-form input,
+        .post-form textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--input-bg);
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+
+        .post-form input:focus,
+        .post-form textarea:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* 修复模态框关闭按钮 */
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--light-bg);
+            color: var(--text-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .modal-close:hover {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        /* 维护通知条 */
+        .maintenance-banner {
+            background: #ff4444;
+            color: white;
+            padding: 12px 20px;
+            text-align: center;
+            position: relative;
+            z-index: 1000;
+            animation: slideDown 0.5s ease-out;
+        }
+
+        .maintenance-banner i {
+            margin-right: 8px;
+        }
+
+        /* 公告栏 */
+        .announcement-banner {
+            background: linear-gradient(135deg, #ff4444, #ff6b6b);
+            padding: 25px;
+            margin: 0 auto 40px;
+            max-width: 100%;
+            border-radius: 0;
+            box-shadow: 0 4px 20px rgba(255, 68, 68, 0.2);
+            position: relative;
+            overflow: hidden;
+            color: white;
+        }
+
+        .announcement-content-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .announcement-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('../images/modern/warning-pattern.png') repeat;
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .announcement-banner h2 {
+            color: white;
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .announcement-banner h2 i {
+            font-size: 1.6rem;
+            animation: pulse 2s infinite;
+        }
+
+        .announcement-content {
+            color: white;
+            line-height: 1.8;
+            position: relative;
+            z-index: 1;
+        }
+
+        .announcement-content p {
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .announcement-content strong {
+            color: white;
+            font-weight: 600;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .announcement-content ul {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+
+        .announcement-content li {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .announcement-content li::before {
+            content: '•';
+            color: white;
+            font-weight: bold;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* 暗色模式适配 */
+        body.dark-mode .announcement-banner {
+            background: linear-gradient(135deg, #ff4444, #ff6b6b);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        body.dark-mode .announcement-banner h2,
+        body.dark-mode .announcement-banner p,
+        body.dark-mode .announcement-banner strong,
+        body.dark-mode .announcement-content {
+            color: white;
+        }
+
+        /* Cookie同意提示 */
+        .cookie-consent {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #ffffff;
+            padding: 20px;
+            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            display: none;
+            animation: slideUp 0.5s ease-out;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .cookie-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .cookie-text {
+            flex-grow: 1;
+            color: #333333;
+        }
+
+        .cookie-text p {
+            margin: 5px 0;
+            line-height: 1.6;
+        }
+
+        .cookie-text strong {
+            color: var(--primary-color);
+        }
+
+        .cookie-text a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .cookie-text a:hover {
+            text-decoration: underline;
+        }
+
+        .cookie-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .cookie-btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            border: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .cookie-btn.accept {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .cookie-btn.accept:hover {
+            opacity: 0.9;
+        }
+
+        .cookie-btn.decline {
+            background: transparent;
+            color: #333333;
+            border: 1px solid #333333;
+        }
+
+        .cookie-btn.decline:hover {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        /* 暗色模式适配 */
+        body.dark-mode .cookie-consent {
+            background: #2c2c2c;
+            border-color: #3a3a3a;
+        }
+
+        body.dark-mode .cookie-text {
+            color: #ffffff;
+        }
+
+        body.dark-mode .cookie-btn.decline {
+            border-color: #ffffff;
+            color: #ffffff;
+            background: transparent;
+        }
+
+        body.dark-mode .cookie-btn.decline:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 导航栏 -->
+    <nav class="nav-wrapper">
+        <div class="nav-content">
+            <a href="../indexmodern.html" class="logo">MCU Learn</a>
+            <ul class="nav-links">
+                <li><a href="../indexmodern.html">首页</a></li>
+                <li><a href="blognew.html">学习</a></li>
+                <li><a href="source.html">期刊</a></li>
+                <li><a href="StudySources/Sources.html">资源</a></li>
+                <li><a href="../News/news.html">新闻</a></li>
+                <li><a href="community.html" class="active">社区</a></li>
+                <li><a href="../relation.html">联系我们</a></li>
+            </ul>
+            <button class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- 英雄区域 -->
+    <section class="community-hero">
+        <h1 data-aos="fade-up">MCU Learn 社区</h1>
+        <p data-aos="fade-up" data-aos-delay="100">加入我们的社区，分享你的知识经验，一起探讨单片机的无限可能</p>
+    </section>
+
+    <!-- 社区导航 -->
+    <nav class="community-nav">
+        <div class="community-nav-content">
+            <div class="community-tabs">
+                <a href="#" class="community-tab active">全部</a>
+                <a href="#" class="community-tab">问答</a>
+                <a href="#" class="community-tab">分享</a>
+                <a href="#" class="community-tab">项目</a>
+                <a href="#" class="community-tab">讨论</a>
+            </div>
+            <div class="community-search">
+                <input type="text" placeholder="搜索帖子...">
+                <i class="fas fa-search"></i>
+            </div>
+        </div>
+    </nav>
+
+        <!-- 维护通知条 -->
+        <div class="maintenance-banner" data-aos="fade-down">
+            <i class="fas fa-exclamation-triangle"></i>
+            社区系统正在维护中，暂时无法提供服务。所有后端功能暂时无法响应，敬请谅解。
+            <span id="current-time"></span>
+        </div>
+    
+        <!-- 公告栏 -->
+        <div class="announcement-banner">
+            <div class="announcement-content-wrapper">
+                <h2><i class="fas fa-exclamation-circle"></i> 重要公告</h2>
+                <div class="announcement-content">
+                    <p><strong>最新公告：</strong>欢迎来到MCU Learn社区！我们正在进行系统升级和维护，以提供更好的用户体验。</p>
+                    <p><strong>维护内容：</strong></p>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> 优化社区互动功能</li>
+                        <li><i class="fas fa-check-circle"></i> 提升系统性能和稳定性</li>
+                        <li><i class="fas fa-check-circle"></i> 增加新的社区功能模块</li>
+                    </ul>
+                    <p><strong>注意：</strong>维护期间，部分功能可能无法正常使用。感谢您的理解与支持！</p>
+                </div>
+            </div>
+        </div>
+    
+
+    <!-- 主要内容 -->
+    <div class="community-main">
+        <!-- 帖子列表 -->
+        <section class="posts-section">
+            <!-- 示例帖子 -->
+            <article class="post-card" data-aos="fade-up">
+                <div class="post-header">
+                    <div class="post-avatar">
+                        <img src="../images/modern/avatar-1.png" alt="用户头像">
+                    </div>
+                    <div class="post-meta">
+                        <div class="post-author">张工程师</div>
+                        <div class="post-time">2小时前</div>
+                    </div>
+                </div>
+                <div class="post-content">
+                    <h3>关于STM32的GPIO配置问题</h3>
+                    <p>最近���使用STM32进行GPIO配置时遇到了一些问题，想请教大一下...</p>
+                    <div class="post-tags">
+                        <span class="post-tag">STM32</span>
+                        <span class="post-tag">GPIO</span>
+                        <span class="post-tag">问答</span>
+                    </div>
+                </div>
+                <div class="post-actions">
+                    <div class="post-action">
+                        <i class="far fa-thumbs-up"></i>
+                        <span>0</span>
+                    </div>
+                    <div class="post-action">
+                        <i class="far fa-comment"></i>
+                        <span>0</span>
+                    </div>
+                    <div class="post-action">
+                        <i class="far fa-bookmark"></i>
+                        <span>收藏</span>
+                    </div>
+                    <div class="post-action">
+                        <i class="far fa-share-square"></i>
+                        <span>分享</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="post-card" data-aos="fade-up">
+                <div class="post-header">
+                    <div class="post-avatar">
+                        <img src="../images/modern/avatar-2.png" alt="用户头像">
+                    </div>
+                    <div class="post-meta">
+                        <div class="post-author">李开发</div>
+                        <div class="post-time">4小时前</div>
+                    </div>
+                </div>
+                <div class="post-content">
+                    <h3>分享一个基于51单片机的智能小车项目</h3>
+                    <p>这是我最近完成的一个项目，包含完整的代码和电路图，希望对大家有帮助...</p>
+                    <div class="post-tags">
+                        <span class="post-tag">51单片机</span>
+                        <span class="post-tag">项目分享</span>
+                        <span class="post-tag">智能小车</span>
+                    </div>
+                </div>
+                <div class="post-actions">
+                    <div class="post-action">
+                        <i class="far fa-thumbs-up"></i>
+                        <span>0</span>
+                    </div>
+                    <div class="post-action">
+                        <i class="far fa-comment"></i>
+                        <span>0</span>
+                    </div>
+                    <div class="post-action">
+                        <i class="far fa-bookmark"></i>
+                        <span>收藏</span>
+                    </div>
+                    <div class="post-action">
+                        <i class="far fa-share-square"></i>
+                        <span>分享</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="post-card" data-aos="fade-up">
+                <div class="post-header">
+                    <div class="post-avatar">
+                        <img src="../images/modern/avatar-3.png" alt="用户头像">
+                    </div>
+                    <div class="post-meta">
+                        <div class="post-author">王工程师</div>
+                        <div class="post-time">6小时前</div>
+                    </div>
+                </div>
+                <div class="post-content">
+                    <h3>RTOS在单片机中的应用经验分享</h3>
+                    <p>总结了一下在项目中使用RTOS的一些经验和注意事项，欢迎讨论...</p>
+                    <div class="post-tags">
+                        <span class="post-tag">RTOS</span>
+                        <span class="post-tag">经验分享</span>
+                        <span class="post-tag">嵌入式</span>
+                    </div>
+                </div>
+                <div class="post-actions">
+                    <div class="post-action">
+                        <i class="far fa-thumbs-up"></i>
+                        <span>0</span>
+                    </div>
+                    <div class="post-action">
+                        <i class="far fa-comment"></i>
+                        <span>0</span>
+                    </div>
+                    <div class="post-action">
+                        <i class="far fa-bookmark"></i>
+                        <span>收藏</span>
+                    </div>
+                    <div class="post-action">
+                        <i class="far fa-share-square"></i>
+                        <span>分享</span>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <!-- 侧边栏 -->
+        <aside class="sidebar">
+            <!-- 热门话题 -->
+            <div class="sidebar-card">
+                <h3>热门话题</h3>
+                <div class="trending-topics">
+                    <div class="trending-topic">
+                        <i class="fas fa-fire"></i>
+                        <span>#STM32开发</span>
+                    </div>
+                    <div class="trending-topic">
+                        <i class="fas fa-fire"></i>
+                        <span>#单片机入门</span>
+                    </div>
+                    <div class="trending-topic">
+                        <i class="fas fa-fire"></i>
+                        <span>#项目分享</span>
+                    </div>
+                    <div class="trending-topic">
+                        <i class="fas fa-fire"></i>
+                        <span>#技术讨论</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 活跃用户 -->
+            <div class="sidebar-card">
+                <h3>活跃用户</h3>
+                <div class="trending-topics">
+                    <div class="trending-topic">
+                        <i class="fas fa-user"></i>
+                        <span>张工程师</span>
+                    </div>
+                    <div class="trending-topic">
+                        <i class="fas fa-user"></i>
+                        <span>李开发</span>
+                    </div>
+                    <div class="trending-topic">
+                        <i class="fas fa-user"></i>
+                        <span>王工程师</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 社区公告 -->
+            <div class="sidebar-card">
+                <h3>社区公告</h3>
+                <p>欢迎加入MCU Learn社区！请遵守社区规则，文明发言。</p>
+            </div>
+        </aside>
+    </div>
+
+    <!-- 发帖按钮 -->
+    <div class="create-post" id="createPost">
+        <i class="fas fa-plus"></i>
+    </div>
+
+    <!-- 发帖模态框 -->
+    <div class="post-modal" id="postModal">
+        <div class="modal-content">
+            <div class="modal-close" id="modalClose">
+                <i class="fas fa-times"></i>
+            </div>
+            <h2>发布新帖子</h2>
+            <form class="post-form">
+                <input type="text" placeholder="标题" required>
+                <textarea placeholder="分享你的想法..." required></textarea>
+                <input type="text" placeholder="添加标签（用逗号分隔）">
+                <button type="submit">发布</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Cookie同意提示 -->
+    <div class="cookie-consent" id="cookieConsent">
+        <div class="cookie-content">
+            <div class="cookie-text">
+                <p><strong>社区使用提示：</strong></p>
+                <p>🖥️ 为了获得最佳社区体验，我们建议您使用电脑端访问。</p>
+                <p>⚠️ 社区系统目前处于维护阶段，部分功能暂时无法使用。</p>
+                <p>🤝 请遵守社区规范，文明发言，共同维护良好的交流环境。继续使用即表示您同意遵守我们的<a href="#">社区规范</a>和<a href="#">隐私政策</a>。</p>
+            </div>
+            <div class="cookie-buttons">
+                <button class="cookie-btn accept" id="acceptCookie">我知道了</button>
+                <button class="cookie-btn decline" id="declineCookie">稍后提醒</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <h3>MCU Learn</h3>
+                <p>探索创新科技的无限可能</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-section">
+                    <h4>快速链接</h4>
+                    <ul>
+                        <li><a href="../indexmodern.html">首页</a></li>
+                        <li><a href="blognew.html">学习资源</a></li>
+                        <li><a href="source.html">学术资源</a></li>
+                        <li><a href="../News/news.html">新闻动态</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>社区支持</h4>
+                    <ul>
+                        <li><a href="#">社区讨论</a></li>
+                        <li><a href="../relation.html">联系我们</a></li>
+                        <li><a href="../about.html">关于我们</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 MCU Learn. 保留所有权利。</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        // 初始化 AOS
+        AOS.init({
+            duration: 800,
+            offset: 100,
+            once: true
+        });
+
+        // 添加动态时间显示功能
+        function updateTime() {
+            const timeElement = document.getElementById('current-time');
+            const now = new Date();
+            const options = {
+                timeZone: 'Asia/Shanghai',
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            };
+            timeElement.textContent = ' - ' + now.toLocaleString('zh-CN', options);
+        }
+
+        // 初始更新时间
+        updateTime();
+        // 每秒更新一次时间
+        setInterval(updateTime, 1000);
+
+        // 修改暗色模式切换脚本
+        const themeToggle = document.querySelector('.theme-toggle');
+        const body = document.body;
+        const icon = themeToggle.querySelector('i');
+
+        // 检查本地存储中的主题设置
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            body.classList.add('dark-mode');
+            icon.classList.remove('fa-moon');
+            icon.classList.add('fa-sun');
+            document.documentElement.setAttribute('data-theme', 'dark');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            if (body.classList.contains('dark-mode')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark');
+                document.documentElement.setAttribute('data-theme', 'dark');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        });
+
+        // 修改模态框显示逻辑
+        const createPost = document.getElementById('createPost');
+        const postModal = document.getElementById('postModal');
+        const modalClose = document.getElementById('modalClose');
+
+        createPost.addEventListener('click', () => {
+            postModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            setTimeout(() => {
+                postModal.style.opacity = '1';
+            }, 10);
+        });
+
+        function closeModal() {
+            postModal.style.opacity = '0';
+            setTimeout(() => {
+                postModal.style.display = 'none';
+                document.body.style.overflow = '';
+            }, 300);
+        }
+
+        modalClose.addEventListener('click', closeModal);
+
+        postModal.addEventListener('click', (e) => {
+            if (e.target === postModal) {
+                closeModal();
+            }
+        });
+
+        // 防止模态框内部点击关闭
+        document.querySelector('.modal-content').addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+
+        // 社区标签切换
+        const communityTabs = document.querySelectorAll('.community-tab');
+        communityTabs.forEach(tab => {
+            tab.addEventListener('click', (e) => {
+                e.preventDefault();
+                communityTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+            });
+        });
+
+        // 点赞功能
+        const likeButtons = document.querySelectorAll('.post-action');
+        likeButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const icon = button.querySelector('i');
+                const count = button.querySelector('span');
+                if (icon.classList.contains('far')) {
+                    icon.classList.remove('far');
+                    icon.classList.add('fas');
+                    count.textContent = parseInt(count.textContent) + 1;
+                } else {
+                    icon.classList.remove('fas');
+                    icon.classList.add('far');
+                    count.textContent = parseInt(count.textContent) - 1;
+                }
+            });
+        });
+
+        // Cookie提示功能
+        document.addEventListener('DOMContentLoaded', () => {
+            const cookieConsent = document.getElementById('cookieConsent');
+            const cookieAccepted = localStorage.getItem('communityPreferencesAccepted');
+
+            if (!cookieAccepted) {
+                setTimeout(() => {
+                    cookieConsent.style.display = 'block';
+                }, 1000);
+            }
+
+            document.getElementById('acceptCookie').addEventListener('click', () => {
+                localStorage.setItem('communityPreferencesAccepted', 'true');
+                cookieConsent.style.opacity = '0';
+                setTimeout(() => {
+                    cookieConsent.style.display = 'none';
+                }, 300);
+            });
+
+            document.getElementById('declineCookie').addEventListener('click', () => {
+                cookieConsent.style.opacity = '0';
+                setTimeout(() => {
+                    cookieConsent.style.display = 'none';
+                }, 300);
+            });
+        });
+    </script>
+</body>
+</html> 

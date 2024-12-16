@@ -1,44 +1,320 @@
 /* other_articles.css */
 
-/* 文章样式 */
+/* 现代化样式 - 其他文章页面 */
+:root {
+    --primary-color: #007aff;
+    --secondary-color: #5856d6;
+    --text-color: #333;
+    --light-bg: #f5f5f7;
+    --card-bg: #ffffff;
+    --border-radius: 12px;
+    --transition: all 0.3s ease;
+    --nav-height: 70px;
+}
+
+body.dark-mode {
+    --text-color: #ffffff;
+    --light-bg: #1a1a1a;
+    --card-bg: #2c2c2c;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: var(--text-color);
+    background-color: var(--light-bg);
+}
+
+/* 导航栏样式 */
+.nav-wrapper {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(20px);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    height: var(--nav-height);
+}
+
+.nav-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.logo:hover {
+    opacity: 0.8;
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+.nav-links a:hover {
+    color: var(--primary-color);
+}
+
+.theme-toggle {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 8px;
+    border-radius: 50%;
+    transition: var(--transition);
+}
+
+.theme-toggle:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+/* 主要内容区域 */
+.main-content {
+    max-width: 1200px;
+    margin: 100px auto 50px;
+    padding: 0 20px;
+}
+
+/* 文章卡片样式 */
+.articles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
 .article {
-    border-bottom: 1px solid #ccc;
-    padding: 20px 0;
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 250px;
+}
+
+.article:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
 }
 
 .article h2 {
-    margin: 0;
-    cursor: pointer;
+    color: var(--text-color);
+    font-size: 1.5rem;
+    margin: 0 0 15px;
+    line-height: 1.4;
 }
 
-.article .like-section {
-    display: flex;
+.article p {
+    color: var(--text-color);
+    opacity: 0.8;
+    margin: 0 0 20px;
+    line-height: 1.6;
+    flex-grow: 1;
+}
+
+/* 阅读更多按钮 */
+.read-more {
+    display: inline-flex;
     align-items: center;
-    margin-top: 10px;
-}
-
-.article .like-button {
-    background-color: #333;
-    color: #fff;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    margin-right: 10px;
-}
-
-.article .like-button:hover {
-    background-color: #555;
-}
-
-.article .like-count {
-    font-size: 14px;
-    color: #666;
-}
-
-.article .read-more {
-    display: inline-block;
-    margin-top: 10px;
-    color: #333;
+    gap: 8px;
+    color: var(--primary-color);
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 500;
+    transition: var(--transition);
+    margin-top: auto;
+}
+
+.read-more:hover {
+    color: var(--secondary-color);
+    gap: 12px;
+}
+
+.read-more i {
+    font-size: 1.1rem;
+    transition: var(--transition);
+}
+
+/* 页脚样式 */
+.footer {
+    background: var(--card-bg);
+    padding: 60px 0 20px;
+    margin-top: 80px;
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 60px;
+}
+
+.footer-logo h3 {
+    color: var(--primary-color);
+    margin: 0 0 15px;
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.footer-logo p {
+    color: var(--text-color);
+    opacity: 0.8;
+    margin: 0;
+    line-height: 1.6;
+}
+
+.footer-links {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+}
+
+.footer-section h4 {
+    color: var(--text-color);
+    margin: 0 0 20px;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 12px;
+}
+
+.footer-section ul li a {
+    color: var(--text-color);
+    text-decoration: none;
+    opacity: 0.8;
+    transition: var(--transition);
+    font-size: 0.95rem;
+}
+
+.footer-section ul li a:hover {
+    color: var(--primary-color);
+    opacity: 1;
+    padding-left: 5px;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 40px;
+    margin-top: 40px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.footer-bottom p {
+    color: var(--text-color);
+    opacity: 0.6;
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .nav-content {
+        padding: 0 15px;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .articles {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .footer-links {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .footer {
+        padding: 40px 0 20px;
+    }
+}
+
+/* 暗色模式适配 */
+body.dark-mode {
+    background-color: var(--light-bg);
+}
+
+body.dark-mode .nav-wrapper {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+body.dark-mode .article {
+    background: var(--card-bg);
+}
+
+body.dark-mode .footer {
+    background: var(--card-bg);
+}
+
+body.dark-mode .footer-bottom {
+    border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .footer-section ul li a:hover {
+    color: var(--primary-color);
+}
+
+/* 置顶文章特殊样式 */
+.article.pinned {
+    border: 2px solid var(--primary-color);
+    position: relative;
+}
+
+.article.pinned::before {
+    content: "置顶";
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: var(--primary-color);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 0.8rem;
 }

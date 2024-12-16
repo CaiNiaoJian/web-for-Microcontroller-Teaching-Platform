@@ -3,163 +3,496 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>学习资源 - 博客</title>
+		<title>学习资源 - MCU Learn</title>
 		<link rel="icon" href="../images/标签栏图标.png" type="images/png" sizes="34x32">
-		<link rel="stylesheet" href="../styles.css">
-		<link rel="stylesheet" href="Sources.css">
-		<link rel="stylesheet" href="../z_css/SunNight.css">
+		<link rel="stylesheet" href="../z_css/modern-style.css">
+		<link rel="stylesheet" href="../z_css/modern-sources.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+		<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
 	</head>
 	<body>
 		<!-- 导航栏 -->
-		<nav class="navbar">
-			<div class="container">
-				<a href="../index.html" class="logo">博客</a>
+		<nav class="nav-wrapper">
+			<div class="nav-content">
+				<a href="../indexmodern.html" class="logo">MCU Learn</a>
 				<ul class="nav-links">
-					<li><a href="../index.html">首页</a></li>
-					<li><a href="../blog.html">文章</a></li>
-					<li><a href="../about.html">关于</a></li>
-					<li><a href="../relation.html">联系</a></li>
-					<li><a href="../Load/ManagementLoading.html">管理员登陆</a></li>
+					<li><a href="../indexmodern.html">首页</a></li>
+					<li><a href="../pages/blognew.html">学习</a></li>
+					<li><a href="../pages/source.html">期刊</a></li>
+					<li><a href="Sources.html" class="active">资源</a></li>
+					<li><a href="../News/news.html">新闻</a></li>
+					<li><a href="../pages/community.html">社区</a></li>
+					<li><a href="../relation.html">联系我们</a></li>
 				</ul>
-				<div class="menu-toggle" id="mobile-menu">
-					<span class="bar"></span>
-					<span class="bar"></span>
-					<span class="bar"></span>
-				</div>
+				<button class="theme-toggle">
+					<i class="fas fa-moon"></i>
+				</button>
 			</div>
 		</nav>
-		<header></header>
-		<!-- 主要内容 -->
-		<div class="container main-content">
-			<h2>学习资源</h2>
-			<section class="resource-section">
-				<h3>理工科类期刊</h3>
-				<div class="resource-grid">
-					<div class="resource-item">
-						<h4>Sciencedirect</h4>
-						<p>在ScienceDirect上探索科学、技术和医学研究</p>
-						<a href="https://www.sciencedirect.com/" target="_blank" class="read-more">访问期刊</a>
-					</div>
-					<div class="resource-item">
-						<h4>Web of Science</h4>
-						<p>Web of Science是一个领先的科学研究平台，提供跨学科的综合数据、指标和见解。</p>
-						<a href="https://www.webofscience.com" target="_blank" class="read-more">访问期刊</a>
-					</div>
-					<!-- 其他期刊链接 -->
-					<div class="resource-item">
-						<h4>EI(Engineering Village)</h4>
-						<p>EI在全球的学术界、工程界、信息界中享有盛誉，是科技界共同认可的重要检索工具。</p>
-						<a href="https://www.elsevier.com/zh-cn" target="_blank" class="read-more">访问期刊</a>
-					</div>
 
-					<div class="resource-item">
-						<h4>Zlibrary</h4>
-						<p>线上电子书库。【需要魔法】现在要收费，不推荐。</p>
-						<a href="zh.z-lib.gs" target="_blank" class="read-more">访问书库</a>
-					</div>
-					<div class="resource-item">
-						<h4>AAAI</h4>
-						<p>Association for the Advancement of Artificial Intelligence是人工智能领域的主要国际学术组织。</p>
-						<a href="https://aaai.org/" target="_blank" class="read-more">访问期刊</a>
-					</div>
-					<div class="resource-item">
-						<h4>IEEE</h4>
-						<p>Institute of Electrical and Electronics Engineers是一个国际性的电子技术与信息科学工程师的协会</p>
-						<a href="https://ieeexplore.ieee.org/" target="_blank" class="read-more">访问期刊</a>
-					</div>
-					<div class="resource-item">
-						<h4>Google Scholar</h4>
-						<p>Google学术搜索是一个可以免费搜索学术文章的Google网络应用。【需要魔法】</p>
-						<a href="https://scholar.google.hk/" target="_blank" class="read-more">访问期刊</a>
-					</div>
-					<div class="resource-item">
-						<h4>中国知网</h4>
-						<p>中国知网提供学术文献、学位论文、报纸等资源的统一检索和在线阅读服务。</p>
-						<a href="https://www.cnki.net/" target="_blank" class="read-more">访问期刊</a>
-					</div>
-					<div class="resource-item">
-						<h4>万方</h4>
-						<p>涵盖期刊、会议纪要、论文、学术成果、学术会议论文的大型网络数据库</p>
-						<a href="https://www.wanfangdata.com.cn/index.html" target="_blank" class="read-more">访问期刊</a>
-					</div>
-				</div>
-			</section>
+		<!-- 页面标题 -->
+		<header class="page-header">
+			<h1 data-aos="fade-up">学习资源中心</h1>
+			<p data-aos="fade-up" data-aos-delay="100">发现优质学习资源，助力你的学习之旅</p>
+		</header>
 
-			<section class="resource-section">
-				<h3>仿真软件&编程官方链接</h3>
-				<div class="resource-grid">
-					<div class="resource-item">
-						<h4>MATLAB</h4>
-						<p>MATLAB 是数百万工程师和科学家都在使用的编程和数值计算平台，支持数据分析、算法开发和建模。</p>
-						<a href="https://ww2.mathworks.cn/products/matlab.html" target="_blank"
-							class="read-more">访问官方网站</a>
-					</div>
-					<div class="resource-item">
-						<h4>Proteus</h4>
-						<p>Proteus是一款强大的EDA软件，适用于电子工程师和爱好者的电路设计和仿真。</p>
-						<a href="https://www.labcenter.com/" target="_blank" class="read-more">访问官方网站</a>
-					</div>
-					<!-- 其他仿真软件链接 -->
-					<div class="resource-item">
-						<h4>Keil</h4>
-						<p>51系列兼容单片机C语言软件开发系统</p>
-						<a href="https://www.keil.com/" target="_blank" class="read-more">访问官方网站</a>
-					</div>
-				</div>
-			</section>
-
-			<section class="resource-section">
-				<h3>中国矿业大学 & 其他网站</h3>
-				<div class="resource-grid">
-					<div class="resource-item">
-						<h4>图书馆</h4>
-						<p>中国矿业大学图书馆的描述。</p>
-						<a href="https://lib.cumt.edu.cn/" target="_blank" class="read-more">访问图书馆</a>
-					</div>
-					<div class="resource-item">
-						<h4>计算机学院</h4>
-						<p>中国矿业大学计算机学院的描述。</p>
-						<a href="https://cs.cumt.edu.cn" target="_blank" class="read-more">访问计算机学院</a>
-					</div>
-					<div class="resource-item">
-						<h4>机电学院</h4>
-						<p>中国矿业大学机电学院的描述。</p>
-						<a href="https://cmee.cumt.edu.cn/" target="_blank" class="read-more">访问机电学院</a>
-					</div>
-					<div class="resource-item">
-						<h4>Bilibili</h4>
-						<p>bilibili是一家弹幕站点,大家可以在这里找到许多的欢乐。</p>
-						<a href="https://www.bilibili.com/" target="_blank" class="read-more">访问B站</a>
-					</div>
-					<div class="resource-item">
-						<h4>Github</h4>
-						<p>GitHub是超过1亿开发者共同塑造软件未来的平台。</p>
-						<a href="https://github.com/" target="_blank" class="read-more">进入Github</a>
-					</div>
-					<div class="resource-item">
-						<h4>掘金</h4>
-						<p>掘金是面向全球中文开发者的技术内容分享与交流平台。</p>
-						<a href="https://juejin.cn/" target="_blank" class="read-more">访问稀土掘金</a>
-					</div>
-					<div class="resource-item">
-						<h4>单片机教学网</h4>
-						<p>单片机教程网-51 stm32 arm MCU 电子技术学习与研究</p>
-						<a href="http://www.51hei.com/" target="_blank" class="read-more">访问教学网</a>
-					</div>
-				</div>
-			</section>
+		<!-- 搜索栏 -->
+		<div class="search-container" data-aos="fade-up">
+			<div class="search-box">
+				<input type="text" class="search-input" placeholder="搜索资源...">
+				<button class="search-button">
+					<i class="fas fa-search"></i>
+					搜索
+				</button>
+			</div>
 		</div>
+
+		<!-- 分类筛选 -->
+		<div class="filter-container" data-aos="fade-up">
+			<button class="filter-button active" data-category="all">全部</button>
+			<button class="filter-button" data-category="journal">期刊资源</button>
+			<button class="filter-button" data-category="software">仿真软件</button>
+			<button class="filter-button" data-category="university">高校资源</button>
+			<button class="filter-button" data-category="community">技术社区</button>
+		</div>
+
+		<!-- 主要内容 -->
+		<main class="container">
+			<!-- 期刊资源 -->
+			<section class="resource-section" data-aos="fade-up">
+				<div class="section-header">
+					<i class="fas fa-book-open"></i>
+					<h2>理工科类期刊</h2>
+				</div>
+				<div class="resource-grid">
+					<div class="resource-card" data-category="journal" data-aos="fade-up">
+						<i class="fas fa-microscope resource-icon"></i>
+						<h3>Sciencedirect</h3>
+						<p>在ScienceDirect上探索科学、技术和医学研究，获取最新的研究成果和学术论文。</p>
+						<div class="resource-tags">
+							<span class="tag">科研</span>
+							<span class="tag">论文</span>
+							<span class="tag">期刊</span>
+						</div>
+						<a href="https://www.sciencedirect.com/" target="_blank" class="resource-link">
+							访问期刊 <i class="fas fa-arrow-right"></i>
+						</a>
+					</div>
+
+					<div class="resource-card" data-category="journal" data-aos="fade-up">
+						<i class="fas fa-globe resource-icon"></i>
+						<h3>Web of Science</h3>
+						<p>Web of Science是一个领先的科学研究平台，提供跨学科的综合数据、指标和见解。</p>
+						<div class="resource-tags">
+							<span class="tag">数据库</span>
+							<span class="tag">引文索引</span>
+							<span class="tag">研究平台</span>
+						</div>
+						<a href="https://www.webofscience.com" target="_blank" class="resource-link">
+							访问平台 <i class="fas fa-arrow-right"></i>
+						</a>
+					</div>
+
+					<div class="resource-card" data-category="journal" data-aos="fade-up">
+						<i class="fas fa-cogs resource-icon"></i>
+						<h3>EI(Engineering Village)</h3>
+						<p>EI在全球的学术界、工程界、信息界中享有盛誉，是科技界共同认可的重要检索工具。</p>
+						<div class="resource-tags">
+							<span class="tag">工程</span>
+							<span class="tag">检索</span>
+							<span class="tag">数据库</span>
+						</div>
+						<a href="https://www.elsevier.com/zh-cn" target="_blank" class="resource-link">
+							访问平台 <i class="fas fa-arrow-right"></i>
+						</a>
+					</div>
+
+					<div class="resource-card" data-category="journal" data-aos="fade-up">
+						<i class="fas fa-robot resource-icon"></i>
+						<h3>AAAI</h3>
+						<p>人工智能领域的主要国际学术组织，提供最新的AI研究成果和学术资源。</p>
+						<div class="resource-tags">
+							<span class="tag">AI</span>
+							<span class="tag">人工智能</span>
+							<span class="tag">学术组织</span>
+						</div>
+						<a href="https://aaai.org/" target="_blank" class="resource-link">
+							访问官网 <i class="fas fa-arrow-right"></i>
+						</a>
+					</div>
+
+					<div class="resource-card" data-category="journal" data-aos="fade-up">
+						<i class="fas fa-microchip resource-icon"></i>
+						<h3>IEEE</h3>
+						<p>国际性的电子技术与信息科学工程师协会，提供高质量的学术资源和技术标准。</p>
+						<div class="resource-tags">
+							<span class="tag">电子技术</span>
+							<span class="tag">工程</span>
+							<span class="tag">标准</span>
+						</div>
+						<a href="https://ieeexplore.ieee.org/" target="_blank" class="resource-link">
+							访问平台 <i class="fas fa-arrow-right"></i>
+						</a>
+					</div>
+
+					<div class="resource-card" data-category="journal" data-aos="fade-up">
+						<i class="fas fa-atom resource-icon"></i>
+						<h3>Nature</h3>
+						<p>世界顶级科学期刊，发表涵盖科学各个领域的突破性研究成果。</p>
+						<div class="resource-tags">
+							<span class="tag">自然科学</span>
+							<span class="tag">前沿研究</span>
+							<span class="tag">跨学科</span>
+						</div>
+						<a href="https://www.nature.com/" target="_blank" class="resource-link">
+							访问期刊 <i class="fas fa-arrow-right"></i>
+						</a>
+					</div>
+
+					<div class="resource-card" data-category="journal" data-aos="fade-up">
+						<i class="fas fa-brain resource-icon"></i>
+						<h3>Science</h3>
+						<p>美国科学促进会的旗舰刊物，发表重要的科学研究和发现。</p>
+						<div class="resource-tags">
+							<span class="tag">科学研究</span>
+							<span class="tag">创新发现</span>
+							<span class="tag">多学科</span>
+						</div>
+						<a href="https://www.science.org/" target="_blank" class="resource-link">
+							访问期刊 <i class="fas fa-arrow-right"></i>
+						</a>
+					</div>
+
+					<div class="resource-card" data-category="journal" data-aos="fade-up">
+						<i class="fas fa-network-wired resource-icon"></i>
+						<h3>ACM Digital Library</h3>
+						<p>计算机科学领域最全面的数字图书馆，包含大量学术论文和会议记录。</p>
+						<div class="resource-tags">
+							<span class="tag">计算机科学</span>
+							<span class="tag">数字图书馆</span>
+							<span class="tag">学术资源</span>
+						</div>
+						<a href="https://dl.acm.org/" target="_blank" class="resource-link">
+							访问平台 <i class="fas fa-arrow-right"></i>
+						</a>
+					</div>
+				</div>
+			</section>
+
+			<!-- 仿真软件 -->
+			<section class="resource-section" data-aos="fade-up">
+				<div class="section-header">
+					<i class="fas fa-laptop-code"></i>
+					<h2>仿真软件 & 编程工具</h2>
+				</div>
+				<div class="resource-grid">
+					<div class="resource-card" data-category="software" data-aos="fade-up">
+						<i class="fas fa-calculator resource-icon"></i>
+						<h3>MATLAB</h3>
+						<p>数百万工程师和科学家使用的编程和数值计算平台，支持数据分析、算法开发和建模。</p>
+						<div class="resource-tags">
+							<span class="tag">仿真</span>
+							<span class="tag">计算</span>
+							<span class="tag">建模</span>
+						</div>
+						<a href="https://ww2.mathworks.cn/products/matlab.html" target="_blank" class="resource-link">
+							访问官网 <i class="fas fa-arrow-right"></i>
+						</a>
+					</div>
+
+					<div class="resource-card" data-category="software" data-aos="fade-up">
+						<i class="fas fa-microchip resource-icon"></i>
+						<h3>Proteus</h3>
+						<p>强大的EDA软件，适用于电子工程师和爱好者的电路设计��仿真。</p>
+						<div class="resource-tags">
+							<span class="tag">电路设计</span>
+							<span class="tag">仿真</span>
+							<span class="tag">EDA</span>
+						</div>
+						<a href="https://www.labcenter.com/" target="_blank" class="resource-link">
+							访问官网 <i class="fas fa-arrow-right"></i>
+						</a>
+					</div>
+
+					<div class="resource-card" data-category="software" data-aos="fade-up">
+						<i class="fas fa-code resource-icon"></i>
+						<h3>Keil</h3>
+						<p>专业的单片机开发环境，支持多种单片机型号的程序开发和调试。</p>
+						<div class="resource-tags">
+							<span class="tag">单片机</span>
+							<span class="tag">开发</span>
+							<span class="tag">调试</span>
+						</div>
+						<a href="https://www.keil.com/" target="_blank" class="resource-link">
+							访问官网 <i class="fas fa-arrow-right"></i>
+						</a>
+					</div>
+
+					<div class="resource-card" data-category="software" data-aos="fade-up">
+						<i class="fas fa-project-diagram resource-icon"></i>
+						<h3>Altium Designer</h3>
+						<p>专业的PCB设计软件，提供完整的电路设计、仿真和PCB布局工具。</p>
+						<div class="resource-tags">
+							<span class="tag">PCB设计</span>
+							<span class="tag">电路设计</span>
+							<span class="tag">仿真</span>
+						</div>
+						<a href="https://www.altium.com/" target="_blank" class="resource-link">
+							访问官网 <i class="fas fa-arrow-right"></i>
+						</a>
+					</div>
+
+					<div class="resource-card" data-category="software" data-aos="fade-up">
+						<i class="fas fa-microchip resource-icon"></i>
+						<h3>STM32CubeIDE</h3>
+						<p>ST公司推出的集成开发环境，支持STM32全系列产品的开发和调试。</p>
+						<div class="resource-tags">
+							<span class="tag">STM32</span>
+							<span class="tag">IDE</span>
+							<span class="tag">开发工具</span>
+						</div>
+						<a href="https://www.st.com/en/development-tools/stm32cubeide.html" target="_blank" class="resource-link">
+							访问官网 <i class="fas fa-arrow-right"></i>
+						</a>
+					</div>
+
+					<div class="resource-card" data-category="software" data-aos="fade-up">
+						<i class="fas fa-code-branch resource-icon"></i>
+						<h3>Visual Studio Code</h3>
+						<p>轻量级但功能强大的代码编辑器，支持多种编程语言和丰富的插件生态。</p>
+						<div class="resource-tags">
+							<span class="tag">编辑器</span>
+							<span class="tag">开发工具</span>
+							<span class="tag">跨平台</span>
+						</div>
+						<a href="https://code.visualstudio.com/" target="_blank" class="resource-link">
+							访问官网 <i class="fas fa-arrow-right"></i>
+						</a>
+					</div>
+
+					<div class="resource-card" data-category="software" data-aos="fade-up">
+						<i class="fas fa-wave-square resource-icon"></i>
+						<h3>Multisim</h3>
+						<p>NI公司开发的电路设计和仿真软件，适用于电子工程教育和研究。</p>
+						<div class="resource-tags">
+							<span class="tag">电路仿真</span>
+							<span class="tag">教育</span>
+							<span class="tag">分析工具</span>
+						</div>
+						<a href="https://www.ni.com/en/support/downloads/software-products/download.multisim.html" target="_blank" class="resource-link">
+							访问官网 <i class="fas fa-arrow-right"></i>
+						</a>
+					</div>
+				</div>
+			</section>
+
+			<!-- 高校资源 -->
+			<section class="resource-section" data-aos="fade-up">
+				<div class="section-header">
+					<i class="fas fa-university"></i>
+					<h2>中国矿业大学资源</h2>
+				</div>
+				<div class="resource-grid">
+					<div class="resource-card" data-category="university" data-aos="fade-up">
+						<i class="fas fa-book resource-icon"></i>
+						<h3>图书馆</h3>
+						<p>中国矿业大学图书馆提供丰富的学术资源和电子文献服务。</p>
+						<div class="resource-tags">
+							<span class="tag">图书</span>
+							<span class="tag">文献</span>
+							<span class="tag">数据库</span>
+						</div>
+						<a href="https://lib.cumt.edu.cn/" target="_blank" class="resource-link">
+							访问图书馆 <i class="fas fa-arrow-right"></i>
+						</a>
+					</div>
+
+					<div class="resource-card" data-category="university" data-aos="fade-up">
+						<i class="fas fa-laptop-code resource-icon"></i>
+						<h3>计算机学院</h3>
+						<p>计算机科学与技术学院，培养信息技术领域的专业人才。</p>
+						<div class="resource-tags">
+							<span class="tag">计算机</span>
+							<span class="tag">信息技术</span>
+							<span class="tag">教育</span>
+						</div>
+						<a href="https://cs.cumt.edu.cn" target="_blank" class="resource-link">
+							访问学院 <i class="fas fa-arrow-right"></i>
+						</a>
+					</div>
+
+					<div class="resource-card" data-category="university" data-aos="fade-up">
+						<i class="fas fa-cog resource-icon"></i>
+						<h3>机电学院</h3>
+						<p>机电工程学院，培养机械电子工程领域的专业人才。</p>
+						<div class="resource-tags">
+							<span class="tag">机械</span>
+							<span class="tag">电子</span>
+							<span class="tag">工程</span>
+						</div>
+						<a href="https://cmee.cumt.edu.cn/" target="_blank" class="resource-link">
+							访问学院 <i class="fas fa-arrow-right"></i>
+						</a>
+					</div>
+				</div>
+			</section>
+
+			<!-- 技术社区 -->
+			<section class="resource-section" data-aos="fade-up">
+				<div class="section-header">
+					<i class="fas fa-users"></i>
+					<h2>技术社区</h2>
+				</div>
+				<div class="resource-grid">
+					<div class="resource-card" data-category="community" data-aos="fade-up">
+						<i class="fab fa-github resource-icon"></i>
+						<h3>GitHub</h3>
+						<p>全球最大的代码托管平台，汇集了数百万开发者和开源项目。</p>
+						<div class="resource-tags">
+							<span class="tag">代码托管</span>
+							<span class="tag">开源</span>
+							<span class="tag">协作</span>
+						</div>
+						<a href="https://github.com/" target="_blank" class="resource-link">
+							访问平台 <i class="fas fa-arrow-right"></i>
+						</a>
+					</div>
+
+					<div class="resource-card" data-category="community" data-aos="fade-up">
+						<i class="fas fa-video resource-icon"></i>
+						<h3>Bilibili</h3>
+						<p>中国最大的视频弹幕网站，包含丰富的技术教程和学习资源。</p>
+						<div class="resource-tags">
+							<span class="tag">视频</span>
+							<span class="tag">教程</span>
+							<span class="tag">学习</span>
+						</div>
+						<a href="https://www.bilibili.com/" target="_blank" class="resource-link">
+							访问B站 <i class="fas fa-arrow-right"></i>
+						</a>
+					</div>
+
+					<div class="resource-card" data-category="community" data-aos="fade-up">
+						<i class="fas fa-gem resource-icon"></i>
+						<h3>掘金</h3>
+						<p>面向全球中文开发者的技术内容分享与交流平台。</p>
+						<div class="resource-tags">
+							<span class="tag">技术</span>
+							<span class="tag">分享</span>
+							<span class="tag">社区</span>
+						</div>
+						<a href="https://juejin.cn/" target="_blank" class="resource-link">
+							访问掘金 <i class="fas fa-arrow-right"></i>
+						</a>
+					</div>
+
+					<div class="resource-card" data-category="community" data-aos="fade-up">
+						<i class="fas fa-microchip resource-icon"></i>
+						<h3>单片机教学网</h3>
+						<p>专注于单片机和嵌入式系统的教学资源网站。</p>
+						<div class="resource-tags">
+							<span class="tag">单片机</span>
+							<span class="tag">教程</span>
+							<span class="tag">资源</span>
+						</div>
+						<a href="http://www.51hei.com/" target="_blank" class="resource-link">
+							访问教学网 <i class="fas fa-arrow-right"></i>
+						</a>
+					</div>
+
+					<div class="resource-card" data-category="community" data-aos="fade-up">
+						<i class="fas fa-stack-overflow resource-icon"></i>
+						<h3>Stack Overflow</h3>
+						<p>全球最大的程序员问答社区，解决编程问题的最佳平台。</p>
+						<div class="resource-tags">
+							<span class="tag">问答</span>
+							<span class="tag">编程</span>
+							<span class="tag">社区</span>
+						</div>
+						<a href="https://stackoverflow.com/" target="_blank" class="resource-link">
+							访问平台 <i class="fas fa-arrow-right"></i>
+						</a>
+					</div>
+
+					<div class="resource-card" data-category="community" data-aos="fade-up">
+						<i class="fas fa-code resource-icon"></i>
+						<h3>CSDN</h3>
+						<p>中国专业的IT技术社区，提供丰富的技术博客和学习资源。</p>
+						<div class="resource-tags">
+							<span class="tag">IT技术</span>
+							<span class="tag">博客</span>
+							<span class="tag">教程</span>
+						</div>
+						<a href="https://www.csdn.net/" target="_blank" class="resource-link">
+							访问CSDN <i class="fas fa-arrow-right"></i>
+						</a>
+					</div>
+
+					<div class="resource-card" data-category="community" data-aos="fade-up">
+						<i class="fas fa-chalkboard-teacher resource-icon"></i>
+						<h3>开源中国</h3>
+						<p>中国最大的开源技术社区，汇集开源项目、代码分享和技术交流。</p>
+						<div class="resource-tags">
+							<span class="tag">开源</span>
+							<span class="tag">技术交流</span>
+							<span class="tag">资源分享</span>
+						</div>
+						<a href="https://www.oschina.net/" target="_blank" class="resource-link">
+							访问社区 <i class="fas fa-arrow-right"></i>
+						</a>
+					</div>
+
+					<div class="resource-card" data-category="community" data-aos="fade-up">
+						<i class="fas fa-laptop-code resource-icon"></i>
+						<h3>V2EX</h3>
+						<p>创意工作者们的社区，关注程序开发、技术创新和互联网话题。</p>
+						<div class="resource-tags">
+							<span class="tag">创意</span>
+							<span class="tag">技术</span>
+							<span class="tag">交流</span>
+						</div>
+						<a href="https://v2ex.com/" target="_blank" class="resource-link">
+							访问V2EX <i class="fas fa-arrow-right"></i>
+						</a>
+					</div>
+				</div>
+			</section>
+		</main>
 
 		<!-- 页脚 -->
 		<footer class="footer">
-			<div class="container">
-				<p>&copy; 2024 博客. 版权所有归中国矿业大学。来自计算机学院和机电学院。</p>
+			<div class="footer-content">
+				<div class="footer-logo">
+					<h3>MCU Learn</h3>
+					<p>探索创新科技的无限可能</p>
+				</div>
+				<div class="footer-links">
+					<div class="footer-section">
+						<h4>快速链接</h4>
+						<ul>
+							<li><a href="../indexmodern.html">首页</a></li>
+							<li><a href="../pages/blognew.html">学习资源</a></li>
+							<li><a href="Sources.html">学术资源</a></li>
+							<li><a href="../News/news.html">新闻动态</a></li>
+						</ul>
+					</div>
+					<div class="footer-section">
+						<h4>关注我们</h4>
+						<ul>
+							<li><a href="#">GitHub</a></li>
+							<li><a href="#">微信公众号</a></li>
+							<li><a href="#">知乎专栏</a></li>
+							<li><a href="#">技术社区</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="footer-bottom">
+				<p>&copy; 2024 MCU Learn. All rights reserved.</p>
 			</div>
 		</footer>
 
-		<!-- JavaScript -->
-		<script src="../scripts.js"></script>
-		<script src="Sources.js"></script>
-		<script src="../z_js/SunNight.js"></script>
+		<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+		<script src="../z_js/modern-sources.js"></script>
 	</body>
 </html>

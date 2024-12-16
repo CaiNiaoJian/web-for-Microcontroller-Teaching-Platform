@@ -3,118 +3,333 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>联系 - 博客</title>
-		<link rel="icon" href="images/标签栏图标.png" type="images/png" sizes="34x32">
-		<link rel="stylesheet" href="styles.css">
+		<title>联系我们 - MCU Learn</title>
+		<link rel="stylesheet" href="../z_css/modern-style.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+		<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
 		<style>
-			/* 新增加的 CSS 样式 */
+			/* 页面特定样式 */
+			.contact-hero {
+				background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+				color: #fff;
+				padding: 120px 0 80px;
+				text-align: center;
+				margin-bottom: 60px;
+			}
+
+			.contact-hero h1 {
+				font-size: 2.5rem;
+				margin-bottom: 20px;
+			}
+
+			.contact-hero p {
+				font-size: 1.1rem;
+				opacity: 0.9;
+				max-width: 600px;
+				margin: 0 auto;
+			}
+
+			.contact-section {
+				max-width: 1200px;
+				margin: 0 auto;
+				padding: 0 20px;
+			}
+
+			.contact-grid {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 40px;
+				margin-bottom: 60px;
+			}
+
+			.contact-info {
+				background: var(--card-bg);
+				padding: 40px;
+				border-radius: 20px;
+				box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+			}
+
+			.contact-item {
+				display: flex;
+				align-items: flex-start;
+				gap: 15px;
+				margin-bottom: 30px;
+			}
+
+			.contact-item i {
+				font-size: 24px;
+				color: var(--primary-color);
+			}
+
+			.contact-item-content h3 {
+				margin: 0 0 8px;
+				font-size: 1.2rem;
+				color: var(--text-color);
+			}
+
+			.contact-item-content p {
+				margin: 0;
+				color: var(--text-color);
+				opacity: 0.8;
+				line-height: 1.6;
+			}
+
+			.contact-table-container {
+				background: var(--card-bg);
+				padding: 40px;
+				border-radius: 20px;
+				box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+			}
+
 			.contact-table {
-				width: 60%;
+				width: 100%;
 				border-collapse: collapse;
 				margin-top: 20px;
 			}
 
 			.contact-table th,
 			.contact-table td {
-				border: 1px solid #ffffff;
-				padding: 10px;
+				padding: 15px;
 				text-align: left;
+				border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 			}
 
 			.contact-table th {
-				background-color: #c9ffff;
+				background: rgba(0, 122, 255, 0.1);
+				color: var(--text-color);
+				font-weight: 600;
 			}
 
-			/* 页脚图片样式 */
-			.footer-images {
+			.contact-table td {
+				color: var(--text-color);
+			}
+
+			.contact-table tr:hover {
+				background: rgba(0, 122, 255, 0.05);
+			}
+
+			.team-section {
+				text-align: center;
+				margin-top: 60px;
+			}
+
+			.team-logos {
 				display: flex;
 				justify-content: center;
 				align-items: center;
-				margin-top: 20px;
+				gap: 40px;
+				margin-top: 30px;
 			}
 
-			.footer-images img {
-				width: 100px;
-				height: 100px;
-				margin: 0 10px;
+			.team-logo {
+				width: 120px;
+				height: 120px;
 				border-radius: 50%;
-				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+				overflow: hidden;
+				box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+				transition: transform 0.3s ease;
+			}
+
+			.team-logo:hover {
+				transform: translateY(-5px);
+			}
+
+			.team-logo img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+			}
+
+			@media (max-width: 768px) {
+				.contact-grid {
+					grid-template-columns: 1fr;
+				}
+
+				.contact-hero {
+					padding: 100px 20px 60px;
+				}
+
+				.team-logos {
+					flex-direction: column;
+					gap: 20px;
+				}
+			}
+
+			/* 暗色模式适配 */
+			body.dark-mode .contact-table th {
+				background: rgba(0, 122, 255, 0.2);
+			}
+
+			body.dark-mode .contact-table td {
+				border-bottom-color: rgba(255, 255, 255, 0.1);
 			}
 		</style>
 	</head>
 	<body>
 		<!-- 导航栏 -->
-		<nav class="navbar">
-			<div class="container">
-				<a href="index.html" class="logo">博客</a>
+		<nav class="nav-wrapper">
+			<div class="nav-content">
+				<a href="../indexmodern.html" class="logo">MCU Learn</a>
 				<ul class="nav-links">
-					<li><a href="index.html">首页</a></li>
-					<li><a href="blog.html">文章</a></li>
-					<li><a href="about.html">关于</a></li>
-					<li><a href="relation.html">联系</a></li>
+					<li><a href="../indexmodern.html">首页</a></li>
+					<li><a href="../pages/blognew.html">学习</a></li>
+					<li><a href="../StudySources/Sources.html">资源</a></li>
+					<li><a href="../News/news.html">新闻</a></li>
+					<li><a href="community.html">社区</a></li>
+					<li><a href="relation.html" class="active">联系我们</a></li>
 				</ul>
-				<div class="menu-toggle" id="mobile-menu">
-					<span class="bar"></span>
-					<span class="bar"></span>
-					<span class="bar"></span>
-				</div>
+				<button class="theme-toggle">
+					<i class="fas fa-moon"></i>
+				</button>
 			</div>
 		</nav>
 
-		<!-- 主要内容 -->
-		<div class="container main-content">
-			<!-- 联系部分 -->
-			<section class="contact">
-				<h1>联系我们</h1>
-				<p>如果你有任何问题或建议，欢迎通过以下方式联系我：</p>
-				<ul>
-					<li>邮箱：cumtMLP123@163.com</li>
-					<li>电话：待更新</li>
-					<li>地址：1号 大学路，徐州市，中国 | 1 No. University Road, Xuzhou City, China</li>
-				</ul>
+		<!-- 页面标题 -->
+		<section class="contact-hero">
+			<h1 data-aos="fade-up">联系我们</h1>
+			<p data-aos="fade-up" data-aos-delay="100">如果你有任何问题或建议，欢迎随时与我们联系</p>
+		</section>
 
-				<!-- 新增加的表格 -->
-				<table class="contact-table">
-					<thead>
-						<tr>
-							<th>投稿邮箱</th>
-							<th>邮箱地址</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>官网</td>
-							<td>cumtMLP123@163.com</td>
-						</tr>
-						<tr>
-							<td>CaiNiaoJina</td>
-							<td>2263617544@qq.com</td>
-						</tr>
-						<tr>
-							<td>noobzhang</td>
-							<td>2937674430@qq.com</td>
-						</tr>
-						<tr>
-							<td>Yzj</td>
-							<td>2904619250@qq.com</td>
-						</tr>
-					</tbody>
-				</table>
-			</section>
+		<!-- 主要内容 -->
+		<div class="contact-section">
+			<div class="contact-grid">
+				<!-- 联系信息 -->
+				<div class="contact-info" data-aos="fade-right">
+					<div class="contact-item">
+						<i class="fas fa-envelope"></i>
+						<div class="contact-item-content">
+							<h3>官方邮箱</h3>
+							<p>cumtMLP123@163.com</p>
+						</div>
+					</div>
+					<div class="contact-item">
+						<i class="fas fa-phone-alt"></i>
+						<div class="contact-item-content">
+							<h3>联系电话</h3>
+							<p>待更新</p>
+						</div>
+					</div>
+					<div class="contact-item">
+						<i class="fas fa-map-marker-alt"></i>
+						<div class="contact-item-content">
+							<h3>地址</h3>
+							<p>1号 大学路，徐州市，中国<br>1 No. University Road, Xuzhou City, China</p>
+						</div>
+					</div>
+				</div>
+
+				<!-- 投稿邮箱表格 -->
+				<div class="contact-table-container" data-aos="fade-left">
+					<h2>投稿邮箱</h2>
+					<table class="contact-table">
+						<thead>
+							<tr>
+								<th>投稿邮箱</th>
+								<th>邮箱地址</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>官网</td>
+								<td>cumtMLP123@163.com</td>
+							</tr>
+							<tr>
+								<td>CaiNiaoJina</td>
+								<td>2263617544@qq.com</td>
+							</tr>
+							<tr>
+								<td>noobzhang</td>
+								<td>2937674430@qq.com</td>
+							</tr>
+							<tr>
+								<td>Yzj</td>
+								<td>2904619250@qq.com</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<!-- 团队信息 -->
+			<div class="team-section">
+				<h2 data-aos="fade-up">我们的团队</h2>
+				<div class="team-logos">
+					<div class="team-logo" data-aos="zoom-in">
+						<img src="images/校徽1.jpg" alt="中国矿业大学校徽">
+					</div>
+					<div class="team-logo" data-aos="zoom-in" data-aos-delay="100">
+						<img src="images/github.jpg" alt="GitHub">
+					</div>
+				</div>
+			</div>
 		</div>
 
 		<!-- 页脚 -->
 		<footer class="footer">
-			<div class="container">
-				<p>&copy; 2024 博客. 中国矿业大学大创团队版权所有.</p>
-				<div class="footer-images">
-					<img src="images/校徽1.jpg" alt="中国矿业大学校徽">
-					<img src="images/github.jpg" alt="GitHub">
+			<div class="footer-content">
+				<div class="footer-logo">
+					<h3>MCU Learn</h3>
+					<p>探索创新科技的无限可能</p>
 				</div>
+				<div class="footer-links">
+					<div class="footer-section">
+						<h4>快速链接</h4>
+						<ul>
+							<li><a href="../indexmodern.html">首页</a></li>
+							<li><a href="../pages/blognew.html">学习资源</a></li>
+							<li><a href="../pages/source.html">学术资源</a></li>
+							<li><a href="../News/news.html">新闻动态</a></li>
+						</ul>
+					</div>
+					<div class="footer-section">
+						<h4>社区支持</h4>
+						<ul>
+							<li><a href="../indexmodern.html#community">社区讨论</a></li>
+							<li><a href="../indexmodern.html#contact">联系我们</a></li>
+							<li><a href="../about.html">关于我们</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="footer-bottom">
+				<p>&copy; 2024 MCU Learn. 保留所有权利。</p>
 			</div>
 		</footer>
 
-		<!-- JavaScript -->
-		<script src="scripts.js"></script>
+		<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+		<script>
+			// 初始化 AOS
+			AOS.init({
+				duration: 800,
+				offset: 100,
+				once: true
+			});
+
+			// 暗色模式切换
+			const themeToggle = document.querySelector('.theme-toggle');
+			const body = document.body;
+			const icon = themeToggle.querySelector('i');
+
+			// 检查本地存储中的主题设置
+			const savedTheme = localStorage.getItem('theme');
+			if (savedTheme === 'dark') {
+				body.classList.add('dark-mode');
+				icon.classList.remove('fa-moon');
+				icon.classList.add('fa-sun');
+			}
+
+			themeToggle.addEventListener('click', () => {
+				body.classList.toggle('dark-mode');
+				if (body.classList.contains('dark-mode')) {
+					icon.classList.remove('fa-moon');
+					icon.classList.add('fa-sun');
+					localStorage.setItem('theme', 'dark');
+				} else {
+					icon.classList.remove('fa-sun');
+					icon.classList.add('fa-moon');
+					localStorage.setItem('theme', 'light');
+				}
+			});
+		</script>
 	</body>
 </html>

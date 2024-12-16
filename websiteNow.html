@@ -3,146 +3,523 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>网站建设 - 博客</title>
-		<link rel="icon" href="images/标签栏图标.png" type="images/png" sizes="34x32">
-		<link rel="stylesheet" href="styles.css">
-
+		<title>网站建设进度 - MCU Learn</title>
+		<link rel="stylesheet" href="z_css/modern-style.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+		<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
 		<style>
-			/* 新增的样式 */
-			body {
-				background: linear-gradient(45deg, #ffc0cb, #add8e6, #90ee90, #f0e68c);
-				background-size: 400% 400%;
-				animation: gradientAnimation 15s ease infinite;
+			/* 页面特定样式 */
+			.progress-hero {
+				background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+				color: #fff;
+				padding: 120px 0 80px;
+				text-align: center;
+				position: relative;
+				overflow: hidden;
 			}
 
-			@keyframes gradientAnimation {
-				0% {
-					background-position: 0% 50%;
-				}
-
-				50% {
-					background-position: 100% 50%;
-				}
-
-				100% {
-					background-position: 0% 50%;
-				}
+			.progress-hero::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background: url('images/modern/circuit-pattern.png') repeat;
+				opacity: 0.1;
+				animation: backgroundMove 20s linear infinite;
 			}
 
-			.website-section {
+			@keyframes backgroundMove {
+				from { background-position: 0 0; }
+				to { background-position: 100% 100%; }
+			}
+
+			.progress-hero h1 {
+				font-size: 2.8rem;
+				margin-bottom: 20px;
+				position: relative;
+				text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+			}
+
+			.progress-hero p {
+				font-size: 1.2rem;
+				opacity: 0.9;
+				max-width: 800px;
+				margin: 0 auto;
+				position: relative;
+			}
+
+			.progress-stats {
 				display: flex;
-				justify-content: space-between;
+				justify-content: center;
+				gap: 40px;
+				margin-top: 40px;
 				flex-wrap: wrap;
 			}
 
-			.website-item {
-				width: 48%;
-				/* 每行显示两个模块 */
-				border: 1px solid #ccc;
-				padding: 20px;
-				box-sizing: border-box;
+			.stat-item {
 				text-align: center;
-				background-color: #f0f8ff;
-				/* 更浅的淡蓝色底色 */
-				border-radius: 10px;
-				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-				transition: transform 0.3s ease, box-shadow 0.3s ease;
-				margin-bottom: 20px;
+				background: rgba(255, 255, 255, 0.1);
+				padding: 20px;
+				border-radius: 15px;
+				backdrop-filter: blur(10px);
+				min-width: 200px;
 			}
 
-			.website-item:hover {
-				transform: translateY(-5px);
-				box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-			}
-
-			.website-item h2 {
-				margin: 0 0 20px;
-				font-size: 24px;
-			}
-
-			.website-item p {
-				margin: 0 0 20px;
-			}
-
-			.website-item a {
-				color: #333;
-				text-decoration: none;
+			.stat-number {
+				font-size: 2.5rem;
 				font-weight: bold;
+				margin-bottom: 10px;
+				background: linear-gradient(45deg, #fff, #f0f0f0);
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
 			}
 
-			/* 响应式设计 */
+			.stat-label {
+				font-size: 1rem;
+				opacity: 0.9;
+			}
+
+			.timeline-section {
+				max-width: 1200px;
+				margin: 60px auto;
+				padding: 0 20px;
+			}
+
+			.timeline {
+				position: relative;
+				padding: 40px 0;
+			}
+
+			.timeline::before {
+				content: '';
+				position: absolute;
+				left: 50%;
+				transform: translateX(-50%);
+				width: 2px;
+				height: 100%;
+				background: var(--primary-color);
+				opacity: 0.3;
+			}
+
+			.timeline-item {
+				display: flex;
+				justify-content: center;
+				padding: 40px 0;
+				position: relative;
+			}
+
+			.timeline-content {
+				width: 45%;
+				padding: 30px;
+				background: var(--card-bg);
+				border-radius: 15px;
+				box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+				position: relative;
+				transition: transform 0.3s ease;
+			}
+
+			.timeline-content:hover {
+				transform: translateY(-5px);
+			}
+
+			.timeline-item:nth-child(odd) .timeline-content {
+				margin-right: auto;
+			}
+
+			.timeline-item:nth-child(even) .timeline-content {
+				margin-left: auto;
+			}
+
+			.timeline-date {
+				position: absolute;
+				top: 20px;
+				background: var(--primary-color);
+				color: white;
+				padding: 8px 16px;
+				border-radius: 20px;
+				font-size: 0.9rem;
+			}
+
+			.timeline-item:nth-child(odd) .timeline-date {
+				right: -20px;
+			}
+
+			.timeline-item:nth-child(even) .timeline-date {
+				left: -20px;
+			}
+
+			.timeline-dot {
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				transform: translate(-50%, -50%);
+				width: 20px;
+				height: 20px;
+				background: var(--primary-color);
+				border-radius: 50%;
+				z-index: 1;
+			}
+
+			.timeline-dot::before {
+				content: '';
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				transform: translate(-50%, -50%);
+				width: 30px;
+				height: 30px;
+				border: 2px solid var(--primary-color);
+				border-radius: 50%;
+				opacity: 0.3;
+				animation: pulse 2s infinite;
+			}
+
+			@keyframes pulse {
+				0% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
+				50% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
+				100% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
+			}
+
+			.timeline-content h3 {
+				color: var(--text-color);
+				font-size: 1.4rem;
+				margin-bottom: 15px;
+			}
+
+			.timeline-content p {
+				color: var(--text-color);
+				opacity: 0.8;
+				line-height: 1.6;
+			}
+
+			.progress-cards {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+				gap: 30px;
+				max-width: 1200px;
+				margin: 60px auto;
+				padding: 0 20px;
+			}
+
+			.progress-card {
+				background: var(--card-bg);
+				border-radius: 15px;
+				padding: 30px;
+				box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+				transition: transform 0.3s ease;
+			}
+
+			.progress-card:hover {
+				transform: translateY(-5px);
+			}
+
+			.progress-card h3 {
+				color: var(--text-color);
+				font-size: 1.3rem;
+				margin-bottom: 20px;
+				display: flex;
+				align-items: center;
+				gap: 10px;
+			}
+
+			.progress-card i {
+				color: var(--primary-color);
+				font-size: 1.4rem;
+			}
+
+			.progress-bar {
+				height: 6px;
+				background: var(--light-bg);
+				border-radius: 3px;
+				overflow: hidden;
+				margin: 15px 0;
+			}
+
+			.progress-fill {
+				height: 100%;
+				background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+				border-radius: 3px;
+				transition: width 1s ease;
+			}
+
+			.progress-text {
+				display: flex;
+				justify-content: space-between;
+				color: var(--text-color);
+				font-size: 0.9rem;
+				margin-top: 8px;
+			}
+
 			@media (max-width: 768px) {
-				.website-item {
-					width: 100%;
-					/* 手机端每行显示一个模块 */
+				.timeline::before {
+					left: 30px;
 				}
+
+				.timeline-content {
+					width: calc(100% - 60px);
+					margin-left: 60px !important;
+				}
+
+				.timeline-date {
+					left: -20px !important;
+				}
+
+				.timeline-dot {
+					left: 30px;
+				}
+
+				.stat-item {
+					min-width: 150px;
+				}
+			}
+
+			/* 暗色模式适配 */
+			body.dark-mode .progress-card {
+				background: var(--card-bg);
+			}
+
+			body.dark-mode .timeline-content {
+				background: var(--card-bg);
+			}
+
+			body.dark-mode .progress-bar {
+				background: var(--light-bg);
 			}
 		</style>
 	</head>
 	<body>
 		<!-- 导航栏 -->
-		<nav class="navbar">
-			<div class="container">
-				<a href="index.html" class="logo">博客</a>
+		<nav class="nav-wrapper">
+			<div class="nav-content">
+				<a href="indexmodern.html" class="logo">MCU Learn</a>
 				<ul class="nav-links">
-					<li><a href="index.html">首页</a></li>
-					<li><a href="blog.html">文章</a></li>
-					<li><a href="about.html">关于</a></li>
-					<li><a href="relation.html">联系</a></li>
+					<li><a href="indexmodern.html">首页</a></li>
+					<li><a href="pages/blognew.html">学习</a></li>
+					<li><a href="pages/source.html">期刊</a></li>
+					<li><a href="StudySources/Sources.html">资源</a></li>
+					<li><a href="News/news.html" class="active">新闻</a></li>
+					<li><a href="pages/community.html">社区</a></li>
+					<li><a href="relation.html">联系我们</a></li>
 				</ul>
-				<div class="menu-toggle" id="mobile-menu">
-					<span class="bar"></span>
-					<span class="bar"></span>
-					<span class="bar"></span>
-				</div>
+				<button class="theme-toggle">
+					<i class="fas fa-moon"></i>
+				</button>
 			</div>
 		</nav>
 
+		<!-- 英雄区域 -->
+		<section class="progress-hero">
+			<h1 data-aos="fade-up">网站建设进度</h1>
+			<p data-aos="fade-up" data-aos-delay="100">探索我们的发展历程，见证每一步的进步与创新</p>
+			
+			<div class="progress-stats">
+				<div class="stat-item" data-aos="fade-up" data-aos-delay="200">
+					<div class="stat-number">65%</div>
+					<div class="stat-label">整体完成度</div>
+				</div>
+				<div class="stat-item" data-aos="fade-up" data-aos-delay="300">
+					<div class="stat-number">12+</div>
+					<div class="stat-label">功能模块开发</div>
+				</div>
+				<div class="stat-item" data-aos="fade-up" data-aos-delay="400">
+					<div class="stat-number">1000+</div>
+					<div class="stat-label">代码提交累计</div>
+				</div>
+			</div>
+		</section>
 
-		<!-- <header></header>主要内容 -->
-		<div class="container main-content">
-			<!-- 网站功能模块 -->
-			<section class="website-section">
-				<div class="website-item">
-					<h2>网站功能</h2>
-					<p>本网站旨在为单片机爱好者和学习者提供一个全面的学习和交流平台。我们提供丰富的教程、项目案例和在线讨论区，帮助用户快速掌握单片机技术。</p>
-					<a href="Solution/Function.html" class="read-more">了解更多</a>
+		<!-- 进度卡片 -->
+		<section class="progress-cards">
+			<div class="progress-card" data-aos="fade-up">
+				<h3><i class="fas fa-paint-brush"></i> 界面设计</h3>
+				<div class="progress-bar">
+					<div class="progress-fill" style="width: 95%;"></div>
+				</div>
+				<div class="progress-text">
+					<span>现代化界面改造</span>
+					<span>95%</span>
+				</div>
+				<p>采用最新的设计趋势，打造直观、美观的用户界面</p>
+			</div>
+
+			<div class="progress-card" data-aos="fade-up" data-aos-delay="100">
+				<h3><i class="fas fa-cogs"></i> 功能开发</h3>
+				<div class="progress-bar">
+					<div class="progress-fill" style="width: 80%;"></div>
+				</div>
+				<div class="progress-text">
+					<span>核心功能实现</span>
+					<span>80%</span>
+				</div>
+				<p>持续开发和优化各项功能，提升用户体验</p>
+			</div>
+
+			<div class="progress-card" data-aos="fade-up" data-aos-delay="200">
+				<h3><i class="fas fa-mobile-alt"></i> 移动适配</h3>
+				<div class="progress-bar">
+					<div class="progress-fill" style="width: 75%;"></div>
+				</div>
+				<div class="progress-text">
+					<span>响应式设计</span>
+					<span>75%</span>
+				</div>
+				<p>优化移动端显示效果，确保跨平台体验一致</p>
+			</div>
+		</section>
+
+		<!-- 时间线 -->
+		<section class="timeline-section">
+			<div class="timeline">
+				<div class="timeline-item" data-aos="fade-up">
+					<div class="timeline-content">
+						<span class="timeline-date">2024-10-12</span>
+						<h3>现代化改造开始</h3>
+						<p>完成网站的现代化改造，引入新的设计语言和交互体验，提升用户体验。</p>
+					</div>
+					<div class="timeline-dot"></div>
 				</div>
 
-				<!-- 网站初心模块 -->
-				<div class="website-item">
-					<h2>网站初心</h2>
-					<p>我们创建这个网站的初衷是为了让更多人能够轻松学习和掌握单片机技术。我们希望通过分享知识和经验，帮助用户解决学习过程中遇到的问题。</p>
-					<a href="Solution/Original_intention.html" class="read-more">了解更多</a>
-				</div>
-			</section>
-
-			<section class="website-section">
-				<!-- 教学宗旨模块 -->
-				<div class="website-item">
-					<h2>教学宗旨</h2>
-					<p>我们的教学宗旨是“理论与实践相结合”。我们不仅提供详细的理论知识，还通过实际项目案例帮助用户将理论应用到实践中，提升实际操作能力。</p>
-					<a href="Solution/Education_purpose.html" class="read-more">了解更多</a>
+				<div class="timeline-item" data-aos="fade-up">
+					<div class="timeline-content">
+						<span class="timeline-date">2024-10-15</span>
+						<h3>社区功能优化</h3>
+						<p>优化社区互动功能，增加用户反馈机制，提升社区活跃度。</p>
+					</div>
+					<div class="timeline-dot"></div>
 				</div>
 
-				<!-- 网站建设者模块 -->
-				<div class="website-item">
-					<h2>网站建设者</h2>
-					<p>本网站由五位热爱单片机技术的学生和一位经验丰富的老师共同建设。我们希望通过这个平台，与更多单片机爱好者分享知识和经验。</p>
-					<a href="Solution/Website_builder.html" class="read-more">了解更多</a>
+				<div class="timeline-item" data-aos="fade-up">
+					<div class="timeline-content">
+						<span class="timeline-date">2024-10-17</span>
+						<h3>云服务部署</h3>
+						<p>成功将网站部署到阿里云服务器，提升网站访问速度和稳定性。</p>
+					</div>
+					<div class="timeline-dot"></div>
 				</div>
-			</section>
-		</div>
+
+				<div class="timeline-item" data-aos="fade-up">
+					<div class="timeline-content">
+						<span class="timeline-date">2024-11-10</span>
+						<h3>学习资源更新</h3>
+						<p>更新学习资源库，添加新的教程和实验案例，丰富学习内容。</p>
+					</div>
+					<div class="timeline-dot"></div>
+				</div>
+
+				<div class="timeline-item" data-aos="fade-up">
+					<div class="timeline-content">
+						<span class="timeline-date">2024-11-11</span>
+						<h3>项目获奖</h3>
+						<p>项目荣获2024年仿真创新应用大赛国家级三等奖，实力得到认可。</p>
+					</div>
+					<div class="timeline-dot"></div>
+				</div>
+
+				<div class="timeline-item" data-aos="fade-up">
+					<div class="timeline-content">
+						<span class="timeline-date">2024-11-15</span>
+						<h3>搜索功能升级</h3>
+						<p>升级网站搜索功能，提供更精准的搜索结果和更好的用户体验。</p>
+					</div>
+					<div class="timeline-dot"></div>
+				</div>
+
+				<div class="timeline-item" data-aos="fade-up">
+					<div class="timeline-content">
+						<span class="timeline-date">2024-12-12</span>
+						<h3>中期检查通过</h3>
+						<p>中期检查通过，项目进展顺利。</p>
+					</div>
+					<div class="timeline-dot"></div>
+				</div>
+			</div>
+		</section>
 
 		<!-- 页脚 -->
 		<footer class="footer">
-			<div class="container">
-				<p>&copy; 2024 博客. 版权所有归中国矿业大学。来自计算机学院和机电学院。</p>
+			<div class="footer-content">
+				<div class="footer-logo">
+					<h3>MCU Learn</h3>
+					<p>探索创新科技的无限可能</p>
+				</div>
+				<div class="footer-links">
+					<div class="footer-section">
+						<h4>快速链接</h4>
+						<ul>
+							<li><a href="indexmodern.html">首页</a></li>
+							<li><a href="pages/blognew.html">学习资源</a></li>
+							<li><a href="pages/source.html">学术资源</a></li>
+							<li><a href="News/news.html">新闻动态</a></li>
+						</ul>
+					</div>
+					<div class="footer-section">
+						<h4>关注我们</h4>
+						<ul>
+							<li><a href="#">GitHub</a></li>
+							<li><a href="#">微信公众号</a></li>
+							<li><a href="#">知乎专栏</a></li>
+							<li><a href="#">技术社区</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="footer-bottom">
+				<p>&copy; 2024 MCU Learn. All rights reserved.</p>
 			</div>
 		</footer>
 
-		<!-- JavaScript -->
-		<script src="scripts.js"></script>
+		<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+		<script>
+			// 初始化 AOS
+			AOS.init({
+				duration: 800,
+				once: true
+			});
 
+			// 暗色模式切换
+			const themeToggle = document.querySelector('.theme-toggle');
+			const body = document.body;
+			const icon = themeToggle.querySelector('i');
+
+			// 检查本地存储中的主题设置
+			const savedTheme = localStorage.getItem('theme');
+			if (savedTheme === 'dark') {
+				body.classList.add('dark-mode');
+				icon.classList.remove('fa-moon');
+				icon.classList.add('fa-sun');
+				document.documentElement.setAttribute('data-theme', 'dark');
+			}
+
+			themeToggle.addEventListener('click', () => {
+				body.classList.toggle('dark-mode');
+				if (body.classList.contains('dark-mode')) {
+					icon.classList.remove('fa-moon');
+					icon.classList.add('fa-sun');
+					localStorage.setItem('theme', 'dark');
+					document.documentElement.setAttribute('data-theme', 'dark');
+				} else {
+					icon.classList.remove('fa-sun');
+					icon.classList.add('fa-moon');
+					localStorage.setItem('theme', 'light');
+					document.documentElement.setAttribute('data-theme', 'light');
+				}
+			});
+
+			// 进度条动画
+			const progressBars = document.querySelectorAll('.progress-fill');
+			const observer = new IntersectionObserver((entries) => {
+				entries.forEach(entry => {
+					if (entry.isIntersecting) {
+						entry.target.style.width = entry.target.parentElement.getAttribute('data-progress') + '%';
+					}
+				});
+			});
+
+			progressBars.forEach(bar => {
+				observer.observe(bar);
+			});
+		</script>
 	</body>
 </html>
