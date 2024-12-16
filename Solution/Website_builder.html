@@ -3,239 +3,457 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>网站建设者 - 博客</title>
-		<link rel="icon" href="../images/标签栏图标.png" type="images/png" sizes="34x32">
-		<link rel="stylesheet" href="../styles.css">
-		<link rel="stylesheet" href="../styles2.css" />
+		<title>网站建设者 - MCU Learn</title>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 		<style>
-			.back-button {
-				display: inline-block;
-				background-color: #333;
-				color: #fff;
-				padding: 10px 20px;
-				text-decoration: none;
-				border-radius: 5px;
-				margin-top: 20px;
+			:root {
+				--primary-color: #4a90e2;
+				--secondary-color: #6c63ff;
+				--success-color: #2ecc71;
+				--warning-color: #f1c40f;
+				--danger-color: #e74c3c;
+				--text-color: #2c3e50;
+				--light-text: #7f8c8d;
+				--card-bg: #ffffff;
+				--light-bg: #f5f6fa;
+				--border-radius: 12px;
+				--transition: all 0.3s ease;
 			}
 
-			.back-button:hover {
-				background-color: #555;
+			body {
+				margin: 0;
+				padding: 0;
+				font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+				background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+				color: var(--text-color);
+				min-height: 100vh;
 			}
 
-			/* 新增的 CSS 代码 */
-			.main-content {
-				display: flex;
-				justify-content: space-between;
+			.container {
+				max-width: 1200px;
+				margin: 0 auto;
+				padding: 40px 20px;
 			}
 
-			.sidebar-image {
-				width: 33%;
-				/* 调整图片区域的宽度 */
-				margin-right: 2%;
-				/* 添加一些间距 */
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				margin-top: -50px;
-				/* 调整图片位置 */
-				position: relative;
-				/* 确保 z-index 生效 */
-				z-index: 1;
-				/* 确保图片在导航栏之下 */
+			.header {
+				text-align: center;
+				margin-bottom: 60px;
+				color: white;
+				animation: fadeInDown 0.8s ease;
 			}
 
-			.sidebar-image img {
+			.header h1 {
+				font-size: 2.5rem;
+				margin-bottom: 20px;
+				text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+			}
+
+			.header p {
+				font-size: 1.1rem;
+				line-height: 1.6;
+				max-width: 800px;
+				margin: 0 auto;
+				opacity: 0.9;
+			}
+
+			.team-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+				gap: 30px;
+				margin-bottom: 40px;
+			}
+
+			.team-member {
+				background: rgba(255, 255, 255, 0.95);
+				border-radius: var(--border-radius);
+				padding: 30px;
+				text-align: center;
+				box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+				backdrop-filter: blur(10px);
+				transition: var(--transition);
+				animation: slideUp 0.8s ease;
+			}
+
+			.team-member:hover {
+				transform: translateY(-10px);
+				box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+			}
+
+			.member-avatar {
+				width: 150px;
+				height: 150px;
+				border-radius: 50%;
+				margin: 0 auto 20px;
+				overflow: hidden;
+				border: 5px solid white;
+				box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+			}
+
+			.member-avatar img {
 				width: 100%;
-				height: auto;
-				border-radius: 10px;
-				/* 可选：添加圆角 */
-				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-				/* 可选：添加阴影 */
+				height: 100%;
+				object-fit: cover;
+				transition: var(--transition);
 			}
 
-			.website-detail {
-				width: 65%;
-				/* 调整内容区域的宽度 */
+			.team-member:hover .member-avatar img {
+				transform: scale(1.1);
 			}
 
-			.image-wall {
-				margin-top: 20px;
-				/* 添加一些间距 */
+			.member-name {
+				font-size: 1.4rem;
+				margin-bottom: 10px;
+				color: var(--text-color);
 			}
 
-			.image-wall img {
-				width: 100%;
-				height: auto;
-				border-radius: 10px;
-				/* 可选：添加圆角 */
-				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-				/* 可选：添加阴影 */
+			.member-role {
+				color: var(--primary-color);
+				font-weight: 500;
+				margin-bottom: 15px;
 			}
 
-			.contributor {
-				display: flex;
-				align-items: center;
+			.member-description {
+				color: var(--light-text);
+				line-height: 1.6;
 				margin-bottom: 20px;
 			}
 
-			.contributor img {
-				width: 50px;
-				height: 50px;
-				border-radius: 50%;
-				/* 圆形头像 */
-				margin-right: 10px;
-			}
-
-			.contributor a {
-				color: #333;
-				text-decoration: none;
-				font-weight: bold;
-			}
-
-			.contributor p {
-				margin: 0;
-				font-size: 14px;
-				color: #666;
-			}
-
-			/* 确保导航栏在边栏图片之上 */
-			.navbar {
-				position: relative;
-				z-index: 2;
-			}
-
-			/* 页脚图片样式 */
-			.footer-images {
+			.social-links {
 				display: flex;
 				justify-content: center;
-				align-items: center;
-				margin-top: 20px;
+				gap: 15px;
 			}
 
-			.footer-images img {
-				width: 100px;
-				height: 100px;
-				margin: 0 10px;
+			.social-link {
+				width: 40px;
+				height: 40px;
 				border-radius: 50%;
-				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+				background: var(--light-bg);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				color: var(--primary-color);
+				text-decoration: none;
+				transition: var(--transition);
+			}
+
+			.social-link:hover {
+				background: var(--primary-color);
+				color: white;
+				transform: translateY(-3px);
+			}
+
+			.donation-section {
+				background: rgba(255, 255, 255, 0.95);
+				border-radius: var(--border-radius);
+				padding: 40px;
+				text-align: center;
+				max-width: 600px;
+				margin: 60px auto;
+				box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+				backdrop-filter: blur(10px);
+				animation: fadeIn 1s ease;
+			}
+
+			.donation-section h2 {
+				color: var(--text-color);
+				margin-bottom: 20px;
+			}
+
+			.qr-codes {
+				display: flex;
+				justify-content: center;
+				gap: 30px;
+				margin: 25px 0;
+				flex-wrap: wrap;
+			}
+
+			.qr-code-item {
+				text-align: center;
+				position: relative;
+				pointer-events: none;
+			}
+
+			.qr-code-item::before {
+				content: "MCU Learn";
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%) rotate(-45deg);
+				font-size: 24px;
+				color: rgba(0, 0, 0, 0.15);
+				pointer-events: none;
+				white-space: nowrap;
+				z-index: 1;
+			}
+
+			.qr-code-item img {
+				width: 180px;
+				border-radius: 10px;
+				box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+				transition: var(--transition);
+				user-select: none;
+				-webkit-user-drag: none;
+			}
+
+			.qr-code-wrapper {
+				position: relative;
+				display: inline-block;
+				background: white;
+				padding: 10px;
+				border-radius: 12px;
+			}
+
+			.qr-code-wrapper::after {
+				content: "";
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background: linear-gradient(45deg, rgba(255,255,255,0.1) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.1) 75%);
+				background-size: 10px 10px;
+				pointer-events: none;
+			}
+
+			.qr-code-label {
+				margin-top: 10px;
+				color: var(--text-color);
+				font-weight: 500;
+			}
+
+			@keyframes fadeInDown {
+				from {
+					opacity: 0;
+					transform: translateY(-20px);
+				}
+				to {
+					opacity: 1;
+					transform: translateY(0);
+				}
+			}
+
+			@keyframes slideUp {
+				from {
+					opacity: 0;
+					transform: translateY(20px);
+				}
+				to {
+					opacity: 1;
+					transform: translateY(0);
+				}
+			}
+
+			@keyframes fadeIn {
+				from {
+					opacity: 0;
+				}
+				to {
+					opacity: 1;
+				}
+			}
+
+			/* 返回按钮 */
+			.back-btn {
+				position: fixed;
+				top: 20px;
+				left: 20px;
+				background: rgba(255, 255, 255, 0.2);
+				color: white;
+				padding: 10px 20px;
+				border-radius: 30px;
+				text-decoration: none;
+				display: flex;
+				align-items: center;
+				gap: 8px;
+				backdrop-filter: blur(5px);
+				transition: var(--transition);
+			}
+
+			.back-btn:hover {
+				background: rgba(255, 255, 255, 0.3);
+				transform: translateX(-5px);
+			}
+
+			/* 响应式设计 */
+			@media (max-width: 768px) {
+				.container {
+					padding: 20px;
+				}
+
+				.header h1 {
+					font-size: 2rem;
+				}
+
+				.team-grid {
+					grid-template-columns: 1fr;
+				}
+
+				.qr-codes {
+					flex-direction: column;
+					align-items: center;
+				}
+
+				.back-btn {
+					top: 10px;
+					left: 10px;
+				}
 			}
 		</style>
 	</head>
 	<body>
-		<!-- 导航栏 -->
-		<nav class="navbar">
-			<div class="container">
-				<a href="../index.html" class="logo">博客</a>
-				<ul class="nav-links">
-					<li><a href="../websiteNow.html">Back</a></li>
-					<li><a href="../index.html">首页</a></li>
-					<li><a href="../blog.html">文章</a></li>
-					<li><a href="../about.html">关于</a></li>
-					<li><a href="../relation.html">联系</a></li>
-				</ul>
-				<div class="menu-toggle" id="mobile-menu">
-					<span class="bar"></span>
-					<span class="bar"></span>
-					<span class="bar"></span>
-				</div>
-			</div>
-		</nav>
+		<a href="../websiteNow.html" class="back-btn">
+			<i class="fas fa-arrow-left"></i>
+			返回
+		</a>
 
-		<!-- 主要内容 -->
-		<div class="container main-content">
-			<!-- 新增的边栏图片 -->
-			<div class="sidebar-image">
-				<img src="../images/边栏风景图1.png" alt="边栏风景图1">
-			</div>
-
-			<!-- 网站建设者详情 -->
-			<section class="website-detail">
-				<a href="new_Website_bulider.html" class="back-button">新版界面</a>
+		<div class="container">
+			<header class="header">
 				<h1>网站建设者</h1>
-				<p>本网站由五位热爱单片机技术的学生和一位经验丰富的老师共同建设。我们希望通过这个平台，与更多单片机爱好者分享知识和经验。</p>
-				<p>具体建设者包括：</p>
-				<ul>
-					<li class="contributor">
-						<img src="../images/CaiNiaoJian.jpg" alt="头像1">
-						<div>
-							<a href="https://github.com/CaiNiaoJian/">CaiNiaoJian</a>
-							<p>介绍文本1</p>
-						</div>
-					</li>
-					<li class="contributor">
-						<img src="../images/noobzhang.jpg" alt="头像2">
-						<div>
-							<a href="#">noobzhang</a>
-							<p>介绍文本2</p>
-						</div>
-					</li>
-					<li class="contributor">
-						<img src="../images/Yzj.jpg" alt="头像3">
-						<div>
-							<a href="#">Yzj</a>
-							<p>介绍文本3</p>
-						</div>
-					</li>
-					<li class="contributor">
-						<img src="../images/头像4.png" alt="头像4">
-						<div>
-							<a href="#">建设者4</a>
-							<p>介绍文本4</p>
-						</div>
-					</li>
-					<li class="contributor">
-						<img src="../images/头像5.png" alt="头像5">
-						<div>
-							<a href="#">建设者5</a>
-							<p>介绍文本5</p>
-						</div>
-					</li>
-					<li class="contributor">
-						<img src="../images/头像6.png" alt="头像6">
-						<div>
-							<a href="#">建设者6</a>
-							<p>介绍文本6</p>
-						</div>
-					</li>
-				</ul>
+				<p>我们是一群热爱单片机技术的学生和老师，致力于打造最好的MCU学习平台。通过这个网站，我们希望能够帮助更多的人进入单片机的精彩世界。</p>
+			</header>
 
-				<!-- 图片墙 -->
-				<!--
-				<section class="image-wall">
-					<img src="Sol_images/图.png" alt="1" class="image">
-					<img src="" alt="2" class="image">
-					<img src="" alt="3" class="image">
-				</section>
-				-->
-			</section>
-		</div>
+			<div class="team-grid">
+				<div class="team-member">
+					<div class="member-avatar">
+						<img src="../images/CaiNiaoJian.jpg" alt="CaiNiaoJian">
+					</div>
+					<h3 class="member-name">CaiNiaoJian</h3>
+					<div class="member-role">全栈开发</div>
+					<p class="member-description">负责网站的整体架构设计和核心功能开发，热衷于探索新技术，追求代码的优雅与效率。</p>
+					<div class="social-links">
+						<a href="https://github.com/CaiNiaoJian/" class="social-link" target="_blank">
+							<i class="fab fa-github"></i>
+						</a>
+					</div>
+				</div>
 
-		<!-- 页脚 -->
-		<footer class="footer">
-			<div class="container">
-				<p>&copy; 2024 博客. 版权所有归中国矿业大学。来自计算机学院和机电学院。</p>
-				<div class="footer-images">
-					<img src="../images/校徽1.jpg" alt="中国矿业大学校徽">
-					<img src="../images/github.jpg" alt="GitHub">
+				<div class="team-member">
+					<div class="member-avatar">
+						<img src="../images/noobzhang.jpg" alt="noobzhang">
+					</div>
+					<h3 class="member-name">noobzhang</h3>
+					<div class="member-role">网站运营</div>
+					<p class="member-description">负责网站文案编写与审核，设计实验内容，确保学习资源的质量和实用性。专注于为用户提供优质的学习体验。</p>
+					<div class="social-links">
+						<a href="#" class="social-link" target="_blank">
+							<i class="fab fa-github"></i>
+						</a>
+					</div>
+				</div>
+
+				<div class="team-member">
+					<div class="member-avatar">
+						<img src="../images/Yzj.jpg" alt="Yzj">
+					</div>
+					<h3 class="member-name">Yzj</h3>
+					<div class="member-role">网站运营</div>
+					<p class="member-description">专注于内容策划和实验设计，负责文案审核和质量把控，致力于打造专业、实用的MCU学习资源。</p>
+					<div class="social-links">
+						<a href="#" class="social-link" target="_blank">
+							<i class="fab fa-github"></i>
+						</a>
+					</div>
+				</div>
+
+				<div class="team-member">
+					<div class="member-avatar">
+						<img src="../images/头像4.png" alt="建设者4">
+					</div>
+					<h3 class="member-name">建设者4</h3>
+					<div class="member-role">技术支持</div>
+					<p class="member-description">提供技术支持和问题解答，帮助用户解决在学习过程中遇到的各种问题。</p>
+					<div class="social-links">
+						<a href="#" class="social-link" target="_blank">
+							<i class="fab fa-github"></i>
+						</a>
+					</div>
+				</div>
+
+				<div class="team-member">
+					<div class="member-avatar">
+						<img src="../images/头像5.png" alt="建设者5">
+					</div>
+					<h3 class="member-name">建设者5</h3>
+					<div class="member-role">内容创作</div>
+					<p class="member-description">负责编写教程和技术文章，将复杂的概念转化为易于理解的内容。</p>
+					<div class="social-links">
+						<a href="#" class="social-link" target="_blank">
+							<i class="fab fa-github"></i>
+						</a>
+					</div>
+				</div>
+
+				<div class="team-member">
+					<div class="member-avatar">
+						<img src="../images/头像6.png" alt="指导老师">
+					</div>
+					<h3 class="member-name">指导老师</h3>
+					<div class="member-role">技术顾问</div>
+					<p class="member-description">提供专业的技术指导和建议，确保网站内容的专业性和准确性。</p>
+					<div class="social-links">
+						<a href="#" class="social-link" target="_blank">
+							<i class="fab fa-github"></i>
+						</a>
+					</div>
 				</div>
 			</div>
-		</footer>
 
-		<!-- JavaScript -->
-		<script src="../scripts.js"></script>
-		<!-- JavaScript -->
-		<script src="scripts.js"></script>
-		<script>
-			// 图片墙动态效果
-			const images = document.querySelectorAll('.image-wall img');
+			<div class="donation-section">
+				<h2>支持我们</h2>
+				<p>如果您觉得我们的工作有价值，欢迎打赏支持我们继续改进</p>
+				<div class="qr-codes">
+					<div class="qr-code-item">
+						<div class="qr-code-wrapper">
+							<img src="../images/wechat-qr.png" alt="微信支付" 
+								oncontextmenu="return false;" 
+								data-checksum="mculearn_wx"
+								crossorigin="anonymous">
+						</div>
+						<div class="qr-code-label">微信支付</div>
+					</div>
+					<div class="qr-code-item">
+						<div class="qr-code-wrapper">
+							<img src="../images/alipay-qr.png" alt="支付宝" 
+								oncontextmenu="return false;" 
+								data-checksum="mculearn_ali"
+								crossorigin="anonymous">
+						</div>
+						<div class="qr-code-label">支付宝</div>
+					</div>
+				</div>
+			</div>
 
-			let delay = 0;
-			images.forEach(image => {
-				setTimeout(() => {
-					image.classList.add('show');
-				}, delay);
-				delay += 1800; // 每张图片延迟 2 秒
-			});
-		</script>
+			<script>
+				// 图片校验
+				document.addEventListener('DOMContentLoaded', function() {
+					const qrImages = document.querySelectorAll('.qr-code-item img');
+					
+					qrImages.forEach(img => {
+						img.addEventListener('load', function() {
+							const checksum = this.getAttribute('data-checksum');
+							if (!checksum || checksum !== `mculearn_${this.alt.includes('微信') ? 'wx' : 'ali'}`) {
+								this.style.display = 'none';
+								console.error('二维码校��失败');
+							}
+						});
+					});
+
+					// 禁用拖拽
+					document.addEventListener('dragstart', function(e) {
+						if (e.target.tagName === 'IMG') {
+							e.preventDefault();
+						}
+					});
+
+					// 禁用复制
+					document.addEventListener('copy', function(e) {
+						if (e.target.closest('.qr-code-item')) {
+							e.preventDefault();
+						}
+					});
+				});
+			</script>
+		</div>
 	</body>
 </html>
