@@ -785,6 +785,77 @@
         body.dark-mode .cookie-btn.decline:hover {
             background: rgba(255, 255, 255, 0.1);
         }
+
+        /* 页脚管理入口样式 */
+        .admin-section {
+            margin-top: 40px;
+            padding: 20px;
+            text-align: center;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .admin-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 20px;
+            background: var(--card-bg);
+            color: var(--text-color);
+            text-decoration: none;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .admin-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            color: var(--primary-color);
+        }
+
+        .admin-link i {
+            font-size: 1.1rem;
+        }
+
+        .footer-logo {
+            margin-bottom: 20px;
+        }
+
+        .footer-logo h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--text-color);
+        }
+
+        .footer-logo p {
+            color: var(--text-color);
+            opacity: 0.8;
+        }
+
+        .footer-logo .admin-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 20px;
+            margin-top: 15px;
+            background: var(--card-bg);
+            color: var(--text-color);
+            text-decoration: none;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            font-size: 0.9rem;
+        }
+
+        .footer-logo .admin-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            color: var(--primary-color);
+        }
+
+        .footer-logo .admin-link i {
+            font-size: 1rem;
+        }
     </style>
 </head>
 <body>
@@ -873,7 +944,7 @@
                 </div>
                 <div class="post-content">
                     <h3>关于STM32的GPIO配置问题</h3>
-                    <p>最近���使用STM32进行GPIO配置时遇到了一些问题，想请教大一下...</p>
+                    <p>最近使用STM32进行GPIO配置时遇到了一些问题，想请教大一下...</p>
                     <div class="post-tags">
                         <span class="post-tag">STM32</span>
                         <span class="post-tag">GPIO</span>
@@ -1074,6 +1145,10 @@
             <div class="footer-logo">
                 <h3>MCU Learn</h3>
                 <p>探索创新科技的无限可能</p>
+                <a href="../Load/ManagementLoading.html" class="admin-link">
+                    <i class="fas fa-user-shield"></i>
+                    管理中心
+                </a>
             </div>
             <div class="footer-links">
                 <div class="footer-section">

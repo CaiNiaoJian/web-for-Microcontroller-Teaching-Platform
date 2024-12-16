@@ -3,62 +3,486 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>管理员登陆 - 博客</title>
-		<link rel="stylesheet" href="../styles.css">
-		<link rel="stylesheet" href="ManagementLoading.css">
+		<title>管理员登录 - MCU Learn</title>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+		<style>
+			:root {
+				--primary-color: #3498db;
+				--secondary-color: #2ecc71;
+				--error-color: #e74c3c;
+				--text-color: #333;
+				--border-color: #ddd;
+				--bg-color: #f9f9f9;
+			}
+
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+
+			body {
+				font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+				background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+				min-height: 100vh;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				color: var(--text-color);
+				padding: 20px;
+			}
+
+			.container {
+				width: 100%;
+				max-width: 1000px;
+				display: flex;
+				background: white;
+				border-radius: 20px;
+				overflow: hidden;
+				box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+			}
+
+			.illustration-container {
+				flex: 1;
+				background: linear-gradient(45deg, rgba(52, 152, 219, 0.9), rgba(46, 204, 113, 0.9));
+				padding: 40px;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				color: white;
+				position: relative;
+				overflow: hidden;
+			}
+
+			.bg-slideshow {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				z-index: -1;
+			}
+
+			.bg-slideshow img {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				opacity: 0;
+				transition: opacity 2s ease-in-out;
+			}
+
+			.bg-slideshow img.active {
+				opacity: 1;
+			}
+
+			.illustration-container::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: linear-gradient(45deg, rgba(52, 152, 219, 0.9), rgba(46, 204, 113, 0.9));
+				z-index: -1;
+			}
+
+			.illustration-text {
+				font-size: 2.5em;
+				font-weight: bold;
+				margin-bottom: 20px;
+				text-align: center;
+				text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+			}
+
+			.illustration-subtext {
+				font-size: 1.2em;
+				text-align: center;
+				opacity: 0.9;
+				line-height: 1.6;
+			}
+
+			.form-container {
+				flex: 1;
+				padding: 60px;
+				background: white;
+			}
+
+			h2 {
+				text-align: center;
+				color: var(--primary-color);
+				margin-bottom: 40px;
+				font-size: 32px;
+				font-weight: 600;
+			}
+
+			.form-group {
+				margin-bottom: 30px;
+			}
+
+			label {
+				display: block;
+				margin-bottom: 10px;
+				font-weight: 500;
+				color: #666;
+				font-size: 0.95em;
+			}
+
+			input {
+				width: 100%;
+				padding: 15px;
+				border: 2px solid var(--border-color);
+				border-radius: 12px;
+				font-size: 16px;
+				transition: all 0.3s ease;
+				background: var(--bg-color);
+			}
+
+			input:focus {
+				outline: none;
+				border-color: var(--primary-color);
+				background: white;
+				box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.1);
+			}
+
+			.password-input {
+				position: relative;
+			}
+
+			.toggle-password {
+				position: absolute;
+				right: 15px;
+				top: 50%;
+				transform: translateY(-50%);
+				cursor: pointer;
+				color: #666;
+				transition: all 0.3s ease;
+				padding: 5px;
+			}
+
+			.toggle-password:hover {
+				color: var(--primary-color);
+			}
+
+			.submit-btn {
+				width: 100%;
+				padding: 16px;
+				background: var(--primary-color);
+				color: white;
+				border: none;
+				border-radius: 12px;
+				font-size: 16px;
+				font-weight: 600;
+				cursor: pointer;
+				transition: all 0.3s ease;
+				position: relative;
+				overflow: hidden;
+			}
+
+			.submit-btn::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: -100%;
+				width: 100%;
+				height: 100%;
+				background: linear-gradient(
+					120deg,
+					transparent,
+					rgba(255, 255, 255, 0.2),
+					transparent
+				);
+				transition: 0.5s;
+			}
+
+			.submit-btn:hover::before {
+				left: 100%;
+			}
+
+			.submit-btn:hover {
+				background: #2980b9;
+				transform: translateY(-2px);
+				box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+			}
+
+			.form-footer {
+				margin-top: 30px;
+				text-align: center;
+				display: flex;
+				justify-content: center;
+				gap: 20px;
+			}
+
+			.form-footer a {
+				color: var(--primary-color);
+				text-decoration: none;
+				font-weight: 500;
+				transition: all 0.3s ease;
+				padding: 8px 16px;
+				border-radius: 8px;
+			}
+
+			.form-footer a:hover {
+				background: rgba(52, 152, 219, 0.1);
+				color: #2980b9;
+			}
+
+			.form-footer .divider {
+				color: #666;
+				opacity: 0.5;
+			}
+
+			/* 登录提示样式 */
+			.login-message {
+				position: fixed;
+				top: 20px;
+				right: 20px;
+				padding: 15px 25px;
+				border-radius: 12px;
+				color: white;
+				font-weight: 500;
+				opacity: 0;
+				transform: translateY(-20px);
+				transition: all 0.3s ease;
+				z-index: 1000;
+				box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+			}
+
+			.login-message.show {
+				opacity: 1;
+				transform: translateY(0);
+			}
+
+			.login-message.success {
+				background: var(--secondary-color);
+			}
+
+			.login-message.error {
+				background: var(--error-color);
+			}
+
+			/* 加载动画 */
+			.loading-spinner {
+				display: none;
+				width: 20px;
+				height: 20px;
+				border: 2px solid rgba(255, 255, 255, 0.3);
+				border-top: 2px solid white;
+				border-radius: 50%;
+				animation: spin 1s linear infinite;
+				margin-left: 10px;
+			}
+
+			@keyframes spin {
+				0% { transform: rotate(0deg); }
+				100% { transform: rotate(360deg); }
+			}
+
+			/* 按钮加载状态 */
+			.btn-loading {
+				position: relative;
+				color: transparent !important;
+			}
+
+			.btn-loading .loading-spinner {
+				display: inline-block;
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				transform: translate(-50%, -50%);
+			}
+
+			/* 响应式设计 */
+			@media (max-width: 768px) {
+				.container {
+					flex-direction: column;
+					max-width: 400px;
+				}
+
+				.illustration-container {
+					padding: 30px;
+					min-height: 200px;
+				}
+
+				.form-container {
+					padding: 30px;
+				}
+
+				.illustration-text {
+					font-size: 2em;
+				}
+
+				.illustration-subtext {
+					font-size: 1em;
+				}
+			}
+
+			@media (max-width: 480px) {
+				body {
+					padding: 10px;
+				}
+
+				.container {
+					border-radius: 15px;
+				}
+
+				.illustration-container {
+					padding: 20px;
+					min-height: 150px;
+				}
+
+				.form-container {
+					padding: 20px;
+				}
+
+				h2 {
+					font-size: 24px;
+					margin-bottom: 30px;
+				}
+
+				.illustration-text {
+					font-size: 1.5em;
+				}
+			}
+		</style>
 	</head>
 	<body>
-		<!-- 导航栏 -->
-		<nav class="navbar">
-			<div class="container">
-				<a href="../index.html" class="logo">返回首页</a>
-			</div>
-		</nav>
+		<!-- 登录提示框 -->
+		<div class="login-message" id="loginMessage"></div>
 
-		<!-- 主要内容 -->
-		<div class="login-container">
-			<div class="login-content">
-				<img src="../images/风景2.jpg" alt="风景图" class="side-image">
-				<div class="login-form-wrapper">
-					<img src="../images/校徽1.jpg" alt="校徽" class="logo-image">
-					<div class="login-form">
-						<h2>管理员登陆</h2>
-						<input type="text" id="username" placeholder="账号（特殊号或邮箱）" required>
-						<input type="password" id="password" placeholder="密码" required>
-						<button type="submit" id="login-btn">登陆</button>
-						<div class="register-link">
-							<a href="registration.html">注册</a>
+		<div class="container">
+			<div class="illustration-container">
+				<div class="bg-slideshow">
+					<img src="../images/风景1.jpg" alt="风景1" class="active">
+					<img src="../images/风景2.jpg" alt="风景2">
+					<img src="../images/风景3.jpg" alt="风景3">
+				</div>
+				<div class="illustration-text">MCU Learn</div>
+				<div class="illustration-subtext">
+					欢迎回来，管理员！<br>
+					让我们一起管理和维护这个知识平台
+				</div>
+			</div>
+			<div class="form-container">
+				<h2>管理员登录</h2>
+				<form id="loginForm">
+					<div class="form-group">
+						<label for="email">邮箱</label>
+						<input type="email" id="email" name="email" required placeholder="请输入管理员邮箱">
+					</div>
+					<div class="form-group">
+						<label for="password">密码</label>
+						<div class="password-input">
+							<input type="password" id="password" name="password" required placeholder="请输入密码">
+							<i class="fas fa-eye-slash toggle-password"></i>
 						</div>
 					</div>
+					<button type="submit" class="submit-btn">
+						登录
+						<div class="loading-spinner"></div>
+					</button>
+				</form>
+				<div class="form-footer">
+					<a href="../indexmodern.html">返回首页</a>
+					<span class="divider">|</span>
+					<a href="registration.html">注册账号</a>
 				</div>
 			</div>
 		</div>
 
-		<!-- 页脚 -->
-		<footer class="footer">
-			<div class="container">
-				<p>&copy; 2024 博客. 版权所有归中国矿业大学。来自计算机学院和机电学院。</p>
-			</div>
-		</footer>
-
-		<!-- JavaScript -->
-		<script src="../scripts.js"></script>
+		<!-- 引入管理员配置 -->
+		<script src="ManagerCenter/admin-config.js"></script>
 		<script>
-			document.getElementById('login-btn').addEventListener('click', function() {
-				const username = document.getElementById('username').value;
+			// 背景图片轮播
+			function initSlideshow() {
+				const images = document.querySelectorAll('.bg-slideshow img');
+				let currentIndex = 0;
+
+				function nextImage() {
+					images[currentIndex].classList.remove('active');
+					currentIndex = (currentIndex + 1) % images.length;
+					images[currentIndex].classList.add('active');
+				}
+
+				// 每5秒切换一次图片
+				setInterval(nextImage, 5000);
+			}
+
+			// 页面加载完成后初始化轮播
+			document.addEventListener('DOMContentLoaded', initSlideshow);
+
+			// 显示登录消息
+			function showMessage(message, type) {
+				const messageEl = document.getElementById('loginMessage');
+				messageEl.textContent = message;
+				messageEl.className = `login-message ${type}`;
+				messageEl.classList.add('show');
+
+				setTimeout(() => {
+					messageEl.classList.remove('show');
+				}, 3000);
+			}
+
+			// 设置按钮加载状态
+			function setButtonLoading(loading) {
+				const button = document.querySelector('.submit-btn');
+				if (loading) {
+					button.classList.add('btn-loading');
+				} else {
+					button.classList.remove('btn-loading');
+				}
+			}
+
+			// 处理登录表单提交
+			document.getElementById('loginForm').addEventListener('submit', async (e) => {
+				e.preventDefault();
+				
+				const email = document.getElementById('email').value;
 				const password = document.getElementById('password').value;
 
-				// 从 localStorage 中读取用户信息
-				const user = JSON.parse(localStorage.getItem('user'));
+				// 设置加载状态
+				setButtonLoading(true);
 
-				// 验证用户信息
-				if (user && user.username === username && user.password === password) {
-					alert('登录成功');
-					//window.location.href = '../Load/ManagerCenter/managercenter.html'; // 跳转到 managercenter.html
-					window.location.href = '../systemtimeout.html'; // 跳转到 ManagerCenter.html
-				} else {
-					alert('用户名或密码错误');
+				try {
+					// 模拟网络延迟
+					await new Promise(resolve => setTimeout(resolve, 1000));
+
+					// 验证管理员账号
+					const admin = adminWhitelist.validateAdmin(email, password);
+
+					if (admin) {
+						// 保存登录状态
+						localStorage.setItem('isLoggedIn', 'true');
+						localStorage.setItem('username', admin.name);
+						localStorage.setItem('userRole', admin.role);
+
+						showMessage('登录成功，正在跳转...', 'success');
+
+						// 延迟跳转
+						setTimeout(() => {
+							window.location.href = 'ManagerCenter/managercenter.html';
+						}, 1500);
+					} else {
+						showMessage('邮箱或密码错误', 'error');
+					}
+				} catch (error) {
+					showMessage('登录失败，请稍后重试', 'error');
+					console.error('Login error:', error);
+				} finally {
+					setButtonLoading(false);
 				}
+			});
+
+			// 密码显示切换
+			document.querySelector('.toggle-password').addEventListener('click', function() {
+				const passwordInput = document.getElementById('password');
+				const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+				passwordInput.setAttribute('type', type);
+				this.classList.toggle('fa-eye');
+				this.classList.toggle('fa-eye-slash');
 			});
 		</script>
 	</body>

@@ -3,63 +3,699 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>注册 - 博客</title>
-		<link rel="stylesheet" href="../styles.css">
-		<link rel="stylesheet" href="registration.css">
+		<title>注册 - MCU Learn</title>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+		<style>
+			:root {
+				--primary-color: #4a90e2;
+				--secondary-color: #6c63ff;
+				--success-color: #2ecc71;
+				--warning-color: #f1c40f;
+				--danger-color: #e74c3c;
+				--text-color: #2c3e50;
+				--light-text: #7f8c8d;
+				--card-bg: #ffffff;
+				--light-bg: #f5f6fa;
+				--border-radius: 12px;
+				--transition: all 0.3s ease;
+			}
+
+			body {
+				background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+				min-height: 100vh;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+				padding: 20px;
+				margin: 0;
+			}
+
+			.registration-container {
+				width: 100%;
+				max-width: 500px;
+				background: rgba(255, 255, 255, 0.95);
+				border-radius: var(--border-radius);
+				box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+				backdrop-filter: blur(10px);
+				animation: slideUp 0.5s ease;
+				position: relative;
+				overflow: hidden;
+				padding: 40px;
+			}
+
+			.registration-container::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				height: 5px;
+				background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+			}
+
+			@keyframes slideUp {
+				from {
+					opacity: 0;
+					transform: translateY(30px);
+				}
+				to {
+					opacity: 1;
+					transform: translateY(0);
+				}
+			}
+
+			.registration-header {
+				text-align: center;
+				margin-bottom: 40px;
+				position: relative;
+			}
+
+			.registration-header h2 {
+				color: var(--text-color);
+				font-size: 2.2rem;
+				margin-bottom: 15px;
+				font-weight: 600;
+				background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
+			}
+
+			.registration-header p {
+				color: var(--light-text);
+				font-size: 1.1rem;
+				line-height: 1.6;
+			}
+
+			.form-group {
+				margin-bottom: 25px;
+				position: relative;
+			}
+
+			.form-group label {
+				display: block;
+				color: var(--text-color);
+				margin-bottom: 10px;
+				font-weight: 500;
+				font-size: 0.95rem;
+			}
+
+			.input-with-icon {
+				position: relative;
+			}
+
+			.input-with-icon i {
+				position: absolute;
+				left: 15px;
+				top: 50%;
+				transform: translateY(-50%);
+				color: var(--light-text);
+				font-size: 1.1rem;
+				transition: var(--transition);
+			}
+
+			.form-control {
+				width: 100%;
+				padding: 14px 15px 14px 45px;
+				border: 2px solid var(--light-bg);
+				border-radius: var(--border-radius);
+				font-size: 1rem;
+				transition: var(--transition);
+				background: var(--light-bg);
+				color: var(--text-color);
+			}
+
+			.form-control:focus {
+				border-color: var(--primary-color);
+				outline: none;
+				background: white;
+				box-shadow: 0 0 0 4px rgba(74, 144, 226, 0.1);
+			}
+
+			.form-control:focus + i {
+				color: var(--primary-color);
+			}
+
+			.password-toggle {
+				position: absolute;
+				right: 15px;
+				top: 50%;
+				transform: translateY(-50%);
+				cursor: pointer;
+				color: var(--light-text);
+				transition: var(--transition);
+				padding: 5px;
+			}
+
+			.password-toggle:hover {
+				color: var(--primary-color);
+			}
+
+			.register-btn {
+				width: 100%;
+				padding: 16px;
+				background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+				color: white;
+				border: none;
+				border-radius: var(--border-radius);
+				font-size: 1.1rem;
+				font-weight: 600;
+				cursor: pointer;
+				transition: var(--transition);
+				margin-top: 20px;
+				position: relative;
+				overflow: hidden;
+			}
+
+			.register-btn::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: -100%;
+				width: 100%;
+				height: 100%;
+				background: linear-gradient(
+					90deg,
+					transparent,
+					rgba(255, 255, 255, 0.2),
+					transparent
+				);
+				transition: 0.5s;
+			}
+
+			.register-btn:hover::before {
+				left: 100%;
+			}
+
+			.register-btn:hover {
+				transform: translateY(-2px);
+				box-shadow: 0 5px 15px rgba(108, 99, 255, 0.4);
+			}
+
+			.register-btn:active {
+				transform: translateY(0);
+			}
+
+			.form-footer {
+				text-align: center;
+				margin-top: 30px;
+				color: var(--light-text);
+				font-size: 1rem;
+			}
+
+			.form-footer a {
+				color: var(--primary-color);
+				text-decoration: none;
+				font-weight: 600;
+				transition: var(--transition);
+			}
+
+			.form-footer a:hover {
+				color: var(--secondary-color);
+				text-decoration: underline;
+			}
+
+			.error-message {
+				color: var(--danger-color);
+				font-size: 0.9rem;
+				margin-top: 8px;
+				display: none;
+				animation: fadeIn 0.3s ease;
+			}
+
+			@keyframes fadeIn {
+				from { opacity: 0; }
+				to { opacity: 1; }
+			}
+
+			.password-strength {
+				height: 4px;
+				background: var(--light-bg);
+				margin-top: 10px;
+				border-radius: 2px;
+				overflow: hidden;
+				position: relative;
+			}
+
+			.password-strength-bar {
+				height: 100%;
+				width: 0;
+				transition: var(--transition);
+				position: relative;
+			}
+
+			.strength-weak {
+				background: var(--danger-color);
+				width: 33.33%;
+			}
+
+			.strength-medium {
+				background: var(--warning-color);
+				width: 66.66%;
+			}
+
+			.strength-strong {
+				background: var(--success-color);
+				width: 100%;
+			}
+
+			.terms-checkbox {
+				display: flex;
+				align-items: center;
+				gap: 10px;
+				margin: 25px 0;
+				padding: 15px;
+				background: var(--light-bg);
+				border-radius: var(--border-radius);
+				transition: var(--transition);
+			}
+
+			.terms-checkbox:hover {
+				background: rgba(74, 144, 226, 0.1);
+			}
+
+			.terms-checkbox input[type="checkbox"] {
+				width: 20px;
+				height: 20px;
+				accent-color: var(--primary-color);
+				cursor: pointer;
+			}
+
+			.terms-checkbox label {
+				margin: 0;
+				cursor: pointer;
+			}
+
+			/* 验证码样式 */
+			.captcha-group {
+				display: flex;
+				gap: 15px;
+				align-items: center;
+			}
+
+			.captcha-input {
+				flex: 1;
+			}
+
+			.captcha-container {
+				background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+				padding: 10px 20px;
+				border-radius: var(--border-radius);
+				font-family: 'Courier New', monospace;
+				font-size: 1.5rem;
+				font-weight: bold;
+				letter-spacing: 5px;
+				color: #2c3e50;
+				text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+				cursor: pointer;
+				user-select: none;
+				position: relative;
+				overflow: hidden;
+				min-width: 150px;
+				text-align: center;
+				transition: var(--transition);
+			}
+
+			.captcha-container:hover {
+				transform: scale(1.02);
+			}
+
+			.captcha-container::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: repeating-linear-gradient(
+					45deg,
+					transparent,
+					transparent 5px,
+					rgba(0,0,0,0.05) 5px,
+					rgba(0,0,0,0.05) 10px
+				);
+			}
+
+			/* 响应式设计 */
+			@media (max-width: 768px) {
+				.registration-container {
+					margin: 40px 20px;
+					padding: 30px 20px;
+				}
+
+				.registration-header h2 {
+					font-size: 1.8rem;
+				}
+
+				.captcha-group {
+					flex-direction: column;
+				}
+
+				.captcha-container {
+					width: 100%;
+				}
+			}
+
+			/* 暗色模式 */
+			body.dark-mode {
+				background: linear-gradient(135deg, #2d3436 0%, #000000 100%);
+			}
+
+			body.dark-mode .registration-container {
+				background: rgba(45, 52, 54, 0.95);
+			}
+
+			body.dark-mode .form-control {
+				background: #353b48;
+				border-color: #353b48;
+				color: #dfe6e9;
+			}
+
+			body.dark-mode .form-control:focus {
+				background: #2d3436;
+				border-color: var(--primary-color);
+			}
+
+			body.dark-mode .registration-header h2 {
+				background: linear-gradient(135deg, #74b9ff, #a29bfe);
+				-webkit-background-clip: text;
+			}
+
+			body.dark-mode .terms-checkbox {
+				background: #353b48;
+			}
+
+			body.dark-mode .terms-checkbox:hover {
+				background: rgba(74, 144, 226, 0.2);
+			}
+
+			body.dark-mode .registration-header p,
+			body.dark-mode .form-footer,
+			body.dark-mode label {
+				color: #b2bec3;
+			}
+
+			/* 返回首页按钮 */
+			.back-to-home {
+				position: absolute;
+				top: 20px;
+				left: 20px;
+				color: white;
+				text-decoration: none;
+				display: flex;
+				align-items: center;
+				gap: 8px;
+				font-size: 1.1rem;
+				padding: 10px 20px;
+				border-radius: 30px;
+				background: rgba(255, 255, 255, 0.2);
+				backdrop-filter: blur(5px);
+				transition: var(--transition);
+			}
+
+			.back-to-home:hover {
+				background: rgba(255, 255, 255, 0.3);
+				transform: translateY(-2px);
+			}
+
+			.back-to-home i {
+				font-size: 1.2rem;
+			}
+
+			/* 主题切换按钮 */
+			.theme-toggle {
+				position: absolute;
+				top: 20px;
+				right: 20px;
+				background: rgba(255, 255, 255, 0.2);
+				border: none;
+				color: white;
+				width: 45px;
+				height: 45px;
+				border-radius: 50%;
+				cursor: pointer;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-size: 1.2rem;
+				backdrop-filter: blur(5px);
+				transition: var(--transition);
+			}
+
+			.theme-toggle:hover {
+				background: rgba(255, 255, 255, 0.3);
+				transform: scale(1.1);
+			}
+
+			@media (max-width: 768px) {
+				.back-to-home, .theme-toggle {
+					position: fixed;
+				}
+			}
+		</style>
 	</head>
 	<body>
-		<!-- 导航栏 -->
-		<nav class="navbar">
-			<div class="container">
-				<a href="../index.html" class="logo">返回首页</a>
-			</div>
-		</nav>
+		<!-- 返回首页按钮 -->
+		<a href="../indexmodern.html" class="back-to-home">
+			<i class="fas fa-arrow-left"></i>
+			返回首页
+		</a>
 
-		<!-- 主要内容 -->
+		<!-- 主题切换按钮 -->
+		<button class="theme-toggle">
+			<i class="fas fa-moon"></i>
+		</button>
+
+		<!-- 注册表单 -->
 		<div class="registration-container">
-			<div class="registration-content">
-				<img src="../images/风景1.jpg" alt="风景图" class="side-image">
-				<div class="registration-form">
-					<h2>管理员注册</h2>
-					<input type="text" id="username" placeholder="用户名" required>
-					<input type="email" id="email" placeholder="邮箱" required>
-					<input type="password" id="password" placeholder="密码" required>
-					<input type="password" id="confirm-password" placeholder="确认密码" required>
-					<div class="captcha-container">
-						<input type="text" id="captcha" placeholder="验证码" required>
-						<div id="captcha-image" onclick="refreshCaptcha()">ABC123</div>
-					</div>
-					<button type="submit" id="register-btn">注册</button>
-				</div>
+			<div class="registration-header">
+				<h2>创建账号</h2>
+				<p>加入我们的学习社区，开启你的MCU学习之旅</p>
 			</div>
+			<form id="registrationForm">
+				<div class="form-group">
+					<label for="username">用户名</label>
+					<div class="input-with-icon">
+						<input type="text" id="username" class="form-control" placeholder="请输入用户名" required>
+						<i class="fas fa-user"></i>
+					</div>
+					<div class="error-message" id="usernameError">用户名不能为空</div>
+				</div>
+
+				<div class="form-group">
+					<label for="email">邮箱</label>
+					<div class="input-with-icon">
+						<input type="email" id="email" class="form-control" placeholder="请输入邮箱" required>
+						<i class="fas fa-envelope"></i>
+					</div>
+					<div class="error-message" id="emailError">请输入有效的邮箱地址</div>
+				</div>
+
+				<div class="form-group">
+					<label for="password">密码</label>
+					<div class="input-with-icon">
+						<input type="password" id="password" class="form-control" placeholder="请输入密码" required>
+						<i class="fas fa-lock"></i>
+						<span class="password-toggle" onclick="togglePassword()">
+							<i class="fas fa-eye"></i>
+						</span>
+					</div>
+					<div class="password-strength">
+						<div class="password-strength-bar"></div>
+					</div>
+					<div class="error-message" id="passwordError">密码长度至少为8位</div>
+				</div>
+
+				<div class="form-group">
+					<label for="confirmPassword">确认密码</label>
+					<div class="input-with-icon">
+						<input type="password" id="confirmPassword" class="form-control" placeholder="请再次输入密码" required>
+						<i class="fas fa-lock"></i>
+					</div>
+					<div class="error-message" id="confirmPasswordError">两次输入的密码不一致</div>
+				</div>
+
+				<div class="form-group">
+					<label for="captcha">验证码</label>
+					<div class="captcha-group">
+						<div class="input-with-icon captcha-input">
+							<input type="text" id="captcha" class="form-control" placeholder="请输入验证码" required>
+							<i class="fas fa-shield-alt"></i>
+						</div>
+						<div class="captcha-container" id="captchaCode" onclick="refreshCaptcha()">
+							ABCD
+						</div>
+					</div>
+					<div class="error-message" id="captchaError">验证码不正确</div>
+				</div>
+
+				<div class="terms-checkbox">
+					<input type="checkbox" id="terms" required>
+					<label for="terms">我已阅读并同意<a href="#">服务条款</a>和<a href="#">隐私政策</a></label>
+				</div>
+
+				<button type="submit" class="register-btn">
+					<i class="fas fa-user-plus"></i>
+					注册账号
+				</button>
+
+				<div class="form-footer">
+					已有账号？<a href="ManagementLoading.html">立即登录</a>
+				</div>
+			</form>
 		</div>
 
-		<!-- 页脚 -->
-		<footer class="footer">
-			<div class="container">
-				<p>&copy; 2024 博客. 版权所有归中国矿业大学。来自计算机学院和机电学院。</p>
-			</div>
-		</footer>
-
-		<!-- JavaScript -->
-		<script src="../scripts.js"></script>
-		<script src="js/registration.js"></script>
 		<script>
-			let captchaCode = generateCaptcha();
-			document.getElementById('captcha-image').innerText = captchaCode;
-
+			// 验证码生成和验证
+			let currentCaptcha = '';
+			
 			function generateCaptcha() {
-				const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+				const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
 				let captcha = '';
-				for (let i = 0; i < 6; i++) {
+				for (let i = 0; i < 4; i++) {
 					captcha += chars.charAt(Math.floor(Math.random() * chars.length));
 				}
 				return captcha;
 			}
 
 			function refreshCaptcha() {
-				captchaCode = generateCaptcha();
-				document.getElementById('captcha-image').innerText = captchaCode;
+				currentCaptcha = generateCaptcha();
+				const captchaElement = document.getElementById('captchaCode');
+				captchaElement.textContent = currentCaptcha;
+				
+				// 添加随机颜色和旋转效果
+				const letters = currentCaptcha.split('');
+				captchaElement.innerHTML = letters.map(letter => {
+					const rotation = Math.random() * 30 - 15;
+					const color = `hsl(${Math.random() * 360}, 70%, 40%)`;
+					return `<span style="display: inline-block; transform: rotate(${rotation}deg); color: ${color}">${letter}</span>`;
+				}).join('');
+			}
+
+			// 初始化验证码
+			refreshCaptcha();
+
+			// 密码显示切换
+			function togglePassword() {
+				const passwordInput = document.getElementById('password');
+				const toggleIcon = document.querySelector('.password-toggle i');
+				
+				if (passwordInput.type === 'password') {
+					passwordInput.type = 'text';
+					toggleIcon.classList.remove('fa-eye');
+					toggleIcon.classList.add('fa-eye-slash');
+				} else {
+					passwordInput.type = 'password';
+					toggleIcon.classList.remove('fa-eye-slash');
+					toggleIcon.classList.add('fa-eye');
+				}
+			}
+
+			// 密码强度检测
+			const passwordInput = document.getElementById('password');
+			const strengthBar = document.querySelector('.password-strength-bar');
+
+			passwordInput.addEventListener('input', function() {
+				const password = this.value;
+				let strength = 0;
+				
+				if (password.length >= 8) strength++;
+				if (password.match(/[A-Z]/)) strength++;
+				if (password.match(/[0-9]/)) strength++;
+				if (password.match(/[^A-Za-z0-9]/)) strength++;
+
+				strengthBar.className = 'password-strength-bar';
+				if (strength >= 3) {
+					strengthBar.classList.add('strength-strong');
+				} else if (strength >= 2) {
+					strengthBar.classList.add('strength-medium');
+				} else if (strength >= 1) {
+					strengthBar.classList.add('strength-weak');
+				}
+			});
+
+			// 表单验证
+			const form = document.getElementById('registrationForm');
+			const confirmPassword = document.getElementById('confirmPassword');
+			const captchaInput = document.getElementById('captcha');
+
+			form.addEventListener('submit', function(e) {
+				e.preventDefault();
+				let isValid = true;
+
+				// 用户名验证
+				if (username.value.trim() === '') {
+					document.getElementById('usernameError').style.display = 'block';
+					isValid = false;
+				} else {
+					document.getElementById('usernameError').style.display = 'none';
+				}
+
+				// 邮箱验证
+				const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+				if (!emailRegex.test(email.value)) {
+					document.getElementById('emailError').style.display = 'block';
+					isValid = false;
+				} else {
+					document.getElementById('emailError').style.display = 'none';
+				}
+
+				// 密码验证
+				if (password.value.length < 8) {
+					document.getElementById('passwordError').style.display = 'block';
+					isValid = false;
+				} else {
+					document.getElementById('passwordError').style.display = 'none';
+				}
+
+				// 确认密码验证
+				if (password.value !== confirmPassword.value) {
+					document.getElementById('confirmPasswordError').style.display = 'block';
+					isValid = false;
+				} else {
+					document.getElementById('confirmPasswordError').style.display = 'none';
+				}
+
+				// 验证码验证
+				if (captchaInput.value.toLowerCase() !== currentCaptcha.toLowerCase()) {
+					document.getElementById('captchaError').style.display = 'block';
+					isValid = false;
+					refreshCaptcha(); // 验证失败时刷新验证码
+				} else {
+					document.getElementById('captchaError').style.display = 'none';
+				}
+
+				if (isValid) {
+					// TODO: 提交表单到服务器
+					alert('注册成功！');
+					window.location.href = 'ManagementLoading.html';
+				}
+			});
+
+			// 暗色模式切换
+			const themeToggle = document.querySelector('.theme-toggle');
+			const body = document.body;
+			const icon = themeToggle.querySelector('i');
+
+			themeToggle.addEventListener('click', () => {
+				body.classList.toggle('dark-mode');
+				if (body.classList.contains('dark-mode')) {
+					icon.classList.remove('fa-moon');
+					icon.classList.add('fa-sun');
+					localStorage.setItem('theme', 'dark');
+				} else {
+					icon.classList.remove('fa-sun');
+					icon.classList.add('fa-moon');
+					localStorage.setItem('theme', 'light');
+				}
+			});
+
+			// 检查本地存储中的主题设置
+			const savedTheme = localStorage.getItem('theme');
+			if (savedTheme === 'dark') {
+				body.classList.add('dark-mode');
+				icon.classList.remove('fa-moon');
+				icon.classList.add('fa-sun');
 			}
 		</script>
 	</body>

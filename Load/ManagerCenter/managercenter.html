@@ -3,110 +3,1298 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>管理者中心</title>
-		<link rel="stylesheet" href="styles.css">
-		<link rel="stylesheet" href="managercenter.css">
+		<title>管理中心 - MCU Learn</title>
+		<link rel="stylesheet" href="../../z_css/modern-style.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.css">
+		<link rel="stylesheet" href="../registration.css">
+		<style>
+			/* 管理中心特定样式 */
+			:root {
+				--primary-color: #4a90e2;
+				--secondary-color: #6c63ff;
+				--success-color: #2ecc71;
+				--warning-color: #f1c40f;
+				--danger-color: #e74c3c;
+				--text-color: #2c3e50;
+				--light-text: #7f8c8d;
+				--card-bg: #ffffff;
+				--light-bg: #f5f6fa;
+				--border-radius: 12px;
+				--transition: all 0.3s ease;
+				--sidebar-width: 250px;
+			}
+
+			/* 布局样式 */
+			.admin-wrapper {
+				display: flex;
+				min-height: 100vh;
+				padding-top: 60px;
+			}
+
+			/* 侧边栏样式 */
+			.sidebar {
+				width: var(--sidebar-width);
+				background: var(--card-bg);
+				box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+				position: fixed;
+				top: 60px;
+				left: 0;
+				height: calc(100vh - 60px);
+				overflow-y: auto;
+				transition: var(--transition);
+				z-index: 100;
+			}
+
+			.sidebar-menu {
+				padding: 20px 0;
+			}
+
+			.menu-item {
+				padding: 12px 25px;
+				display: flex;
+				align-items: center;
+				gap: 12px;
+				color: var(--text-color);
+				text-decoration: none;
+				transition: var(--transition);
+				border-left: 4px solid transparent;
+			}
+
+			.menu-item:hover,
+			.menu-item.active {
+				background: var(--light-bg);
+				border-left-color: var(--primary-color);
+				color: var(--primary-color);
+			}
+
+			.menu-item i {
+				font-size: 1.2rem;
+			}
+
+			/* 主内容区域样式 */
+			.main-content {
+				flex: 1;
+				margin-left: var(--sidebar-width);
+				padding: 30px;
+				background: var(--light-bg);
+			}
+
+			/* 仪表盘卡片样式 */
+			.dashboard-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+				gap: 25px;
+				margin-bottom: 30px;
+			}
+
+			.stat-card {
+				background: var(--card-bg);
+				padding: 25px;
+				border-radius: var(--border-radius);
+				box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+				transition: var(--transition);
+			}
+
+			.stat-card:hover {
+				transform: translateY(-5px);
+				box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+			}
+
+			.stat-header {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				margin-bottom: 20px;
+			}
+
+			.stat-icon {
+				width: 50px;
+				height: 50px;
+				border-radius: 50%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-size: 1.5rem;
+				color: white;
+			}
+
+			.stat-number {
+				font-size: 2rem;
+				font-weight: bold;
+				color: var(--text-color);
+				margin-bottom: 5px;
+			}
+
+			.stat-label {
+				color: var(--light-text);
+				font-size: 0.9rem;
+			}
+
+			/* 图表容器样式 */
+			.charts-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+				gap: 25px;
+				margin-bottom: 30px;
+			}
+
+			.chart-container {
+				background: var(--card-bg);
+				padding: 25px;
+				border-radius: var(--border-radius);
+				box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+			}
+
+			.chart-header {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				margin-bottom: 20px;
+			}
+
+			.chart-title {
+				font-size: 1.2rem;
+				color: var(--text-color);
+				margin: 0;
+			}
+
+			/* 表格样式 */
+			.table-container {
+				background: var(--card-bg);
+				padding: 25px;
+				border-radius: var(--border-radius);
+				box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+				overflow-x: auto;
+			}
+
+			.admin-table {
+				width: 100%;
+				border-collapse: collapse;
+			}
+
+			.admin-table th,
+			.admin-table td {
+				padding: 12px 15px;
+				text-align: left;
+				border-bottom: 1px solid var(--light-bg);
+			}
+
+			.admin-table th {
+				background: var(--light-bg);
+				color: var(--text-color);
+				font-weight: 600;
+			}
+
+			.admin-table tr:hover {
+				background: var(--light-bg);
+			}
+
+			/* 操作按钮样式 */
+			.action-btn {
+				padding: 8px 15px;
+				border-radius: 20px;
+				border: none;
+				cursor: pointer;
+				transition: var(--transition);
+				font-size: 0.9rem;
+				display: inline-flex;
+				align-items: center;
+				gap: 5px;
+			}
+
+			.btn-primary {
+				background: var(--primary-color);
+				color: white;
+			}
+
+			.btn-success {
+				background: var(--success-color);
+				color: white;
+			}
+
+			.btn-warning {
+				background: var(--warning-color);
+				color: white;
+			}
+
+			.btn-danger {
+				background: var(--danger-color);
+				color: white;
+			}
+
+			/* 搜索框样式 */
+			.search-box {
+				display: flex;
+				gap: 10px;
+				margin-bottom: 20px;
+			}
+
+			.search-input {
+				flex: 1;
+				padding: 10px 15px;
+				border: 2px solid var(--light-bg);
+				border-radius: var(--border-radius);
+				font-size: 1rem;
+				transition: var(--transition);
+			}
+
+			.search-input:focus {
+				border-color: var(--primary-color);
+				outline: none;
+			}
+
+			/* 暗色模式适配 */
+			body.dark-mode {
+				--card-bg: #2d3436;
+				--light-bg: #353b48;
+				--text-color: #dfe6e9;
+				--light-text: #b2bec3;
+			}
+
+			/* 响应式设计 */
+			@media (max-width: 768px) {
+				.sidebar {
+					transform: translateX(-100%);
+				}
+
+				.sidebar.active {
+					transform: translateX(0);
+				}
+
+				.main-content {
+					margin-left: 0;
+				}
+
+				.dashboard-grid {
+					grid-template-columns: 1fr;
+				}
+
+				.charts-grid {
+					grid-template-columns: 1fr;
+				}
+			}
+
+			/* 加载动画 */
+			.loading-overlay {
+				position: fixed;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background: rgba(255, 255, 255, 0.9);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				z-index: 1000;
+			}
+
+			.spinner {
+				width: 50px;
+				height: 50px;
+				border: 5px solid var(--light-bg);
+				border-top-color: var(--primary-color);
+				border-radius: 50%;
+				animation: spin 1s linear infinite;
+			}
+
+			@keyframes spin {
+				to { transform: rotate(360deg); }
+			}
+
+			/* 导航栏右侧样式调整 */
+			.nav-right {
+				display: flex;
+				align-items: center;
+				gap: 15px;
+			}
+
+			.theme-toggle {
+				background: none;
+				border: none;
+				color: var(--text-color);
+				font-size: 1.2rem;
+				cursor: pointer;
+				padding: 8px;
+				border-radius: 50%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				transition: var(--transition);
+			}
+
+			.theme-toggle:hover {
+				background: var(--light-bg);
+			}
+
+			/* 用户信息和登出按钮样式 */
+			.user-profile {
+				position: relative;
+				display: flex;
+				align-items: center;
+				gap: 10px;
+			}
+
+			.user-avatar {
+				width: 35px;
+				height: 35px;
+				border-radius: 50%;
+				background: var(--primary-color);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				color: white;
+				font-size: 1.2rem;
+				cursor: pointer;
+				transition: var(--transition);
+			}
+
+			.user-avatar:hover {
+				transform: scale(1.05);
+			}
+
+			.user-menu {
+				position: absolute;
+				top: 100%;
+				right: 0;
+				background: var(--card-bg);
+				border-radius: var(--border-radius);
+				box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+				padding: 10px 0;
+				min-width: 200px;
+				display: none;
+				z-index: 1000;
+			}
+
+			.user-menu.active {
+				display: block;
+			}
+
+			.user-menu-item {
+				padding: 10px 20px;
+				display: flex;
+				align-items: center;
+				gap: 10px;
+				color: var(--text-color);
+				text-decoration: none;
+				transition: var(--transition);
+			}
+
+			.user-menu-item:hover {
+				background: var(--light-bg);
+				color: var(--primary-color);
+			}
+
+			.user-menu-item i {
+				font-size: 1.1rem;
+			}
+
+			.logout-btn {
+				color: var(--danger-color);
+			}
+
+			/* 登录检查遮罩层 */
+			.auth-check-overlay {
+				position: fixed;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background: rgba(255, 255, 255, 0.9);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				z-index: 2000;
+				flex-direction: column;
+				gap: 20px;
+			}
+
+			.auth-check-message {
+				font-size: 1.2rem;
+				color: var(--text-color);
+				text-align: center;
+			}
+
+			.auth-check-btn {
+				padding: 10px 20px;
+				background: var(--primary-color);
+				color: white;
+				border: none;
+				border-radius: var(--border-radius);
+				cursor: pointer;
+				transition: var(--transition);
+				text-decoration: none;
+			}
+
+			.auth-check-btn:hover {
+				background: var(--secondary-color);
+			}
+
+			/* 系统状态公示条样式 */
+			.system-notice {
+				background: linear-gradient(135deg, #ff4444, #ff6b6b);
+				color: white;
+				padding: 8px 15px;
+				text-align: center;
+				position: fixed;
+				top: 60px;
+				left: var(--sidebar-width);
+				right: 0;
+				z-index: 1001;
+				font-size: 0.9rem;
+				box-shadow: 0 2px 8px rgba(255, 68, 68, 0.2);
+				animation: noticePulse 2s infinite;
+				transition: var(--transition);
+			}
+
+			.system-notice-content {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				gap: 8px;
+				max-width: 1200px;
+				margin: 0 auto;
+			}
+
+			.system-notice i {
+				font-size: 1.1rem;
+			}
+
+			.system-notice-text {
+				font-size: 0.9rem;
+				font-weight: normal;
+			}
+
+			.system-notice-text span {
+				font-weight: 600;
+				text-decoration: underline;
+			}
+
+			@keyframes noticePulse {
+				0% {
+					box-shadow: 0 2px 8px rgba(255, 68, 68, 0.2);
+				}
+				50% {
+					box-shadow: 0 2px 12px rgba(255, 68, 68, 0.3);
+				}
+				100% {
+					box-shadow: 0 2px 8px rgba(255, 68, 68, 0.2);
+				}
+			}
+
+			/* 移动端适配 */
+			@media (max-width: 768px) {
+				.system-notice {
+					left: 0;
+					font-size: 0.8rem;
+					padding: 6px 10px;
+				}
+				
+				.system-notice i {
+					font-size: 1rem;
+				}
+			}
+
+			/* 新增样式 */
+			.section-header {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				margin-bottom: 20px;
+			}
+
+			.section-header h2 {
+				margin: 0;
+				color: var(--text-color);
+				font-size: 1.5rem;
+			}
+
+			.header-actions {
+				display: flex;
+				gap: 10px;
+			}
+
+			.badge {
+				padding: 4px 8px;
+				border-radius: 12px;
+				font-size: 0.8rem;
+				font-weight: 500;
+			}
+
+			.badge.success {
+				background: var(--success-color);
+				color: white;
+			}
+
+			.badge.warning {
+				background: var(--warning-color);
+				color: white;
+			}
+
+			.badge.danger {
+				background: var(--danger-color);
+				color: white;
+			}
+
+			.content-section {
+				animation: fadeIn 0.3s ease;
+			}
+
+			@keyframes fadeIn {
+				from {
+					opacity: 0;
+					transform: translateY(10px);
+				}
+				to {
+					opacity: 1;
+					transform: translateY(0);
+				}
+			}
+		</style>
 	</head>
 	<body>
+		<!-- 登录检查遮罩层 -->
+		<div class="auth-check-overlay" id="authCheckOverlay" style="display: none;">
+			<div class="auth-check-message">请先登录后再访问管理中心</div>
+			<a href="../ManagementLoading.html" class="auth-check-btn">前往登录</a>
+		</div>
+
 		<!-- 导航栏 -->
-		<nav class="navbar">
-			<div class="container">
-				<a href="../../index.html" class="logo">中国矿业大学单片机学习平台</a>
+		<nav class="nav-wrapper">
+			<div class="nav-content">
+				<a href="../../indexmodern.html" class="logo">MCU Learn</a>
 				<ul class="nav-links">
-					<li><a href="../../blog.html">文章</a></li>
-					<li><a href="../../about.html">关于</a></li>
-					<li><a href="../../relation.html">联系</a></li>
+					<li><a href="../../indexmodern.html">首页</a></li>
+					<li><a href="../../pages/blognew.html">学习</a></li>
+					<li><a href="../../pages/knowledge.html">知识分享</a></li>
+					<li><a href="../../StudySources/Sources.html">资源</a></li>
+					<li><a href="../../News/news.html">新闻</a></li>
+					<li><a href="../../pages/community.html">社区</a></li>
 				</ul>
-				<div class="menu-toggle" id="mobile-menu">
-					<span class="bar"></span>
-					<span class="bar"></span>
-					<span class="bar"></span>
+				<div class="nav-right">
+					<button class="theme-toggle">
+						<i class="fas fa-moon"></i>
+					</button>
+					<div class="user-profile">
+						<div class="user-avatar" id="userAvatar">
+							<i class="fas fa-user"></i>
+						</div>
+						<div class="user-menu" id="userMenu">
+							<a href="#profile" class="user-menu-item">
+								<i class="fas fa-user-circle"></i>
+								<span>个人信息</span>
+							</a>
+							<a href="#settings" class="user-menu-item">
+								<i class="fas fa-cog"></i>
+								<span>账号设置</span>
+							</a>
+							<hr style="border: none; border-top: 1px solid var(--light-bg); margin: 5px 0;">
+							<a href="javascript:void(0)" class="user-menu-item logout-btn" id="logoutBtn">
+								<i class="fas fa-sign-out-alt"></i>
+								<span>退出登录</span>
+							</a>
+						</div>
+					</div>
 				</div>
 			</div>
 		</nav>
 
-		<header class="header">
-			<div class="container">
-				<img src="../../images/校徽1.jpg" alt="校徽" class="logo-image">
-				<h1>管理者中心</h1>
+		<!-- 管理中心主体 -->
+		<div class="admin-wrapper">
+			<!-- 系统状态公示条 -->
+			<div class="system-notice">
+				<div class="system-notice-content">
+					<i class="fas fa-exclamation-triangle"></i>
+					<div class="system-notice-text">
+						<span>系统状态提示：</span> 当前系统处于关闭状态，所有数据均为系统自动生成的演示数据，仅供界面展示使用。
+					</div>
+				</div>
 			</div>
-		</header>
 
-		<main class="container">
-			<nav class="sidebar">
-				<ul>
-					<li><a href="#dashboard">仪表盘</a></li>
-					<li><a href="#articles">文章管理</a></li>
-					<li><a href="#users">用户管理</a></li>
-					<li><a href="#reviews">审核</a></li>
-					<li><a href="#data">数据统计</a></li>
-					<li><a href="../../index.html">返回首页</a></li>
-				</ul>
-			</nav>
+			<!-- 侧边栏 -->
+			<aside class="sidebar">
+				<nav class="sidebar-menu">
+					<a href="#dashboard" class="menu-item active">
+						<i class="fas fa-tachometer-alt"></i>
+						<span>仪表盘</span>
+					</a>
+					<a href="#content" class="menu-item">
+						<i class="fas fa-file-alt"></i>
+						<span>内容管理</span>
+					</a>
+					<a href="#users" class="menu-item">
+						<i class="fas fa-users"></i>
+						<span>用户管理</span>
+					</a>
+					<a href="#comments" class="menu-item">
+						<i class="fas fa-comments"></i>
+						<span>评论管理</span>
+					</a>
+					<a href="#resources" class="menu-item">
+						<i class="fas fa-box"></i>
+						<span>资源管理</span>
+					</a>
+					<a href="#statistics" class="menu-item">
+						<i class="fas fa-chart-bar"></i>
+						<span>数据统计</span>
+					</a>
+					<a href="#settings" class="menu-item">
+						<i class="fas fa-cog"></i>
+						<span>系统设置</span>
+					</a>
+				</nav>
+			</aside>
 
-			<div class="content">
-				<section id="dashboard">
-					<h2>仪表盘</h2>
-					<div class="dashboard-cards">
-						<div class="card">
-							<h3>文章总数</h3>
-							<p id="totalArticles">16</p>
+			<!-- 主要内容区域 -->
+			<main class="main-content">
+				<!-- 仪表盘页面 -->
+				<div class="content-section" id="dashboard-section">
+					<!-- 仪表盘统计卡片 -->
+					<section class="dashboard-grid">
+						<div class="stat-card">
+							<div class="stat-header">
+								<div class="stat-icon" style="background: var(--primary-color)">
+									<i class="fas fa-users"></i>
+								</div>
+							</div>
+							<div class="stat-number">1,234</div>
+							<div class="stat-label">总用户数</div>
 						</div>
-						<div class="card">
-							<h3>用户总数</h3>
-							<p id="totalUsers">2</p>
+
+						<div class="stat-card">
+							<div class="stat-header">
+								<div class="stat-icon" style="background: var(--success-color)">
+									<i class="fas fa-file-alt"></i>
+								</div>
+							</div>
+							<div class="stat-number">567</div>
+							<div class="stat-label">文章总数</div>
 						</div>
-						<div class="card">
-							<h3>待审核文章</h3>
-							<p id="pendingReviews">-</p>
+
+						<div class="stat-card">
+							<div class="stat-header">
+								<div class="stat-icon" style="background: var(--warning-color)">
+									<i class="fas fa-comments"></i>
+								</div>
+							</div>
+							<div class="stat-number">890</div>
+							<div class="stat-label">评论数</div>
+						</div>
+
+						<div class="stat-card">
+							<div class="stat-header">
+								<div class="stat-icon" style="background: var(--danger-color)">
+									<i class="fas fa-download"></i>
+								</div>
+							</div>
+							<div class="stat-number">2,345</div>
+							<div class="stat-label">资源下载</div>
+						</div>
+					</section>
+
+					<!-- 图表区域 -->
+					<section class="charts-grid">
+						<div class="chart-container">
+							<div class="chart-header">
+								<h3 class="chart-title">访问统计</h3>
+								<div class="chart-actions">
+									<button class="action-btn btn-primary">
+										<i class="fas fa-download"></i>
+										导出
+									</button>
+								</div>
+							</div>
+							<canvas id="visitsChart"></canvas>
+						</div>
+
+						<div class="chart-container">
+							<div class="chart-header">
+								<h3 class="chart-title">用户增长</h3>
+								<div class="chart-actions">
+									<button class="action-btn btn-primary">
+										<i class="fas fa-download"></i>
+										导出
+									</button>
+								</div>
+							</div>
+							<canvas id="usersChart"></canvas>
+						</div>
+					</section>
+
+					<!-- 最新动态表格 -->
+					<section class="table-container">
+						<div class="chart-header">
+							<h3 class="chart-title">最新动态</h3>
+							<div class="search-box">
+								<input type="text" class="search-input" placeholder="搜索...">
+								<button class="action-btn btn-primary">
+									<i class="fas fa-search"></i>
+									搜索
+								</button>
+							</div>
+						</div>
+						<table class="admin-table">
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>用户</th>
+									<th>操作</th>
+									<th>时间</th>
+									<th>状态</th>
+									<th>操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>#1001</td>
+									<td>张三</td>
+									<td>发布文章</td>
+									<td>2024-01-20 10:30</td>
+									<td><span class="badge success">已审核</span></td>
+									<td>
+										<button class="action-btn btn-primary">查看</button>
+										<button class="action-btn btn-danger">删除</button>
+									</td>
+								</tr>
+								<tr>
+									<td>#1002</td>
+									<td>李四</td>
+									<td>评论</td>
+									<td>2024-01-20 11:15</td>
+									<td><span class="badge warning">待审核</span></td>
+									<td>
+										<button class="action-btn btn-primary">查看</button>
+										<button class="action-btn btn-danger">删除</button>
+									</td>
+								</tr>
+								<tr>
+									<td>#1003</td>
+									<td>王五</td>
+									<td>上传资源</td>
+									<td>2024-01-20 14:20</td>
+									<td><span class="badge success">已审核</span></td>
+									<td>
+										<button class="action-btn btn-primary">查看</button>
+										<button class="action-btn btn-danger">删除</button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</section>
+				</div>
+
+				<!-- 内容管理页面 -->
+				<div class="content-section" id="content-section" style="display: none;">
+					<div class="section-header">
+						<h2>内容管��</h2>
+						<div class="header-actions">
+							<button class="action-btn btn-success">
+								<i class="fas fa-plus"></i>
+								新建文章
+							</button>
 						</div>
 					</div>
-				</section>
-
-				<section id="articles">
-					<h2>文章管理</h2>
-					<div class="search-add-article">
-						<input type="text" id="searchInput" placeholder="输入关键词...">
-						<button id="searchButton">搜索</button>
-						<button id="addArticleButton">添加文章</button>
+					<div class="search-box" style="margin: 20px 0;">
+						<input type="text" class="search-input" placeholder="搜索文章...">
+						<button class="action-btn btn-primary">
+							<i class="fas fa-search"></i>
+							搜索
+						</button>
 					</div>
-					<div id="articleList">
-						<!-- 文章列表 -->
+					<div class="table-container">
+						<table class="admin-table">
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>标题</th>
+									<th>作者</th>
+									<th>分类</th>
+									<th>发布时间</th>
+									<th>状态</th>
+									<th>操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>#A001</td>
+									<td>MCU开发入门指南</td>
+									<td>张三</td>
+									<td>教程</td>
+									<td>2024-01-20</td>
+									<td><span class="badge success">已发布</span></td>
+									<td>
+										<button class="action-btn btn-primary">编辑</button>
+										<button class="action-btn btn-danger">删除</button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
 					</div>
-					<div id="addArticles" class="add-article-form">
-						<input type="text" id="articleTitle" placeholder="文章标题">
-						<textarea id="articleContent" placeholder="文章内容"></textarea>
-						<button id="submitArticleButton">提交</button>
+				</div>
+
+				<!-- 用户管理页面 -->
+				<div class="content-section" id="users-section" style="display: none;">
+					<div class="section-header">
+						<h2>用户管理</h2>
+						<div class="header-actions">
+							<button class="action-btn btn-success">
+								<i class="fas fa-user-plus"></i>
+								添加用户
+							</button>
+						</div>
 					</div>
-				</section>
-
-				<section id="users">
-					<h2>用户管理</h2>
-					<input type="text" id="searchUserInput" placeholder="输入用户名...">
-					<button id="searchUserButton">搜索</button>
-					<div id="searchUserResults"></div>
-				</section>
-
-				<section id="reviews">
-					<h2>审核</h2>
-					<div id="reviewList">
-						<!-- 审核列表 -->
+					<div class="search-box" style="margin: 20px 0;">
+						<input type="text" class="search-input" placeholder="搜索用户...">
+						<button class="action-btn btn-primary">
+							<i class="fas fa-search"></i>
+							搜索
+						</button>
 					</div>
-				</section>
-
-				<section id="data">
-					<h2>数据统计</h2>
-					<div id="dataInfo">
-						<!-- 数据信息 -->
+					<div class="table-container">
+						<table class="admin-table">
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>用户名</th>
+									<th>邮箱</th>
+									<th>注册时间</th>
+									<th>角色</th>
+									<th>状态</th>
+									<th>操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>#U001</td>
+									<td>张三</td>
+									<td>zhangsan@example.com</td>
+									<td>2024-01-15</td>
+									<td>管理员</td>
+									<td><span class="badge success">正常</span></td>
+									<td>
+										<button class="action-btn btn-primary">编辑</button>
+										<button class="action-btn btn-warning">禁用</button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
 					</div>
-				</section>
-			</div>
-		</main>
+				</div>
 
-		<footer class="footer">
-			<p>&copy; 2024 管理者中心</p>
-		</footer>
+				<!-- 评论管理页面 -->
+				<div class="content-section" id="comments-section" style="display: none;">
+					<div class="section-header">
+						<h2>评论管理</h2>
+					</div>
+					<div class="search-box" style="margin: 20px 0;">
+						<input type="text" class="search-input" placeholder="搜索评论...">
+						<button class="action-btn btn-primary">
+							<i class="fas fa-search"></i>
+							搜索
+						</button>
+					</div>
+					<div class="table-container">
+						<table class="admin-table">
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>评论内容</th>
+									<th>评论者</th>
+									<th>文章</th>
+									<th>评论时间</th>
+									<th>状态</th>
+									<th>操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>#C001</td>
+									<td>这篇文章写得很好，对我帮助很大！</td>
+									<td>李四</td>
+									<td>MCU开发入门指南</td>
+									<td>2024-01-20</td>
+									<td><span class="badge warning">待审核</span></td>
+									<td>
+										<button class="action-btn btn-success">通过</button>
+										<button class="action-btn btn-danger">删除</button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
 
-		<script src="managercenter.js"></script>
+				<!-- 资源管理页面 -->
+				<div class="content-section" id="resources-section" style="display: none;">
+					<div class="section-header">
+						<h2>资源管理</h2>
+						<div class="header-actions">
+							<button class="action-btn btn-success">
+								<i class="fas fa-upload"></i>
+								上传资源
+							</button>
+						</div>
+					</div>
+					<div class="search-box" style="margin: 20px 0;">
+						<input type="text" class="search-input" placeholder="搜索资源...">
+						<button class="action-btn btn-primary">
+							<i class="fas fa-search"></i>
+							搜索
+						</button>
+					</div>
+					<div class="table-container">
+						<table class="admin-table">
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>资源名称</th>
+									<th>类型</th>
+									<th>大小</th>
+									<th>上传者</th>
+									<th>上传时间</th>
+									<th>下载次数</th>
+									<th>操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>#R001</td>
+									<td>STM32开发板资料包</td>
+									<td>ZIP</td>
+									<td>125MB</td>
+									<td>王五</td>
+									<td>2024-01-18</td>
+									<td>156</td>
+									<td>
+										<button class="action-btn btn-primary">下载</button>
+										<button class="action-btn btn-danger">删除</button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+				<!-- 数据统计页面 -->
+				<div class="content-section" id="statistics-section" style="display: none;">
+					<div class="section-header">
+						<h2>数据统计</h2>
+						<div class="header-actions">
+							<button class="action-btn btn-primary">
+								<i class="fas fa-download"></i>
+								导出报告
+							</button>
+						</div>
+					</div>
+					<div class="charts-grid">
+						<div class="chart-container">
+							<div class="chart-header">
+								<h3 class="chart-title">用户活跃度分析</h3>
+							</div>
+							<canvas id="userActivityChart"></canvas>
+						</div>
+						<div class="chart-container">
+							<div class="chart-header">
+								<h3 class="chart-title">内容发布趋势</h3>
+							</div>
+							<canvas id="contentTrendChart"></canvas>
+						</div>
+						<div class="chart-container">
+							<div class="chart-header">
+								<h3 class="chart-title">资源下载统计</h3>
+							</div>
+							<canvas id="downloadStatsChart"></canvas>
+						</div>
+						<div class="chart-container">
+							<div class="chart-header">
+								<h3 class="chart-title">评论互动分析</h3>
+							</div>
+							<canvas id="commentAnalysisChart"></canvas>
+						</div>
+					</div>
+				</div>
+			</main>
+		</div>
+
+		<!-- 加载动画 -->
+		<div class="loading-overlay" id="loadingOverlay">
+			<div class="spinner"></div>
+		</div>
+
+		<!-- 脚本引入 -->
+		<script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
+		<script>
+			// 登录状态检查
+			function checkLoginStatus() {
+				const isLoggedIn = localStorage.getItem('isLoggedIn');
+				if (!isLoggedIn) {
+					document.getElementById('authCheckOverlay').style.display = 'flex';
+					return false;
+				}
+				return true;
+			}
+
+			// 用户菜单切换
+			const userAvatar = document.getElementById('userAvatar');
+			const userMenu = document.getElementById('userMenu');
+
+			userAvatar.addEventListener('click', () => {
+				userMenu.classList.toggle('active');
+			});
+
+			// 点击其他地方关闭用户菜单
+			document.addEventListener('click', (e) => {
+				if (!userAvatar.contains(e.target) && !userMenu.contains(e.target)) {
+					userMenu.classList.remove('active');
+				}
+			});
+
+			// 登出功能
+			document.getElementById('logoutBtn').addEventListener('click', () => {
+				// 显示确认对话框
+				if (confirm('确定要退出登录吗？')) {
+					// 除登录状态
+					localStorage.removeItem('isLoggedIn');
+					localStorage.removeItem('username');
+					
+					// 重定向到登录页面
+					window.location.href = '../ManagementLoading.html';
+				}
+			});
+
+			// 页面加载时检查登录状态
+			window.addEventListener('load', () => {
+				if (!checkLoginStatus()) {
+					return;
+				}
+
+				// 隐藏加载动画
+				document.getElementById('loadingOverlay').style.display = 'none';
+				// 初始化图表
+				initCharts();
+
+				// 设置用户信息
+				const username = localStorage.getItem('username');
+				if (username) {
+					document.querySelector('.user-avatar').setAttribute('title', username);
+				}
+			});
+
+			// 初始化图表
+			function initCharts() {
+				// 访问统计图表
+				const visitsCtx = document.getElementById('visitsChart').getContext('2d');
+				new Chart(visitsCtx, {
+					type: 'line',
+					data: {
+						labels: ['1月', '2月', '3月', '4月', '5月', '6月'],
+						datasets: [{
+							label: '访问量',
+							data: [1200, 1900, 3000, 5000, 4000, 6000],
+							borderColor: '#4a90e2',
+							tension: 0.4
+						}]
+					},
+					options: {
+						responsive: true,
+						plugins: {
+							legend: {
+								position: 'top',
+							}
+						}
+					}
+				});
+
+				// 用户增长图表
+				const usersCtx = document.getElementById('usersChart').getContext('2d');
+				new Chart(usersCtx, {
+					type: 'bar',
+					data: {
+						labels: ['1月', '2月', '3月', '4月', '5月', '6月'],
+						datasets: [{
+							label: '新增用户',
+							data: [65, 59, 80, 81, 56, 55],
+							backgroundColor: '#2ecc71'
+						}]
+					},
+					options: {
+						responsive: true,
+						plugins: {
+							legend: {
+								position: 'top',
+							}
+						}
+					}
+				});
+			}
+
+			// 暗模式切换
+			const themeToggle = document.querySelector('.theme-toggle');
+			const body = document.body;
+			const icon = themeToggle.querySelector('i');
+
+				themeToggle.addEventListener('click', () => {
+					body.classList.toggle('dark-mode');
+					if (body.classList.contains('dark-mode')) {
+						icon.classList.remove('fa-moon');
+						icon.classList.add('fa-sun');
+						localStorage.setItem('theme', 'dark');
+					} else {
+						icon.classList.remove('fa-sun');
+						icon.classList.add('fa-moon');
+						localStorage.setItem('theme', 'light');
+					}
+				});
+
+			// 检查本地存储中的主题设置
+			const savedTheme = localStorage.getItem('theme');
+			if (savedTheme === 'dark') {
+				body.classList.add('dark-mode');
+				icon.classList.remove('fa-moon');
+				icon.classList.add('fa-sun');
+			}
+
+			// 侧边栏菜单和页面切换逻辑
+			const menuItems = document.querySelectorAll('.menu-item');
+			const contentSections = document.querySelectorAll('.content-section');
+
+			menuItems.forEach(item => {
+				item.addEventListener('click', () => {
+					// 移除所有菜单项的激活状态
+					menuItems.forEach(i => i.classList.remove('active'));
+					// 添加当前菜单项的激活状态
+					item.classList.add('active');
+					
+					// 获取目标内容区域ID
+					const targetId = item.getAttribute('href').substring(1) + '-section';
+					
+					// 隐藏所有内容区域
+					contentSections.forEach(section => {
+						section.style.display = 'none';
+					});
+					
+					// 显示目标内容区域
+					const targetSection = document.getElementById(targetId);
+					if (targetSection) {
+						targetSection.style.display = 'block';
+						
+						// 如果是统计页面，初始化新的图表
+						if (targetId === 'statistics-section') {
+							initStatisticsCharts();
+						}
+					}
+				});
+			});
+
+			// 移动端侧边栏切换
+			const sidebar = document.querySelector('.sidebar');
+			const menuToggle = document.createElement('button');
+			menuToggle.classList.add('menu-toggle');
+			menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+			document.querySelector('.nav-content').appendChild(menuToggle);
+
+			menuToggle.addEventListener('click', () => {
+				sidebar.classList.toggle('active');
+			});
+
+			// 统计页面图表初始化
+			function initStatisticsCharts() {
+				// 用户活跃度分析图表
+				const userActivityCtx = document.getElementById('userActivityChart').getContext('2d');
+				new Chart(userActivityCtx, {
+					type: 'line',
+					data: {
+						labels: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+						datasets: [{
+							label: '日活跃用户',
+							data: [120, 150, 180, 190, 160, 140, 130],
+							borderColor: '#4a90e2',
+							tension: 0.4
+						}]
+					},
+					options: {
+						responsive: true,
+						plugins: {
+							legend: {
+								position: 'top',
+							}
+						}
+					}
+				});
+
+				// 内容发布趋势图表
+				const contentTrendCtx = document.getElementById('contentTrendChart').getContext('2d');
+				new Chart(contentTrendCtx, {
+					type: 'bar',
+					data: {
+						labels: ['教程', '资源', '新闻', '问答', '分享'],
+						datasets: [{
+							label: '内容数量',
+							data: [45, 30, 25, 35, 20],
+							backgroundColor: '#2ecc71'
+						}]
+					},
+					options: {
+						responsive: true,
+						plugins: {
+							legend: {
+								position: 'top',
+							}
+						}
+					}
+				});
+
+				// 资源下载统计图表
+				const downloadStatsCtx = document.getElementById('downloadStatsChart').getContext('2d');
+				new Chart(downloadStatsCtx, {
+					type: 'pie',
+					data: {
+						labels: ['开发工具', '学习资料', '示例代码', '开发板资源', '其他'],
+						datasets: [{
+							data: [30, 25, 20, 15, 10],
+							backgroundColor: [
+								'#4a90e2',
+								'#2ecc71',
+								'#f1c40f',
+								'#e74c3c',
+								'#95a5a6'
+							]
+						}]
+					},
+					options: {
+						responsive: true,
+						plugins: {
+							legend: {
+								position: 'right',
+							}
+						}
+					}
+				});
+
+				// 评论互动分析图表
+				const commentAnalysisCtx = document.getElementById('commentAnalysisChart').getContext('2d');
+				new Chart(commentAnalysisCtx, {
+					type: 'radar',
+					data: {
+						labels: ['问答互动', '技术讨论', '经验分享', '建议反馈', '其他'],
+						datasets: [{
+							label: '评论分布',
+							data: [80, 65, 45, 35, 25],
+							backgroundColor: 'rgba(74, 144, 226, 0.2)',
+							borderColor: '#4a90e2',
+							pointBackgroundColor: '#4a90e2'
+						}]
+					},
+					options: {
+						responsive: true,
+						plugins: {
+							legend: {
+								position: 'top',
+							}
+						}
+					}
+				});
+			}
+		</script>
 	</body>
 </html>
