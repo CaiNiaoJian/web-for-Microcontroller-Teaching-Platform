@@ -9,7 +9,7 @@ function createEmoji(startX, startY) {
     
     // 随机生成初始速度和角度
     const angle = (Math.random() * 60 - 30) * Math.PI / 180; // -30度到30度
-    const initialVelocity = 12 + Math.random() * 8; // 12-20的初始速度
+    const initialVelocity = 15 + Math.random() * 10; // 15-25的初始速度，增加初始速度
     const vx = Math.sin(angle) * initialVelocity; // x方向速度
     const vy = -Math.cos(angle) * initialVelocity; // y方向速度（向上为负）
     const rotateSpeed = (Math.random() - 0.5) * 720; // 随机旋转速度
@@ -59,7 +59,7 @@ function addAnimationStyle() {
 // 更新表情位置
 function updateEmojiPosition(emoji, deltaTime) {
     try {
-        const gravity = 980; // 重力加速度 (像素/秒²)
+        const gravity = 480; // 重力加速度减半 (原来是980像素/秒²)
         const time = parseFloat(emoji.dataset.time) + deltaTime;
         const vx = parseFloat(emoji.dataset.vx);
         const vy = parseFloat(emoji.dataset.vy);
@@ -108,10 +108,10 @@ function initEmojiFountain() {
         return;
     }
 
-    let isActive = false;
     let activeEmojis = new Set();
     let lastTime = performance.now();
     let animationFrame;
+    let activeBursts = new Set(); // 存储所有活动的喷发动画
 
     // 确保动画样式已添加
     addAnimationStyle();
@@ -132,19 +132,15 @@ function initEmojiFountain() {
                 }
             }
 
-            if (isActive || activeEmojis.size > 0) {
+            if (activeBursts.size > 0 || activeEmojis.size > 0) {
                 animationFrame = requestAnimationFrame(animate);
+            } else {
+                cancelAnimationFrame(animationFrame);
+                animationFrame = null;
             }
         } catch (error) {
             console.error('动画循环中发生错误:', error);
-            // 清理所有活动的表情
-            for (let emoji of activeEmojis) {
-                if (emoji.parentNode) {
-                    emoji.parentNode.removeChild(emoji);
-                }
-            }
-            activeEmojis.clear();
-            isActive = false;
+            cleanup();
         }
     }
 
@@ -168,30 +164,30 @@ function initEmojiFountain() {
             e.stopPropagation();
         }
         
-        if (!isActive) {
-            isActive = true;
-            lastTime = performance.now();
-            
-            // 开始喷发动画
-            let emojisCreated = 0;
-            const maxEmojis = 20; // 最大表情数量
-            const burstInterval = setInterval(() => {
-                if (emojisCreated >= maxEmojis || !isActive) {
-                    clearInterval(burstInterval);
-                    isActive = false;
-                    return;
-                }
-                createFountainEmoji();
-                emojisCreated++;
-            }, 40); // 每40ms创建一个表情
-
-            if (!animationFrame) {
-                animationFrame = requestAnimationFrame(animate);
+        // 创建新的喷发动画
+        let emojisCreated = 0;
+        const maxEmojis = 20; // 每次喷发的最大表情数量
+        const burstId = Date.now(); // 为这次喷发创建唯一ID
+        
+        const burstInterval = setInterval(() => {
+            if (emojisCreated >= maxEmojis) {
+                clearInterval(burstInterval);
+                activeBursts.delete(burstId);
+                return;
             }
+            createFountainEmoji();
+            emojisCreated++;
+        }, 40); // 每40ms创建一个表情
+
+        activeBursts.add(burstId);
+
+        if (!animationFrame) {
+            lastTime = performance.now();
+            animationFrame = requestAnimationFrame(animate);
         }
     }
 
-    // 清理和重新绑定事件监听器
+    // 清理函数
     function cleanup() {
         trigger.removeEventListener('click', startFountain);
         trigger.removeEventListener('touchstart', startFountain);
@@ -202,8 +198,14 @@ function initEmojiFountain() {
             }
         }
         activeEmojis.clear();
+        // 清理所有喷发动画
+        for (let burstId of activeBursts) {
+            clearInterval(burstId);
+        }
+        activeBursts.clear();
         if (animationFrame) {
             cancelAnimationFrame(animationFrame);
+            animationFrame = null;
         }
     }
 

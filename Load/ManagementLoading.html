@@ -1,18 +1,35 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="light">
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>管理员登录 - MCU Learn</title>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 		<style>
-			:root {
+			:root[data-theme="light"] {
 				--primary-color: #3498db;
 				--secondary-color: #2ecc71;
 				--error-color: #e74c3c;
 				--text-color: #333;
 				--border-color: #ddd;
 				--bg-color: #f9f9f9;
+				--body-bg: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+				--container-bg: white;
+				--input-bg: #f9f9f9;
+				--label-color: #666;
+			}
+
+			:root[data-theme="dark"] {
+				--primary-color: #2980b9;
+				--secondary-color: #27ae60;
+				--error-color: #c0392b;
+				--text-color: #e0e0e0;
+				--border-color: #444;
+				--bg-color: #2c3e50;
+				--body-bg: linear-gradient(135deg, #2c3e50 0%, #1a1a1a 100%);
+				--container-bg: #34495e;
+				--input-bg: #2c3e50;
+				--label-color: #bbb;
 			}
 
 			* {
@@ -23,7 +40,7 @@
 
 			body {
 				font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-				background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+				background: var(--body-bg);
 				min-height: 100vh;
 				display: flex;
 				align-items: center;
@@ -36,7 +53,7 @@
 				width: 100%;
 				max-width: 1000px;
 				display: flex;
-				background: white;
+				background: var(--container-bg);
 				border-radius: 20px;
 				overflow: hidden;
 				box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
@@ -108,7 +125,7 @@
 			.form-container {
 				flex: 1;
 				padding: 60px;
-				background: white;
+				background: var(--container-bg);
 			}
 
 			h2 {
@@ -127,7 +144,7 @@
 				display: block;
 				margin-bottom: 10px;
 				font-weight: 500;
-				color: #666;
+				color: var(--label-color);
 				font-size: 0.95em;
 			}
 
@@ -138,7 +155,8 @@
 				border-radius: 12px;
 				font-size: 16px;
 				transition: all 0.3s ease;
-				background: var(--bg-color);
+				background: var(--input-bg);
+				color: var(--text-color);
 			}
 
 			input:focus {
@@ -347,9 +365,51 @@
 					font-size: 1.5em;
 				}
 			}
+
+			/* 主题切换按钮样式 */
+			.theme-toggle {
+				position: fixed;
+				top: 20px;
+				right: 20px;
+				background: var(--primary-color);
+				color: white;
+				border: none;
+				border-radius: 50%;
+				width: 45px;
+				height: 45px;
+				cursor: pointer;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-size: 1.2em;
+				transition: all 0.3s ease;
+				box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+			}
+
+			.theme-toggle:hover {
+				transform: scale(1.1);
+			}
+
+			/* 夜间模式时的特定样式调整 */
+			[data-theme="dark"] .form-container {
+				background: var(--container-bg);
+			}
+
+			[data-theme="dark"] .form-footer a {
+				color: var(--primary-color);
+			}
+
+			[data-theme="dark"] .toggle-password {
+				color: var(--label-color);
+			}
 		</style>
 	</head>
 	<body>
+		<!-- 主题切换按钮 -->
+		<button class="theme-toggle" id="themeToggle">
+			<i class="fas fa-sun"></i>
+		</button>
+
 		<!-- 登录提示框 -->
 		<div class="login-message" id="loginMessage"></div>
 
@@ -411,8 +471,35 @@
 				setInterval(nextImage, 5000);
 			}
 
-			// 页面加载完成后初始化轮播
-			document.addEventListener('DOMContentLoaded', initSlideshow);
+			// 主题切换功能
+			function initTheme() {
+				const themeToggleBtn = document.getElementById('themeToggle');
+				const themeIcon = themeToggleBtn.querySelector('i');
+				const savedTheme = localStorage.getItem('theme') || 'light';
+				
+				// 设置初始主题
+				document.documentElement.setAttribute('data-theme', savedTheme);
+				updateThemeIcon(savedTheme);
+
+				themeToggleBtn.addEventListener('click', () => {
+					const currentTheme = document.documentElement.getAttribute('data-theme');
+					const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+					
+					document.documentElement.setAttribute('data-theme', newTheme);
+					localStorage.setItem('theme', newTheme);
+					updateThemeIcon(newTheme);
+				});
+
+				function updateThemeIcon(theme) {
+					themeIcon.className = theme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
+				}
+			}
+
+			// 页面加载完成后初始化主题和轮播
+			document.addEventListener('DOMContentLoaded', () => {
+				initTheme();
+				initSlideshow();
+			});
 
 			// 显示登录消息
 			function showMessage(message, type) {
