@@ -1,123 +1,354 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="light">
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>站点正在建设中</title>
+		<title>站点跳转 - MCU Learn</title>
 		<link rel="icon" href="images/标签栏图标.png" type="images/png" sizes="34x32">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 		<style>
+			:root[data-theme="light"] {
+				--bg-primary: #f0f2f5;
+				--bg-secondary: #ffffff;
+				--text-primary: #333333;
+				--text-secondary: #666666;
+				--accent-color: #3498db;
+				--accent-hover: #2980b9;
+				--shadow-color: rgba(0, 0, 0, 0.1);
+				--particle-color: rgba(52, 152, 219, 0.2);
+			}
+
+			:root[data-theme="dark"] {
+				--bg-primary: #1a1a1a;
+				--bg-secondary: #2d2d2d;
+				--text-primary: #ffffff;
+				--text-secondary: #cccccc;
+				--accent-color: #3498db;
+				--accent-hover: #2980b9;
+				--shadow-color: rgba(0, 0, 0, 0.3);
+				--particle-color: rgba(52, 152, 219, 0.3);
+			}
+
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+
 			body {
-				font-family: Arial, sans-serif;
-				background-color: #f0f0f0;
+				font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+				background: var(--bg-primary);
+				min-height: 100vh;
 				display: flex;
 				justify-content: center;
 				align-items: center;
-				height: 100vh;
-				margin: 0;
-				overflow: hidden;
 				position: relative;
+				overflow: hidden;
+				transition: background-color 0.3s ease;
+			}
+
+			.theme-toggle {
+				position: fixed;
+				top: 20px;
+				right: 20px;
+				background: var(--bg-secondary);
+				border: none;
+				width: 40px;
+				height: 40px;
+				border-radius: 50%;
+				cursor: pointer;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-size: 1.2rem;
+				color: var(--text-primary);
+				box-shadow: 0 2px 10px var(--shadow-color);
+				transition: all 0.3s ease;
+				z-index: 1000;
+			}
+
+			.theme-toggle:hover {
+				transform: scale(1.1);
 			}
 
 			.container {
-				text-align: center;
-				background-color: #fff;
+				background: var(--bg-secondary);
 				padding: 40px;
-				border-radius: 10px;
-				box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+				border-radius: 20px;
+				box-shadow: 0 10px 30px var(--shadow-color);
+				text-align: center;
+				max-width: 90%;
+				width: 500px;
+				position: relative;
 				z-index: 1;
+				animation: fadeIn 0.5s ease-out;
 			}
 
-			h1 {
-				font-size: 2.5em;
-				color: #333;
+			@keyframes fadeIn {
+				from {
+					opacity: 0;
+					transform: translateY(20px);
+				}
+				to {
+					opacity: 1;
+					transform: translateY(0);
+				}
 			}
 
-			p {
-				font-size: 1.2em;
-				color: #666;
+			.logo {
+				font-size: 2.5rem;
+				font-weight: bold;
+				color: var(--accent-color);
+				margin-bottom: 20px;
+				text-shadow: 2px 2px 4px var(--shadow-color);
+			}
+
+			.message {
+				color: var(--text-primary);
+				font-size: 1.2rem;
+				margin: 20px 0;
+				line-height: 1.6;
 			}
 
 			.countdown {
-				font-size: 1.5em;
-				color: #ff6347;
-				margin-top: 20px;
+				font-size: 3rem;
+				font-weight: bold;
+				color: var(--accent-color);
+				margin: 30px 0;
+				text-shadow: 2px 2px 4px var(--shadow-color);
+				animation: pulse 1s infinite;
 			}
 
-			.back-button {
-				margin-top: 20px;
-				padding: 10px 20px;
-				font-size: 1em;
-				color: #fff;
-				background-color: #007bff;
+			@keyframes pulse {
+				0% {
+					transform: scale(1);
+				}
+				50% {
+					transform: scale(1.05);
+				}
+				100% {
+					transform: scale(1);
+				}
+			}
+
+			.redirect-button {
+				background: var(--accent-color);
+				color: white;
 				border: none;
-				border-radius: 5px;
+				padding: 15px 30px;
+				font-size: 1.1rem;
+				border-radius: 30px;
 				cursor: pointer;
+				transition: all 0.3s ease;
+				box-shadow: 0 4px 15px var(--shadow-color);
+				position: relative;
+				overflow: hidden;
 			}
 
-			.back-button:hover {
-				background-color: #0056b3;
+			.redirect-button:hover {
+				background: var(--accent-hover);
+				transform: translateY(-2px);
+				box-shadow: 0 6px 20px var(--shadow-color);
 			}
 
-			.emoji {
+			.redirect-button::after {
+				content: '';
 				position: absolute;
-				font-size: 2em;
+				top: 0;
+				left: -100%;
+				width: 100%;
+				height: 100%;
+				background: linear-gradient(
+					120deg,
+					transparent,
+					rgba(255, 255, 255, 0.2),
+					transparent
+				);
+				transition: 0.5s;
+			}
+
+			.redirect-button:hover::after {
+				left: 100%;
+			}
+
+			.particles {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				pointer-events: none;
+				z-index: 0;
+			}
+
+			.particle {
+				position: absolute;
+				background: var(--particle-color);
+				border-radius: 50%;
+				pointer-events: none;
 				animation: float 10s infinite linear;
 			}
 
 			@keyframes float {
 				0% {
 					transform: translateY(0) rotate(0deg);
+					opacity: 0;
 				}
-
+				10% {
+					opacity: 1;
+				}
+				90% {
+					opacity: 1;
+				}
 				100% {
 					transform: translateY(-100vh) rotate(360deg);
+					opacity: 0;
+				}
+			}
+
+			.loading-bar {
+				width: 100%;
+				height: 4px;
+				background: #e0e0e0;
+				border-radius: 2px;
+				margin: 20px 0;
+				overflow: hidden;
+			}
+
+			.loading-progress {
+				height: 100%;
+				background: var(--accent-color);
+				width: 0%;
+				transition: width 0.1s linear;
+			}
+
+			@media (max-width: 480px) {
+				.container {
+					padding: 30px 20px;
+				}
+
+				.logo {
+					font-size: 2rem;
+				}
+
+				.message {
+					font-size: 1rem;
+				}
+
+				.countdown {
+					font-size: 2.5rem;
+				}
+
+				.redirect-button {
+					padding: 12px 24px;
+					font-size: 1rem;
 				}
 			}
 		</style>
 	</head>
 	<body>
+		<button class="theme-toggle" id="themeToggle">
+			<i class="fas fa-sun"></i>
+		</button>
+
+		<div class="particles" id="particles"></div>
+
 		<div class="container">
-			<h1>站点正在建设中</h1>
-			<p>我们正在努力建设这个站点，敬请期待！</p>
+			<div class="logo">MCU Learn</div>
+			<p class="message">页面正在跳转中，请稍候...</p>
+			<div class="loading-bar">
+				<div class="loading-progress" id="progress"></div>
+			</div>
 			<div class="countdown" id="countdown">15</div>
-			<button class="back-button" onclick="goToBlog()">立即跳转到博客</button>
+			<button class="redirect-button" onclick="goToBlog()">
+				立即跳转 <i class="fas fa-arrow-right"></i>
+			</button>
 		</div>
 
 		<script>
-			const emojis = ['😊', '😄', '😉', '😍', '🤔', '🤗', '🤩', '🤯', '🤪', '🤭'];
-			const emojiCount = 20;
+			// 主题切换功能
+			function initTheme() {
+				const themeToggleBtn = document.getElementById('themeToggle');
+				const themeIcon = themeToggleBtn.querySelector('i');
+				const savedTheme = localStorage.getItem('theme') || 'light';
+				
+				document.documentElement.setAttribute('data-theme', savedTheme);
+				updateThemeIcon(savedTheme);
 
-			function createEmojis() {
-				for (let i = 0; i < emojiCount; i++) {
-					const emoji = document.createElement('div');
-					emoji.className = 'emoji';
-					emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-					emoji.style.left = `${Math.random() * 100}vw`;
-					emoji.style.animationDuration = `${5 + Math.random() * 10}s`;
-					document.body.appendChild(emoji);
+				themeToggleBtn.addEventListener('click', () => {
+					const currentTheme = document.documentElement.getAttribute('data-theme');
+					const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+					
+					document.documentElement.setAttribute('data-theme', newTheme);
+					localStorage.setItem('theme', newTheme);
+					updateThemeIcon(newTheme);
+				});
+
+				function updateThemeIcon(theme) {
+					themeIcon.className = theme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
 				}
 			}
 
-			createEmojis();
+			// 创建粒子效果
+			function createParticles() {
+				const container = document.getElementById('particles');
+				const particleCount = 30;
 
-			let countdown = 15;
-			const countdownElement = document.getElementById('countdown');
-
-			function updateCountdown() {
-				countdown--;
-				countdownElement.textContent = countdown;
-				if (countdown <= 0) {
-					goToBlog();
-				} else {
-					setTimeout(updateCountdown, 1000);
+				for (let i = 0; i < particleCount; i++) {
+					const particle = document.createElement('div');
+					particle.className = 'particle';
+					
+					// 随机大小
+					const size = Math.random() * 20 + 10;
+					particle.style.width = `${size}px`;
+					particle.style.height = `${size}px`;
+					
+					// 随机位置
+					particle.style.left = `${Math.random() * 100}vw`;
+					
+					// 随机动画延迟和持续时间
+					particle.style.animationDelay = `${Math.random() * 5}s`;
+					particle.style.animationDuration = `${5 + Math.random() * 10}s`;
+					
+					container.appendChild(particle);
 				}
+			}
+
+			// 倒计时和进度条功能
+			function initCountdown() {
+				let countdown = 15;
+				const countdownElement = document.getElementById('countdown');
+				const progressElement = document.getElementById('progress');
+				const totalTime = countdown;
+
+				function updateCountdown() {
+					countdown--;
+					countdownElement.textContent = countdown;
+					
+					// 更新进度条
+					const progress = ((totalTime - countdown) / totalTime) * 100;
+					progressElement.style.width = `${progress}%`;
+
+					if (countdown <= 0) {
+						goToBlog();
+					} else {
+						setTimeout(updateCountdown, 1000);
+					}
+				}
+
+				setTimeout(updateCountdown, 1000);
 			}
 
 			function goToBlog() {
 				window.location.href = 'pages/blognew.html';
 			}
 
-			setTimeout(updateCountdown, 1000);
+			// 初始化所有功能
+			document.addEventListener('DOMContentLoaded', () => {
+				initTheme();
+				createParticles();
+				initCountdown();
+			});
 		</script>
 	</body>
 </html>

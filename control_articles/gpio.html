@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPIO编程基础 - MCU Learn</title>
+    <link rel="stylesheet" href="../z_css/modern-style.css">
+    <link rel="stylesheet" href="../z_css/articles-modern.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css">
+    <style>
+        /* 文章特定样式 */
+        .article-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .article-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .article-meta {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            color: var(--text-secondary);
+            margin: 1rem 0;
+        }
+
+        .content-section {
+            margin-bottom: 3rem;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .content-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .code-block {
+            background: var(--code-bg);
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            position: relative;
+        }
+
+        .code-block pre {
+            padding: 1.5rem;
+            overflow-x: auto;
+        }
+
+        .code-block .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.5rem;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .code-block:hover .copy-button {
+            opacity: 1;
+        }
+
+        .info-box {
+            background: var(--info-bg);
+            border-left: 4px solid var(--primary-color);
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+
+        .warning-box {
+            background: var(--warning-bg);
+            border-left: 4px solid var(--warning-color);
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+
+        .image-container {
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin: 2rem 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        tr:hover {
+            background: var(--hover-bg);
+        }
+
+        .next-steps {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            border-radius: 8px;
+            margin-top: 3rem;
+        }
+
+        .next-steps h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .next-steps ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .next-steps li {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .next-steps li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 页脚样式优化 */
+        .footer {
+            background: var(--bg-secondary);
+            padding: 3rem 0 1rem;
+            margin-top: 4rem;
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 0 2rem;
+        }
+
+        .footer-section {
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--primary-color);
+            margin-bottom: 1.2rem;
+            font-size: 1.2rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--primary-color);
+        }
+
+        .footer-section p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-section ul li a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-section ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: var(--text-secondary);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-primary);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .social-links a:hover {
+            color: var(--primary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .contact-info li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .contact-info li i {
+            width: 20px;
+            color: var(--primary-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-bottom p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .footer-section h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+
+            .contact-info li {
+                justify-content: center;
+            }
+
+            .footer-section ul li a {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="nav-wrapper">
+        <div class="nav-content">
+            <a href="../indexmodern.html" class="logo">MCU Learn</a>
+            <ul class="nav-links">
+                <li><a href="../indexmodern.html">首页</a></li>
+                <li><a href="../pages/blognew.html">学习</a></li>
+                <li><a href="../pages/source.html">资源</a></li>
+                <li><a href="../News/news.html">新闻</a></li>
+                <li><a href="../indexmodern.html#community">社区</a></li>
+                <li><a href="../indexmodern.html#contact">联系我们</a></li>
+            </ul>
+            <button class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- 文章内容 -->
+    <div class="article-container">
+        <article class="article-content" data-aos="fade-up">
+            <header class="article-header">
+                <h1>GPIO编程基础</h1>
+                <div class="article-meta">
+                    <span><i class="fas fa-clock"></i> 阅读时间：30分钟</span>
+                    <span><i class="fas fa-user"></i> 难度：入门</span>
+                    <span><i class="fas fa-calendar"></i> 最后更新���2024-01-20</span>
+                </div>
+            </header>
+
+            <section class="content-section" data-aos="fade-up">
+                <h2>1. GPIO简介</h2>
+                <p>GPIO（General Purpose Input/Output，通用输入/输出端口）是单片机最基本也是最重要的外设之一。它允许我们控制单片机的引脚，实现数字信号的输入和输出功能。通过GPIO，我们可以：</p>
+                <ul>
+                    <li>控制LED的亮灭</li>
+                    <li>读取按键的状态</li>
+                    <li>驱动蜂鸣器发声</li>
+                    <li>与其他数字器件通信</li>
+                </ul>
+                
+                <div class="info-box">
+                    <p><i class="fas fa-info-circle"></i> 提示：在开始GPIO编程之前，请确保你已经正确安装了开发环境，并且了解单片机的基本概念。</p>
+                </div>
+            </section>
+
+            <section class="content-section" data-aos="fade-up">
+                <h2>2. GPIO的基本特性</h2>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>特性</th>
+                                <th>说明</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>工作模式</td>
+                                <td>输入模式、输出模式</td>
+                            </tr>
+                            <tr>
+                                <td>驱动能力</td>
+                                <td>每个引脚都有最大输出电流限制</td>
+                            </tr>
+                            <tr>
+                                <td>上拉/下拉</td>
+                                <td>内部上拉/下拉电阻可配置</td>
+                            </tr>
+                            <tr>
+                                <td>输入电平</td>
+                                <td>高电平（3.3V/5V）、低电平（0V）</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="content-section" data-aos="fade-up">
+                <h2>3. GPIO的基本操作</h2>
+                <h3>3.1 配置GPIO为输出模式</h3>
+                <div class="code-block">
+                    <button class="copy-button"><i class="fas fa-copy"></i></button>
+                    <pre><code class="language-c">// 配���P1.0为推挽输出模式
+P1M0 = 0x01;  // 设置P1.0为推挽输出
+P1M1 = 0x00;  // 清除P1.1的推挽设置
+
+// LED控制示例
+void LED_Init(void)
+{
+    P1M0 = 0x01;  // P1.0设置为推挽输出
+    P1M1 = 0x00;
+    P1 = 0xFF;    // 初始状态置高
+}</code></pre>
+                </div>
+
+                <h3>3.2 GPIO输出控制</h3>
+                <div class="code-block">
+                    <button class="copy-button"><i class="fas fa-copy"></i></button>
+                    <pre><code class="language-c">// LED控制函数
+void LED_ON(void)
+{
+    P1_0 = 0;    // 低电平点亮LED
+}
+
+void LED_OFF(void)
+{
+    P1_0 = 1;    // 高电平熄灭LED
+}
+
+void LED_Toggle(void)
+{
+    P1_0 = !P1_0;  // LED状态翻转
+}</code></pre>
+                </div>
+
+                <h3>3.3 配置GPIO为输入模式</h3>
+                <div class="code-block">
+                    <button class="copy-button"><i class="fas fa-copy"></i></button>
+                    <pre><code class="language-c">// 配置P3.2为输入模式（按键输入）
+void KEY_Init(void)
+{
+    P3M0 = 0x00;  // 设置P3.2为高阻输入
+    P3M1 = 0x04;
+    P3 = 0xFF;    // 使能上拉电阻
+}</code></pre>
+                </div>
+
+                <h3>3.4 GPIO输入读取</h3>
+                <div class="code-block">
+                    <button class="copy-button"><i class="fas fa-copy"></i></button>
+                    <pre><code class="language-c">// 按键检测函数
+bit KEY_Scan(void)
+{
+    if (P3_2 == 0)  // 检测到按键按下
+    {
+        Delay_ms(20);  // 消抖延时
+        if (P3_2 == 0)
+        {
+            while (!P3_2);  // 等待按键释放
+            return 1;
+        }
+    }
+    return 0;
+}</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section" data-aos="fade-up">
+                <h2>4. 实践项目：LED流水灯</h2>
+                <p>下面我们将实现一个简单的LED流水灯项目，综合运用GPIO的输出控制功能。</p>
+                
+                <div class="code-block">
+                    <button class="copy-button"><i class="fas fa-copy"></i></button>
+                    <pre><code class="language-c">#include <reg52.h>
+
+// LED流水灯程序
+void main(void)
+{
+    unsigned char i;
+    P1M0 = 0xFF;  // 设置P1全部为推挽输出
+    P1M1 = 0x00;
+    
+    while(1)
+    {
+        for(i = 0; i < 8; i++)
+        {
+            P1 = ~(0x01 << i);  // 依次点亮每个LED
+            Delay_ms(200);      // 延时200ms
+        }
+    }
+}</code></pre>
+                </div>
+
+                <div class="warning-box">
+                    <p><i class="fas fa-exclamation-triangle"></i> 注意：在实际连接LED时，需要添加适当的限流电阻，防止LED损坏。</p>
+                </div>
+            </section>
+
+            <section class="content-section" data-aos="fade-up">
+                <h2>5. 常见问题与解决方案</h2>
+                <div class="info-box">
+                    <h4>Q1: 为什么配置为输出模式后GPIO无法输出高电平？</h4>
+                    <p>A: 检查以下几点：</p>
+                    <ul>
+                        <li>确认P1M0和P1M1的配置是否正确</li>
+                        <li>检查是否正确设置了引脚的初始状态</li>
+                        <li>确认电源和地是否正确连接</li>
+                    </ul>
+                </div>
+
+                <div class="info-box">
+                    <h4>Q2: 按键检测不稳定，有抖动现象？</h4>
+                    <p>A: 这是机械按键的正常现象，需要在程序中添加消抖延时，一般20ms左右即可。</p>
+                </div>
+            </section>
+
+            <section class="next-steps" data-aos="fade-up">
+                <h3>下一步学习建议</h3>
+                <ul>
+                    <li>学习中断机制，实现更高效的按键检测</li>
+                    <li>了解定时的使用，实现更精确的延时控制</li>
+                    <li>探索PWM输出，实现LED呼吸灯效果</li>
+                    <li>学习串口通信，实现更复杂的控制功能</li>
+                </ul>
+            </section>
+        </article>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>关于我们</h3>
+                <p>MCU Learn 是中国矿业大学计算机学院和机电学院联合开发的单片机学习平台</p>
+                <div class="social-links">
+                    <a href="#" title="微信"><i class="fab fa-weixin"></i></a>
+                    <a href="#" title="QQ"><i class="fab fa-qq"></i></a>
+                    <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>快速链接</h3>
+                <ul>
+                    <li><a href="../indexmodern.html"><i class="fas fa-home"></i> 首页</a></li>
+                    <li><a href="../pages/blognew.html"><i class="fas fa-book"></i> 学习</a></li>
+                    <li><a href="../pages/source.html"><i class="fas fa-download"></i> 资源</a></li>
+                    <li><a href="../News/news.html"><i class="fas fa-newspaper"></i> 新闻</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>联系我们</h3>
+                <ul class="contact-info">
+                    <li><i class="fas fa-envelope"></i> Email: cumt_mcu@163.com</li>
+                    <li><i class="fas fa-map-marker-alt"></i> 地址：江苏省徐州市大学路1号</li>
+                    <li><i class="fab fa-weixin"></i> 微信公众号: CUMT_MCU</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 MCU Learn | 中国矿业大学计算机学院和机电学院版权所有</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-c.min.js"></script>
+    <script>
+        // 初始化AOS动画库
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+
+        // 主题切换功能
+        const themeToggle = document.querySelector('.theme-toggle');
+        const themeIcon = themeToggle.querySelector('i');
+
+        function updateTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            themeIcon.className = theme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            updateTheme(newTheme);
+        });
+
+        // 代码复制功能
+        document.querySelectorAll('.copy-button').forEach(button => {
+            button.addEventListener('click', () => {
+                const code = button.nextElementSibling.textContent;
+                navigator.clipboard.writeText(code).then(() => {
+                    button.innerHTML = '<i class="fas fa-check"></i>';
+                    setTimeout(() => {
+                        button.innerHTML = '<i class="fas fa-copy"></i>';
+                    }, 2000);
+                });
+            });
+        });
+
+        // 加载保存的主题
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        updateTheme(savedTheme);
+    </script>
+</body>
+</html> 
