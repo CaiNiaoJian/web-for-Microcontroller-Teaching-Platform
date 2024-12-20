@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="light">
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -43,7 +43,7 @@
 			}
 
 			.contact-info {
-				background: var(--card-bg);
+				background: var(--card-bg, var(--background-color));
 				padding: 40px;
 				border-radius: 20px;
 				box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
@@ -75,7 +75,7 @@
 			}
 
 			.contact-table-container {
-				background: var(--card-bg);
+				background: var(--card-bg, var(--background-color));
 				padding: 40px;
 				border-radius: 20px;
 				box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
@@ -91,7 +91,7 @@
 			.contact-table td {
 				padding: 15px;
 				text-align: left;
-				border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+				border-bottom: 1px solid var(--border-color, rgba(0, 0, 0, 0.1));
 			}
 
 			.contact-table th {
@@ -155,13 +155,19 @@
 				}
 			}
 
-			/* 暗色模式适配 */
-			body.dark-mode .contact-table th {
+			/* 暗色���式适配 */
+			[data-theme="dark"] .contact-table th {
 				background: rgba(0, 122, 255, 0.2);
 			}
 
-			body.dark-mode .contact-table td {
+			[data-theme="dark"] .contact-table td {
 				border-bottom-color: rgba(255, 255, 255, 0.1);
+			}
+
+			[data-theme="dark"] .contact-info,
+			[data-theme="dark"] .contact-table-container {
+				background: var(--card-bg);
+				box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 			}
 		</style>
 	</head>
@@ -301,35 +307,34 @@
 			// 初始化 AOS
 			AOS.init({
 				duration: 800,
-				offset: 100,
 				once: true
 			});
 
-			// 暗色模式切换
-			const themeToggle = document.querySelector('.theme-toggle');
-			const body = document.body;
-			const icon = themeToggle.querySelector('i');
+			// 主题切换功能
+			function initTheme() {
+				const themeToggleBtn = document.querySelector('.theme-toggle');
+				const themeIcon = themeToggleBtn.querySelector('i');
+				const savedTheme = localStorage.getItem('theme') || 'light';
+				
+				document.documentElement.setAttribute('data-theme', savedTheme);
+				updateThemeIcon(savedTheme);
 
-			// 检查本地存储中的主题设置
-			const savedTheme = localStorage.getItem('theme');
-			if (savedTheme === 'dark') {
-				body.classList.add('dark-mode');
-				icon.classList.remove('fa-moon');
-				icon.classList.add('fa-sun');
+				themeToggleBtn.addEventListener('click', () => {
+					const currentTheme = document.documentElement.getAttribute('data-theme');
+					const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+					
+					document.documentElement.setAttribute('data-theme', newTheme);
+					localStorage.setItem('theme', newTheme);
+					updateThemeIcon(newTheme);
+				});
+
+				function updateThemeIcon(theme) {
+					themeIcon.className = theme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
+				}
 			}
 
-			themeToggle.addEventListener('click', () => {
-				body.classList.toggle('dark-mode');
-				if (body.classList.contains('dark-mode')) {
-					icon.classList.remove('fa-moon');
-					icon.classList.add('fa-sun');
-					localStorage.setItem('theme', 'dark');
-				} else {
-					icon.classList.remove('fa-sun');
-					icon.classList.add('fa-moon');
-					localStorage.setItem('theme', 'light');
-				}
-			});
+			// 初始化主题
+			document.addEventListener('DOMContentLoaded', initTheme);
 		</script>
 	</body>
 </html>

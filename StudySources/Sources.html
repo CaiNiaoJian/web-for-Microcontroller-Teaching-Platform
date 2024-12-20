@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="light">
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -82,7 +82,7 @@
 					<div class="resource-card" data-category="journal" data-aos="fade-up">
 						<i class="fas fa-globe resource-icon"></i>
 						<h3>Web of Science</h3>
-						<p>Web of Science是一个领先的科学研究平台，提供跨学科的综合数据、指标和见解。</p>
+						<p>Web of Science是一个领先的科学研究平台，提供跨学��的综合数据、指标和见解。</p>
 						<div class="resource-tags">
 							<span class="tag">数据库</span>
 							<span class="tag">引文索引</span>
@@ -166,7 +166,7 @@
 					<div class="resource-card" data-category="journal" data-aos="fade-up">
 						<i class="fas fa-network-wired resource-icon"></i>
 						<h3>ACM Digital Library</h3>
-						<p>计算机科学领域最全面的数字图书馆，包含大量学术论文和会议记录。</p>
+						<p>计算机科学领域最全面的数字图书馆，包含大量学术论文和会议��录。</p>
 						<div class="resource-tags">
 							<span class="tag">计算机科学</span>
 							<span class="tag">数字图书馆</span>
@@ -259,7 +259,7 @@
 					<div class="resource-card" data-category="software" data-aos="fade-up">
 						<i class="fas fa-code-branch resource-icon"></i>
 						<h3>Visual Studio Code</h3>
-						<p>轻量级但功能强大的代码编辑器，支持多种编程语言和丰富的插件生态。</p>
+						<p>轻量级但功能强大的代码编辑���，支持多种编程语言和丰富的插件生态。</p>
 						<div class="resource-tags">
 							<span class="tag">编辑器</span>
 							<span class="tag">开发工具</span>
@@ -349,7 +349,7 @@
 						<h3>GitHub</h3>
 						<p>全球最大的代码托管平台，汇集了数百万开发者和开源项目。</p>
 						<div class="resource-tags">
-							<span class="tag">代码托管</span>
+							<span class="tag">代��托管</span>
 							<span class="tag">开源</span>
 							<span class="tag">协作</span>
 						</div>
@@ -375,7 +375,7 @@
 					<div class="resource-card" data-category="community" data-aos="fade-up">
 						<i class="fas fa-gem resource-icon"></i>
 						<h3>掘金</h3>
-						<p>面向全球中文开发者的技术内容分享与交流平台。</p>
+						<p>���向全球中文开发者的技术内容分享与交流平台。</p>
 						<div class="resource-tags">
 							<span class="tag">技术</span>
 							<span class="tag">分享</span>
@@ -468,7 +468,7 @@
 				</div>
 				<div class="footer-links">
 					<div class="footer-section">
-						<h4>快速链接</h4>
+						<h4>快速链���</h4>
 						<ul>
 							<li><a href="../indexmodern.html">首页</a></li>
 							<li><a href="../pages/blognew.html">学习资源</a></li>
@@ -493,6 +493,95 @@
 		</footer>
 
 		<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-		<script src="../z_js/modern-sources.js"></script>
+		<script>
+			// 主题切换功能
+			function initTheme() {
+				const themeToggleBtn = document.querySelector('.theme-toggle');
+				const themeIcon = themeToggleBtn.querySelector('i');
+				const savedTheme = localStorage.getItem('theme') || 'light';
+				
+				// 立即设置主题
+				document.documentElement.setAttribute('data-theme', savedTheme);
+				updateThemeIcon(savedTheme);
+
+				themeToggleBtn.addEventListener('click', () => {
+					const currentTheme = document.documentElement.getAttribute('data-theme');
+					const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+					
+					document.documentElement.setAttribute('data-theme', newTheme);
+					localStorage.setItem('theme', newTheme);
+					updateThemeIcon(newTheme);
+				});
+			}
+
+			function updateThemeIcon(theme) {
+				const themeIcon = document.querySelector('.theme-toggle i');
+				themeIcon.className = theme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
+			}
+
+			// 立即初始化主题
+			initTheme();
+
+			// 其他初始化在 DOMContentLoaded 中进行
+			document.addEventListener('DOMContentLoaded', () => {
+				// 初始化 AOS
+				AOS.init({
+					duration: 800,
+					once: true
+				});
+				
+				// 资源筛选功能
+				const filterButtons = document.querySelectorAll('.filter-button');
+				const resourceCards = document.querySelectorAll('.resource-card');
+
+				filterButtons.forEach(button => {
+					button.addEventListener('click', () => {
+						// 移除所有按钮的active类
+						filterButtons.forEach(btn => btn.classList.remove('active'));
+						// 添加当前按钮的active类
+						button.classList.add('active');
+
+						const category = button.dataset.category;
+						
+						resourceCards.forEach(card => {
+							if (category === 'all' || card.dataset.category === category) {
+								card.style.display = 'block';
+							} else {
+								card.style.display = 'none';
+							}
+						});
+					});
+				});
+
+				// 搜索功能
+				const searchInput = document.querySelector('.search-input');
+				const searchButton = document.querySelector('.search-button');
+
+				function performSearch() {
+					const searchTerm = searchInput.value.toLowerCase();
+					
+					resourceCards.forEach(card => {
+						const title = card.querySelector('h3').textContent.toLowerCase();
+						const description = card.querySelector('p').textContent.toLowerCase();
+						const tags = Array.from(card.querySelectorAll('.tag')).map(tag => tag.textContent.toLowerCase());
+						
+						if (title.includes(searchTerm) || 
+							description.includes(searchTerm) || 
+							tags.some(tag => tag.includes(searchTerm))) {
+							card.style.display = 'block';
+						} else {
+							card.style.display = 'none';
+						}
+					});
+				}
+
+				searchButton.addEventListener('click', performSearch);
+				searchInput.addEventListener('keypress', (e) => {
+					if (e.key === 'Enter') {
+						performSearch();
+					}
+				});
+			});
+		</script>
 	</body>
 </html>

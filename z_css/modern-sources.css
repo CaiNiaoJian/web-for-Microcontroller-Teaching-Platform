@@ -11,6 +11,29 @@
     --light-bg: #f5f6fa;
     --border-radius: 12px;
     --transition: all 0.3s ease;
+    --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    --hover-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    --search-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    --background-color: #ffffff;
+}
+
+/* 深色模式变量 */
+[data-theme="dark"] {
+    --text-color: #dfe6e9;
+    --light-text: #b2bec3;
+    --card-bg: #2d3436;
+    --light-bg: #353b48;
+    --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    --hover-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    --search-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    --background-color: #1a1a1a;
+}
+
+/* 基础样式 */
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    transition: var(--transition);
 }
 
 /* 页面标题样式 */
@@ -90,7 +113,7 @@
     background: var(--card-bg);
     border-radius: var(--border-radius);
     padding: 25px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--card-shadow);
     transition: var(--transition);
     position: relative;
     overflow: hidden;
@@ -111,7 +134,7 @@
 
 .resource-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    box-shadow: var(--hover-shadow);
 }
 
 .resource-card:hover::before {
@@ -187,10 +210,10 @@
 .search-box {
     display: flex;
     gap: 10px;
-    background: white;
+    background: var(--card-bg);
     padding: 10px;
     border-radius: var(--border-radius);
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--search-shadow);
 }
 
 .search-input {
@@ -199,6 +222,12 @@
     padding: 10px;
     font-size: 1rem;
     outline: none;
+    background: var(--card-bg);
+    color: var(--text-color);
+}
+
+.search-input::placeholder {
+    color: var(--light-text);
 }
 
 .search-button {
@@ -239,37 +268,6 @@
 .filter-button:hover {
     background: var(--primary-color);
     color: white;
-}
-
-/* 暗色模式适配 */
-body.dark-mode {
-    --card-bg: #2d3436;
-    --light-bg: #353b48;
-    --text-color: #dfe6e9;
-    --light-text: #b2bec3;
-}
-
-body.dark-mode .resource-card {
-    background: var(--card-bg);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-}
-
-body.dark-mode .resource-card:hover {
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-}
-
-body.dark-mode .search-box {
-    background: var(--card-bg);
-}
-
-body.dark-mode .search-input {
-    background: var(--card-bg);
-    color: var(--text-color);
-}
-
-body.dark-mode .tag {
-    background: var(--light-bg);
-    color: var(--text-color);
 }
 
 /* 响应式设计 */

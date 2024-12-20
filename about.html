@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="light">
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,8 +7,31 @@
 		<link rel="icon" href="images/标签栏图标.png" type="images/png" sizes="34x32">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 		<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
-		<!--<link rel="stylesheet" href="styles.css">-->
 		<link rel="stylesheet" href="z_css/styles_about.css">
+		<style>
+			/* 语言切换按钮样式 */
+			.controls {
+				display: flex;
+				gap: 1rem;
+				align-items: center;
+			}
+
+			.theme-toggle, .lang-toggle {
+				background: none;
+				border: none;
+				color: var(--text-color);
+				cursor: pointer;
+				padding: 0.5rem;
+				font-size: 1.2rem;
+				transition: var(--transition);
+				border-radius: 50%;
+			}
+
+			.theme-toggle:hover, .lang-toggle:hover {
+				background: var(--bg-color);
+				transform: scale(1.1);
+			}
+		</style>
 	</head>
 	<body>
 		<!-- 导航栏 -->
@@ -16,17 +39,22 @@
 			<div class="nav-content">
 				<a href="indexmodern.html" class="logo">MCU Learn</a>
 				<ul class="nav-links">
-					<li><a href="indexmodern.html">首页</a></li>
-					<li><a href="pages/blognew.html">学习</a></li>
-					<li><a href="pages/source.html">期刊</a></li>
-					<li><a href="StudySources/Sources.html">资源</a></li>
-					<li><a href="News/news.html">新闻</a></li>
-					<li><a href="pages/community.html">社区</a></li>
-					<li><a href="relation.html">联系我们</a></li>
+					<li><a href="indexmodern.html" data-i18n="nav.home">首页</a></li>
+					<li><a href="pages/blognew.html" data-i18n="nav.learn">学习</a></li>
+					<li><a href="pages/source.html" data-i18n="nav.journal">期刊</a></li>
+					<li><a href="StudySources/Sources.html" data-i18n="nav.resources">资源</a></li>
+					<li><a href="News/news.html" data-i18n="nav.news">新闻</a></li>
+					<li><a href="pages/community.html" data-i18n="nav.community">社区</a></li>
+					<li><a href="relation.html" data-i18n="nav.contact">联系我们</a></li>
 				</ul>
-				<button class="theme-toggle">
-					<i class="fas fa-moon"></i>
-				</button>
+				<div class="controls">
+					<button class="lang-toggle" title="切换语言">
+						<i class="fas fa-globe"></i>
+					</button>
+					<button class="theme-toggle" title="切换主题">
+						<i class="fas fa-moon"></i>
+					</button>
+				</div>
 			</div>
 		</nav>
 
@@ -34,43 +62,43 @@
 		<div class="about-container">
 			<!-- 英雄区域 -->
 			<section class="about-hero" data-aos="fade-up">
-				<h1>关于 MCU Learn</h1>
-				<p>我们致力于为单片机学习者提供最优质的学习资源和技术支持，打造一个开放、包容、充满活力的技术社区。</p>
+				<h1 data-i18n="about.title">关于 MCU Learn</h1>
+				<p data-i18n="about.description">我们致力于为单片机学习者提供最优质的学习资源和技术支持，打造一个开放、包容、充满活力的技术社区。</p>
 			</section>
 
 			<!-- 团队介绍 -->
 			<section class="team-section">
 				<div class="team-card" data-aos="fade-up">
-					<h3>我们的团队</h3>
-					<p>我们的团队由一群充满激情和经验丰富的专业人士组成，涵盖了嵌入式开发、单片机应用、物联网技术等多个领域。每位成员都致力于分享知识和经验，帮助更多人掌握单片机技术。</p>
+					<h3 data-i18n="team.title">我们的团队</h3>
+					<p data-i18n="team.description">我们的团队由一群充满激情和经验丰富的专业人士组成，涵盖了嵌入式开发、单片机应用、物联网技术等多个领域。每位成员都致力于分享知识和经验，帮助更多人掌握单片机技术。</p>
 				</div>
 				<div class="team-card" data-aos="fade-up" data-aos-delay="100">
-					<h3>教学理念</h3>
-					<p>我们相信，通过实践和互动学习是掌握单片机技术的最佳方式。我们提供详实的教程、丰富的实例和完整的项目案例，帮助学习者从入门到精通。</p>
+					<h3 data-i18n="philosophy.title">教学理念</h3>
+					<p data-i18n="philosophy.description">我们相信，通过实践和互动学习是掌握单片机技术的最佳方式。我们提供详实的教程、丰富的实例和完整的项目案例，帮助学习者从入门到精通。</p>
 				</div>
 				<div class="team-card" data-aos="fade-up" data-aos-delay="200">
-					<h3>技术支持</h3>
-					<p>我们提供全面的技术支持，包括代码审查、问题解答和项目指导。我们的社区成员随时准备帮助你解决学习过程中遇到的各种问题。</p>
+					<h3 data-i18n="support.title">技术支持</h3>
+					<p data-i18n="support.description">我们提供全面的技术支持，包括代码审查、问题解答和项目指导。我们的社区成员随时准备帮助你解决学习过程中遇到的各种问题。</p>
 				</div>
 			</section>
 
 			<!-- 目标和愿景 -->
 			<section class="vision-section">
 				<div class="vision-card" data-aos="fade-right">
-					<h3>我们的目标</h3>
-					<p>我们的目标是创建一个开放、包容和充满活力的学习社区，让每个人都能在这里找到适合自己的学习路径。我们希望通过我们的努力，帮助更多的人掌握单片机技术，实现个人和职业的成长。</p>
+					<h3 data-i18n="goals.title">我们的目标</h3>
+					<p data-i18n="goals.description">我们的目标是创建一个开放、包容和充满活力的学习社区，让每个人都能在这里找到适合自己的学习路径。我们希望通过我们的努力，帮助更多的人掌握单片机技术，实现个人和职业的成长。</p>
 				</div>
 				<div class="vision-card" data-aos="fade-left">
-					<h3>我们的愿景</h3>
-					<p>我们的愿景是成为单片机教育领域的领先平台，为学习者提供最新、最全面的技术资讯和资源。我们希望通过持续的努力和创新，推动单片机技术的发展，并为社会培养更多优秀的嵌入式开发人才。</p>
+					<h3 data-i18n="vision.title">我们的愿景</h3>
+					<p data-i18n="vision.description">我们的愿景是成为单片机教育领域的领先平台，为学习者提供最新、最全面的技术资讯和资源。我们希望通过持续的努力和创新，推动单片机技术的发展，并为社会培养更多优秀的嵌入式开发人才。</p>
 				</div>
 			</section>
 
 			<!-- 评论区 -->
 			<section class="comment-section" data-aos="fade-up">
-				<h2>留言板</h2>
+				<h2 data-i18n="comments.title">留言板</h2>
 				<div class="comment-form">
-					<textarea id="comment-input" placeholder="分享你的想法..."></textarea>
+					<textarea id="comment-input" data-i18n-placeholder="comments.placeholder" placeholder="分享你的想法..."></textarea>
 					<div class="emoji-picker">
 						<span class="emoji" data-emoji="😀">😀</span>
 						<span class="emoji" data-emoji="😊">😊</span>
@@ -83,7 +111,7 @@
 						<span class="emoji" data-emoji="❤️">❤️</span>
 						<span class="emoji" data-emoji="🤝">🤝</span>
 					</div>
-					<button id="submit-comment">发布留言</button>
+					<button id="submit-comment" data-i18n="comments.submit">发布留言</button>
 				</div>
 				<div class="comments">
 					<!-- 评论列表将通过 JavaScript 动态加载 -->
@@ -96,31 +124,31 @@
 			<div class="footer-content">
 				<div class="footer-logo">
 					<h3>MCU Learn</h3>
-					<p>探索创新科技的无限可能</p>
+					<p data-i18n="footer.slogan">探索创新科技的无限可能</p>
 				</div>
 				<div class="footer-links">
 					<div class="footer-section">
-						<h4>快速链接</h4>
+						<h4 data-i18n="footer.quickLinks">快速链接</h4>
 						<ul>
-							<li><a href="indexmodern.html">首页</a></li>
-							<li><a href="pages/blognew.html">学习</a></li>
-							<li><a href="pages/source.html">资源</a></li>
-							<li><a href="News/news.html">新闻</a></li>
+							<li><a href="indexmodern.html" data-i18n="footer.home">首页</a></li>
+							<li><a href="pages/blognew.html" data-i18n="footer.learn">学习</a></li>
+							<li><a href="pages/source.html" data-i18n="footer.resources">资源</a></li>
+							<li><a href="News/news.html" data-i18n="footer.news">新闻</a></li>
 						</ul>
 					</div>
 					<div class="footer-section">
-						<h4>关注我们</h4>
+						<h4 data-i18n="footer.followUs">关注我们</h4>
 						<ul>
 							<li><a href="https://github.com/CaiNiaoJian/web-for-cumt-Microcontroller-Teaching-Platform">GitHub</a></li>
-							<li><a href="#">微信公众号</a></li>
-							<li><a href="Solution/Website_builder.html">网站建设者</a></li>
-                        	<li><a href="websiteNow.html">网站开发进度</a></li>
+							<li><a href="#" data-i18n="footer.wechat">微信公众号</a></li>
+							<li><a href="Solution/Website_builder.html" data-i18n="footer.builders">网站建设者</a></li>
+							<li><a href="websiteNow.html" data-i18n="footer.progress">网站建设进度</a></li>
 						</ul>
 					</div>
 				</div>
 			</div>
 			<div class="footer-bottom">
-				<p>&copy; 2024 MCU Learn. All rights reserved.</p>
+				<p data-i18n="footer.copyright">&copy; 2024 MCU Learn. All rights reserved.</p>
 			</div>
 		</footer>
 
@@ -133,6 +161,109 @@
 				duration: 800,
 				once: true
 			});
+
+			// 语言配置
+			const translations = {
+				'zh-CN': {
+					'nav.home': '首页',
+					'nav.learn': '学习',
+					'nav.journal': '期刊',
+					'nav.resources': '资源',
+					'nav.news': '新闻',
+					'nav.community': '社区',
+					'nav.contact': '联系我们',
+					'about.title': '关于 MCU Learn',
+					'about.description': '我们致力于为单片机学习者提供最优质的学习资源和技术支持，打造一个开放、包容、充满活力的技术社区。',
+					'team.title': '我们的团队',
+					'team.description': '我们的团队由一群充满激情和经验丰富的专业人士组成，涵盖了嵌入式开发、单片机应用、物联网技术等多个领域。每位成员都致力于分享知识和经验，帮助更多人掌握单片机技术。',
+					'philosophy.title': '教学理念',
+					'philosophy.description': '我们相信，通过实践和互动学习是掌握单片机技术的最佳方式。我们提供详实的教程、丰富的实例和完整的项目案例，帮助学习者从入门到精通。',
+					'support.title': '技术支持',
+					'support.description': '我们提供全面的技术支持，包括代码审查、问题解答和项目指导。我们的社区成员随时准备帮助你解决学习过程中遇到的各种问题。',
+					'goals.title': '我们的目标',
+					'goals.description': '我们的目标是创建一个开放、包容和充满活力的学习社区，让每个人都能在这里找到适合自己的学习路径。我们希望通过我们的努力，帮助更多的人掌握单片机技术，实现个人和职业的成长。',
+					'vision.title': '我们的愿景',
+					'vision.description': '我们的愿景是成为单片机教育领域的领先平台，为学习者提供最新、最全面的技术资讯和资源。我们希望通过持续的努力和创新，推动单片机技术的发展，并为社会培养更多优秀的嵌入式开发人才。',
+					'comments.title': '留言板',
+					'comments.placeholder': '分享你的想法...',
+					'comments.submit': '发布留言',
+					'footer.slogan': '探索创新科技的无限可能',
+					'footer.quickLinks': '快速链接',
+					'footer.home': '首页',
+					'footer.learn': '学习',
+					'footer.resources': '资源',
+					'footer.news': '新闻',
+					'footer.followUs': '关注我们',
+					'footer.wechat': '微信公众号',
+					'footer.builders': '网站建设者',
+					'footer.progress': '网站建设进度',
+					'footer.copyright': '© 2024 MCU Learn. 保留所有权利。'
+				},
+				'en': {
+					'nav.home': 'Home',
+					'nav.learn': 'Learn',
+					'nav.journal': 'Journal',
+					'nav.resources': 'Resources',
+					'nav.news': 'News',
+					'nav.community': 'Community',
+					'nav.contact': 'Contact',
+					'about.title': 'About MCU Learn',
+					'about.description': 'We are dedicated to providing the highest quality learning resources and technical support for MCU learners, creating an open, inclusive, and vibrant technical community.',
+					'team.title': 'Our Team',
+					'team.description': 'Our team consists of passionate and experienced professionals covering various fields including embedded development, MCU applications, and IoT technology. Each member is committed to sharing knowledge and experience to help more people master MCU technology.',
+					'philosophy.title': 'Teaching Philosophy',
+					'philosophy.description': 'We believe that practical and interactive learning is the best way to master MCU technology. We provide detailed tutorials, rich examples, and complete project cases to help learners progress from beginners to experts.',
+					'support.title': 'Technical Support',
+					'support.description': 'We provide comprehensive technical support, including code review, problem-solving, and project guidance. Our community members are always ready to help you solve various problems encountered during your learning journey.',
+					'goals.title': 'Our Goals',
+					'goals.description': 'Our goal is to create an open, inclusive, and vibrant learning community where everyone can find their suitable learning path. Through our efforts, we hope to help more people master MCU technology and achieve personal and professional growth.',
+					'vision.title': 'Our Vision',
+					'vision.description': 'Our vision is to become a leading platform in MCU education, providing the latest and most comprehensive technical information and resources. Through continuous effort and innovation, we aim to promote the development of MCU technology and cultivate more excellent embedded development talents for society.',
+					'comments.title': 'Message Board',
+					'comments.placeholder': 'Share your thoughts...',
+					'comments.submit': 'Post Message',
+					'footer.slogan': 'Explore Infinite Possibilities of Innovation Technology',
+					'footer.quickLinks': 'Quick Links',
+					'footer.home': 'Home',
+					'footer.learn': 'Learn',
+					'footer.resources': 'Resources',
+					'footer.news': 'News',
+					'footer.followUs': 'Follow Us',
+					'footer.wechat': 'WeChat Official Account',
+					'footer.builders': 'Website Builders',
+					'footer.progress': 'Website Progress',
+					'footer.copyright': '© 2024 MCU Learn. All rights reserved.'
+				}
+			};
+
+			// 语言切换功能
+			const langToggle = document.querySelector('.lang-toggle');
+			let currentLang = localStorage.getItem('lang') || 'zh-CN';
+
+			function updateLanguage() {
+				document.querySelectorAll('[data-i18n]').forEach(element => {
+					const key = element.getAttribute('data-i18n');
+					if (translations[currentLang][key]) {
+						element.textContent = translations[currentLang][key];
+					}
+				});
+
+				// 更新 placeholder
+				document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
+					const key = element.getAttribute('data-i18n-placeholder');
+					if (translations[currentLang][key]) {
+						element.placeholder = translations[currentLang][key];
+					}
+				});
+
+				document.documentElement.lang = currentLang;
+			}
+
+			function toggleLanguage() {
+				currentLang = currentLang === 'zh-CN' ? 'en' : 'zh-CN';
+				localStorage.setItem('lang', currentLang);
+				updateLanguage();
+			}
 
 			// 暗色模式切换
 			const themeToggle = document.querySelector('.theme-toggle');
@@ -157,6 +288,15 @@
 					const emoji = e.target.dataset.emoji;
 					commentInput.value += emoji;
 				}
+			});
+
+			// 事件监听
+			langToggle.addEventListener('click', toggleLanguage);
+
+			// 初始化语言
+			document.addEventListener('DOMContentLoaded', () => {
+				currentLang = localStorage.getItem('lang') || 'zh-CN';
+				updateLanguage();
 			});
 		</script>
 	</body>

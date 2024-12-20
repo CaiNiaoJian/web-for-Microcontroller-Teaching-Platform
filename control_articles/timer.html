@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>51单片机定时器应用实战 - MCU Learn</title>
+    <link rel="stylesheet" href="../z_css/modern-style.css">
+    <link rel="stylesheet" href="../z_css/articles-modern.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css">
+    <style>
+        /* 文章特定样式 */
+        .article-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .article-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-top: 4rem;
+        }
+
+        .article-meta {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            color: var(--text-secondary);
+            margin: 1rem 0;
+        }
+
+        .content-section {
+            margin-bottom: 3rem;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .content-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .code-block {
+            background: var(--code-bg);
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            position: relative;
+        }
+
+        .code-block pre {
+            padding: 1.5rem;
+            overflow-x: auto;
+            background: var(--code-bg);
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+
+        .code-block code {
+            font-family: 'Fira Code', monospace;
+            color: var(--text-color);
+        }
+
+        .info-box {
+            background: var(--info-bg);
+            border-left: 4px solid var(--primary-color);
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+
+        .warning-box {
+            background: var(--warning-bg);
+            border-left: 4px solid var(--warning-color);
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+
+        .setup-step {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .setup-step h4 {
+            color: var(--primary-color);
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+
+        .timer-diagram {
+            width: 100%;
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 1rem;
+            background: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .timer-diagram img {
+            width: 100%;
+            height: auto;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 导航栏样式 */
+        .nav-wrapper {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        /* 返回按钮样式 */
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--primary-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin-top: 2rem;
+        }
+
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="nav-wrapper">
+        <div class="nav-content">
+            <a href="../indexmodern.html" class="logo">MCU Learn</a>
+            <ul class="nav-links">
+                <li><a href="../indexmodern.html">首页</a></li>
+                <li><a href="../pages/blognew.html">学习</a></li>
+                <li><a href="../StudySources/Sources.html">资源</a></li>
+                <li><a href="../News/news.html">新闻</a></li>
+                <li><a href="../pages/community.html">社区</a></li>
+                <li><a href="../relation.html">联系我们</a></li>
+            </ul>
+            <button class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <div class="article-container">
+        <div class="article-header">
+            <h1>51单片机定时器应用实战</h1>
+            <div class="article-meta">
+                <span><i class="fas fa-calendar"></i> 2024-01-20</span>
+                <span><i class="fas fa-user"></i> MCU Learn</span>
+                <span><i class="fas fa-tag"></i> 实验教程</span>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>实验目的</h2>
+            <p>本实验旨在掌握51单片机定时器的配置和使用方法，实现精确的时间控制功能。通过实际案例，深入理解定时器的工作原理和应用技巧。具体目标包括：</p>
+            <ul class="goal-list">
+                <li>理解定时器的基本工作原理</li>
+                <li>掌握定时器的配置方法</li>
+                <li>学习定时器中断服务程序的编写</li>
+                <li>实现精确的时间控制功能</li>
+                <li>掌握定时器在实际项目中的应用方法</li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h2>定时器基础知识</h2>
+            <div class="principle-content">
+                <h3>1. 定时器结构</h3>
+                <p>51单片机内置的定时器主要包含以下部分：</p>
+                <ul>
+                    <li>定时器/计数器寄存器（TH、TL）</li>
+                    <li>模式寄存器（TMOD）</li>
+                    <li>控制寄存器（TCON）</li>
+                    <li>中断控制相关寄存器</li>
+                </ul>
+
+                <div class="info-box">
+                    <p><i class="fas fa-info-circle"></i> 定时器模式：</p>
+                    <ul>
+                        <li>模式0：13位定时器/计数器</li>
+                        <li>模式1：16位定时器/计数器</li>
+                        <li>模式2：8位自动重装定时器/计数器</li>
+                        <li>模式3：两个8位定时器/计数器</li>
+                    </ul>
+                </div>
+
+                <h3>2. 定时计算</h3>
+                <p>定时器计数值计算公式：</p>
+                <div class="code-block">
+                    <pre><code>计数初值 = 65536 - (定时时间 × 晶振频率) / 12</code></pre>
+                </div>
+                <p>例如：12MHz晶振，需要1ms定时：</p>
+                <div class="code-block">
+                    <pre><code>计数初值 = 65536 - (0.001 × 12000000) / 12
+计数初值 = 65536 - 1000 = 64536 (FC18H)</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>实验案例：精确定时控制LED闪烁</h2>
+            <div class="setup-step">
+                <h4>1. 硬件连接</h4>
+                <p>本实验需要的硬件连接非常简单：</p>
+                <ul>
+                    <li>将LED正极通过限流电阻连接到P1.0口</li>
+                    <li>LED负极接地</li>
+                    <li>12MHz晶振连接到XTAL1和XTAL2</li>
+                </ul>
+            </div>
+
+            <div class="setup-step">
+                <h4>2. 程序实现</h4>
+                <div class="code-block">
+                    <pre><code>#include &lt;reg51.h&gt;
+
+sbit LED = P1^0;    // LED连接到P1.0口
+bit flag = 0;       // LED状态标志位
+
+// 定时器0中断服务函数
+void Timer0_ISR() interrupt 1 {
+    TH0 = 0xFC;    // 重装初值高字节
+    TL0 = 0x18;    // 重装初值低字节
+    flag = !flag;   // 翻转标志位
+    LED = flag;     // 控制LED
+}
+
+// 定时器0初始化函数
+void Timer0_Init(void) {
+    TMOD &= 0xF0;   // 清零T0的控制位
+    TMOD |= 0x01;   // 设置T0为模式1(16位定时器)
+    
+    TH0 = 0xFC;     // 1ms定时值
+    TL0 = 0x18;
+    
+    ET0 = 1;        // 使能T0中断
+    EA = 1;         // 使能总中断
+    TR0 = 1;        // 启动定时器0
+}
+
+void main() {
+    Timer0_Init();  // 初始化定时器0
+    
+    while(1) {
+        // 主循环中可以执行其他任务
+    }
+}</code></pre>
+                </div>
+                <div class="code-explanation">
+                    <h4>代码说明：</h4>
+                    <ul>
+                        <li>使用定时器0，工作在模式1（16位定时器模式）</li>
+                        <li>通过中断服务程序实现LED状态翻转</li>
+                        <li>定时时间为1ms，使用12MHz晶振</li>
+                        <li>主循环可以执行其他任务，不会被定时器占用</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="setup-step">
+                <h4>3. 关键点解析</h4>
+                <div class="info-box">
+                    <h4>定时器配置步骤：</h4>
+                    <ol>
+                        <li>配置TMOD寄存器，选择工作模式</li>
+                        <li>计算并设置定时初值（TH0、TL0）</li>
+                        <li>配置中断使能</li>
+                        <li>编写中断服务程序</li>
+                        <li>启动定时器</li>
+                    </ol>
+                </div>
+                <div class="warning-box">
+                    <p><i class="fas fa-exclamation-triangle"></i> 注意事项：</p>
+                    <ul>
+                        <li>中断服务程序要尽量简短</li>
+                        <li>注意重装初值的时机</li>
+                        <li>避免在中断中���行耗时操作</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>实验扩展</h2>
+            <div class="extension-content">
+                <h3>1. 多定时器应用</h3>
+                <p>51单片机有Timer0和Timer1两个定时器，可以同时使用：</p>
+                <div class="code-block">
+                    <pre><code>// Timer1中断服务函数
+void Timer1_ISR() interrupt 3 {
+    TH1 = 0xFC;    // 1ms定时
+    TL1 = 0x18;
+    // 其他任务
+}
+
+// 初始化两个定时器
+void Timer_Init(void) {
+    // Timer0配置（同上）
+    TMOD |= 0x10;   // 设置Timer1为模式1
+    TH1 = 0xFC;
+    TL1 = 0x18;
+    ET1 = 1;        // 使能Timer1中断
+    TR1 = 1;        // 启动Timer1
+}</code></pre>
+                </div>
+
+                <h3>2. 实用功能示例</h3>
+                <ul>
+                    <li>数码管动态显示时钟</li>
+                    <li>PWM输出控制</li>
+                    <li>按键消抖</li>
+                    <li>串口波特率产生</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>实验思考</h2>
+            <div class="thinking-content">
+                <ol>
+                    <li>如何实现更长时间的定时？</li>
+                    <li>定时器如何配合PWM实现呼吸灯效果？</li>
+                    <li>如何使用定时器实现精确的串口波特率？</li>
+                    <li>多个定时器同时使用时需要注意什么？</li>
+                </ol>
+            </div>
+        </div>
+
+        <a href="control-articles.html" class="back-button">
+            <i class="fas fa-arrow-left"></i> 返回文章列表
+        </a>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-c.min.js"></script>
+    <script>
+        // 主题切换功能
+        function initTheme() {
+            const themeToggleBtn = document.querySelector('.theme-toggle');
+            const themeIcon = themeToggleBtn.querySelector('i');
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            updateThemeIcon(savedTheme);
+
+            themeToggleBtn.addEventListener('click', () => {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                
+                document.documentElement.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                updateThemeIcon(newTheme);
+            });
+        }
+
+        function updateThemeIcon(theme) {
+            const themeIcon = document.querySelector('.theme-toggle i');
+            themeIcon.className = theme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
+        }
+
+        // 立即初始化主题
+        initTheme();
+    </script>
+</body>
+</html> 

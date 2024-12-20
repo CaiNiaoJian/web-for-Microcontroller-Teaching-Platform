@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="light">
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -118,6 +118,29 @@
 			body.dark-mode .cookie-btn.decline:hover {
 				background: rgba(255, 255, 255, 0.1);
 			}
+
+			/* 语言切换按钮样式 */
+			.controls {
+				display: flex;
+				gap: 1rem;
+				align-items: center;
+			}
+
+			.theme-toggle, .lang-toggle {
+				background: none;
+				border: none;
+				color: var(--text-color);
+				cursor: pointer;
+				padding: 0.5rem;
+				font-size: 1.2rem;
+				transition: var(--transition);
+				border-radius: 50%;
+			}
+
+			.theme-toggle:hover, .lang-toggle:hover {
+				background: var(--bg-color);
+				transform: scale(1.1);
+			}
 		</style>
 	</head>
 	<body>
@@ -126,30 +149,35 @@
 			<div class="nav-content">
 				<a href="index.html" class="logo">MCU Learn</a>
 				<ul class="nav-links">
-					<li><a href="about.html">简介</a></li>
-					<li><a href="pages/blognew.html">学习</a></li>
-					<li><a href="pages/source.html">期刊</a></li>
-					<li><a href="StudySources/Sources.html">资源</a></li>
-					<li><a href="News/news.html">新闻</a></li>
-					<li><a href="systemtimeout.html">社区</a></li>
-					<li><a href="relation.html">联系我们</a></li>
+					<li><a href="about.html" data-i18n="nav.about">简介</a></li>
+					<li><a href="pages/blognew.html" data-i18n="nav.learn">学习</a></li>
+					<li><a href="pages/source.html" data-i18n="nav.journal">期刊</a></li>
+					<li><a href="StudySources/Sources.html" data-i18n="nav.resources">资源</a></li>
+					<li><a href="News/news.html" data-i18n="nav.news">新闻</a></li>
+					<li><a href="systemtimeout.html" data-i18n="nav.community">社区</a></li>
+					<li><a href="relation.html" data-i18n="nav.contact">联系我们</a></li>
 				</ul>
-				<button class="theme-toggle">
-					<i class="fas fa-moon"></i>
-				</button>
+				<div class="controls">
+					<button class="lang-toggle" title="切换语言">
+						<i class="fas fa-globe"></i>
+					</button>
+					<button class="theme-toggle" title="切换主题">
+						<i class="fas fa-moon"></i>
+					</button>
+				</div>
 			</div>
 		</nav>
 
 		<!-- 英雄区域 -->
 		<section class="hero">
 			<div class="hero-content" data-aos="fade-up">
-				<h1>探索单片机的无限可能</h1>
-				<h2>从入门到精通，打造你的嵌入式世界</h2>
-				<a href="pages/blognew.html" class="cta-button">开始学习</a>
+				<h1 data-i18n="hero.title">探索单片机的无限可能</h1>
+				<h2 data-i18n="hero.subtitle">从入门到精通，打造你的嵌入式世界</h2>
+				<a href="pages/blognew.html" class="cta-button" data-i18n="hero.cta">开始学习</a>
 			</div>
 			<div class="scroll-indicator">
 				<div class="mouse"></div>
-				<p>向下滚动探索更多</p>
+				<p data-i18n="hero.scroll">向下滚动探索更多</p>
 			</div>
 		</section>
 
@@ -157,15 +185,15 @@
 		<!-- 学习路径 -->
 		<section class="learning-path" id="resources">
 			<div class="section-content">
-				<h2 class="section-title" data-aos="fade-up">我们能为你做什么？</h2>
+				<h2 class="section-title" data-aos="fade-up" data-i18n="path.title">我们能为你做什么？</h2>
 				<div class="path-timeline">
 					<div class="path-item" data-aos="fade-right">
 						<div class="path-icon">
 							<i class="fas fa-microchip"></i>
 						</div>
 						<div class="path-content">
-							<h3>基础知识</h3>
-							<p>掌握单片机基本概念和开发环境</p>
+							<h3 data-i18n="path.basic.title">基础知识</h3>
+							<p data-i18n="path.basic.desc">掌握单片机基本概念和开发环境</p>
 						</div>
 					</div>
 					<div class="path-item" data-aos="fade-left">
@@ -173,8 +201,8 @@
 							<i class="fas fa-code"></i>
 						</div>
 						<div class="path-content">
-							<h3>编程技能</h3>
-							<p>学习C语言和单片机编程基础</p>
+							<h3 data-i18n="path.coding.title">编程技能</h3>
+							<p data-i18n="path.coding.desc">学习C语言和单片机编程基础</p>
 						</div>
 					</div>
 					<div class="path-item" data-aos="fade-right">
@@ -182,8 +210,8 @@
 							<i class="fas fa-project-diagram"></i>
 						</div>
 						<div class="path-content">
-							<h3>项目实践</h3>
-							<p>动手实现各类单片机项目</p>
+							<h3 data-i18n="path.project.title">项目实践</h3>
+							<p data-i18n="path.project.desc">动手实现各类单片机项目</p>
 						</div>
 					</div>
 				</div>
@@ -193,16 +221,19 @@
 		<!-- 特色课程 -->
 		<section class="featured-courses" id="courses">
 			<div class="section-content">
-				<h2 class="section-title" data-aos="fade-up">实验课程</h2>
+				<h2 class="section-title" data-aos="fade-up" data-i18n="courses.title">实验课程</h2>
 				<div class="course-grid">
 					<div class="course-card" data-aos="fade-up" data-aos-delay="100">
 						<div class="course-image">
 							<img src="images/modern/course-basic.png" alt="基础课程">
 						</div>
 						<div class="course-info">
-							<h3>单片机基础入门</h3>
-							<p>从零开始，掌握单片机基础知识</p>
-							<a href="control_articles/control-articles.html" class="learn-more">了解更多 <i class="fas fa-arrow-right"></i></a>
+							<h3 data-i18n="courses.basic.title">单片机基础入门</h3>
+							<p data-i18n="courses.basic.desc">从零开始，掌握单片机基础知识</p>
+							<a href="control_articles/control-articles.html" class="learn-more">
+								<span data-i18n="courses.learnMore">了解更多</span>
+								<i class="fas fa-arrow-right"></i>
+							</a>
 						</div>
 					</div>
 					<div class="course-card" data-aos="fade-up" data-aos-delay="200">
@@ -210,9 +241,12 @@
 							<img src="images/modern/course-advanced.png" alt="进阶课程">
 						</div>
 						<div class="course-info">
-							<h3>项目实战进阶</h3>
-							<p>真实项目驱动学习</p>
-							<a href="non_control_articles/non-control-articles.html" class="learn-more">了解更多 <i class="fas fa-arrow-right"></i></a>
+							<h3 data-i18n="courses.advanced.title">项目实战进阶</h3>
+							<p data-i18n="courses.advanced.desc">真实项目驱动学习</p>
+							<a href="non_control_articles/non-control-articles.html" class="learn-more">
+								<span data-i18n="courses.learnMore">了解更多</span>
+								<i class="fas fa-arrow-right"></i>
+							</a>
 						</div>
 					</div>
 				</div>
@@ -222,19 +256,19 @@
 		<!-- 新闻板块 -->
 		<section class="news-section" id="news">
 			<div class="section-content">
-				<h2 class="section-title" data-aos="fade-up">最新动态</h2>
+				<h2 class="section-title" data-aos="fade-up" data-i18n="news.title">最新动态</h2>
 				<div class="news-grid">
 					<article class="news-card main-news" data-aos="fade-up">
 						<div class="news-image">
 							<img src="images/modern/news-main.png" alt="主要新闻">
 						</div>
 						<div class="news-content">
-							<span class="news-tag">热门</span>
-							<h3>2024年单片机技术发展趋势</h3>
-							<p>探索最新的单片机技术发展方向，了解行业动态和未来趋势。人工智能和物联网的融合将为单片机开发带来新的机遇和挑战。</p>
+							<span class="news-tag" data-i18n="news.tag.hot">热门</span>
+							<h3 data-i18n="news.main.title">2024年单片机技术发展趋势</h3>
+							<p data-i18n="news.main.desc">探索最新的单片机技术发展方向，了解行业动态和未来趋势。人工智能和物联网的融合将为单片机开发带来新的机遇和挑战。</p>
 							<div class="news-meta">
 								<span class="date">2024-01-20</span>
-								<a href="#" class="read-more">阅读更多 <i class="fas fa-arrow-right"></i></a>
+								<a href="#" class="read-more"><span data-i18n="news.readMore">阅读更多</span> <i class="fas fa-arrow-right"></i></a>
 							</div>
 						</div>
 					</article>
@@ -242,13 +276,13 @@
 					<div class="news-sidebar">
 						<article class="news-card" data-aos="fade-up" data-aos-delay="100">
 							<div class="news-image">
-								<img src="images/modern/news-1.png" alt="新闻1">
+								<img src="images/modern/news-dongzhi.png" alt="新闻1">
 							</div>
 							<div class="news-content">
-								<span class="news-tag">教程</span>
-								<h3>零基础入门单片机编程</h3>
+								<span class="news-tag" data-i18n="news.tag.festival">节日</span>
+								<h3 data-i18n="news.dongzhi.title">冬至快乐</h3>
 								<div class="news-meta">
-									<span class="date">2024-01-18</span>
+									<span class="date" data-i18n="news.dongzhi.date">新闻中心2024-12-21</span>
 								</div>
 							</div>
 						</article>
@@ -258,10 +292,10 @@
 								<img src="images/modern/news-2.png" alt="新闻2">
 							</div>
 							<div class="news-content">
-								<span class="news-tag">项目</span>
-								<h3>基于单片机的智能家居系统设计</h3>
+								<span class="news-tag" data-i18n="news.tag.project">项目</span>
+								<h3 data-i18n="news.robot.title">基于单片机的简单机器人设计</h3>
 								<div class="news-meta">
-									<span class="date">2024-01-15</span>
+									<span class="date" data-i18n="news.robot.date">进阶课程2024-11-15</span>
 								</div>
 							</div>
 						</article>
@@ -271,8 +305,8 @@
 								<img src="images/modern/news-3.png" alt="新闻3">
 							</div>
 							<div class="news-content">
-								<span class="news-tag">活动</span>
-								<h3>2024年度单片机创新大赛启动</h3>
+								<span class="news-tag" data-i18n="news.tag.event">活动</span>
+								<h3 data-i18n="news.competition.title">2024年度单片机创新大赛启动</h3>
 								<div class="news-meta">
 									<span class="date">2024-01-12</span>
 								</div>
@@ -286,27 +320,27 @@
 		<!-- 社区展示 -->
 		<section class="community" id="community">
 			<div class="section-content">
-				<h2 class="section-title" data-aos="fade-up">加入社区</h2>
+				<h2 class="section-title" data-aos="fade-up" data-i18n="community.title">加入社区</h2>
 				<!-- 维护公告条 -->
 				<div class="maintenance-notice" data-aos="fade-up">
 					<i class="fas fa-exclamation-circle"></i>
-					<span>社区系统关闭维护暂不提供服务</span>
+					<span data-i18n="community.maintenance">社区系统关闭维护暂不提供服务</span>
 				</div>
 				<div class="community-grid">
 					<div class="community-card" data-aos="zoom-in">
 						<i class="fas fa-users"></i>
-						<h3>技术交流</h3>
-						<p>与其他开发者分享经验</p>
+						<h3 data-i18n="community.exchange.title">技术交流</h3>
+						<p data-i18n="community.exchange.desc">与其他开发者分享经验</p>
 					</div>
 					<div class="community-card" data-aos="zoom-in" data-aos-delay="100">
 						<i class="fas fa-book-reader"></i>
-						<h3>在线资源</h3>
-						<p>获取最新学习资料</p>
+						<h3 data-i18n="community.resources.title">在线资源</h3>
+						<p data-i18n="community.resources.desc">获取最新学习资料</p>
 					</div>
 					<div class="community-card" data-aos="zoom-in" data-aos-delay="200">
 						<i class="fas fa-hands-helping"></i>
-						<h3>项目协作</h3>
-						<p>参与开源项目开发</p>
+						<h3 data-i18n="community.collaboration.title">项目协作</h3>
+						<p data-i18n="community.collaboration.desc">参与开源项目开发</p>
 					</div>
 				</div>
 			</div>
@@ -315,7 +349,7 @@
 		<!-- 联系我们 -->
 		<section class="contact" id="contact">
 			<div class="section-content">
-				<h2 class="section-title" data-aos="fade-up">联系我们</h2>
+				<h2 class="section-title" data-aos="fade-up" data-i18n="contact.title">联系我们</h2>
 				<div class="contact-content">
 					<div class="contact-info" data-aos="fade-right">
 						<div class="contact-item">
@@ -324,7 +358,7 @@
 						</div>
 						<div class="contact-item">
 							<i class="fas fa-map-marker-alt"></i>
-							<p>中国矿业大学机电与计算机学院</p>
+							<p data-i18n="contact.address">中国矿业大学机电与计算机学院</p>
 						</div>
 						<div class="contact-social">
 							<a href="#"><i class="fab fa-github"></i></a>
@@ -341,40 +375,40 @@
 			<div class="footer-content">
 				<div class="footer-logo">
 					<h3>MCU Learn</h3>
-					<p>探索创新科技的无限可能</p>
+					<p data-i18n="footer.slogan">探索创新科技的无限可能</p>
 				</div>
 				<div class="footer-links">
 					<div class="footer-section">
-						<h4>快速链接</h4>
+						<h4 data-i18n="footer.quickLinks">快速链接</h4>
 						<ul>
-							<li><a href="about.html">关于我们</a></li>
-							<li><a href="pages/blognew.html">课程</a></li>
-							<li><a href="pages/source.html">资源</a></li>
-							<li><a href="pages/community.html">社区</a></li>
+							<li><a href="about.html" data-i18n="footer.about">关于我们</a></li>
+							<li><a href="pages/blognew.html" data-i18n="footer.courses">课程</a></li>
+							<li><a href="pages/source.html" data-i18n="footer.resources">资源</a></li>
+							<li><a href="pages/community.html" data-i18n="footer.community">社区</a></li>
 						</ul>
 					</div>
 					<div class="footer-section">
-						<h4>学习资源</h4>
+						<h4 data-i18n="footer.learningResources">学习资源</h4>
 						<ul>
-							<li><a href="#">教程</a></li>
-							<li><a href="#">文档</a></li>
-							<li><a href="#">项目案例</a></li>
-							<li><a href="#">技术博客</a></li>
+							<li><a href="#" data-i18n="footer.tutorials">教程</a></li>
+							<li><a href="#" data-i18n="footer.documentation">文档</a></li>
+							<li><a href="#" data-i18n="footer.projects">项目案例</a></li>
+							<li><a href="#" data-i18n="footer.blog">技术博客</a></li>
 						</ul>
 					</div>
 					<div class="footer-section">
-						<h4>关注我们</h4>
+						<h4 data-i18n="footer.followUs">关注我们</h4>
 						<ul>
 							<li><a href="#">GitHub</a></li>
-							<li><a href="#">微信公众号</a></li>
-							<li><a href="Solution/Website_builder.html">网站建设者</a></li>
-							<li><a href="websiteNow.html">网站建设进度</a></li>
+							<li><a href="#" data-i18n="footer.wechat">微信公众号</a></li>
+							<li><a href="Solution/Website_builder.html" data-i18n="footer.builders">网站建设者</a></li>
+							<li><a href="websiteNow.html" data-i18n="footer.progress">网站建设进度</a></li>
 						</ul>
 					</div>
 				</div>
 			</div>
 			<div class="footer-bottom">
-				<p>&copy; 2024 MCU Learn. All rights reserved.</p>
+				<p data-i18n="footer.copyright">&copy; 2024 MCU Learn. All rights reserved.</p>
 			</div>
 		</footer>
 
@@ -423,6 +457,167 @@
 					}, 300);
 				});
 			});
+
+			// 语言配置
+			const translations = {
+				'zh-CN': {
+					'nav.about': '简介',
+					'nav.learn': '学习',
+					'nav.journal': '期刊',
+					'nav.resources': '资源',
+					'nav.news': '新闻',
+					'nav.community': '社区',
+					'nav.contact': '联系我们',
+					'hero.title': '探索单片机的无限可能',
+					'hero.subtitle': '从入门到精通，打造你的嵌入式世界',
+					'hero.cta': '开始学习',
+					'hero.scroll': '向下滚动探索更多',
+					'path.title': '我们能为你做什么？',
+					'path.basic.title': '基础知识',
+					'path.basic.desc': '掌握单片机基本概念和开发环境',
+					'path.coding.title': '编程技能',
+					'path.coding.desc': '学习C语言和单片机编程基础',
+					'path.project.title': '项目实践',
+					'path.project.desc': '动手实现各类单片机项目',
+					'courses.title': '实验课程',
+					'courses.basic.title': '单片机基础入门',
+					'courses.basic.desc': '从零开始，掌握单片机基础知识',
+					'courses.advanced.title': '项目实战进阶',
+					'courses.advanced.desc': '真实项目驱动学习',
+					'courses.learnMore': '了解更多',
+					'news.title': '最新动态',
+					'news.tag.hot': '热门',
+					'news.main.title': '2024年单片机技术发展趋势',
+					'news.main.desc': '探索最新的单片机技术发展方向，了解行业动态和未来趋势。人工智能和物联网的融合将为单片机开发带来新的机遇和挑战。',
+					'news.readMore': '阅读更多',
+					'news.tag.festival': '节日',
+					'news.dongzhi.title': '冬至快乐',
+					'news.dongzhi.date': '新闻中心2024-12-21',
+					'news.tag.project': '项目',
+					'news.robot.title': '基于单片机的简单机器人设计',
+					'news.robot.date': '进阶课程2024-11-15',
+					'news.tag.event': '活动',
+					'news.competition.title': '2024年度单片机创新大赛启动',
+					'community.title': '加入社区',
+					'community.maintenance': '社区系统关闭维护暂不提供服务',
+					'community.exchange.title': '技术交流',
+					'community.exchange.desc': '与其他开发者分享经验',
+					'community.resources.title': '在线资源',
+					'community.resources.desc': '获取最新学习资料',
+					'community.collaboration.title': '项目协作',
+					'community.collaboration.desc': '参与开源项目开发',
+					'contact.title': '联系我们',
+					'contact.address': '中国矿业大学机电与计算机学院',
+					'footer.slogan': '探索创新科技的无限可能',
+					'footer.quickLinks': '快速链接',
+					'footer.about': '关于我们',
+					'footer.courses': '课程',
+					'footer.resources': '资源',
+					'footer.community': '社区',
+					'footer.learningResources': '学习资源',
+					'footer.tutorials': '教程',
+					'footer.documentation': '文档',
+					'footer.projects': '项目案例',
+					'footer.blog': '技术博客',
+					'footer.followUs': '关注我们',
+					'footer.wechat': '微信公众号',
+					'footer.builders': '网站建设者',
+					'footer.progress': '网站建设进度',
+					'footer.copyright': '© 2024 MCU Learn. 保留所有权利。'
+				},
+				'en': {
+					'nav.about': 'About',
+					'nav.learn': 'Learn',
+					'nav.journal': 'Journal',
+					'nav.resources': 'Resources',
+					'nav.news': 'News',
+					'nav.community': 'Community',
+					'nav.contact': 'Contact',
+					'hero.title': 'Explore Infinite Possibilities of MCU',
+					'hero.subtitle': 'From Beginner to Master, Build Your Embedded World',
+					'hero.cta': 'Start Learning',
+					'hero.scroll': 'Scroll Down to Explore More',
+					'path.title': 'What Can We Do For You?',
+					'path.basic.title': 'Basic Knowledge',
+					'path.basic.desc': 'Master MCU concepts and development environment',
+					'path.coding.title': 'Programming Skills',
+					'path.coding.desc': 'Learn C language and MCU programming basics',
+					'path.project.title': 'Project Practice',
+					'path.project.desc': 'Implement various MCU projects hands-on',
+					'courses.title': 'Experimental Courses',
+					'courses.basic.title': 'MCU Basics',
+					'courses.basic.desc': 'Start from scratch, master MCU fundamentals',
+					'courses.advanced.title': 'Advanced Projects',
+					'courses.advanced.desc': 'Learn through real projects',
+					'courses.learnMore': 'Learn More',
+					'news.title': 'Latest Updates',
+					'news.tag.hot': 'Hot',
+					'news.main.title': '2024 MCU Technology Trends',
+					'news.main.desc': 'Explore the latest developments in MCU technology, understand industry dynamics and future trends. The integration of AI and IoT will bring new opportunities and challenges to MCU development.',
+					'news.readMore': 'Read More',
+					'news.tag.festival': 'Festival',
+					'news.dongzhi.title': 'Happy Winter Solstice',
+					'news.dongzhi.date': 'News Center 2024-12-21',
+					'news.tag.project': 'Project',
+					'news.robot.title': 'Simple Robot Design Based on MCU',
+					'news.robot.date': 'Advanced Course 2024-11-15',
+					'news.tag.event': 'Event',
+					'news.competition.title': '2024 MCU Innovation Competition Launch',
+					'community.title': 'Join Community',
+					'community.maintenance': 'Community system is under maintenance and temporarily unavailable',
+					'community.exchange.title': 'Technical Exchange',
+					'community.exchange.desc': 'Share experience with other developers',
+					'community.resources.title': 'Online Resources',
+					'community.resources.desc': 'Access latest learning materials',
+					'community.collaboration.title': 'Project Collaboration',
+					'community.collaboration.desc': 'Participate in open source projects',
+					'contact.title': 'Contact Us',
+					'contact.address': 'School of Mechanical and Electrical Engineering, China University of Mining and Technology',
+					'footer.slogan': 'Explore Infinite Possibilities of Innovation Technology',
+					'footer.quickLinks': 'Quick Links',
+					'footer.about': 'About Us',
+					'footer.courses': 'Courses',
+					'footer.resources': 'Resources',
+					'footer.community': 'Community',
+					'footer.learningResources': 'Learning Resources',
+					'footer.tutorials': 'Tutorials',
+					'footer.documentation': 'Documentation',
+					'footer.projects': 'Project Cases',
+					'footer.blog': 'Tech Blog',
+					'footer.followUs': 'Follow Us',
+					'footer.wechat': 'WeChat Official Account',
+					'footer.builders': 'Website Builders',
+					'footer.progress': 'Website Progress',
+					'footer.copyright': '© 2024 MCU Learn. All rights reserved.'
+				}
+			};
+
+			// 语言切换
+			const langToggle = document.querySelector('.lang-toggle');
+			let currentLang = localStorage.getItem('lang') || 'zh-CN';
+
+			function updateLanguage() {
+				document.querySelectorAll('[data-i18n]').forEach(element => {
+					const key = element.getAttribute('data-i18n');
+					if (translations[currentLang][key]) {
+						element.textContent = translations[currentLang][key];
+					}
+				});
+				document.documentElement.lang = currentLang;
+			}
+
+			function toggleLanguage() {
+				currentLang = currentLang === 'zh-CN' ? 'en' : 'zh-CN';
+				localStorage.setItem('lang', currentLang);
+				updateLanguage();
+			}
+
+			// 事件监听
+			langToggle.addEventListener('click', toggleLanguage);
+
+			// 初始化语言
+			currentLang = localStorage.getItem('lang') || 'zh-CN';
+			updateLanguage();
 		</script>
 	</body>
 </html>

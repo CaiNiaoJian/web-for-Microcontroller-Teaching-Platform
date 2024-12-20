@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中国矿业大学校园美景 - MCU Learn</title>
+    <link rel="icon" href="../images/标签栏图标.png" type="images/png" sizes="34x32">
+    <link rel="stylesheet" href="../z_css/modern-style.css">
+    <link rel="stylesheet" href="news-modern.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+    <style>
+        .gallery-section {
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+        }
+
+        .gallery-caption h3 {
+            margin: 0;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .gallery-caption p {
+            margin: 0;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .season-section {
+            margin-bottom: 60px;
+        }
+
+        .season-section h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--primary-color);
+            font-size: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="nav-wrapper">
+        <div class="nav-content">
+            <a href="../indexmodern.html" class="logo">MCU Learn</a>
+            <ul class="nav-links">
+                <li><a href="../indexmodern.html">首页</a></li>
+                <li><a href="../pages/blognew.html">学习</a></li>
+                <li><a href="../pages/source.html">资源</a></li>
+                <li><a href="news.html" class="active">新闻</a></li>
+                <li><a href="../indexmodern.html#community">社区</a></li>
+                <li><a href="../indexmodern.html#contact">联系我们</a></li>
+            </ul>
+            <button class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- 页面标题 -->
+    <section class="blog-hero">
+        <div class="hero-content" data-aos="fade-up">
+            <h1>中国矿业大学秋日美景</h1>
+            <p>金秋时节，最美校园</p>
+        </div>
+    </section>
+
+    <!-- 主要内容 -->
+    <main class="gallery-section">
+        <!-- 晨光篇 -->
+        <div class="season-section" data-aos="fade-up">
+            <h2>晨光初现</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="../images/风景1.jpg" alt="秋日晨光">
+                    <div class="gallery-caption">
+                        <h3>校园景观</h3>
+                        <p>朝阳初升，金光洒满校园</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="../images/风景2.jpg" alt="秋日晨光">
+                    <div class="gallery-caption">
+                        <h3>美丽风景</h3>
+                        <p>晨露未干，秋意渐浓</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="../images/风景3.jpg" alt="秋日晨光">
+                    <div class="gallery-caption">
+                        <h3>楼宇一角</h3>
+                        <p>清晨漫步，感受秋日气息</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 正午篇 -->
+        <div class="season-section" data-aos="fade-up">
+            <h2>正午时分</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="../images/风景4.png" alt="秋日正午">
+                    <div class="gallery-caption">
+                        <h3>秋日暖阳</h3>
+                        <p>阳光正好，秋色宜人</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="../images/风景5.png" alt="秋日正午">
+                    <div class="gallery-caption">
+                        <h3>金色校园</h3>
+                        <p>秋阳普照，满园金黄</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="../images/风景6.png" alt="秋日正午">
+                    <div class="gallery-caption">
+                        <h3>秋色正浓</h3>
+                        <p>树影婆娑，秋意正浓</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 傍晚篇 -->
+        <div class="season-section" data-aos="fade-up">
+            <h2>夕阳西下</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="../images/风景7.png" alt="秋日傍晚">
+                    <div class="gallery-caption">
+                        <h3>落日余晖</h3>
+                        <p>夕阳西下，金辉满园</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="../images/风景8.png" alt="秋日傍晚">
+                    <div class="gallery-caption">
+                        <h3>暮色苍茫</h3>
+                        <p>晚霞绚烂，秋色迷人</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="../images/风景9.png" alt="秋日傍晚">
+                    <div class="gallery-caption">
+                        <h3>日暮校园</h3>
+                        <p>夕照余晖，秋意渐浓</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 夜景篇 -->
+        <div class="season-section" data-aos="fade-up">
+            <h2>夜色迷人</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="../images/风景10.png" alt="秋日夜景">
+                    <div class="gallery-caption">
+                        <h3>华灯初上</h3>
+                        <p>夜幕降临，灯火阑珊</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="../images/风景11.png" alt="秋日夜景">
+                    <div class="gallery-caption">
+                        <h3>夜色阑珊</h3>
+                        <p>月色朦胧，秋夜静谧</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="../images/风景12.png" alt="秋日夜景">
+                    <div class="gallery-caption">
+                        <h3>夜色校园</h3>
+                        <p>繁星点点，秋夜温柔</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <h3>MCU Learn</h3>
+                <p>探索创新科技的无限可能</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-section">
+                    <h4>快速链接</h4>
+                    <ul>
+                        <li><a href="../indexmodern.html">首页</a></li>
+                        <li><a href="../pages/blognew.html">学习</a></li>
+                        <li><a href="../pages/source.html">资源</a></li>
+                        <li><a href="news.html">新闻</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>关注我们</h4>
+                    <ul>
+                        <li><a href="#">GitHub</a></li>
+                        <li><a href="#">微信公众号</a></li>
+                        <li><a href="#">知乎专栏</a></li>
+                        <li><a href="#">技术社区</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 MCU Learn. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        // 初始化 AOS
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+
+        // 主题切换功能
+        function initTheme() {
+            const themeToggleBtn = document.querySelector('.theme-toggle');
+            const themeIcon = themeToggleBtn.querySelector('i');
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            updateThemeIcon(savedTheme);
+
+            themeToggleBtn.addEventListener('click', () => {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                
+                document.documentElement.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                updateThemeIcon(newTheme);
+            });
+        }
+
+        function updateThemeIcon(theme) {
+            const themeIcon = document.querySelector('.theme-toggle i');
+            themeIcon.className = theme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
+        }
+
+        // 立即初始化主题
+        initTheme();
+    </script>
+</body>
+</html> 

@@ -1,181 +1,237 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="light">
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>51单片机实验 - 温度传感器与LCD显示</title>
+		<link rel="stylesheet" href="../z_css/modern-style.css">
+		<link rel="stylesheet" href="../z_css/articles-modern.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+		<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css">
 		<style>
-			/* 全局样式 */
-			body {
-				font-family: Arial, sans-serif;
-				margin: 0;
-				padding: 0;
-				background-color: #f5f5f5;
-			}
-
-			/* 页头样式 */
-			header {
-				background-color: #333;
-				color: #fff;
-				padding: 20px;
-				text-align: center;
-			}
-
-			header h1 {
-				margin: 0;
-			}
-
-			/* 内容区域样式 */
-			.container {
-				max-width: 800px;
+			/* 文章特定样式 */
+			.article-container {
+				max-width: 900px;
 				margin: 0 auto;
-				padding: 40px;
+				padding: 2rem;
 			}
 
-			.article-content {
-				background-color: #fff;
-				padding: 30px;
-				border-radius: 5px;
-				box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+			.article-header {
+				text-align: center;
+				margin-bottom: 3rem;
+				padding-top: 4rem;
 			}
 
-			.article-content h2 {
-				margin-top: 0;
+			.article-meta {
+				display: flex;
+				justify-content: center;
+				gap: 2rem;
+				color: var(--text-secondary);
+				margin: 1rem 0;
 			}
 
-			.article-content p {
-				line-height: 1.6;
-				margin-bottom: 20px;
+			.content-section {
+				margin-bottom: 3rem;
+				animation: fadeIn 0.5s ease-out;
 			}
 
-			.article-content ul {
-				margin-left: 20px;
-				margin-bottom: 20px;
+			.content-section h2 {
+				color: var(--primary-color);
+				margin-bottom: 1.5rem;
+				border-bottom: 2px solid var(--border-color);
+				padding-bottom: 0.5rem;
 			}
 
-			.article-content li {
-				margin-bottom: 10px;
+			.code-block {
+				background: var(--code-bg);
+				border-radius: 8px;
+				margin: 1.5rem 0;
+				position: relative;
 			}
 
-			.article-content pre {
-				background-color: #f5f5f5;
-				padding: 20px;
-				border-radius: 5px;
+			.code-block pre {
+				padding: 1.5rem;
 				overflow-x: auto;
+				background: var(--code-bg);
+				border-radius: 8px;
+				margin: 1rem 0;
 			}
 
-			.article-content code {
-				font-family: monospace;
+			.code-block code {
+				font-family: 'Fira Code', monospace;
+				color: var(--text-color);
 			}
 
-			.article-content .code-explanation {
-				margin-top: 20px;
+			.info-box {
+				background: var(--info-bg);
+				border-left: 4px solid var(--primary-color);
+				padding: 1rem;
+				margin: 1.5rem 0;
+				border-radius: 4px;
 			}
 
-			.article-content .code-explanation h3 {
+			.setup-step {
+				background: var(--card-bg);
+				padding: 1.5rem;
+				border-radius: 8px;
+				margin-bottom: 1.5rem;
+				box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+			}
+
+			.setup-step h4 {
+				color: var(--primary-color);
 				margin-top: 0;
+				margin-bottom: 1rem;
 			}
 
-			.article-content .code-explanation p {
-				margin-bottom: 10px;
+			.setup-step ul {
+				list-style-type: none;
+				padding-left: 0;
 			}
 
-			.article-content .experiment-setup {
-				margin-top: 40px;
+			.setup-step ul li {
+				position: relative;
+				padding-left: 1.5rem;
+				margin-bottom: 0.8rem;
 			}
 
-			.article-content .experiment-setup h3 {
-				margin-top: 0;
+			.setup-step ul li::before {
+				content: "→";
+				position: absolute;
+				left: 0;
+				color: var(--primary-color);
 			}
 
-			.article-content .experiment-setup .setup-step {
-				margin-bottom: 30px;
+			@keyframes fadeIn {
+				from {
+					opacity: 0;
+					transform: translateY(20px);
+				}
+				to {
+					opacity: 1;
+					transform: translateY(0);
+				}
 			}
 
-			.article-content .experiment-setup .setup-step h4 {
-				margin-top: 0;
+			/* 导航栏样式 */
+			.nav-wrapper {
+				background: rgba(0, 0, 0, 0.8);
+				backdrop-filter: blur(10px);
 			}
 
-			.article-content .experiment-setup .setup-step p {
-				margin-bottom: 10px;
-			}
-
-			.article-content .experiment-setup .setup-step pre {
-				margin-top: 10px;
-			}
-
-			.article-content .experiment-result {
-				margin-top: 40px;
-			}
-
-			.article-content .experiment-result h3 {
-				margin-top: 0;
-			}
-
-			.article-content .experiment-result .result-step {
-				margin-bottom: 30px;
-			}
-
-			.article-content .experiment-result .result-step h4 {
-				margin-top: 0;
-			}
-
-			.article-content .experiment-result .result-step p {
-				margin-bottom: 10px;
-			}
-
-			.article-content .experiment-result .result-step pre {
-				margin-top: 10px;
-			}
-
+			/* 返回按钮样式 */
 			.back-button {
-				display: inline-block;
-				background-color: #333;
-				color: #fff;
-				padding: 10px 20px;
+				display: inline-flex;
+				align-items: center;
+				gap: 0.5rem;
+				background: var(--primary-color);
+				color: white;
+				padding: 0.8rem 1.5rem;
+				border-radius: 8px;
 				text-decoration: none;
-				border-radius: 5px;
-				margin-top: 20px;
+				transition: all 0.3s ease;
+				margin-top: 2rem;
 			}
 
 			.back-button:hover {
-				background-color: #555;
-			}
-
-			/* 页脚样式 */
-			footer {
-				background-color: #333;
-				color: #fff;
-				padding: 20px;
-				text-align: center;
-			}
-
-			footer p {
-				margin: 0;
+				transform: translateY(-2px);
+				box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 			}
 		</style>
 	</head>
 	<body>
-		<header>
-			<h1>51单片机实验 - 温度传感器与LCD显示</h1>
-		</header>
+		<!-- 导航栏 -->
+		<nav class="nav-wrapper">
+			<div class="nav-content">
+				<a href="../indexmodern.html" class="logo">MCU Learn</a>
+				<ul class="nav-links">
+					<li><a href="../indexmodern.html">首页</a></li>
+					<li><a href="../pages/blognew.html">学习</a></li>
+					<li><a href="../StudySources/Sources.html">资源</a></li>
+					<li><a href="../News/news.html">新闻</a></li>
+					<li><a href="../pages/community.html">社区</a></li>
+					<li><a href="../relation.html">联系我们</a></li>
+				</ul>
+				<button class="theme-toggle">
+					<i class="fas fa-moon"></i>
+				</button>
+			</div>
+		</nav>
 
-		<div class="container">
-			<div class="article-content">
+		<div class="article-container">
+			<div class="article-header">
+				<h1>51单片机实验 - 温度传感器与LCD显示</h1>
+				<div class="article-meta">
+					<span><i class="fas fa-calendar"></i> 2024-01-20</span>
+					<span><i class="fas fa-user"></i> MCU Learn</span>
+					<span><i class="fas fa-tag"></i> 实验教程</span>
+				</div>
+			</div>
+
+			<div class="content-section">
 				<h2>实验目的</h2>
-				<p>本实验旨在使用51单片机读取温度传感器的数据,并通过LCD显示屏显示当前温度。通过这个实验,学习如何使用ADC模块读取模拟量数据,以及如何驱动LCD显示屏。</p>
+				<p>本实验旨在使用51单片机读取温度传感器的数据,并通过LCD显示屏显示当前温度。通过这个实验,学习如何使用ADC模块读取模拟量数据,以及如何驱动LCD显示屏。具体目标包括：</p>
+				<ul class="goal-list">
+					<li>掌握LM35温度传感器的工作原理和使用方法</li>
+					<li>学习51单片机ADC模块的配置和使用</li>
+					<li>掌握LCD1602显示屏的驱动方法</li>
+					<li>理解模拟量到数字量的转换原理</li>
+					<li>提高单片机综合应用能力</li>
+				</ul>
+			</div>
 
+			<div class="content-section">
 				<h2>实验原理</h2>
-				<p>本实验使用LM35温度传感器作为温度检测元件,LM35是一种精度较高的模拟量温度传感器。51单片机的ADC模块可以将LM35输出的模拟电压转换为数字量,从而获取温度数据。然后将温度数据通过LCD显示屏显示出来。
-				</p>
+				<div class="principle-content">
+					<h3>1. LM35温度传感器</h3>
+					<p>LM35是一种常用的精密集成温度传感器，其主要特点有：</p>
+					<ul>
+						<li>输出电压与温度呈线性关系：10mV/℃</li>
+						<li>测量范围：-55℃ 到 +150℃</li>
+						<li>精度：±0.5℃（在25℃时）</li>
+						<li>工作电压：4V-30V</li>
+					</ul>
+					<div class="info-box">
+						<p><i class="fas fa-info-circle"></i> LM35的输出电压计算公式：</p>
+						<p>V<sub>out</sub> = 10mV/℃ × T（℃）</p>
+					</div>
 
-				<div class="experiment-setup">
-					<h3>实验步骤</h3>
-					<div class="setup-step">
-						<h4>1. 硬件连接</h4>
-						<p>将LM35温度传感器的3个引脚分别连接到51单片机的VCC、GND和ADC输入引脚。将LCD显示屏的数据线和控制线连接到51单片机的相应引脚。</p>
-						<pre><code>
-LM35 引脚:
+					<h3>2. ADC转换原理</h3>
+					<p>51单片机通过ADC模块将LM35输出的模拟电压转换为数字量。在本实验中，我们使用8位ADC，转换过程如下：</p>
+					<ul>
+						<li>ADC参考电压：5V</li>
+						<li>ADC分辨率：8位（0-255）</li>
+						<li>温度计算公式：T = ADC值 × (5V/255) × (100℃/1V)</li>
+					</ul>
+
+					<h3>3. LCD1602显示原理</h3>
+					<p>LCD1602是一种常用的字符型液晶显示模块，具有以下特点：</p>
+					<ul>
+						<li>显示容量：2行×16字符</li>
+						<li>字符大小：5×8点阵</li>
+						<li>工作电压：5V</li>
+						<li>支持4位和8位数据传输模式</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="content-section">
+				<h2>实验步骤</h2>
+				
+				<div class="setup-step">
+					<h4>1. 硬件连接</h4>
+					<p>将LM35温度传感器的3个引脚分别连接到51单片机的VCC、GND和ADC输入引脚。将LCD显示屏的数据线和控制线连接到51单片机的相应引脚。</p>
+					<div class="info-box">
+						<p><i class="fas fa-exclamation-triangle"></i> 注意事项：</p>
+						<ul>
+							<li>确保所有连接牢固，避免虚接</li>
+							<li>注意电源极性，防止器件损坏</li>
+							<li>LCD对比度引脚可通过电位器调节</li>
+						</ul>
+					</div>
+					<div class="code-block">
+						<pre><code>LM35 引脚:
 - VCC 连接到 51MCU VCC
 - GND 连接到 51MCU GND 
 - OUT 连接到 51MCU ADC输入引脚 (如 P1.0)
@@ -184,20 +240,21 @@ LCD 引脚:
 - RS 连接到 51MCU 数字引脚 (如 P2.0)
 - RW 连接到 51MCU 数字引脚 (如 P2.1) 
 - E  连接到 51MCU 数字引脚 (如 P2.2)
-- D4-D7 连接到 51MCU 数字引脚 (如 P0.4 - P0.7)
-                    </code></pre>
+- D4-D7 连接到 51MCU 数字引脚 (如 P0.4 - P0.7)</code></pre>
 					</div>
-					<div class="setup-step">
-						<h4>2. 软件编程</h4>
-						<p>编写51单片机程序,实现以下功能:</p>
-						<ul>
-							<li>初始化ADC模块,读取LM35的模拟量输出</li>
-							<li>将ADC读取的数值转换为温度值</li>
-							<li>初始化LCD显示屏,并将温度值显示在LCD上</li>
-							<li>定期更新温度值的显示</li>
-						</ul>
-						<pre><code>
-#include &lt;reg51.h&gt;
+				</div>
+
+				<div class="setup-step">
+					<h4>2. 软件编程</h4>
+					<p>编写51单片机程序,实现以下功能:</p>
+					<ul>
+						<li>初始化ADC模块,读取LM35的模拟量输出</li>
+						<li>将ADC读取的数值转换为温度值</li>
+						<li>初始化LCD显示屏,并将温度值显示在LCD上</li>
+						<li>定期更新温度值的显示</li>
+					</ul>
+					<div class="code-block">
+						<pre><code>#include &lt;reg51.h&gt;
 #include &lt;stdio.h&gt;
 
 // LCD引脚定义
@@ -209,10 +266,69 @@ sbit LCD_E = P2^2;
 // 温度传感器引脚定义
 sbit LM35_OUT = P1^0;
 
-void lcd_init();
+// 函数声明
+void lcd_init(void);
 void lcd_write_cmd(unsigned char cmd);
 void lcd_write_data(unsigned char dat);
 void lcd_display_temp(float temp);
+void delay_ms(unsigned int ms);
+
+// LCD初始化函数
+void lcd_init(void) {
+    delay_ms(15);
+    lcd_write_cmd(0x38);    // 8位数据接口，2行显示，5×7点阵
+    delay_ms(5);
+    lcd_write_cmd(0x38);
+    delay_ms(5);
+    lcd_write_cmd(0x38);
+    lcd_write_cmd(0x0C);    // 显示开，光标关闭
+    lcd_write_cmd(0x06);    // 光标右移，字符不移动
+    lcd_write_cmd(0x01);    // 清屏
+    delay_ms(5);
+}
+
+// LCD写命令函数
+void lcd_write_cmd(unsigned char cmd) {
+    LCD_RS = 0;
+    LCD_RW = 0;
+    LCD_DATA = cmd;
+    LCD_E = 1;
+    delay_ms(5);
+    LCD_E = 0;
+}
+
+// LCD写数据函数
+void lcd_write_data(unsigned char dat) {
+    LCD_RS = 1;
+    LCD_RW = 0;
+    LCD_DATA = dat;
+    LCD_E = 1;
+    delay_ms(5);
+    LCD_E = 0;
+}
+
+// 显示温度函数
+void lcd_display_temp(float temp) {
+    char temp_str[16];
+    lcd_write_cmd(0x80);    // 设置光标位置到第一行开始
+    sprintf(temp_str, "Temperature:");
+    for(int i = 0; temp_str[i] != '\0'; i++) {
+        lcd_write_data(temp_str[i]);
+    }
+    
+    lcd_write_cmd(0xC0);    // 设置光标位置到第二行开始
+    sprintf(temp_str, "%.2f C", temp);
+    for(int i = 0; temp_str[i] != '\0'; i++) {
+        lcd_write_data(temp_str[i]);
+    }
+}
+
+// 延时函数
+void delay_ms(unsigned int ms) {
+    unsigned int i, j;
+    for(i = ms; i > 0; i--)
+        for(j = 110; j > 0; j--);
+}
 
 void main() {
     unsigned int adc_value;
@@ -231,91 +347,107 @@ void main() {
         lcd_display_temp(temperature);
         
         // 延时1秒
-        for (unsigned int i = 0; i &lt; 65535; i++);
+        delay_ms(1000);
     }
-}
-
-void lcd_init() {
-    // LCD初始化代码...
-}
-
-void lcd_write_cmd(unsigned char cmd) {
-    // LCD写命令代码...
-}
-
-void lcd_write_data(unsigned char dat) {
-    // LCD写数据代码...
-}
-
-void lcd_display_temp(float temp) {
-    char buf[16];
-    sprintf(buf, "Temp: %.2f C", temp);
-    // 在LCD上显示温度值
-}
-                    </code></pre>
-						<div class="code-explanation">
-							<h3>代码解析</h3>
-							<p>该程序实现了以下功能:</p>
-							<ul>
-								<li>定义了LCD和温度传感器的引脚</li>
-								<li>在main()函数中,读取LM35的模拟量输出,并转换为温度值</li>
-								<li>调用lcd_display_temp()函数,将温度值显示在LCD上</li>
-								<li>lcd_init()、lcd_write_cmd()和lcd_write_data()函数实现了LCD的初始化和数据写入</li>
-							</ul>
-							<p>在这个程序中,我们使用ADC模块读取LM35的模拟量输出,并根据公式将其转换为温度值。然后通过LCD显示屏将温度值显示出来。这种方式可以用于各种温度监测和控制的应用场景。</p>
-						</div>
+}</code></pre>
+					</div>
+					<div class="code-explanation">
+						<h4>代码说明：</h4>
+						<ul>
+							<li>程序使用8位并行方式驱动LCD1602</li>
+							<li>LCD初始化包括设置显示模式、清屏等操作</li>
+							<li>温度显示格式为：两行显示，第一行显示"Temperature:"，第二行显示具体温度值</li>
+							<li>使用sprintf函数格式化温度字符串，保留两位小数</li>
+						</ul>
 					</div>
 				</div>
 
-				<div class="experiment-result">
-					<h3>实验结果</h3>
-					<div class="result-step">
-						<h4>LCD温度显示</h4>
-						<p>实验完成后,LCD显示屏上会实时显示当前温度值,单位为摄氏度。可以通过改变温度传感器的温度,观察LCD上温度值的变化。</p>
-						<pre><code>
-Temp: 25.35 C
-                    </code></pre>
-						<p>通过这个实验,我们学会了如何使用51单片机的ADC模块读取模拟量传感器的数据,并将其转换为可读的温度值。同时也学会了如何驱动LCD显示屏,将温度值显示出来。这些都是51单片机开发中非常基础和重要的知识。
-						</p>
-					</div>
+				<div class="setup-step">
+					<h4>3. 调试方法</h4>
+					<ul>
+						<li>使用万用表测量LM35输出电压，验证传感器工作是否正常</li>
+						<li>观察LCD显示内容，检查显示格式是否正确</li>
+						<li>调节LCD对比度电位器，获得最佳显示效果</li>
+						<li>可以用手捂热传感器，观察温度变化</li>
+					</ul>
 				</div>
-
-				<a href="control-articles.html" class="back-button">返回上一篇</a>
 			</div>
+
+			<div class="content-section">
+				<h2>实验结果</h2>
+				<div class="result-content">
+					<h3>预期显示效果</h3>
+					<div class="code-block">
+						<pre><code>Temperature:
+25.75 C</code></pre>
+					</div>
+
+					<h3>实验现象</h3>
+					<ul>
+						<li>LCD第一行显示"Temperature:"</li>
+						<li>第二行显示当前温度值，精确到小数点后两位</li>
+						<li>温度值每秒更新一次</li>
+						<li>用手触摸传感器时，可以观察到温度值逐渐升高</li>
+					</ul>
+
+					<div class="info-box">
+						<h4>常见问题及解决方法：</h4>
+						<ul>
+							<li>LCD显示乱码：检查接线是否正确，确认初始化代码是否正确执行</li>
+							<li>温度显示异常：检查ADC转换公式，确认LM35连接是否正确</li>
+							<li>显示不清晰：调节LCD对比度电位器</li>
+							<li>程序无响应：检查晶振和复位电路</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<div class="content-section">
+				<h2>实验思考</h2>
+				<div class="thinking-content">
+					<ol>
+						<li>如何提高温度测量的精度？</li>
+						<li>如何添加温度报警功能？</li>
+						<li>如何将数据记录到EEPROM中？</li>
+						<li>如何通过串口将温度数据发送到电脑？</li>
+					</ol>
+				</div>
+			</div>
+
+			<a href="control-articles.html" class="back-button">
+				<i class="fas fa-arrow-left"></i> 返回文章列表
+			</a>
 		</div>
 
-		<footer>
-			<p>&copy; 2024 51单片机开发教程. All rights reserved.</p>
-		</footer>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-c.min.js"></script>
 		<script>
-			window.parent.postMessage({
-				action: "ready"
-			}, "*");
+			// 主题切换功能
+			function initTheme() {
+				const themeToggleBtn = document.querySelector('.theme-toggle');
+				const themeIcon = themeToggleBtn.querySelector('i');
+				const savedTheme = localStorage.getItem('theme') || 'light';
+				
+				document.documentElement.setAttribute('data-theme', savedTheme);
+				updateThemeIcon(savedTheme);
 
-			window.console = new Proxy(console, {
-				get(target, prop) {
-					if (['log', 'warn', 'error'].includes(prop)) {
-						return new Proxy(target[prop], {
-							apply(fn, thisArg, args) {
-								fn.apply(thisArg, args);
-								window.parent.postMessage({
-									action: 'console',
-									type: prop,
-									args: args.map((arg) => {
-										try {
-											return JSON.stringify(arg).replace(
-												/^["']|["']$/g, '');
-										} catch (e) {
-											return arg;
-										}
-									})
-								}, '*');
-							}
-						});
-					}
-					return target[prop];
-				}
-			});
+				themeToggleBtn.addEventListener('click', () => {
+					const currentTheme = document.documentElement.getAttribute('data-theme');
+					const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+					
+					document.documentElement.setAttribute('data-theme', newTheme);
+					localStorage.setItem('theme', newTheme);
+					updateThemeIcon(newTheme);
+				});
+			}
+
+			function updateThemeIcon(theme) {
+				const themeIcon = document.querySelector('.theme-toggle i');
+				themeIcon.className = theme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
+			}
+
+			// 立即初始化主题
+			initTheme();
 		</script>
 	</body>
 </html>

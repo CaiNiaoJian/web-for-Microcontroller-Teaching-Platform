@@ -1,0 +1,1269 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简单机器人制作教程 - MCU Learn</title>
+    <link rel="stylesheet" href="../z_css/modern-style.css">
+    <link rel="stylesheet" href="../z_css/articles-modern.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css">
+    <style>
+        /* 文章特定样式 */
+        .article-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .article-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-top: 4rem;
+        }
+
+        .article-meta {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            color: var(--text-secondary);
+            margin: 1rem 0;
+        }
+
+        .content-section {
+            margin-bottom: 3rem;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .content-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .component-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .component-card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .component-card h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .component-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .component-card li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .component-card li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+        }
+
+        .step-section {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .step-section h3 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .step-section h3 i {
+            font-size: 1.5rem;
+        }
+
+        .code-block {
+            background: var(--code-bg);
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            position: relative;
+        }
+
+        .code-block pre {
+            padding: 1.5rem;
+            overflow-x: auto;
+        }
+
+        .code-block code {
+            font-family: 'Fira Code', monospace;
+            color: var(--text-color);
+        }
+
+        .info-box {
+            background: var(--info-bg);
+            border-left: 4px solid var(--primary-color);
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+
+        .warning-box {
+            background: var(--warning-bg);
+            border-left: 4px solid var(--warning-color);
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+
+        .circuit-diagram {
+            width: 100%;
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1rem;
+            background: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .circuit-diagram img {
+            width: 100%;
+            height: auto;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="nav-wrapper">
+        <div class="nav-content">
+            <a href="../indexmodern.html" class="logo">MCU Learn</a>
+            <ul class="nav-links">
+                <li><a href="../indexmodern.html">首页</a></li>
+                <li><a href="../pages/blognew.html">学习</a></li>
+                <li><a href="../StudySources/Sources.html">资源</a></li>
+                <li><a href="../News/news.html">新闻</a></li>
+                <li><a href="../pages/community.html">社区</a></li>
+                <li><a href="../relation.html">联系我们</a></li>
+            </ul>
+            <button class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <div class="article-container">
+        <div class="article-header">
+            <h1>简单机器人制作教程</h1>
+            <div class="article-meta">
+                <span><i class="fas fa-calendar"></i> 2024-01-20</span>
+                <span><i class="fas fa-user"></i> MCU Learn</span>
+                <span><i class="fas fa-tag"></i> 机器人教程</span>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>项目介绍</h2>
+            <p>本教程将指导你制作一个基于51单片机的智能避障小车，它能够自主避开障碍物，跟随光线移动，并可以通过蓝牙遥控。通过本项目，你将学习：</p>
+            <ul>
+                <li>电机驱动原理与控制方法</li>
+                <li>超声波测距原理与应用</li>
+                <li>光敏传感器的使用</li>
+                <li>蓝牙模块的配置与通信</li>
+                <li>多传感器数据融合</li>
+                <li>PID控制算法的实现</li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h2>硬件清单</h2>
+            <div class="component-list">
+                <div class="component-card">
+                    <h4><i class="fas fa-microchip"></i> 控制系统</h4>
+                    <ul>
+                        <li>STC89C52RC单片机</li>
+                        <li>PCB主控板</li>
+                        <li>USB下载器</li>
+                        <li>电池盒（6节5号）</li>
+                    </ul>
+                </div>
+
+                <div class="component-card">
+                    <h4><i class="fas fa-cog"></i> 驱动系统</h4>
+                    <ul>
+                        <li>L298N电机驱动模块</li>
+                        <li>TT马达 × 4</li>
+                        <li>65mm橡胶轮 × 4</li>
+                        <li>电机支架 × 4</li>
+                    </ul>
+                </div>
+
+                <div class="component-card">
+                    <h4><i class="fas fa-satellite-dish"></i> 传感器</h4>
+                    <ul>
+                        <li>HC-SR04超声波模块</li>
+                        <li>光敏电阻模块 × 2</li>
+                        <li>HC-05蓝牙模块</li>
+                        <li>红外避障模块 × 2</li>
+                    </ul>
+                </div>
+
+                <div class="component-card">
+                    <h4><i class="fas fa-tools"></i> 机械结构</h4>
+                    <ul>
+                        <li>���力底盘</li>
+                        <li>万向轮</li>
+                        <li>螺丝螺母套装</li>
+                        <li>铜柱支架</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>机械组装</h2>
+            <div class="step-section">
+                <h3><i class="fas fa-wrench"></i> 底盘组装</h3>
+                <ol>
+                    <li>将四个电机支架固定在底盘对应位置</li>
+                    <li>安装TT马达到支架上</li>
+                    <li>安装轮胎到电机轴上</li>
+                    <li>在底盘前部安装万向轮</li>
+                </ol>
+                <div class="info-box">
+                    <p><i class="fas fa-info-circle"></i> 安装提示：</p>
+                    <ul>
+                        <li>确保左右电机对称安装</li>
+                        <li>轮胎安装时注意方向一致</li>
+                        <li>所有螺丝要拧紧，防止运行时松动</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="step-section">
+                <h3><i class="fas fa-microchip"></i> 电路安装</h3>
+                <ol>
+                    <li>将主控板用铜柱固定在底盘层</li>
+                    <li>安装L298N驱动模块</li>
+                    <li>安装超声波模块在前方</li>
+                    <li>两侧安装红外避障模块</li>
+                    <li>安装光敏传感器</li>
+                    <li>固定蓝牙模块</li>
+                    <li>安装电池盒</li>
+                </ol>
+                <div class="warning-box">
+                    <p><i class="fas fa-exclamation-triangle"></i> 注意事项：</p>
+                    <ul>
+                        <li>注意电源正负极不要接反</li>
+                        <li>传感器的安装位置要便于检测</li>
+                        <li>所有线路要整齐布置，避免缠绕</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>电路连接</h2>
+            <div class="step-section">
+                <h3><i class="fas fa-plug"></i> 电机驱动连接</h3>
+                <div class="code-block">
+                    <pre><code>// L298N模块连接
+IN1 - P1.0
+IN2 - P1.1
+IN3 - P1.2
+IN4 - P1.3
+ENA - P1.4 (PWM)
+ENB - P1.5 (PWM)
+
+// 电机接线
+M1 - 左前轮
+M2 - 右前轮
+M3 - 左后轮
+M4 - 右后轮</code></pre>
+                </div>
+            </div>
+
+            <div class="step-section">
+                <h3><i class="fas fa-satellite-dish"></i> 传感器连接</h3>
+                <div class="code-block">
+                    <pre><code>// 超声波模块
+TRIG - P2.0
+ECHO - P2.1
+
+// 红外避障模块
+LEFT_IR - P2.2
+RIGHT_IR - P2.3
+
+// 光敏模块
+LEFT_LIGHT - P2.4
+RIGHT_LIGHT - P2.5
+
+// 蓝牙模块
+TXD - P3.0
+RXD - P3.1</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>程序设计</h2>
+            <div class="step-section">
+                <h3><i class="fas fa-code"></i> 主程序框架</h3>
+                <div class="code-block">
+                    <pre><code>#include &lt;reg52.h&gt;
+#include &lt;intrins.h&gt;
+
+// 引脚定义
+sbit IN1 = P1^0;
+sbit IN2 = P1^1;
+sbit IN3 = P1^2;
+sbit IN4 = P1^3;
+sbit ENA = P1^4;
+sbit ENB = P1^5;
+
+sbit TRIG = P2^0;
+sbit ECHO = P2^1;
+sbit LEFT_IR = P2^2;
+sbit RIGHT_IR = P2^3;
+sbit LEFT_LIGHT = P2^4;
+sbit RIGHT_LIGHT = P2^5;
+
+// 全局变量
+unsigned int distance;
+unsigned char mode = 0;  // 0:蓝牙控制 1:避障 2:寻光
+
+// 函数声明
+void delay_ms(unsigned int ms);
+void motor_init(void);
+void uart_init(void);
+void timer_init(void);
+void get_distance(void);
+void motor_control(unsigned char direction, unsigned char speed);
+void obstacle_avoidance(void);
+void light_following(void);
+void bluetooth_control(void);
+
+// 主函数
+void main(void) {
+    // 初始化
+    motor_init();
+    uart_init();
+    timer_init();
+    
+    while(1) {
+        switch(mode) {
+            case 0:
+                bluetooth_control();
+                break;
+            case 1:
+                obstacle_avoidance();
+                break;
+            case 2:
+                light_following();
+                break;
+        }
+    }
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="step-section">
+                <h3><i class="fas fa-cog"></i> 电机控制函数</h3>
+                <div class="code-block">
+                    <pre><code>// 电机初始化
+void motor_init(void) {
+    IN1 = IN2 = IN3 = IN4 = 0;
+    ENA = ENB = 0;
+}
+
+// 电机控制
+void motor_control(unsigned char direction, unsigned char speed) {
+    switch(direction) {
+        case 0:  // 停止
+            IN1 = IN2 = IN3 = IN4 = 0;
+            break;
+        case 1:  // 前进
+            IN1 = 1; IN2 = 0;
+            IN3 = 1; IN4 = 0;
+            break;
+        case 2:  // 后退
+            IN1 = 0; IN2 = 1;
+            IN3 = 0; IN4 = 1;
+            break;
+        case 3:  // 左转
+            IN1 = 0; IN2 = 0;
+            IN3 = 1; IN4 = 0;
+            break;
+        case 4:  // 右转
+            IN1 = 1; IN2 = 0;
+            IN3 = 0; IN4 = 0;
+            break;
+    }
+    
+    // PWM控制速度
+    ENA = ENB = speed;
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="step-section">
+                <h3><i class="fas fa-wave-square"></i> 超声波测距</h3>
+                <div class="code-block">
+                    <pre><code>// 获取距离
+void get_distance(void) {
+    unsigned int time = 0;
+    
+    // 发送触发信号
+    TRIG = 1;
+    delay_us(20);
+    TRIG = 0;
+    
+    // 等待回响信号
+    while(!ECHO);
+    TR0 = 1;        // 启动定时器
+    while(ECHO);
+    TR0 = 0;        // 停止定时器
+    
+    // 计算距离 (cm)
+    time = TH0 * 256 + TL0;
+    distance = (time * 1.7) / 100;  // 声速340m/s
+    
+    // 重置定时器
+    TH0 = 0;
+    TL0 = 0;
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="step-section">
+                <h3><i class="fas fa-robot"></i> 避障功能</h3>
+                <div class="code-block">
+                    <pre><code>// 避障模式
+void obstacle_avoidance(void) {
+    get_distance();
+    
+    if(distance < 20) {  // 前方障碍物
+        motor_control(0, 0);  // 停止
+        delay_ms(500);
+        
+        // 检测左右红外
+        if(!LEFT_IR && RIGHT_IR) {  // 右侧有障碍
+            motor_control(3, 80);    // 左转
+        }
+        else if(LEFT_IR && !RIGHT_IR) {  // 左侧有障碍
+            motor_control(4, 80);    // 右转
+        }
+        else {  // 两侧都有障碍
+            motor_control(2, 80);    // 后退
+            delay_ms(1000);
+            motor_control(3, 80);    // 左转
+            delay_ms(800);
+        }
+    }
+    else {  // 无障碍
+        motor_control(1, 100);  // 前进
+    }
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="step-section">
+                <h3><i class="fas fa-sun"></i> 寻光功能</h3>
+                <div class="code-block">
+                    <pre><code>// 寻光模式
+void light_following(void) {
+    unsigned char left_val, right_val;
+    
+    // 读取光敏值
+    left_val = LEFT_LIGHT;
+    right_val = RIGHT_LIGHT;
+    
+    if(!left_val && !right_val) {  // 两侧都有光
+        motor_control(1, 100);      // 前进
+    }
+    else if(!left_val && right_val) {  // 左侧有光
+        motor_control(3, 80);          // 左转
+    }
+    else if(left_val && !right_val) {  // 右侧有光
+        motor_control(4, 80);          // 右转
+    }
+    else {  // 没有检测到光
+        motor_control(0, 0);           // 停止
+    }
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="step-section">
+                <h3><i class="fas fa-bluetooth"></i> 蓝牙控制</h3>
+                <div class="code-block">
+                    <pre><code>// 串口初始化
+void uart_init(void) {
+    TMOD |= 0x20;    // 设置定时器1为模式2
+    SCON = 0x50;     // 8位数据,可变波特率
+    PCON |= 0x80;    // 波特率加倍
+    TH1 = 0xF3;      // 设置波特率9600
+    TL1 = 0xF3;
+    TR1 = 1;         // 启动定时器1
+    ES = 1;          // 使能串口中断
+    EA = 1;          // 使能总中断
+}
+
+// 串口中断服务程序
+void uart_isr() interrupt 4 {
+    unsigned char cmd;
+    
+    if(RI) {
+        RI = 0;
+        cmd = SBUF;
+        switch(cmd) {
+            case 'F': motor_control(1, 100); break;  // 前进
+            case 'B': motor_control(2, 100); break;  // 后退
+            case 'L': motor_control(3, 80);  break;  // 左转
+            case 'R': motor_control(4, 80);  break;  // 右转
+            case 'S': motor_control(0, 0);   break;  // 停止
+            case '1': mode = 0; break;  // 蓝牙控制模式
+            case '2': mode = 1; break;  // 避障模式
+            case '3': mode = 2; break;  // 寻光模式
+        }
+    }
+}</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>调试与优化</h2>
+            <div class="step-section">
+                <h3><i class="fas fa-bug"></i> 常见问题</h3>
+                <div class="info-box">
+                    <h4>电机控制问题：</h4>
+                    <ul>
+                        <li>检查电机接线是否正确</li>
+                        <li>确认PWM信号是否正常</li>
+                        <li>电池电压是否足够</li>
+                    </ul>
+                </div>
+                <div class="info-box">
+                    <h4>传感器问题：</h4>
+                    <ul>
+                        <li>超声波模块的安装角度要合适</li>
+                        <li>红外避障模块的灵敏度需要调节</li>
+                        <li>光敏电阻要避免相互干扰</li>
+                    </ul>
+                </div>
+                <div class="info-box">
+                    <h4>蓝牙通信问题：</h4>
+                    <ul>
+                        <li>确认波特率设置正确</li>
+                        <li>检查AT指令配置是否成功</li>
+                        <li>避免信号干扰</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="step-section">
+                <h3><i class="fas fa-chart-line"></i> 性能优化</h3>
+                <ol>
+                    <li>调整PID参数提高运动稳定性</li>
+                    <li>优化传感器数据滤波算法</li>
+                    <li>改进避障算法的智能性</li>
+                    <li>添加加速度平滑控制</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>扩展功能</h2>
+            <div class="thinking-content">
+                <ol>
+                    <li>添加OLED显示功能，实时显示传感器数据</li>
+                    <li>增加WiFi模块，实现远程控制</li>
+                    <li>添加摄像头模块，实现图像识别</li>
+                    <li>集成语音模块，实现语音控制</li>
+                    <li>添加自动充电功能</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>传感器原理</h2>
+            <div class="step-section">
+                <h3><i class="fas fa-wave-square"></i> 超声波测距原理</h3>
+                <p>HC-SR04超声波模块是通过发射超声波并接收回波来测量距离的传感器。其工作原理如下：</p>
+                <ol>
+                    <li>向TRIG引脚发送至少10us的高电平触发信号</li>
+                    <li>模块自动发送8个40kHz的超声波脉冲</li>
+                    <li>超声波遇到障碍物反射回来</li>
+                    <li>ECHO引脚输出高电平，高电平持续时间就是超声波从发射到返回的时间</li>
+                </ol>
+                <div class="info-box">
+                    <p><i class="fas fa-calculator"></i> 距离计算：</p>
+                    <pre><code>测量距离 = (高电平时间 × 声速) / 2
+声速 = 340m/s = 34000cm/s
+距离(cm) = (高电平时间us × 34000) / 2000000
+         = 高电平时间us × 0.017</code></pre>
+                </div>
+            </div>
+
+            <div class="step-section">
+                <h3><i class="fas fa-lightbulb"></i> 光敏传感器工作原理</h3>
+                <p>光敏电阻是一种随入射光强度变化而改变电阻值的器件：</p>
+                <ul>
+                    <li>光照强度增加，电阻值减小</li>
+                    <li>光照强度减弱，电阻值增大</li>
+                    <li>响应时间约为10ms</li>
+                    <li>工作电压3.3V-5V</li>
+                </ul>
+                <div class="code-block">
+                    <pre><code>// 光敏模块读取示例
+unsigned char read_light(void) {
+    unsigned char adc_value;
+    // 启动ADC转换
+    ADC_START = 1;
+    // 等待转换完成
+    while(!ADC_FLAG);
+    // 读取结果
+    adc_value = ADC_RESULT;
+    // 清除标志位
+    ADC_FLAG = 0;
+    return adc_value;
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="step-section">
+                <h3><i class="fas fa-broadcast-tower"></i> 红外避障原理</h3>
+                <p>红外避障模块使用发射管发出红外线，接收管接收反射回来的红外线：</p>
+                <ul>
+                    <li>发射管发出38KHz调制的红外线</li>
+                    <li>遇到障碍物时红外线被反射</li>
+                    <li>接收管接收反射信号并解调</li>
+                    <li>比较器输出数字信号</li>
+                </ul>
+                <div class="warning-box">
+                    <p><i class="fas fa-exclamation-triangle"></i> 使用注意：</p>
+                    <ul>
+                        <li>避免阳光直射干扰</li>
+                        <li>检测距离一般在2-30cm</li>
+                        <li>对黑色物体敏感度较低</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>电机驱动技术</h2>
+            <div class="step-section">
+                <h3><i class="fas fa-cogs"></i> L298N驱动原理</h3>
+                <p>L298N是一款双H桥直流电机驱动芯片，主要特点：</p>
+                <ul>
+                    <li>工作电压：5V-35V</li>
+                    <li>最大电流：2A/通道</li>
+                    <li>支持PWM调速</li>
+                    <li>内置续流二极管</li>
+                </ul>
+                <div class="info-box">
+                    <h4>控制逻辑：</h4>
+                    <pre><code>ENA/ENB  IN1/IN3  IN2/IN4  电机状态
+   1         1        0      正转
+   1         0        1      反转
+   1         0        0      制动
+   1         1        1      制动
+   0         x        x      停止</code></pre>
+                </div>
+            </div>
+
+            <div class="step-section">
+                <h3><i class="fas fa-wave-square"></i> PWM调速实现</h3>
+                <div class="code-block">
+                    <pre><code>// 定时器0初始化(PWM发生器)
+void timer0_init(void) {
+    TMOD &= 0xF0;
+    TMOD |= 0x01;    // 16��定时器模式
+    TH0 = 0xFF;      // PWM周期设置
+    TL0 = 0x00;
+    ET0 = 1;         // 使能定时器0中断
+    TR0 = 1;         // 启动定时器0
+}
+
+// PWM中断服务程序
+void timer0_isr() interrupt 1 {
+    static unsigned char pwm_count = 0;
+    
+    // 重装初值
+    TH0 = 0xFF;
+    TL0 = 0x00;
+    
+    // PWM计数
+    pwm_count++;
+    if(pwm_count >= 100) pwm_count = 0;
+    
+    // 输出PWM
+    ENA = (pwm_count < motor_speed_left) ? 1 : 0;
+    ENB = (pwm_count < motor_speed_right) ? 1 : 0;
+}</code></pre>
+                </div>
+                <div class="info-box">
+                    <p><i class="fas fa-info-circle"></i> PWM频率计算：</p>
+                    <pre><code>PWM频率 = 晶振频率 / (12 × 计数值)
+例如：12MHz晶振，计数值256时
+PWM频率 = 12000000 / (12 × 256) ≈ 3.9kHz</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>蓝牙通信详解</h2>
+            <div class="step-section">
+                <h3><i class="fas fa-bluetooth"></i> HC-05模块配置</h3>
+                <p>HC-05蓝牙模块配置步骤：</p>
+                <ol>
+                    <li>进入AT模式：上电时按住模块上的按键</li>
+                    <li>串口配置：9600波特率，无校验位</li>
+                    <li>发送AT指令进行配置</li>
+                </ol>
+                <div class="code-block">
+                    <pre><code>// AT指令示例
+AT              // 测试通信
+AT+NAME=Robot   // 设置蓝牙名称
+AT+PSWD=1234    // 设置配对密码
+AT+UART=9600,0,0  // 设置串口参数
+AT+ROLE=0       // 设置为从机模式</code></pre>
+                </div>
+            </div>
+
+            <div class="step-section">
+                <h3><i class="fas fa-exchange-alt"></i> 通信协议设计</h3>
+                <div class="code-block">
+                    <pre><code>// 通信协议格式
+typedef struct {
+    unsigned char header;    // 帧头 0xAA
+    unsigned char command;   // 命令字
+    unsigned char param;     // 参数
+    unsigned char checksum;  // 校验和
+} Command_Frame;
+
+// 发送数据帧
+void send_frame(unsigned char cmd, unsigned char param) {
+    Command_Frame frame;
+    frame.header = 0xAA;
+    frame.command = cmd;
+    frame.param = param;
+    frame.checksum = frame.header + frame.command + frame.param;
+    
+    // 发送数据
+    uart_send_byte(frame.header);
+    uart_send_byte(frame.command);
+    uart_send_byte(frame.param);
+    uart_send_byte(frame.checksum);
+}</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>PID控制算法</h2>
+            <div class="step-section">
+                <h3><i class="fas fa-chart-line"></i> PID原理</h3>
+                <p>PID控制算法包含三个部分：</p>
+                <ul>
+                    <li>比例（P）：当前误差的纠正</li>
+                    <li>积分（I）：累计误差的纠正</li>
+                    <li>微分（D）：误差变化率的纠正</li>
+                </ul>
+                <div class="code-block">
+                    <pre><code>// PID结构体
+typedef struct {
+    float kp;         // 比例系数
+    float ki;         // 积分系数
+    float kd;         // 微分系数
+    float error;      // 当前误差
+    float last_error; // 上次误差
+    float integral;   // 积分项
+} PID_TypeDef;
+
+// PID计算函数
+float pid_calculate(PID_TypeDef *pid, float target, float current) {
+    float output;
+    
+    // 计算误差
+    pid->error = target - current;
+    
+    // 计算积分项
+    pid->integral += pid->error;
+    
+    // PID输出计算
+    output = pid->kp * pid->error +                    // 比例项
+             pid->ki * pid->integral +                 // 积分项
+             pid->kd * (pid->error - pid->last_error); // 微分项
+    
+    // 更新上次误差
+    pid->last_error = pid->error;
+    
+    return output;
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="step-section">
+                <h3><i class="fas fa-sliders-h"></i> PID参数整定</h3>
+                <p>PID参数整定步骤：</p>
+                <ol>
+                    <li>首先将Ki、Kd设为0，调节Kp直到系统有较快响应</li>
+                    <li>增加Ki消除稳态误差，但不能太大以免振荡</li>
+                    <li>最后加入Kd抑制超调，提高稳定性</li>
+                </ol>
+                <div class="info-box">
+                    <p><i class="fas fa-info-circle"></i> 参数调节参考：</p>
+                    <ul>
+                        <li>Kp过大：响应快但容易振荡</li>
+                        <li>Ki过大：消除静差但增加振荡</li>
+                        <li>Kd过大：抑制振荡但响应变慢</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>进阶优化</h2>
+            <div class="step-section">
+                <h3><i class="fas fa-filter"></i> 传感器滤波</h3>
+                <div class="code-block">
+                    <pre><code>// 滑动平均滤波
+#define FILTER_N 10
+unsigned int filter_buf[FILTER_N];
+unsigned char filter_index = 0;
+
+unsigned int average_filter(unsigned int new_value) {
+    unsigned long sum = 0;
+    unsigned char i;
+    
+    // 更新缓冲区
+    filter_buf[filter_index] = new_value;
+    filter_index = (filter_index + 1) % FILTER_N;
+    
+    // 计算平均值
+    for(i = 0; i < FILTER_N; i++) {
+        sum += filter_buf[i];
+    }
+    
+    return sum / FILTER_N;
+}
+
+// 卡尔曼滤波
+typedef struct {
+    float Q;  // 过程噪声
+    float R;  // 测量噪声
+    float P;  // 估计误差
+    float K;  // 卡尔曼增益
+    float X;  // 状态估计值
+} Kalman_TypeDef;
+
+float kalman_filter(Kalman_TypeDef *kalman, float measurement) {
+    // 预测
+    kalman->P = kalman->P + kalman->Q;
+    
+    // 更新
+    kalman->K = kalman->P / (kalman->P + kalman->R);
+    kalman->X = kalman->X + kalman->K * (measurement - kalman->X);
+    kalman->P = (1 - kalman->K) * kalman->P;
+    
+    return kalman->X;
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="step-section">
+                <h3><i class="fas fa-tachometer-alt"></i> 运动优化</h3>
+                <div class="code-block">
+                    <pre><code>// 加速度平滑控制
+void smooth_speed_control(unsigned char target_speed) {
+    static unsigned char current_speed = 0;
+    const unsigned char acc_step = 5;  // 加速步进值
+    
+    if(current_speed < target_speed) {
+        current_speed = min(current_speed + acc_step, target_speed);
+    }
+    else if(current_speed > target_speed) {
+        current_speed = max(current_speed - acc_step, target_speed);
+    }
+    
+    motor_control(current_direction, current_speed);
+    delay_ms(20);  // 控制加速度
+}</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>故障排除指南</h2>
+            <div class="step-section">
+                <h3><i class="fas fa-tools"></i> 常见故障分析</h3>
+                <div class="info-box">
+                    <h4>1. 电机不转动</h4>
+                    <ul>
+                        <li>检查电源电压</li>
+                        <li>测量驱动信号</li>
+                        <li>检查电机接线</li>
+                        <li>测试L298N输出</li>
+                    </ul>
+                </div>
+                <div class="info-box">
+                    <h4>2. 运动不稳定</h4>
+                    <ul>
+                        <li>检查机械结构</li>
+                        <li>调整PID参数</li>
+                        <li>优化速度控制</li>
+                        <li>检查电池电量</li>
+                    </ul>
+                </div>
+                <div class="info-box">
+                    <h4>3. 避障失效</h4>
+                    <ul>
+                        <li>校准传感器</li>
+                        <li>调整安装角度</li>
+                        <li>检查反射面情况</li>
+                        <li>优化检测算法</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>开发环境配置</h2>
+            <div class="step-section">
+                <h3><i class="fas fa-laptop-code"></i> 软件环境</h3>
+                <div class="info-box">
+                    <h4>必需软件：</h4>
+                    <ul>
+                        <li>Keil μVision 5（IDE开发环境）
+                            <ul>
+                                <li>下载地址：www.keil.com/download</li>
+                                <li>推荐版本：5.36或更高</li>
+                                <li>需要安装C51组件包</li>
+                            </ul>
+                        </li>
+                        <li>STC-ISP（单片机下载软件）
+                            <ul>
+                                <li>下载地址：www.stcmcu.com</li>
+                                <li>支持STC89C52RC编程</li>
+                            </ul>
+                        </li>
+                        <li>Proteus（电路仿真软件）
+                            <ul>
+                                <li>用于电路设计和仿真</li>
+                                <li>推荐版本：8.9或更高</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="info-box">
+                    <h4>开发环境配置步骤：</h4>
+                    <ol>
+                        <li>安装Keil μVision 5
+                            <ul>
+                                <li>运行安装程序，选择完整安装</li>
+                                <li>安装C51组件包</li>
+                                <li>配置项目环境变量</li>
+                            </ul>
+                        </li>
+                        <li>配置STC-ISP
+                            <ul>
+                                <li>安装USB转串口驱动</li>
+                                <li>选择正确的单片机型号</li>
+                                <li>设置串口参数</li>
+                            </ul>
+                        </li>
+                        <li>安装Proteus
+                            <ul>
+                                <li>安装主程序</li>
+                                <li>安装元件库</li>
+                                <li>配置许可证</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="step-section">
+                <h3><i class="fas fa-microchip"></i> 硬件环境</h3>
+                <div class="info-box">
+                    <h4>开发工具：</h4>
+                    <ul>
+                        <li>USB下载器（支持STC系列单片机）</li>
+                        <li>示波器（用于信号调试）</li>
+                        <li>万用表（电路测试）</li>
+                        <li>焊接工具套装</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>项目目录结构</h2>
+            <div class="step-section">
+                <h3><i class="fas fa-folder-tree"></i> 目录说明</h3>
+                <div class="code-block">
+                    <pre><code>robot_project/
+├── src/                    # 源代码目录
+│   ├── main.c             # 主程序
+│   ├── motor.c            # 电机控制
+│   ├── motor.h
+│   ├── sensor.c           # 传感器驱动
+│   ├── sensor.h
+│   ├── bluetooth.c        # 蓝牙通信
+│   ├── bluetooth.h
+│   ├── pid.c              # PID控制
+│   └── pid.h
+├── lib/                    # 库文件目录
+│   ├── delay.c            # 延时函数
+│   └── delay.h
+├── doc/                    # 文档目录
+│   ├── schematic.pdf      # 电路图
+│   └── manual.pdf         # 使用手册
+├── hardware/              # 硬件设计文件
+│   ├── pcb/              # PCB设计
+│   └── mechanical/       # 机械结构
+└── tools/                # 工具和脚本
+    └── calibration.exe   # 传感器校准工具</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>开发步骤详解</h2>
+            <div class="step-section">
+                <h3><i class="fas fa-code-branch"></i> 开发流程</h3>
+                <ol>
+                    <li>项目初始化
+                        <ul>
+                            <li>创建Keil工程</li>
+                            <li>配置编译选项</li>
+                            <li>添加必要的头文件和库</li>
+                        </ul>
+                    </li>
+                    <li>底层驱动开发
+                        <ul>
+                            <li>编写电机驱动</li>
+                            <li>实现传感器接口</li>
+                            <li>开发通信协议</li>
+                        </ul>
+                    </li>
+                    <li>算法实现
+                        <ul>
+                            <li>PID控制算法</li>
+                            <li>避障算法</li>
+                            <li>路径规划</li>
+                        </ul>
+                    </li>
+                    <li>功能测试
+                        <ul>
+                            <li>单元测试</li>
+                            <li>集成测试</li>
+                            <li>系统测试</li>
+                        </ul>
+                    </li>
+                    <li>优化改进
+                        <ul>
+                            <li>性能优化</li>
+                            <li>代码重构</li>
+                            <li>Bug修复</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+
+            <div class="step-section">
+                <h3><i class="fas fa-code"></i> 代码规范</h3>
+                <div class="info-box">
+                    <h4>命名规范：</h4>
+                    <ul>
+                        <li>函数名：动词_名词，如init_motor()</li>
+                        <li>变量名：名词_描述，如speed_current</li>
+                        <li>常量名：全大写，如MAX_SPEED</li>
+                        <li>文件名：模块名.c/h，如motor.c</li>
+                    </ul>
+                </div>
+                <div class="info-box">
+                    <h4>注释规范：</h4>
+                    <pre><code>/**
+ * 函数名称: function_name
+ * 功能描述: 描述函数的主要功能
+ * 输入参数: param1 - 参数1的说明
+ *          param2 - 参数2的说明
+ * 返回值: 返回值的说明
+ * 注意事项: 特殊说明和注意事项
+ */</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>系统集成</h2>
+            <div class="step-section">
+                <h3><i class="fas fa-puzzle-piece"></i> 模块集成</h3>
+                <div class="code-block">
+                    <pre><code>// main.c
+#include "motor.h"
+#include "sensor.h"
+#include "bluetooth.h"
+#include "pid.h"
+
+// 系统初始化
+void system_init(void) {
+    // 初始化各个模块
+    motor_init();
+    sensor_init();
+    bluetooth_init();
+    pid_init();
+    
+    // 配置中断优先级
+    IP = 0x20;  // 设置Timer0为高优先级
+    
+    // 使能总中断
+    EA = 1;
+}
+
+// 主循环任务调度
+void main(void) {
+    system_init();
+    
+    while(1) {
+        // 任务调度
+        if(task_flag & TASK_SENSOR) {
+            sensor_process();
+            task_flag &= ~TASK_SENSOR;
+        }
+        
+        if(task_flag & TASK_CONTROL) {
+            control_process();
+            task_flag &= ~TASK_CONTROL;
+        }
+        
+        if(task_flag & TASK_COMMUNICATION) {
+            communication_process();
+            task_flag &= ~TASK_COMMUNICATION;
+        }
+        
+        // 系统监控
+        system_monitor();
+    }
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="step-section">
+                <h3><i class="fas fa-tasks"></i> 任务调度</h3>
+                <div class="info-box">
+                    <h4>任务优先级：</h4>
+                    <ol>
+                        <li>传感器数据采集（最高优先级）</li>
+                        <li>运动控制计算</li>
+                        <li>通信处理</li>
+                        <li>状态监控（最低优先级）</li>
+                    </ol>
+                </div>
+                <div class="code-block">
+                    <pre><code>// 任务标志位定义
+#define TASK_SENSOR        0x01
+#define TASK_CONTROL       0x02
+#define TASK_COMMUNICATION 0x04
+#define TASK_MONITOR      0x08
+
+// 定时器中断服务程序
+void timer0_isr() interrupt 1 {
+    static unsigned char count = 0;
+    
+    // 重装初值
+    TH0 = 0xFC;
+    TL0 = 0x18;
+    
+    // 任务调度
+    count++;
+    if(count % 1 == 0) {  // 1ms
+        task_flag |= TASK_SENSOR;
+    }
+    if(count % 5 == 0) {  // 5ms
+        task_flag |= TASK_CONTROL;
+    }
+    if(count % 10 == 0) { // 10ms
+        task_flag |= TASK_COMMUNICATION;
+    }
+    if(count % 100 == 0) { // 100ms
+        task_flag |= TASK_MONITOR;
+        count = 0;
+    }
+}</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <a href="non-control-articles.html" class="back-button">
+            <i class="fas fa-arrow-left"></i> 返回文章列表
+        </a>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-c.min.js"></script>
+    <script>
+        // 主题切换功能
+        function initTheme() {
+            const themeToggleBtn = document.querySelector('.theme-toggle');
+            const themeIcon = themeToggleBtn.querySelector('i');
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            updateThemeIcon(savedTheme);
+
+            themeToggleBtn.addEventListener('click', () => {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                
+                document.documentElement.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                updateThemeIcon(newTheme);
+            });
+        }
+
+        function updateThemeIcon(theme) {
+            const themeIcon = document.querySelector('.theme-toggle i');
+            themeIcon.className = theme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
+        }
+
+        // 立即初始化主题
+        initTheme();
+    </script>
+</body>
+</html> 
