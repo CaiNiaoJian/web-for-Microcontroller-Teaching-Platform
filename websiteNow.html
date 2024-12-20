@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="light">
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -287,6 +287,29 @@
 			body.dark-mode .progress-bar {
 				background: var(--light-bg);
 			}
+
+			/* 语言切换按钮样式 */
+			.controls {
+				display: flex;
+				gap: 1rem;
+				align-items: center;
+			}
+
+			.theme-toggle, .lang-toggle {
+				background: none;
+				border: none;
+				color: #fff;
+				cursor: pointer;
+				padding: 0.5rem;
+				font-size: 1.2rem;
+				transition: var(--transition);
+				border-radius: 50%;
+			}
+
+			.theme-toggle:hover, .lang-toggle:hover {
+				background: rgba(255, 255, 255, 0.1);
+				transform: scale(1.1);
+			}
 		</style>
 	</head>
 	<body>
@@ -296,76 +319,81 @@
 				<a href="indexmodern.html" class="logo">MCU Learn</a>
 				<ul class="nav-links">
 					<li><a href="indexmodern.html">首页</a></li>
-					<li><a href="pages/blognew.html">学习</a></li>
-					<li><a href="pages/source.html">期刊</a></li>
-					<li><a href="StudySources/Sources.html">资源</a></li>
-					<li><a href="News/news.html" class="active">新闻</a></li>
+					<li><a href="pages/blognew.html">学习资源</a></li>
+					<li><a href="pages/source.html">学术资源</a></li>
+					<li><a href="StudySources/Sources.html">���源</a></li>
+					<li><a href="News/news.html" class="active">新闻动态</a></li>
 					<li><a href="pages/community.html">社区</a></li>
 					<li><a href="relation.html">联系我们</a></li>
 				</ul>
-				<button class="theme-toggle">
-					<i class="fas fa-moon"></i>
-				</button>
+				<div class="controls">
+					<button class="lang-toggle" title="切换语言">
+						<i class="fas fa-globe"></i>
+					</button>
+					<button class="theme-toggle" title="切换主题">
+						<i class="fas fa-moon"></i>
+					</button>
+				</div>
 			</div>
 		</nav>
 
 		<!-- 英雄区域 -->
 		<section class="progress-hero">
-			<h1 data-aos="fade-up">网站建设进度</h1>
-			<p data-aos="fade-up" data-aos-delay="100">探索我们的发展历程，见证每一步的进步与创新</p>
+			<h1 data-aos="fade-up" data-i18n="hero.title">网站建设进度</h1>
+			<p data-aos="fade-up" data-aos-delay="100" data-i18n="hero.subtitle">探索我们的发展历程，见证每一步的进步与创新</p>
 			
 			<div class="progress-stats">
 				<div class="stat-item" data-aos="fade-up" data-aos-delay="200">
 					<div class="stat-number">65%</div>
-					<div class="stat-label">整体完成度</div>
+					<div class="stat-label" data-i18n="stats.completion">整体完成度</div>
 				</div>
 				<div class="stat-item" data-aos="fade-up" data-aos-delay="300">
 					<div class="stat-number">12+</div>
-					<div class="stat-label">功能模块开发</div>
+					<div class="stat-label" data-i18n="stats.modules">功能模块开发</div>
 				</div>
 				<div class="stat-item" data-aos="fade-up" data-aos-delay="400">
 					<div class="stat-number">1000+</div>
-					<div class="stat-label">代码提交累计</div>
+					<div class="stat-label" data-i18n="stats.commits">代码提交累计</div>
 				</div>
 			</div>
 		</section>
-
+				
 		<!-- 进度卡片 -->
 		<section class="progress-cards">
-			<div class="progress-card" data-aos="fade-up">
-				<h3><i class="fas fa-paint-brush"></i> 界面设计</h3>
+				<div class="progress-card" data-aos="fade-up">
+				<h3><i class="fas fa-paint-brush"></i> <span data-i18n="cards.ui.title">界面设计</span></h3>
 				<div class="progress-bar">
 					<div class="progress-fill" style="width: 95%;"></div>
 				</div>
 				<div class="progress-text">
-					<span>现代化界面改造</span>
+					<span data-i18n="cards.ui.subtitle">现代化界面改造</span>
 					<span>95%</span>
 				</div>
-				<p>采用最新的设计趋势，打造直观、美观的用户界面</p>
-			</div>
+				<p data-i18n="cards.ui.desc">采用最新的设计趋势，打造直观、美观的用户界面</p>
+				</div>
 
 			<div class="progress-card" data-aos="fade-up" data-aos-delay="100">
-				<h3><i class="fas fa-cogs"></i> 功能开发</h3>
-				<div class="progress-bar">
-					<div class="progress-fill" style="width: 80%;"></div>
-				</div>
+				<h3><i class="fas fa-cogs"></i> <span data-i18n="cards.function.title">功能开发</span></h3>
+					<div class="progress-bar">
+						<div class="progress-fill" style="width: 80%;"></div>
+					</div>
 				<div class="progress-text">
-					<span>核心功能实现</span>
+					<span data-i18n="cards.function.subtitle">核心功能实现</span>
 					<span>80%</span>
+					</div>
+				<p data-i18n="cards.function.desc">持续开发和优化各项功能，提升用户体验</p>
 				</div>
-				<p>持续开发和优化各项功能，提升用户体验</p>
-			</div>
 
 			<div class="progress-card" data-aos="fade-up" data-aos-delay="200">
-				<h3><i class="fas fa-mobile-alt"></i> 移动适配</h3>
-				<div class="progress-bar">
+				<h3><i class="fas fa-mobile-alt"></i> <span data-i18n="cards.mobile.title">移动适配</span></h3>
+					<div class="progress-bar">
 					<div class="progress-fill" style="width: 75%;"></div>
-				</div>
+					</div>
 				<div class="progress-text">
-					<span>响应式设计</span>
+					<span data-i18n="cards.mobile.subtitle">响应式设计</span>
 					<span>75%</span>
 				</div>
-				<p>优化移动端显示效果，确保跨平台体验一致</p>
+				<p data-i18n="cards.mobile.desc">优化移动端显示效果，确保跨平台体验一致</p>
 			</div>
 		</section>
 
@@ -375,8 +403,8 @@
 				<div class="timeline-item" data-aos="fade-up">
 					<div class="timeline-content">
 						<span class="timeline-date">2024-10-12</span>
-						<h3>现代化改造开始</h3>
-						<p>完成网站的现代化改造，引入新的设计语言和交互体验，提升用户体验。</p>
+						<h3 data-i18n="timeline.modern.title">现代化改造开始</h3>
+						<p data-i18n="timeline.modern.desc">完成网站的现代化改造，引入新的设计语言和交互体验，提升用户体验。</p>
 					</div>
 					<div class="timeline-dot"></div>
 				</div>
@@ -384,17 +412,17 @@
 				<div class="timeline-item" data-aos="fade-up">
 					<div class="timeline-content">
 						<span class="timeline-date">2024-10-15</span>
-						<h3>社区功能优化</h3>
-						<p>优化社区互动功能，增加用户反馈机制，提升社区活跃度。</p>
+						<h3 data-i18n="timeline.community.title">社区功能优化</h3>
+						<p data-i18n="timeline.community.desc">优化社区互动功能，增加用户反馈机制，提升社区活跃度。</p>
 					</div>
 					<div class="timeline-dot"></div>
-				</div>
+					</div>
 
 				<div class="timeline-item" data-aos="fade-up">
 					<div class="timeline-content">
 						<span class="timeline-date">2024-10-17</span>
-						<h3>云服务部署</h3>
-						<p>成功将网站部署到阿里云服务器，提升网站访问速度和稳定性。</p>
+						<h3 data-i18n="timeline.cloud.title">云服务部署</h3>
+						<p data-i18n="timeline.cloud.desc">成功将网站部署到阿里云服务器，提升网站访问速度和稳定性。</p>
 					</div>
 					<div class="timeline-dot"></div>
 				</div>
@@ -402,8 +430,8 @@
 				<div class="timeline-item" data-aos="fade-up">
 					<div class="timeline-content">
 						<span class="timeline-date">2024-11-10</span>
-						<h3>学习资源更新</h3>
-						<p>更新学习资源库，添加新的教程和实验案例，丰富学习内容。</p>
+						<h3 data-i18n="timeline.resources.title">学习资源更新</h3>
+						<p data-i18n="timeline.resources.desc">更新学习资源库，添加新的教程和实验案例，丰富学习内容。</p>
 					</div>
 					<div class="timeline-dot"></div>
 				</div>
@@ -411,8 +439,8 @@
 				<div class="timeline-item" data-aos="fade-up">
 					<div class="timeline-content">
 						<span class="timeline-date">2024-11-11</span>
-						<h3>项目获奖</h3>
-						<p>项目荣获2024年仿真创新应用大赛国家级三等奖，实力得到认可。</p>
+						<h3 data-i18n="timeline.award.title">项目获奖</h3>
+						<p data-i18n="timeline.award.desc">项目荣获2024年仿真创新应用大赛国家级三等奖，实力得到认可。</p>
 					</div>
 					<div class="timeline-dot"></div>
 				</div>
@@ -420,8 +448,8 @@
 				<div class="timeline-item" data-aos="fade-up">
 					<div class="timeline-content">
 						<span class="timeline-date">2024-11-15</span>
-						<h3>搜索功能升级</h3>
-						<p>升级网站搜索功能，提供更精准的搜索结果和更好的用户体验。</p>
+						<h3 data-i18n="timeline.search.title">搜索功能升级</h3>
+						<p data-i18n="timeline.search.desc">升级网站搜索功能，提供更精准的搜索结果和更好的用户体验。</p>
 					</div>
 					<div class="timeline-dot"></div>
 				</div>
@@ -429,44 +457,44 @@
 				<div class="timeline-item" data-aos="fade-up">
 					<div class="timeline-content">
 						<span class="timeline-date">2024-12-12</span>
-						<h3>中期检查通过</h3>
-						<p>中期检查通过，项目进展顺利。</p>
+						<h3 data-i18n="timeline.check.title">中期检查通过</h3>
+						<p data-i18n="timeline.check.desc">中期检查通过，项目进展顺利。</p>
 					</div>
 					<div class="timeline-dot"></div>
+					</div>
 				</div>
-			</div>
-		</section>
+			</section>
 
 		<!-- 页脚 -->
 		<footer class="footer">
 			<div class="footer-content">
 				<div class="footer-logo">
 					<h3>MCU Learn</h3>
-					<p>探索创新科技的无限可能</p>
+					<p data-i18n="footer.slogan">探索创新科技的无限可能</p>
 				</div>
 				<div class="footer-links">
 					<div class="footer-section">
-						<h4>快速链接</h4>
+						<h4 data-i18n="footer.quickLinks">快速链接</h4>
 						<ul>
-							<li><a href="indexmodern.html">首页</a></li>
-							<li><a href="pages/blognew.html">学习资源</a></li>
-							<li><a href="pages/source.html">学术资源</a></li>
-							<li><a href="News/news.html">新闻动态</a></li>
+							<li><a href="indexmodern.html" data-i18n="footer.home">首页</a></li>
+							<li><a href="pages/blognew.html" data-i18n="footer.learn">学习资源</a></li>
+							<li><a href="pages/source.html" data-i18n="footer.academic">学术资源</a></li>
+							<li><a href="News/news.html" data-i18n="footer.news">新闻动态</a></li>
 						</ul>
 					</div>
 					<div class="footer-section">
-						<h4>关注我们</h4>
+						<h4 data-i18n="footer.followUs">关注我们</h4>
 						<ul>
 							<li><a href="#">GitHub</a></li>
-							<li><a href="#">微信公众号</a></li>
-							<li><a href="#">知乎专栏</a></li>
-							<li><a href="#">技术社区</a></li>
+							<li><a href="#" data-i18n="footer.wechat">微信公众号</a></li>
+							<li><a href="#" data-i18n="footer.zhihu">知乎专栏</a></li>
+							<li><a href="#" data-i18n="footer.community">技术社区</a></li>
 						</ul>
 					</div>
 				</div>
 			</div>
 			<div class="footer-bottom">
-				<p>&copy; 2024 MCU Learn. All rights reserved.</p>
+				<p data-i18n="footer.copyright">&copy; 2024 MCU Learn. All rights reserved.</p>
 			</div>
 		</footer>
 
@@ -476,6 +504,121 @@
 			AOS.init({
 				duration: 800,
 				once: true
+			});
+
+			// 语言配置
+			const translations = {
+				'zh-CN': {
+					'hero.title': '网站建设进度',
+					'hero.subtitle': '探索我们的发展历程，见证每一步的进步与创新',
+					'stats.completion': '整体完成度',
+					'stats.modules': '功能模块开发',
+					'stats.commits': '代码提交累计',
+					'cards.ui.title': '界面设计',
+					'cards.ui.subtitle': '现代化界面改造',
+					'cards.ui.desc': '采用最新的设计趋势，打造直观、美观的用户界面',
+					'cards.function.title': '功能开发',
+					'cards.function.subtitle': '核心功能实现',
+					'cards.function.desc': '持续开发和优化各项功能，提升用户体验',
+					'cards.mobile.title': '移动适配',
+					'cards.mobile.subtitle': '响应式设计',
+					'cards.mobile.desc': '优化移动端显示效果，确保跨平台体验一致',
+					'timeline.modern.title': '现代化改造开始',
+					'timeline.modern.desc': '完成网站的现代化改造，引入新的设计语言和交互体验，提升用户体验。',
+					'timeline.community.title': '社区功能优化',
+					'timeline.community.desc': '优化社区互动功能，增加用户反馈机制，提升社区活跃度。',
+					'timeline.cloud.title': '云服务部署',
+					'timeline.cloud.desc': '成功将网站部署到阿里云服务器，提升网站访问速度和稳定性。',
+					'timeline.resources.title': '学习资源更新',
+					'timeline.resources.desc': '更新学习资源库，添加新的教程和实验案例，丰富学习内容。',
+					'timeline.award.title': '项目获奖',
+					'timeline.award.desc': '项目荣获2024年仿真创新应用大赛国家级三等奖，实力得到认可。',
+					'timeline.search.title': '搜索功能升级',
+					'timeline.search.desc': '升级网站搜索功能，提供更精准的搜索结果和更好的用户体验。',
+					'timeline.check.title': '中期检查通过',
+					'timeline.check.desc': '中期检查通过，项目进展顺利。',
+					'footer.slogan': '探索创新科技的无限可能',
+					'footer.quickLinks': '快速链接',
+					'footer.home': '首页',
+					'footer.learn': '学习资源',
+					'footer.academic': '学术资源',
+					'footer.news': '新闻动态',
+					'footer.followUs': '关注我们',
+					'footer.wechat': '微信公众号',
+					'footer.zhihu': '知乎专栏',
+					'footer.community': '技术社区',
+					'footer.copyright': '© 2024 MCU Learn. 保留所有权利。'
+				},
+				'en': {
+					'hero.title': 'Website Development Progress',
+					'hero.subtitle': 'Explore our development journey and witness every step of progress and innovation',
+					'stats.completion': 'Overall Completion',
+					'stats.modules': 'Feature Modules',
+					'stats.commits': 'Code Commits',
+					'cards.ui.title': 'UI Design',
+					'cards.ui.subtitle': 'Modern Interface',
+					'cards.ui.desc': 'Adopt the latest design trends to create an intuitive and beautiful user interface',
+					'cards.function.title': 'Feature Development',
+					'cards.function.subtitle': 'Core Features',
+					'cards.function.desc': 'Continuously develop and optimize features to enhance user experience',
+					'cards.mobile.title': 'Mobile Adaptation',
+					'cards.mobile.subtitle': 'Responsive Design',
+					'cards.mobile.desc': 'Optimize mobile display for consistent cross-platform experience',
+					'timeline.modern.title': 'Modern Redesign Started',
+					'timeline.modern.desc': 'Completed website modernization with new design language and interaction experience.',
+					'timeline.community.title': 'Community Features Optimized',
+					'timeline.community.desc': 'Enhanced community interaction features and user feedback mechanisms.',
+					'timeline.cloud.title': 'Cloud Service Deployment',
+					'timeline.cloud.desc': 'Successfully deployed to Alibaba Cloud for improved speed and stability.',
+					'timeline.resources.title': 'Learning Resources Updated',
+					'timeline.resources.desc': 'Updated resource library with new tutorials and practical cases.',
+					'timeline.award.title': 'Project Award',
+					'timeline.award.desc': 'Won third prize in the 2024 Simulation Innovation Application Competition.',
+					'timeline.search.title': 'Search Function Upgraded',
+					'timeline.search.desc': 'Enhanced search functionality for more accurate results and better experience.',
+					'timeline.check.title': 'Mid-term Review Passed',
+					'timeline.check.desc': 'Project progressing smoothly, passed mid-term review.',
+					'footer.slogan': 'Explore Infinite Possibilities of Innovation Technology',
+					'footer.quickLinks': 'Quick Links',
+					'footer.home': 'Home',
+					'footer.learn': 'Learning Resources',
+					'footer.academic': 'Academic Resources',
+					'footer.news': 'News',
+					'footer.followUs': 'Follow Us',
+					'footer.wechat': 'WeChat Official',
+					'footer.zhihu': 'Zhihu Column',
+					'footer.community': 'Tech Community',
+					'footer.copyright': '© 2024 MCU Learn. All rights reserved.'
+				}
+			};
+
+			// 语言切换功能
+			const langToggle = document.querySelector('.lang-toggle');
+			let currentLang = localStorage.getItem('lang') || 'zh-CN';
+
+			function updateLanguage() {
+				document.querySelectorAll('[data-i18n]').forEach(element => {
+					const key = element.getAttribute('data-i18n');
+					if (translations[currentLang][key]) {
+						element.textContent = translations[currentLang][key];
+					}
+				});
+				document.documentElement.lang = currentLang;
+			}
+
+			function toggleLanguage() {
+				currentLang = currentLang === 'zh-CN' ? 'en' : 'zh-CN';
+				localStorage.setItem('lang', currentLang);
+				updateLanguage();
+			}
+
+			// 事件监听
+			langToggle.addEventListener('click', toggleLanguage);
+
+			// 初始化语言
+			document.addEventListener('DOMContentLoaded', () => {
+				currentLang = localStorage.getItem('lang') || 'zh-CN';
+				updateLanguage();
 			});
 
 			// 暗色模式切换
@@ -515,7 +658,7 @@
 						entry.target.style.width = entry.target.parentElement.getAttribute('data-progress') + '%';
 					}
 				});
-			});
+				});
 
 			progressBars.forEach(bar => {
 				observer.observe(bar);
