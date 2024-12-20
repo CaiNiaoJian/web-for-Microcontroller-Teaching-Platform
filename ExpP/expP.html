@@ -4,31 +4,66 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>仿真实验平台</title>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 		<style>
-			body {
-				font-family: Arial, sans-serif;
-				margin: 0;
-				padding: 0;
+			:root {
+				--primary-color: #4a90e2;
+				--secondary-color: #f5f7fa;
+				--accent-color: #ff6b6b;
+				--success-color: #2ecc71;
+				--warning-color: #f1c40f;
+				--text-color: #333;
+				--text-light: #666;
+				--border-color: #e1e4e8;
+				--shadow-color: rgba(0, 0, 0, 0.1);
+				--transition: all 0.3s ease;
+				--border-radius: 12px;
 			}
 
+			body {
+				font-family: "Microsoft YaHei", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+				margin: 0;
+				padding: 0;
+				background-color: var(--secondary-color);
+				color: var(--text-color);
+				line-height: 1.6;
+			}
+
+			/* 导航栏样式 */
 			.navbar {
 				display: flex;
 				justify-content: space-between;
 				align-items: center;
-				background-color: #333;
+				background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
 				color: white;
-				padding: 10px 20px;
+				padding: 1rem 2rem;
+				position: fixed;
+				top: 0;
+				left: 0;
+				right: 0;
+				z-index: 1000;
+				box-shadow: 0 2px 10px var(--shadow-color);
 			}
 
 			.navbar .logo {
-				font-size: 24px;
+				font-size: 1.5rem;
 				font-weight: bold;
+				display: flex;
+				align-items: center;
+				gap: 0.5rem;
+			}
+
+			.logo i {
+				font-size: 1.8rem;
 			}
 
 			.nav-links {
 				list-style: none;
 				display: flex;
-				gap: 20px;
+				gap: 2rem;
+				margin: 0;
+				padding: 0;
+				align-items: center;
 			}
 
 			.nav-links li {
@@ -38,35 +73,333 @@
 			.nav-links a {
 				color: white;
 				text-decoration: none;
-			}
-
-			.experiment-list,
-			.help {
-				padding: 20px;
-			}
-
-			.experiment-cards {
+				font-weight: 500;
+				padding: 0.5rem 1rem;
+				border-radius: var(--border-radius);
+				transition: var(--transition);
 				display: flex;
+				align-items: center;
+				gap: 0.5rem;
+			}
+
+			.nav-links a:hover {
+				background: rgba(255, 255, 255, 0.1);
+				transform: translateY(-2px);
+			}
+
+			.search-box {
+				position: relative;
+			}
+
+			.search-box input {
+				padding: 0.5rem 1rem 0.5rem 2.5rem;
+				border: none;
+				border-radius: var(--border-radius);
+				background: rgba(255, 255, 255, 0.1);
+				color: white;
+				width: 200px;
+				transition: var(--transition);
+			}
+
+			.search-box i {
+				position: absolute;
+				left: 0.8rem;
+				top: 50%;
+				transform: translateY(-50%);
+				color: rgba(255, 255, 255, 0.7);
+			}
+
+			.search-box input:focus {
+				background: rgba(255, 255, 255, 0.2);
+				outline: none;
+				width: 250px;
+			}
+
+			.search-box input::placeholder {
+				color: rgba(255, 255, 255, 0.7);
+			}
+
+			/* 主要内容区域 */
+			main {
+				margin-top: 80px;
+				padding: 2rem;
+				max-width: 1400px;
+				margin-left: auto;
+				margin-right: auto;
+			}
+
+			/* 欢迎区域 */
+			.welcome-section {
+				text-align: center;
+				padding: 3rem 1rem;
+				margin-bottom: 3rem;
+				background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+				border-radius: var(--border-radius);
+				box-shadow: 0 4px 6px var(--shadow-color);
+			}
+
+			.welcome-section h1 {
+				font-size: 2.5rem;
+				color: var(--text-color);
+				margin-bottom: 1rem;
+			}
+
+			.welcome-section p {
+				color: var(--text-light);
+				font-size: 1.1rem;
+				max-width: 800px;
+				margin: 0 auto 2rem;
+			}
+
+			/* 统计卡片 */
+			.stats-cards {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+				gap: 1.5rem;
+				margin-bottom: 3rem;
+			}
+
+			.stat-card {
+				background: white;
+				padding: 1.5rem;
+				border-radius: var(--border-radius);
+				box-shadow: 0 4px 6px var(--shadow-color);
+				text-align: center;
+				transition: var(--transition);
+			}
+
+			.stat-card:hover {
+				transform: translateY(-5px);
+			}
+
+			.stat-card i {
+				font-size: 2rem;
+				margin-bottom: 1rem;
+			}
+
+			.stat-card.experiments i {
+				color: var(--primary-color);
+			}
+
+			.stat-card.users i {
+				color: var(--accent-color);
+			}
+
+			.stat-card.completed i {
+				color: var(--success-color);
+			}
+
+			.stat-card h3 {
+				font-size: 1.8rem;
+				margin: 0.5rem 0;
+			}
+
+			.stat-card p {
+				color: var(--text-light);
+				margin: 0;
+			}
+
+			/* 实验分类标签 */
+			.experiment-filters {
+				display: flex;
+				gap: 1rem;
+				margin-bottom: 2rem;
 				flex-wrap: wrap;
-				gap: 20px;
+			}
+
+			.filter-tag {
+				padding: 0.5rem 1rem;
+				border-radius: var(--border-radius);
+				background: white;
+				border: 1px solid var(--border-color);
+				color: var(--text-color);
+				cursor: pointer;
+				transition: var(--transition);
+			}
+
+			.filter-tag:hover,
+			.filter-tag.active {
+				background: var(--primary-color);
+				color: white;
+				border-color: var(--primary-color);
+			}
+
+			/* 实验卡片网格 */
+			.experiment-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+				gap: 2rem;
+				margin-bottom: 3rem;
 			}
 
 			.experiment-card {
-				border: 1px solid #ccc;
-				padding: 20px;
-				border-radius: 8px;
-				width: 200px;
-				text-align: center;
+				background: white;
+				border-radius: var(--border-radius);
+				overflow: hidden;
+				box-shadow: 0 4px 6px var(--shadow-color);
+				transition: var(--transition);
+				position: relative;
 			}
 
-			.experiment-card button {
-				margin-top: 10px;
-				padding: 10px 20px;
-				background-color: #007BFF;
+			.experiment-card:hover {
+				transform: translateY(-5px);
+				box-shadow: 0 8px 15px var(--shadow-color);
+			}
+
+			.card-image {
+				height: 160px;
+				background-size: cover;
+				background-position: center;
+				position: relative;
+			}
+
+			.card-image::after {
+				content: '';
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				height: 50%;
+				background: linear-gradient(to top, rgba(0,0,0,0.5), transparent);
+			}
+
+			.card-content {
+				padding: 1.5rem;
+			}
+
+			.card-header {
+				display: flex;
+				justify-content: space-between;
+				align-items: flex-start;
+				margin-bottom: 1rem;
+			}
+
+			.card-title {
+				margin: 0;
+				font-size: 1.2rem;
+				color: var(--text-color);
+			}
+
+			.difficulty-badge {
+				padding: 0.3rem 0.8rem;
+				border-radius: 20px;
+				font-size: 0.8rem;
+				font-weight: 500;
+			}
+
+			.difficulty-beginner {
+				background: var(--success-color);
+				color: white;
+			}
+
+			.difficulty-intermediate {
+				background: var(--warning-color);
+				color: white;
+			}
+
+			.difficulty-advanced {
+				background: var(--accent-color);
+				color: white;
+			}
+
+			.card-description {
+				color: var(--text-light);
+				margin-bottom: 1.5rem;
+				font-size: 0.95rem;
+			}
+
+			.card-meta {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				color: var(--text-light);
+				font-size: 0.9rem;
+				margin-bottom: 1rem;
+			}
+
+			.meta-item {
+				display: flex;
+				align-items: center;
+				gap: 0.5rem;
+			}
+
+			.start-experiment {
+				width: 100%;
+				padding: 0.8rem;
+				background: var(--primary-color);
 				color: white;
 				border: none;
-				border-radius: 5px;
+				border-radius: var(--border-radius);
+				font-weight: 500;
 				cursor: pointer;
+				transition: var(--transition);
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				gap: 0.5rem;
+			}
+
+			.start-experiment:hover {
+				background: #357abd;
+				transform: translateY(-2px);
+			}
+
+			/* 帮助区域 */
+			.help-section {
+				background: white;
+				border-radius: var(--border-radius);
+				padding: 2rem;
+				margin-top: 3rem;
+				box-shadow: 0 4px 6px var(--shadow-color);
+			}
+
+			.help-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+				gap: 2rem;
+				margin-top: 2rem;
+			}
+
+			.help-card {
+				padding: 1.5rem;
+				background: var(--secondary-color);
+				border-radius: var(--border-radius);
+				transition: var(--transition);
+			}
+
+			.help-card:hover {
+				transform: translateY(-5px);
+				box-shadow: 0 4px 6px var(--shadow-color);
+			}
+
+			.help-card h3 {
+				display: flex;
+				align-items: center;
+				gap: 0.5rem;
+				margin-top: 0;
+				color: var(--text-color);
+			}
+
+			.help-card i {
+				color: var(--primary-color);
+			}
+
+			.help-card p {
+				color: var(--text-light);
+				margin: 0;
+			}
+
+			/* 用户信息弹窗 */
+			.modal-overlay {
+				display: none;
+				position: fixed;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background: rgba(0, 0, 0, 0.5);
+				z-index: 1000;
+				backdrop-filter: blur(5px);
 			}
 
 			.user-info-modal {
@@ -75,131 +408,503 @@
 				top: 50%;
 				left: 50%;
 				transform: translate(-50%, -50%);
-				background-color: white;
-				padding: 20px;
-				border-radius: 8px;
-				box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-				z-index: 1000;
+				background: white;
+				padding: 2rem;
+				border-radius: var(--border-radius);
+				box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+				z-index: 1001;
+				width: 90%;
+				max-width: 500px;
 			}
 
-			.user-info-modal h3 {
-				margin-top: 0;
+			.user-info-header {
+				text-align: center;
+				margin-bottom: 2rem;
 			}
 
-			.user-info-modal p {
-				margin: 10px 0;
-			}
-
-			.user-info-modal button {
-				padding: 10px 20px;
-				background-color: #007BFF;
+			.user-avatar {
+				width: 100px;
+				height: 100px;
+				border-radius: 50%;
+				margin: 0 auto 1rem;
+				background: var(--primary-color);
+				display: flex;
+				align-items: center;
+				justify-content: center;
 				color: white;
-				border: none;
-				border-radius: 5px;
+				font-size: 2.5rem;
+			}
+
+			.user-info-content {
+				display: grid;
+				grid-template-columns: repeat(2, 1fr);
+				gap: 1rem;
+				margin-bottom: 2rem;
+			}
+
+			.user-info-item {
+				background: var(--secondary-color);
+				padding: 1rem;
+				border-radius: var(--border-radius);
+				display: flex;
+				align-items: center;
+				gap: 0.8rem;
+			}
+
+			.user-info-item i {
+				color: var(--primary-color);
+				font-size: 1.2rem;
+			}
+
+			.progress-section {
+				margin-top: 1.5rem;
+				padding-top: 1.5rem;
+				border-top: 1px solid var(--border-color);
+			}
+
+			.progress-bar {
+				height: 8px;
+				background: var(--secondary-color);
+				border-radius: 4px;
+				overflow: hidden;
+				margin: 0.5rem 0;
+			}
+
+			.progress-fill {
+				height: 100%;
+				background: var(--primary-color);
+				width: 50%;
+				transition: width 0.3s ease;
+			}
+
+			.modal-buttons {
+				display: flex;
+				justify-content: flex-end;
+				gap: 1rem;
+				margin-top: 2rem;
+			}
+
+			.modal-button {
+				padding: 0.8rem 1.5rem;
+				border-radius: var(--border-radius);
 				cursor: pointer;
+				font-weight: 500;
+				transition: var(--transition);
+			}
+
+			.close-modal {
+				background: var(--secondary-color);
+				color: var(--text-color);
+				border: none;
+			}
+
+			.close-modal:hover {
+				background: #e1e4e8;
+			}
+
+			/* 响应式设计 */
+			@media (max-width: 768px) {
+				.navbar {
+					padding: 1rem;
+				}
+
+				.nav-links {
+					display: none;
+					position: absolute;
+					top: 100%;
+					left: 0;
+					right: 0;
+					background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+					flex-direction: column;
+					padding: 1rem;
+					gap: 1rem;
+				}
+
+				.nav-links.active {
+					display: flex;
+				}
+
+				.menu-toggle {
+					display: block;
+					background: none;
+					border: none;
+					color: white;
+					font-size: 1.5rem;
+					cursor: pointer;
+				}
+
+				.search-box input {
+					width: 150px;
+				}
+
+				.search-box input:focus {
+					width: 200px;
+				}
+
+				.welcome-section {
+					padding: 2rem 1rem;
+				}
+
+				.welcome-section h1 {
+					font-size: 2rem;
+				}
+
+				.stats-cards {
+					grid-template-columns: 1fr;
+				}
+
+				.experiment-grid {
+					grid-template-columns: 1fr;
+				}
+
+				.help-grid {
+					grid-template-columns: 1fr;
+				}
+
+				.user-info-content {
+					grid-template-columns: 1fr;
+				}
+			}
+
+			/* 动画效果 */
+			@keyframes fadeIn {
+				from {
+					opacity: 0;
+					transform: translateY(20px);
+				}
+				to {
+					opacity: 1;
+					transform: translateY(0);
+				}
+			}
+
+			.animate-fade-in {
+				animation: fadeIn 0.5s ease forwards;
 			}
 		</style>
 	</head>
 	<body>
 		<nav class="navbar">
-			<div class="logo">仿真实验平台</div>
+			<div class="logo">
+				<i class="fas fa-microchip"></i>
+				仿真实验平台
+			</div>
+			<button class="menu-toggle">
+				<i class="fas fa-bars"></i>
+			</button>
 			<ul class="nav-links">
-				<li><a href="#experiments">实验列表</a></li>
-				<li><a href="#" id="user-center-link">用户中心</a></li>
-				<li><a href="#help">帮助</a></li>
-				<li><input type="text" placeholder="搜索实验..."></li>
+				<li><a href="#experiments"><i class="fas fa-flask"></i> 实验列表</a></li>
+				<li><a href="#" id="user-center-link"><i class="fas fa-user"></i> 用户中心</a></li>
+				<li><a href="#help"><i class="fas fa-question-circle"></i> 帮助</a></li>
+				<li class="search-box">
+					<i class="fas fa-search"></i>
+					<input type="text" placeholder="搜索实验...">
+				</li>
 			</ul>
 		</nav>
 
-		<section id="experiments" class="experiment-list">
-			<h2>实验列表</h2>
-			<div class="experiment-cards">
-				<div class="experiment-card" data-id="1">
-					<h3>实验1</h3>
-					<p>这是一个简单的实验，适合初学者。</p>
-					<button class="start-experiment">开始实验</button>
+		<main>
+			<section class="welcome-section animate-fade-in">
+				<h1>欢迎来到仿真实验平台</h1>
+				<p>这里为您提供丰富的单片机实验资源，帮助您更好地学习和实践。选择适合您的实验，开始动手操作吧！</p>
+			</section>
+
+			<div class="stats-cards animate-fade-in">
+				<div class="stat-card experiments">
+					<i class="fas fa-flask"></i>
+					<h3>4</h3>
+					<p>在线实验</p>
 				</div>
-				<div class="experiment-card" data-id="2">
-					<h3>实验2</h3>
-					<p>这是一个进阶实验，需要一定的基础知识。</p>
-					<button class="start-experiment">开始实验</button>
+				<div class="stat-card users">
+					<i class="fas fa-users"></i>
+					<h3>1+</h3>
+					<p>活跃用户</p>
 				</div>
-				<div class="experiment-card" data-id="3">
-					<h3>实验3</h3>
-					<p>这是一个进阶实验，需要一定的基础知识。</p>
-					<button class="start-experiment">开始实验</button>
-				</div>
-				<div class="experiment-card" data-id="4">
-					<h3>实验4</h3>
-					<p>这是一个进阶实验，需要一定的基础知识。</p>
-					<button class="start-experiment">开始实验</button>
-				</div>
-				<div class="experiment-card" data-id="5">
-					<h3>实验5</h3>
-					<p>这是一个进阶实验，需要一定的基础知识。</p>
-					<button class="start-experiment">开始实验</button>
-				</div>
-				<div class="experiment-card" data-id="6">
-					<h3>实验6</h3>
-					<p>这是一个进阶实验，需要一定的基础知识。</p>
-					<button class="start-experiment">开始实验</button>
-				</div>
-				<div class="experiment-card" data-id="7">
-					<h3>实验7</h3>
-					<p>这是一个进阶实验，需要一定的基础知识。</p>
-					<button class="start-experiment">开始实验</button>
-				</div>
-				<div class="experiment-card" data-id="8">
-					<h3>实验8</h3>
-					<p>这是一个进阶实验，需要一定的基础知识。</p>
-					<button class="start-experiment">开始实验</button>
-				</div>
-				<div class="experiment-card" data-id="9">
-					<h3>实验9</h3>
-					<p>这是一个进阶实验，需要一定的基础知识。</p>
-					<button class="start-experiment">开始实验</button>
+				<div class="stat-card completed">
+					<i class="fas fa-check-circle"></i>
+					<h3>0+</h3>
+					<p>完成实验</p>
 				</div>
 			</div>
-		</section>
 
-		<section id="help" class="help">
-			<h2>帮助与支持</h2>
-			<div class="help-content">
-				<h3>常见问题</h3>
-				<p>这里是常见问题的解答。</p>
-			</div>
-		</section>
+			<section id="experiments" class="experiment-section">
+				<div class="experiment-filters">
+					<button class="filter-tag active">全部</button>
+					<button class="filter-tag">基础实验</button>
+					<button class="filter-tag">进阶实验</button>
+					<button class="filter-tag">综合实验</button>
+				</div>
 
-		<!-- 用户信息弹出框 -->
+				<div class="experiment-grid">
+					<div class="experiment-card" data-category="basic">
+						<div class="card-image" style="background-image: url('https://via.placeholder.com/300x160')"></div>
+						<div class="card-content">
+							<div class="card-header">
+								<h3 class="card-title">基础单片机实验</h3>
+								<span class="difficulty-badge difficulty-beginner">初级</span>
+							</div>
+							<p class="card-description">适合初学者的基础实验，包含LED控制、按键输入等基本操作。</p>
+							<div class="card-meta">
+								<span class="meta-item">
+									<i class="fas fa-clock"></i>
+									预计用时：2小时
+								</span>
+								<span class="meta-item">
+									<i class="fas fa-users"></i>
+									已完成：0人
+								</span>
+							</div>
+							<button class="start-experiment">
+								<i class="fas fa-play"></i>
+								开始实验
+							</button>
+						</div>
+					</div>
+
+					<div class="experiment-card" data-category="intermediate">
+						<div class="card-image" style="background-image: url('https://via.placeholder.com/300x160')"></div>
+						<div class="card-content">
+							<div class="card-header">
+								<h3 class="card-title">定时器与中断实验</h3>
+								<span class="difficulty-badge difficulty-intermediate">中级</span>
+							</div>
+							<p class="card-description">学习定时器配置和中断处理的进阶实验。</p>
+							<div class="card-meta">
+								<span class="meta-item">
+									<i class="fas fa-clock"></i>
+									预计用时：3小时
+								</span>
+								<span class="meta-item">
+									<i class="fas fa-users"></i>
+									已完成：0人
+								</span>
+							</div>
+							<button class="start-experiment">
+								<i class="fas fa-play"></i>
+								开始实验
+							</button>
+						</div>
+					</div>
+
+					<div class="experiment-card" data-category="advanced">
+						<div class="card-image" style="background-image: url('https://via.placeholder.com/300x160')"></div>
+						<div class="card-content">
+							<div class="card-header">
+								<h3 class="card-title">串口通信实验</h3>
+								<span class="difficulty-badge difficulty-intermediate">中级</span>
+							</div>
+							<p class="card-description">掌握单片机串口通信原理和编程方法。</p>
+							<div class="card-meta">
+								<span class="meta-item">
+									<i class="fas fa-clock"></i>
+									预计用时：4小时
+								</span>
+								<span class="meta-item">
+									<i class="fas fa-users"></i>
+									已完成：0人
+								</span>
+							</div>
+							<button class="start-experiment">
+								<i class="fas fa-play"></i>
+								开始实验
+							</button>
+						</div>
+					</div>
+
+					<div class="experiment-card" data-category="advanced">
+						<div class="card-image" style="background-image: url('https://via.placeholder.com/300x160')"></div>
+						<div class="card-content">
+							<div class="card-header">
+								<h3 class="card-title">ADC与DAC实验</h3>
+								<span class="difficulty-badge difficulty-advanced">高级</span>
+							</div>
+							<p class="card-description">模拟量采集与输出的综合实验。</p>
+							<div class="card-meta">
+								<span class="meta-item">
+									<i class="fas fa-clock"></i>
+									预计用时：5小时
+								</span>
+								<span class="meta-item">
+									<i class="fas fa-users"></i>
+									已完成：156人
+								</span>
+							</div>
+							<button class="start-experiment">
+								<i class="fas fa-play"></i>
+								开始实验
+							</button>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section id="help" class="help-section">
+				<h2 class="section-title">帮助与支持</h2>
+				<div class="help-grid">
+					<div class="help-card">
+						<h3><i class="fas fa-book"></i> 学习指南</h3>
+						<p>查看详细的实验指导文档，了解每个实验的操作步骤和注意事项。</p>
+					</div>
+					<div class="help-card">
+						<h3><i class="fas fa-comments"></i> 在线答疑</h3>
+						<p>遇到问题？我们的技术支持团队随时为您解答。</p>
+					</div>
+					<div class="help-card">
+						<h3><i class="fas fa-video"></i> 视频教程</h3>
+						<p>观看实验相关的视频教程，更直观地了解操作方法。</p>
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<div class="modal-overlay"></div>
 		<div id="user-info-modal" class="user-info-modal">
-			<h3>个人信息</h3>
-			<p>用户名: 张三</p>
-			<p>邮箱: zhangsan@example.com</p>
-			<button id="close-modal">关闭</button>
+			<div class="user-info-header">
+				<div class="user-avatar">
+					<i class="fas fa-user"></i>
+				</div>
+				<h3>个人信息</h3>
+			</div>
+			<div class="user-info-content">
+				<div class="user-info-item">
+					<i class="fas fa-user"></i>
+					<span>用户名：张三</span>
+				</div>
+				<div class="user-info-item">
+					<i class="fas fa-envelope"></i>
+					<span>邮箱：zhangsan@example.com</span>
+				</div>
+				<div class="user-info-item">
+					<i class="fas fa-calendar-alt"></i>
+					<span>注册时间：2024-01-01</span>
+				</div>
+				<div class="user-info-item">
+					<i class="fas fa-graduation-cap"></i>
+					<span>完成实验：6/12</span>
+				</div>
+			</div>
+			<div class="progress-section">
+				<h4>学习进度</h4>
+				<div class="progress-bar">
+					<div class="progress-fill"></div>
+				</div>
+				<p>已完成 50% 的课程</p>
+			</div>
+			<div class="modal-buttons">
+				<button class="modal-button close-modal">关闭</button>
+			</div>
 		</div>
 
 		<script>
 			document.addEventListener('DOMContentLoaded', () => {
-				const experimentCards = document.querySelectorAll('.experiment-card');
+				const menuToggle = document.querySelector('.menu-toggle');
+				const navLinks = document.querySelector('.nav-links');
+				const modalOverlay = document.querySelector('.modal-overlay');
 				const userCenterLink = document.getElementById('user-center-link');
 				const userInfoModal = document.getElementById('user-info-modal');
-				const closeModalButton = document.getElementById('close-modal');
+				const closeModalButton = document.querySelector('.close-modal');
+				const filterTags = document.querySelectorAll('.filter-tag');
+				const experimentCards = document.querySelectorAll('.experiment-card');
 
-				experimentCards.forEach(card => {
-					card.querySelector('.start-experiment').addEventListener('click', () => {
-						const experimentId = card.getAttribute('data-id');
-						window.location.href = `simulation.html?id=${experimentId}`;
+				// 移动端菜单切换
+				menuToggle.addEventListener('click', () => {
+					navLinks.classList.toggle('active');
+				});
+
+				// 用户信息弹窗
+				function showModal() {
+					modalOverlay.style.display = 'block';
+					userInfoModal.style.display = 'block';
+					document.body.style.overflow = 'hidden';
+				}
+
+				function hideModal() {
+					modalOverlay.style.display = 'none';
+					userInfoModal.style.display = 'none';
+					document.body.style.overflow = '';
+				}
+
+				userCenterLink.addEventListener('click', (e) => {
+					e.preventDefault();
+					showModal();
+				});
+
+				closeModalButton.addEventListener('click', hideModal);
+				modalOverlay.addEventListener('click', hideModal);
+
+				// 实验过滤功能
+				filterTags.forEach(tag => {
+					tag.addEventListener('click', () => {
+						filterTags.forEach(t => t.classList.remove('active'));
+						tag.classList.add('active');
+						
+						const category = tag.textContent.trim();
+						experimentCards.forEach(card => {
+							if (category === '全部' || card.dataset.category === category.toLowerCase()) {
+								card.style.display = 'block';
+							} else {
+								card.style.display = 'none';
+							}
+						});
 					});
 				});
 
-				userCenterLink.addEventListener('click', (event) => {
-					event.preventDefault();
-					userInfoModal.style.display = 'block';
+				// 实验卡片点击事件
+				document.querySelectorAll('.start-experiment').forEach(button => {
+					button.addEventListener('click', (e) => {
+						e.preventDefault();
+						const card = button.closest('.experiment-card');
+						const title = card.querySelector('.card-title').textContent;
+						
+						// 根据实验标题跳转到对应的实验页面
+						switch(title) {
+							case '基础单片机实验':
+								window.location.href = 'simP/simulation.html?exp=basic';
+								break;
+							case '定时器与中断实验':
+								window.location.href = 'simP/simulation.html?exp=timer';
+								break;
+							case '串口通信实验':
+								window.location.href = 'simP/simulation.html?exp=uart';
+								break;
+							case 'ADC与DAC实验':
+								window.location.href = 'simP/simulation.html?exp=adc';
+								break;
+							default:
+								window.location.href = 'simP/simulation.html';
+						}
+					});
 				});
 
-				closeModalButton.addEventListener('click', () => {
-					userInfoModal.style.display = 'none';
+				// 搜索功能
+				const searchInput = document.querySelector('.search-box input');
+				searchInput.addEventListener('input', () => {
+					const searchTerm = searchInput.value.toLowerCase();
+					experimentCards.forEach(card => {
+						const title = card.querySelector('.card-title').textContent.toLowerCase();
+						const description = card.querySelector('.card-description').textContent.toLowerCase();
+						const isVisible = title.includes(searchTerm) || description.includes(searchTerm);
+						card.style.display = isVisible ? 'block' : 'none';
+					});
 				});
+
+				// 滚动动画
+				const animateOnScroll = () => {
+					const elements = document.querySelectorAll('.animate-fade-in');
+					elements.forEach(element => {
+						const elementTop = element.getBoundingClientRect().top;
+						const elementBottom = element.getBoundingClientRect().bottom;
+						const isVisible = elementTop < window.innerHeight && elementBottom >= 0;
+						
+						if (isVisible) {
+							element.style.opacity = '1';
+							element.style.transform = 'translateY(0)';
+						}
+					});
+				};
+
+				window.addEventListener('scroll', animateOnScroll);
+				animateOnScroll();
 			});
 		</script>
 	</body>

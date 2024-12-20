@@ -1,0 +1,524 @@
+/* 全局样式 */
+:root {
+    --primary-color: #4a90e2;
+    --secondary-color: #f5f7fa;
+    --accent-color: #ff6b6b;
+    --success-color: #2ecc71;
+    --warning-color: #f1c40f;
+    --text-color: #333;
+    --text-light: #666;
+    --border-color: #e1e4e8;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+    --border-radius: 12px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Microsoft YaHei", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* 导航栏样式 */
+.sim-navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    color: white;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 10px var(--shadow-color);
+}
+
+.nav-left, .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.back-btn, .help-btn, .save-btn {
+    background: none;
+    border: none;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: var(--transition);
+}
+
+.back-btn:hover, .help-btn:hover, .save-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.experiment-title {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+/* 主要内容区域 */
+.main-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    padding: 2rem;
+    height: calc(100vh - 80px);
+}
+
+/* 代码编辑器区域 */
+.code-section {
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 6px var(--shadow-color);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.code-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: #2d2d2d;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.file-tabs {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.file-tab {
+    padding: 0.5rem 1rem;
+    background: none;
+    border: none;
+    color: #aaa;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: var(--transition);
+}
+
+.file-tab.active {
+    background: #3c3c3c;
+    color: white;
+}
+
+.code-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.run-btn, .stop-btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: var(--transition);
+}
+
+.run-btn {
+    background: var(--success-color);
+    color: white;
+}
+
+.stop-btn {
+    background: var(--accent-color);
+    color: white;
+}
+
+.run-btn:hover, .stop-btn:hover {
+    filter: brightness(1.1);
+}
+
+/* 代码编辑器样式覆盖 */
+.CodeMirror {
+    height: 100% !important;
+    font-family: "Consolas", monospace;
+    font-size: 14px;
+}
+
+/* 实验区域 */
+.experiment-section {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.experiment-info {
+    background: white;
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 6px var(--shadow-color);
+}
+
+.experiment-progress {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+    position: relative;
+}
+
+.experiment-progress::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--border-color);
+    transform: translateY(-50%);
+    z-index: 0;
+}
+
+.progress-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    position: relative;
+    z-index: 1;
+    background: white;
+    padding: 0 1rem;
+}
+
+.progress-item i {
+    font-size: 1.5rem;
+    color: var(--border-color);
+}
+
+.progress-item.completed i {
+    color: var(--success-color);
+}
+
+.progress-item.active i {
+    color: var(--primary-color);
+}
+
+/* 实验模拟区域 */
+.simulation-area {
+    background: white;
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 6px var(--shadow-color);
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.board-view {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+    padding: 2rem;
+    background: #f8f9fa;
+    border-radius: var(--border-radius);
+}
+
+/* LED组件样式 */
+.led-group {
+    display: flex;
+    gap: 2rem;
+}
+
+.led {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.led-light {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #ddd;
+    border: 2px solid #ccc;
+    transition: var(--transition);
+}
+
+.led-light.on {
+    background: #ff0;
+    box-shadow: 0 0 10px #ff0;
+}
+
+/* 按键样式 */
+.button-group {
+    display: flex;
+    gap: 2rem;
+}
+
+.control-btn {
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: var(--border-radius);
+    background: var(--primary-color);
+    color: white;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.control-btn:hover {
+    transform: translateY(-2px);
+}
+
+.control-btn:active {
+    transform: translateY(0);
+    background: #357abd;
+}
+
+/* 调试面板 */
+.debug-panel {
+    background: #2d2d2d;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 1rem;
+    background: #1a1a1a;
+    color: white;
+}
+
+.panel-header h3 {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.panel-header button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+    transition: var(--transition);
+}
+
+.panel-header button:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.debug-content {
+    padding: 1rem;
+    color: #fff;
+    font-family: monospace;
+    height: 150px;
+    overflow-y: auto;
+}
+
+/* 帮助弹窗 */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background: white;
+    border-radius: var(--border-radius);
+    width: 90%;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.modal-header h2 {
+    margin: 0;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-light);
+    transition: var(--transition);
+}
+
+.close-btn:hover {
+    color: var(--text-color);
+}
+
+.modal-body {
+    padding: 1.5rem;
+}
+
+.modal-body h3 {
+    color: var(--primary-color);
+    margin: 1.5rem 0 1rem;
+}
+
+.modal-body h3:first-child {
+    margin-top: 0;
+}
+
+.modal-body p {
+    margin: 0.5rem 0;
+    color: var(--text-light);
+}
+
+/* 响应式设计 */
+@media (max-width: 1200px) {
+    .main-content {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+
+    .code-section, .experiment-section {
+        height: 600px;
+    }
+}
+
+@media (max-width: 768px) {
+    .sim-navbar {
+        padding: 1rem;
+    }
+
+    .experiment-title {
+        font-size: 1.2rem;
+    }
+
+    .main-content {
+        padding: 1rem;
+    }
+
+    .led-group, .button-group {
+        gap: 1rem;
+    }
+
+    .modal-content {
+        width: 95%;
+        margin: 1rem;
+    }
+}
+
+/* 实验讲解和参考代码区域 */
+.experiment-guide {
+    margin-top: 1rem;
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 4px var(--shadow-color);
+    overflow: hidden;
+}
+
+.guide-header {
+    display: flex;
+    background: #f8f9fa;
+    border-bottom: 1px solid var(--border-color);
+    padding: 0.5rem;
+}
+
+.guide-tab {
+    padding: 0.5rem 1rem;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: var(--text-light);
+    font-weight: 500;
+    transition: var(--transition);
+    border-radius: 4px;
+}
+
+.guide-tab:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.guide-tab.active {
+    color: var(--primary-color);
+    background: white;
+}
+
+.guide-content {
+    padding: 1.5rem;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.guide-section {
+    display: none;
+}
+
+.guide-section.active {
+    display: block;
+}
+
+.guide-section h3 {
+    color: var(--text-color);
+    margin: 0 0 1rem 0;
+    font-size: 1.1rem;
+}
+
+.guide-section p {
+    color: var(--text-light);
+    margin: 0 0 1rem 0;
+    line-height: 1.6;
+}
+
+.guide-section ul, .guide-section ol {
+    color: var(--text-light);
+    margin: 0 0 1rem 1.5rem;
+    padding: 0;
+}
+
+.guide-section li {
+    margin-bottom: 0.5rem;
+}
+
+.guide-section code {
+    background: #f8f9fa;
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    color: var(--primary-color);
+    font-family: "Consolas", monospace;
+}
+
+.guide-section pre {
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    overflow-x: auto;
+    margin: 0 0 1rem 0;
+}
+
+.guide-section pre code {
+    background: none;
+    padding: 0;
+    color: var(--text-color);
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .guide-content {
+        max-height: 300px;
+    }
+} 

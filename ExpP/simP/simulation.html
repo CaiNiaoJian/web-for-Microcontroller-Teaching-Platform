@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>单片机实验模拟器</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/monokai.min.css">
+    <link rel="stylesheet" href="styles/simulation.css">
+</head>
+<body>
+    <div class="simulation-container">
+        <!-- 顶部导航栏 -->
+        <nav class="sim-navbar">
+            <div class="nav-left">
+                <button class="back-btn" onclick="window.location.href='../expP.html'">
+                    <i class="fas fa-arrow-left"></i> 返回
+                </button>
+                <h1 class="experiment-title">基础单片机实验</h1>
+            </div>
+            <div class="nav-right">
+                <button class="help-btn" onclick="showHelp()">
+                    <i class="fas fa-question-circle"></i> 帮助
+                </button>
+                <button class="save-btn" onclick="saveProgress()">
+                    <i class="fas fa-save"></i> 保存
+                </button>
+            </div>
+        </nav>
+
+        <!-- 主要内容区域 -->
+        <div class="main-content">
+            <!-- 左侧代码编辑器 -->
+            <div class="code-section">
+                <div class="code-header">
+                    <div class="file-tabs">
+                        <button class="file-tab active">main.c</button>
+                        <button class="file-tab">led.h</button>
+                        <button class="file-tab">led.c</button>
+                    </div>
+                    <div class="code-actions">
+                        <button class="run-btn" onclick="runCode()">
+                            <i class="fas fa-play"></i> 运行
+                        </button>
+                        <button class="stop-btn" onclick="stopCode()">
+                            <i class="fas fa-stop"></i> 停止
+                        </button>
+                    </div>
+                </div>
+                <div id="code-editor"></div>
+
+                <!-- 实验讲解和参考代码区域 -->
+                <div class="experiment-guide">
+                    <div class="guide-header">
+                        <button class="guide-tab active" data-tab="explanation">实验讲解</button>
+                        <button class="guide-tab" data-tab="reference">参考代码</button>
+                    </div>
+                    <div class="guide-content">
+                        <div class="guide-section explanation active">
+                            <h3>实验原理</h3>
+                            <p>本实验通过控制GPIO端口的高低电平来实现LED的亮灭控制。GPIO（通用输入输出端口）是单片机的基本输入输出接口，可以通过软件配置为输入或输出模式。</p>
+                            
+                            <h3>关键函数说明</h3>
+                            <ul>
+                                <li><code>LED_Init()</code>: 初始化LED，配置GPIO为输出模式</li>
+                                <li><code>LED_ON(pin)</code>: 点亮指定的LED</li>
+                                <li><code>LED_OFF(pin)</code>: 熄灭指定的LED</li>
+                                <li><code>delay_ms(ms)</code>: 延时函数，参数为毫秒</li>
+                            </ul>
+
+                            <h3>实验步骤</h3>
+                            <ol>
+                                <li>调用LED_Init()初始化LED</li>
+                                <li>在主循环中编写LED控制代码</li>
+                                <li>使用delay_ms()函数控制LED闪烁间隔</li>
+                                <li>可以使用按键KEY1和KEY2进行交互控制</li>
+                            </ol>
+                        </div>
+                        <div class="guide-section reference">
+                            <h3>LED闪烁示例</h3>
+                            <pre><code>void main() {
+    LED_Init();
+    while(1) {
+        LED_ON(0);
+        delay_ms(500);
+        LED_OFF(0);
+        delay_ms(500);
+    }
+}</code></pre>
+
+                            <h3>按键控制示例</h3>
+                            <pre><code>void main() {
+    LED_Init();
+    while(1) {
+        if(Button.isPressed(0)) {  // 检测KEY1
+            LED_ON(0);
+        } else {
+            LED_OFF(0);
+        }
+        delay_ms(10);
+    }
+}</code></pre>
+
+                            <h3>流水灯示例</h3>
+                            <pre><code>void main() {
+    LED_Init();
+    while(1) {
+        for(int i = 0; i < 4; i++) {
+            LED_ON(i);
+            delay_ms(200);
+            LED_OFF(i);
+        }
+    }
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 右侧实验区域 -->
+            <div class="experiment-section">
+                <!-- 实验说明 -->
+                <div class="experiment-info">
+                    <h2>实验内容：LED控制实验</h2>
+                    <p>本实验将学习如何控制单片机的GPIO端口，实现LED的基本控制。</p>
+                    <div class="experiment-progress">
+                        <div class="progress-item completed">
+                            <i class="fas fa-check-circle"></i>
+                            <span>实验准备</span>
+                        </div>
+                        <div class="progress-item active">
+                            <i class="fas fa-circle"></i>
+                            <span>代码编写</span>
+                        </div>
+                        <div class="progress-item">
+                            <i class="far fa-circle"></i>
+                            <span>实验验证</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 实验模拟区域 -->
+                <div class="simulation-area">
+                    <div class="board-view">
+                        <!-- LED显示区域 -->
+                        <div class="led-group">
+                            <div class="led" data-pin="0">
+                                <div class="led-light"></div>
+                                <span>LED0</span>
+                            </div>
+                            <div class="led" data-pin="1">
+                                <div class="led-light"></div>
+                                <span>LED1</span>
+                            </div>
+                            <div class="led" data-pin="2">
+                                <div class="led-light"></div>
+                                <span>LED2</span>
+                            </div>
+                            <div class="led" data-pin="3">
+                                <div class="led-light"></div>
+                                <span>LED3</span>
+                            </div>
+                        </div>
+
+                        <!-- 按键控制区域 -->
+                        <div class="button-group">
+                            <button class="control-btn" data-pin="0">KEY1</button>
+                            <button class="control-btn" data-pin="1">KEY2</button>
+                        </div>
+                    </div>
+
+                    <!-- 调试信息 -->
+                    <div class="debug-panel">
+                        <div class="panel-header">
+                            <h3>调试信息</h3>
+                            <button onclick="clearDebug()">清除</button>
+                        </div>
+                        <div class="debug-content" id="debug-output"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 帮助弹窗 -->
+    <div class="modal" id="help-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>实验帮助</h2>
+                <button class="close-btn" onclick="hideHelp()">×</button>
+            </div>
+            <div class="modal-body">
+                <h3>实验目标</h3>
+                <p>1. 理解GPIO的基本原理</p>
+                <p>2. 掌握LED控制方法</p>
+                <p>3. 实现LED的基本控制功能</p>
+
+                <h3>操作说明</h3>
+                <p>1. 在代码编辑器中编写控制代码</p>
+                <p>2. 点击运行按钮执行代码</p>
+                <p>3. 观察LED的变化情况</p>
+                <p>4. 使用按键进行交互测试</p>
+
+                <h3>注意事项</h3>
+                <p>1. 运行前请确保代码语法正确</p>
+                <p>2. 可以随时停止程序运行</p>
+                <p>3. 代码修改后需要重新运行</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 引入必要的脚本 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/clike/clike.min.js"></script>
+    <script>
+        // 全局编辑器实例
+        let editor;
+        
+        // 获取URL参数
+        function getExperimentType() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('exp') || 'basic';
+        }
+
+        // 根据实验类型设置页面内容
+        function setExperimentContent(type) {
+            const title = document.querySelector('.experiment-title');
+            const description = document.querySelector('.experiment-info p');
+            let defaultCode = '';
+
+            switch(type) {
+                case 'timer':
+                    title.textContent = '定时器与中断实验';
+                    description.textContent = '本实验将学习如何配置定时器和处理中断，实现LED的定时闪烁和按键中断控制。';
+                    defaultCode = `// 定时器实验
+void Timer0_Init(void) {
+    // 在此编写定时器初始化代码
+}
+
+void Timer0_IRQHandler(void) {
+    // 在此编写定时器中断处理代码
+    LED_ON(1);
+    delay_ms(100);
+    LED_OFF(1);
+}
+
+void main() {
+    LED_Init();
+    Timer0_Init();
+    
+    while(1) {
+        // 主循环代码
+    }
+}`;
+                    break;
+                case 'uart':
+                    title.textContent = '串口通信实验';
+                    description.textContent = '本实验将学习如何使用串口进行数据通信，实现LED的远程控制。';
+                    defaultCode = `// 串口通信实验
+void UART_Init(void) {
+    // 在此编写串口初始化代码
+}
+
+void UART_SendByte(uint8_t data) {
+    // 在此编写串口发送代码
+}
+
+void main() {
+    LED_Init();
+    UART_Init();
+    
+    while(1) {
+        // 在此编写串口通信代码
+        if(UART_ReceiveByte() == '1') {
+            LED_ON(2);
+        } else {
+            LED_OFF(2);
+        }
+    }
+}`;
+                    break;
+                case 'adc':
+                    title.textContent = 'ADC与DAC实验';
+                    description.textContent = '本实验将学习如何使用ADC采集模拟量，并通过DAC输出控制LED亮度。';
+                    defaultCode = `// ADC实验
+void ADC_Init(void) {
+    // 在此编写ADC初始化代码
+}
+
+uint16_t ADC_GetValue(void) {
+    // 在此编写ADC采样代码
+    return 0;
+}
+
+void main() {
+    LED_Init();
+    ADC_Init();
+    
+    while(1) {
+        // 在���编写ADC控制代码
+        uint16_t value = ADC_GetValue();
+        if(value > 2048) {
+            LED_ON(3);
+        } else {
+            LED_OFF(3);
+        }
+        delay_ms(100);
+    }
+}`;
+                    break;
+                default: // basic
+                    title.textContent = '基础单片机实验';
+                    description.textContent = '本实验将学习如何控制单片机的GPIO端口，实现LED的基本控制。';
+                    defaultCode = `// LED控制实验
+void main() {
+    // 初始化LED
+    LED_Init();
+    
+    while(1) {
+        // 在此编写LED控制代码
+        LED_ON(0);    // 点亮LED0
+        delay_ms(500);
+        LED_OFF(0);   // 熄灭LED0
+        delay_ms(500);
+    }
+}`;
+                    break;
+            }
+
+            return defaultCode;
+        }
+
+        // 初始化函数
+        function initializeEditor() {
+            // 创建编辑器实例
+            editor = CodeMirror(document.getElementById("code-editor"), {
+                mode: "text/x-c",
+                theme: "monokai",
+                lineNumbers: true,
+                autoCloseBrackets: true,
+                matchBrackets: true,
+                indentUnit: 4,
+                value: setExperimentContent(getExperimentType())
+            });
+
+            // 显示��助弹窗
+            window.showHelp = function() {
+                document.getElementById('help-modal').style.display = 'flex';
+            };
+
+            // 隐藏帮助弹窗
+            window.hideHelp = function() {
+                document.getElementById('help-modal').style.display = 'none';
+            };
+
+            // 清除调试信息
+            window.clearDebug = function() {
+                document.getElementById('debug-output').innerHTML = '';
+            };
+        }
+
+        // 等待DOM加载完成后初始化
+        document.addEventListener('DOMContentLoaded', initializeEditor);
+    </script>
+    <script src="scripts/simulator.js"></script>
+    <script src="scripts/ui.js"></script>
+</body>
+</html> 
