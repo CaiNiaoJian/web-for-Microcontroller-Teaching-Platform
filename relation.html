@@ -104,58 +104,30 @@
 				color: var(--text-color);
 			}
 
-			.contact-table tr:hover {
-				background: rgba(0, 122, 255, 0.05);
-			}
-
-			.team-section {
-				text-align: center;
-				margin-top: 60px;
-			}
-
-			.team-logos {
+			/* 语言切换按钮样式 */
+			.controls {
 				display: flex;
-				justify-content: center;
+				gap: 1rem;
 				align-items: center;
-				gap: 40px;
-				margin-top: 30px;
 			}
 
-			.team-logo {
-				width: 120px;
-				height: 120px;
+			.theme-toggle, .lang-toggle {
+				background: none;
+				border: none;
+				color: var(--text-color);
+				cursor: pointer;
+				padding: 0.5rem;
+				font-size: 1.2rem;
+				transition: var(--transition);
 				border-radius: 50%;
-				overflow: hidden;
-				box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-				transition: transform 0.3s ease;
 			}
 
-			.team-logo:hover {
-				transform: translateY(-5px);
+			.theme-toggle:hover, .lang-toggle:hover {
+				background: var(--bg-color);
+				transform: scale(1.1);
 			}
 
-			.team-logo img {
-				width: 100%;
-				height: 100%;
-				object-fit: cover;
-			}
-
-			@media (max-width: 768px) {
-				.contact-grid {
-					grid-template-columns: 1fr;
-				}
-
-				.contact-hero {
-					padding: 100px 20px 60px;
-				}
-
-				.team-logos {
-					flex-direction: column;
-					gap: 20px;
-				}
-			}
-
-			/* 暗色���式适配 */
+			/* 深色模式适配 */
 			[data-theme="dark"] .contact-table th {
 				background: rgba(0, 122, 255, 0.2);
 			}
@@ -177,23 +149,28 @@
 			<div class="nav-content">
 				<a href="../indexmodern.html" class="logo">MCU Learn</a>
 				<ul class="nav-links">
-					<li><a href="../indexmodern.html">首页</a></li>
-					<li><a href="../pages/blognew.html">学习</a></li>
-					<li><a href="../StudySources/Sources.html">资源</a></li>
-					<li><a href="../News/news.html">新闻</a></li>
-					<li><a href="community.html">社区</a></li>
-					<li><a href="relation.html" class="active">联系我们</a></li>
+					<li><a href="../indexmodern.html" data-i18n="nav.home">首页</a></li>
+					<li><a href="../pages/blognew.html" data-i18n="nav.learn">学习</a></li>
+					<li><a href="../StudySources/Sources.html" data-i18n="nav.resources">资源</a></li>
+					<li><a href="../News/news.html" data-i18n="nav.news">新闻</a></li>
+					<li><a href="community.html" data-i18n="nav.community">社区</a></li>
+					<li><a href="relation.html" class="active" data-i18n="nav.contact">联系我们</a></li>
 				</ul>
-				<button class="theme-toggle">
-					<i class="fas fa-moon"></i>
-				</button>
+				<div class="controls">
+					<button class="lang-toggle" title="切换语言">
+						<i class="fas fa-globe"></i>
+					</button>
+					<button class="theme-toggle" title="切换主题">
+						<i class="fas fa-moon"></i>
+					</button>
+				</div>
 			</div>
 		</nav>
 
 		<!-- 页面标题 -->
 		<section class="contact-hero">
-			<h1 data-aos="fade-up">联系我们</h1>
-			<p data-aos="fade-up" data-aos-delay="100">如果你有任何问题或建议，欢迎随时与我们联系</p>
+			<h1 data-aos="fade-up" data-i18n="hero.title">联系我们</h1>
+			<p data-aos="fade-up" data-aos-delay="100" data-i18n="hero.subtitle">如果你有任何问题或建议，欢迎随时与我们联系</p>
 		</section>
 
 		<!-- 主要内容 -->
@@ -204,68 +181,47 @@
 					<div class="contact-item">
 						<i class="fas fa-envelope"></i>
 						<div class="contact-item-content">
-							<h3>官方邮箱</h3>
+							<h3 data-i18n="contact.email">官方邮箱</h3>
 							<p>cumtMLP123@163.com</p>
 						</div>
 					</div>
 					<div class="contact-item">
 						<i class="fas fa-phone-alt"></i>
 						<div class="contact-item-content">
-							<h3>联系电话</h3>
-							<p>待更新</p>
+							<h3 data-i18n="contact.phone">联系电话</h3>
+							<p data-i18n="contact.phoneNumber">待更新</p>
 						</div>
 					</div>
 					<div class="contact-item">
 						<i class="fas fa-map-marker-alt"></i>
 						<div class="contact-item-content">
-							<h3>地址</h3>
-							<p>1号 大学路，徐州市，中国<br>1 No. University Road, Xuzhou City, China</p>
+							<h3 data-i18n="contact.address">地址</h3>
+							<p data-i18n="contact.addressDetail">1号 大学路，徐州市，中国<br>1 No. University Road, Xuzhou City, China</p>
 						</div>
 					</div>
 				</div>
 
 				<!-- 投稿邮箱表格 -->
 				<div class="contact-table-container" data-aos="fade-left">
-					<h2>投稿邮箱</h2>
+					<h2 data-i18n="table.title">投稿邮箱</h2>
 					<table class="contact-table">
 						<thead>
 							<tr>
-								<th>投稿邮箱</th>
-								<th>邮箱地址</th>
+								<th data-i18n="table.header1">投稿邮箱</th>
+								<th data-i18n="table.header2">邮箱地址</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
-								<td>官网</td>
+								<td data-i18n="table.row1.name">官网</td>
 								<td>cumtMLP123@163.com</td>
 							</tr>
 							<tr>
 								<td>CaiNiaoJina</td>
 								<td>2263617544@qq.com</td>
 							</tr>
-							<tr>
-								<td>noobzhang</td>
-								<td>2937674430@qq.com</td>
-							</tr>
-							<tr>
-								<td>Yzj</td>
-								<td>2904619250@qq.com</td>
-							</tr>
 						</tbody>
 					</table>
-				</div>
-			</div>
-
-			<!-- 团队信息 -->
-			<div class="team-section">
-				<h2 data-aos="fade-up">我们的团队</h2>
-				<div class="team-logos">
-					<div class="team-logo" data-aos="zoom-in">
-						<img src="images/校徽1.jpg" alt="中国矿业大学校徽">
-					</div>
-					<div class="team-logo" data-aos="zoom-in" data-aos-delay="100">
-						<img src="images/github.jpg" alt="GitHub">
-					</div>
 				</div>
 			</div>
 		</div>
@@ -275,30 +231,30 @@
 			<div class="footer-content">
 				<div class="footer-logo">
 					<h3>MCU Learn</h3>
-					<p>探索创新科技的无限可能</p>
+					<p data-i18n="footer.slogan">探索创新科技的无限可能</p>
 				</div>
 				<div class="footer-links">
 					<div class="footer-section">
-						<h4>快速链接</h4>
+						<h4 data-i18n="footer.quickLinks">快速链接</h4>
 						<ul>
-							<li><a href="../indexmodern.html">首页</a></li>
-							<li><a href="../pages/blognew.html">学习资源</a></li>
-							<li><a href="../pages/source.html">学术资源</a></li>
-							<li><a href="../News/news.html">新闻动态</a></li>
+							<li><a href="../indexmodern.html" data-i18n="footer.home">首页</a></li>
+							<li><a href="../pages/blognew.html" data-i18n="footer.learn">学习</a></li>
+							<li><a href="../indexmodern.html#resources" data-i18n="footer.resources">资源</a></li>
+							<li><a href="../indexmodern.html#community" data-i18n="footer.community">社区</a></li>
 						</ul>
 					</div>
 					<div class="footer-section">
-						<h4>社区支持</h4>
+						<h4 data-i18n="footer.support">社区支持</h4>
 						<ul>
-							<li><a href="../indexmodern.html#community">社区讨论</a></li>
-							<li><a href="../indexmodern.html#contact">联系我们</a></li>
-							<li><a href="../about.html">关于我们</a></li>
+							<li><a href="../indexmodern.html#community" data-i18n="footer.discussion">社区讨论</a></li>
+							<li><a href="../indexmodern.html#contact" data-i18n="footer.contact">联系我们</a></li>
+							<li><a href="../about.html" data-i18n="footer.about">关于我们</a></li>
 						</ul>
 					</div>
 				</div>
 			</div>
 			<div class="footer-bottom">
-				<p>&copy; 2024 MCU Learn. 保留所有权利。</p>
+				<p data-i18n="footer.copyright">&copy; 2024 MCU Learn. 保留所有权利。</p>
 			</div>
 		</footer>
 
@@ -308,6 +264,99 @@
 			AOS.init({
 				duration: 800,
 				once: true
+			});
+
+			// 语言配置
+			const translations = {
+				'zh-CN': {
+					'nav.home': '首页',
+					'nav.learn': '学习',
+					'nav.resources': '资源',
+					'nav.news': '新闻',
+					'nav.community': '社区',
+					'nav.contact': '联系我们',
+					'hero.title': '联系我们',
+					'hero.subtitle': '如果你有任何问题或建议，欢迎随时与我们联系',
+					'contact.email': '官方邮箱',
+					'contact.phone': '联系电话',
+					'contact.phoneNumber': '待更新',
+					'contact.address': '地址',
+					'contact.addressDetail': '1号 大学路，徐州市，中国\n1 No. University Road, Xuzhou City, China',
+					'table.title': '投稿邮箱',
+					'table.header1': '投稿邮箱',
+					'table.header2': '邮箱地址',
+					'table.row1.name': '官网',
+					'footer.slogan': '探索创新科技的无限可能',
+					'footer.quickLinks': '快速链接',
+					'footer.home': '首页',
+					'footer.learn': '学习',
+					'footer.resources': '资源',
+					'footer.community': '社区',
+					'footer.support': '社区支持',
+					'footer.discussion': '社区讨论',
+					'footer.contact': '联系我们',
+					'footer.about': '关于我们',
+					'footer.copyright': '© 2024 MCU Learn. 保留所有权利。'
+				},
+				'en': {
+					'nav.home': 'Home',
+					'nav.learn': 'Learn',
+					'nav.resources': 'Resources',
+					'nav.news': 'News',
+					'nav.community': 'Community',
+					'nav.contact': 'Contact',
+					'hero.title': 'Contact Us',
+					'hero.subtitle': 'If you have any questions or suggestions, feel free to contact us',
+					'contact.email': 'Official Email',
+					'contact.phone': 'Phone',
+					'contact.phoneNumber': 'Coming Soon',
+					'contact.address': 'Address',
+					'contact.addressDetail': '1 No. University Road, Xuzhou City, China',
+					'table.title': 'Submission Email',
+					'table.header1': 'Email Type',
+					'table.header2': 'Email Address',
+					'table.row1.name': 'Official',
+					'footer.slogan': 'Explore Infinite Possibilities of Innovation Technology',
+					'footer.quickLinks': 'Quick Links',
+					'footer.home': 'Home',
+					'footer.learn': 'Learn',
+					'footer.resources': 'Resources',
+					'footer.community': 'Community',
+					'footer.support': 'Community Support',
+					'footer.discussion': 'Community Discussion',
+					'footer.contact': 'Contact Us',
+					'footer.about': 'About Us',
+					'footer.copyright': '© 2024 MCU Learn. All rights reserved.'
+				}
+			};
+
+			// 语言切换功能
+			const langToggle = document.querySelector('.lang-toggle');
+			let currentLang = localStorage.getItem('lang') || 'zh-CN';
+
+			function updateLanguage() {
+				document.querySelectorAll('[data-i18n]').forEach(element => {
+					const key = element.getAttribute('data-i18n');
+					if (translations[currentLang][key]) {
+						element.textContent = translations[currentLang][key];
+					}
+				});
+				document.documentElement.lang = currentLang;
+			}
+
+			function toggleLanguage() {
+				currentLang = currentLang === 'zh-CN' ? 'en' : 'zh-CN';
+				localStorage.setItem('lang', currentLang);
+				updateLanguage();
+			}
+
+			// 事件监听
+			langToggle.addEventListener('click', toggleLanguage);
+
+			// 初始化语言
+			document.addEventListener('DOMContentLoaded', () => {
+				currentLang = localStorage.getItem('lang') || 'zh-CN';
+				updateLanguage();
 			});
 
 			// 主题切换功能
@@ -327,14 +376,15 @@
 					localStorage.setItem('theme', newTheme);
 					updateThemeIcon(newTheme);
 				});
+			}
 
-				function updateThemeIcon(theme) {
-					themeIcon.className = theme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
-				}
+			function updateThemeIcon(theme) {
+				const themeIcon = document.querySelector('.theme-toggle i');
+				themeIcon.className = theme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
 			}
 
 			// 初始化主题
-			document.addEventListener('DOMContentLoaded', initTheme);
+			initTheme();
 		</script>
 	</body>
 </html>

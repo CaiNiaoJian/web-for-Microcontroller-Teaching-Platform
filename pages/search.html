@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +8,30 @@
     <link rel="stylesheet" href="../z_css/search-style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+    <style>
+        /* 语言切换按钮样式 */
+        .controls {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .theme-toggle, .lang-toggle {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            padding: 0.5rem;
+            font-size: 1.2rem;
+            transition: var(--transition);
+            border-radius: 50%;
+        }
+
+        .theme-toggle:hover, .lang-toggle:hover {
+            background: var(--bg-color);
+            transform: scale(1.1);
+        }
+    </style>
 </head>
 <body>
     <!-- 导航栏 -->
@@ -15,60 +39,65 @@
         <div class="nav-content">
             <a href="../indexmodern.html" class="logo">MCU Learn</a>
             <ul class="nav-links">
-                <li><a href="../indexmodern.html">首页</a></li>
-                <li><a href="blognew.html">学习</a></li>
-                <li><a href="knowledge.html" id="knowledgeEngine">知识分享</a></li>
-                <li><a href="search.html" class="active">元器件搜索</a></li>
-                <li><a href="StudySources/Sources.html">资源</a></li>
-                <li><a href="pages/source.html">期刊</a></li>
-                <li><a href="pages/community.html">社区</a></li>
+                <li><a href="../indexmodern.html" data-i18n="nav.home">首页</a></li>
+                <li><a href="blognew.html" data-i18n="nav.learn">学习</a></li>
+                <li><a href="knowledge.html" id="knowledgeEngine" data-i18n="nav.knowledge">知识分享</a></li>
+                <li><a href="search.html" class="active" data-i18n="nav.search">元器件搜索</a></li>
+                <li><a href="StudySources/Sources.html" data-i18n="nav.resources">资源</a></li>
+                <li><a href="pages/source.html" data-i18n="nav.journal">期刊</a></li>
+                <li><a href="pages/community.html" data-i18n="nav.community">社区</a></li>
             </ul>
-            <button class="theme-toggle">
-                <i class="fas fa-moon"></i>
-            </button>
+            <div class="controls">
+                <button class="lang-toggle" title="切换语言">
+                    <i class="fas fa-globe"></i>
+                </button>
+                <button class="theme-toggle" title="切换主题">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
         </div>
     </nav>
 
     <!-- 搜索引擎主界面 -->
     <section class="search-hero">
         <div class="hero-content" data-aos="fade-up">
-            <h1>元器件搜索引擎</h1>
-            <p>快速查找电子元器件数据、参数和替代方案</p>
+            <h1 data-i18n="hero.title">元器件搜索引擎</h1>
+            <p data-i18n="hero.subtitle">快速查找电子元器件数据、参数和替代方案</p>
             <div class="search-container">
                 <div class="search-box">
                     <div class="search-input-group">
                         <div class="search-input-wrapper">
                             <i class="fas fa-search search-icon"></i>
-                            <input type="text" id="componentSearch" placeholder="输入元器件型号、名称或关键词...">
+                            <input type="text" id="componentSearch" data-i18n-placeholder="search.placeholder" placeholder="输入元器件型号、名称或关键词...">
                             <button class="voice-search-btn" title="语音搜索">
                                 <i class="fas fa-microphone"></i>
                             </button>
                         </div>
                         <div class="search-filters">
                             <select id="componentCategory" class="category-select">
-                                <option value="all">所有类别</option>
-                                <option value="mcu">单片机/处理器</option>
-                                <option value="sensor">传感器</option>
-                                <option value="communication">通信模块</option>
-                                <option value="power">电源管理</option>
-                                <option value="analog">模拟器件</option>
-                                <option value="digital">数字器件</option>
-                                <option value="display">显示器件</option>
-                                <option value="passive">无源器件</option>
+                                <option value="all" data-i18n="category.all">所有类别</option>
+                                <option value="mcu" data-i18n="category.mcu">单片机/处理器</option>
+                                <option value="sensor" data-i18n="category.sensor">传感器</option>
+                                <option value="communication" data-i18n="category.communication">通信模块</option>
+                                <option value="power" data-i18n="category.power">电源管理</option>
+                                <option value="analog" data-i18n="category.analog">模拟器件</option>
+                                <option value="digital" data-i18n="category.digital">数字器件</option>
+                                <option value="display" data-i18n="category.display">显示器件</option>
+                                <option value="passive" data-i18n="category.passive">无源器件</option>
                             </select>
                             <button class="advanced-search-btn" onclick="toggleAdvancedSearch()">
                                 <i class="fas fa-sliders-h"></i>
-                                高级搜索
+                                <span data-i18n="search.advanced">高级搜索</span>
                             </button>
                         </div>
-                        <button class="search-btn">搜索</button>
+                        <button class="search-btn" data-i18n="search.button">搜索</button>
                     </div>
                 </div>
                 <!-- 高级搜索选项 -->
                 <div id="advancedSearch" class="advanced-search-panel">
                     <div class="advanced-filters">
                         <div class="filter-group">
-                            <label>制造商</label>
+                            <label data-i18n="filter.manufacturer">制造商</label>
                             <select multiple id="manufacturers">
                                 <option value="st">ST</option>
                                 <option value="ti">Texas Instruments</option>
@@ -78,7 +107,7 @@
                             </select>
                         </div>
                         <div class="filter-group">
-                            <label>封装类型</label>
+                            <label data-i18n="filter.package">封装类型</label>
                             <select multiple id="packages">
                                 <option value="dip">DIP</option>
                                 <option value="sop">SOP</option>
@@ -88,11 +117,11 @@
                             </select>
                         </div>
                         <div class="filter-group">
-                            <label>工作温度范围</label>
+                            <label data-i18n="filter.temperature">工作温度范围</label>
                             <div class="range-inputs">
-                                <input type="number" placeholder="最小值" id="tempMin">
-                                <span>至</span>
-                                <input type="number" placeholder="最大值" id="tempMax">
+                                <input type="number" data-i18n-placeholder="filter.tempMin" placeholder="最小值" id="tempMin">
+                                <span data-i18n="filter.to">至</span>
+                                <input type="number" data-i18n-placeholder="filter.tempMax" placeholder="最大值" id="tempMax">
                                 <span>℃</span>
                             </div>
                         </div>
@@ -106,13 +135,13 @@
     <section class="quick-filters">
         <div class="container">
             <div class="filter-tags" data-aos="fade-up">
-                <span class="filter-label">热门搜索：</span>
+                <span class="filter-label" data-i18n="filter.hotSearch">热门搜索：</span>
                 <button class="filter-tag" data-type="stm32">STM32</button>
                 <button class="filter-tag" data-type="esp32">ESP32</button>
                 <button class="filter-tag" data-type="arduino">Arduino</button>
-                <button class="filter-tag" data-type="temperature">温度传感器</button>
-                <button class="filter-tag" data-type="wifi">WiFi模块</button>
-                <button class="filter-tag" data-type="lcd">LCD显示屏</button>
+                <button class="filter-tag" data-type="temperature" data-i18n="filter.tempSensor">温度传感器</button>
+                <button class="filter-tag" data-type="wifi" data-i18n="filter.wifiModule">WiFi模块</button>
+                <button class="filter-tag" data-type="lcd" data-i18n="filter.lcd">LCD显示屏</button>
             </div>
         </div>
     </section>
@@ -122,15 +151,15 @@
         <div class="container">
             <div class="results-header">
                 <div class="results-info">
-                    <h2>搜索结果</h2>
-                    <span class="results-count">找到 <strong>0</strong> 个结果</span>
+                    <h2 data-i18n="results.title">搜索结果</h2>
+                    <span class="results-count" data-i18n="results.count">找到 <strong>0</strong> 个结果</span>
                 </div>
                 <div class="results-sort">
                     <select id="sortResults">
-                        <option value="relevance">相关度排序</option>
-                        <option value="name-asc">名称升序</option>
-                        <option value="name-desc">名称降序</option>
-                        <option value="manufacturer">制造商</option>
+                        <option value="relevance" data-i18n="sort.relevance">相关度排序</option>
+                        <option value="name-asc" data-i18n="sort.nameAsc">名称升序</option>
+                        <option value="name-desc" data-i18n="sort.nameDesc">名称降序</option>
+                        <option value="manufacturer" data-i18n="sort.manufacturer">制造商</option>
                     </select>
                 </div>
             </div>
@@ -139,7 +168,7 @@
             </div>
             <div class="results-pagination">
                 <button class="pagination-btn" disabled><i class="fas fa-chevron-left"></i></button>
-                <span class="pagination-info">第 1 页，共 1 页</span>
+                <span class="pagination-info" data-i18n="pagination.info">第 1 页，共 1 页</span>
                 <button class="pagination-btn" disabled><i class="fas fa-chevron-right"></i></button>
             </div>
         </div>
@@ -150,45 +179,210 @@
         <div class="footer-content">
             <div class="footer-logo">
                 <h3>MCU Learn</h3>
-                <p>探索创新科技的无限可能</p>
+                <p data-i18n="footer.slogan">探索创新科技的无限可能</p>
             </div>
             <div class="footer-links">
                 <div class="footer-section">
-                    <h4>快速链接</h4>
+                    <h4 data-i18n="footer.quickLinks">快速链接</h4>
                     <ul>
-                        <li><a href="../indexmodern.html">首页</a></li>
-                        <li><a href="blognew.html">学习</a></li>
-                        <li><a href="search.html">元器件搜索</a></li>
-                        <li><a href="../indexmodern.html#community">社区</a></li>
+                        <li><a href="../indexmodern.html" data-i18n="footer.home">首页</a></li>
+                        <li><a href="blognew.html" data-i18n="footer.learn">学习</a></li>
+                        <li><a href="search.html" data-i18n="footer.search">元器件搜索</a></li>
+                        <li><a href="../indexmodern.html#community" data-i18n="footer.community">社区</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h4>资源中心</h4>
+                    <h4 data-i18n="footer.resources">资源中心</h4>
                     <ul>
-                        <li><a href="#">数据手册</a></li>
-                        <li><a href="#">应用笔记</a></li>
-                        <li><a href="#">参考设计</a></li>
-                        <li><a href="#">技术支持</a></li>
+                        <li><a href="#" data-i18n="footer.datasheet">数据手册</a></li>
+                        <li><a href="#" data-i18n="footer.appnote">应用笔记</a></li>
+                        <li><a href="#" data-i18n="footer.reference">参考设计</a></li>
+                        <li><a href="#" data-i18n="footer.support">技术支持</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h4>关注我们</h4>
+                    <h4 data-i18n="footer.followUs">关注我们</h4>
                     <ul>
                         <li><a href="#">GitHub</a></li>
-                        <li><a href="#">微信公众号</a></li>
-                        <li><a href="../Solution/Website_builder.html">网站建设者</a></li>
-                        <li><a href="../websiteNow.html">网站开发进度</a></li>
+                        <li><a href="#" data-i18n="footer.wechat">微信公众号</a></li>
+                        <li><a href="../Solution/Website_builder.html" data-i18n="footer.builders">网站建设者</a></li>
+                        <li><a href="../websiteNow.html" data-i18n="footer.progress">网站开发进度</a></li>
                     </ul>
                 </div>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2024 MCU Learn. All rights reserved.</p>
+            <p data-i18n="footer.copyright">&copy; 2024 MCU Learn. All rights reserved.</p>
         </div>
     </footer>
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="../z_js/modern-script.js"></script>
     <script src="../z_js/search-engine.js"></script>
+    <script>
+        // 语言配置
+        const translations = {
+            'zh-CN': {
+                'nav.home': '首页',
+                'nav.learn': '学习',
+                'nav.knowledge': '知识分享',
+                'nav.search': '元器件搜索',
+                'nav.resources': '资源',
+                'nav.journal': '期刊',
+                'nav.community': '社区',
+                'hero.title': '元器件搜索引擎',
+                'hero.subtitle': '快速查找电子元器件数据、参数和替代方案',
+                'search.placeholder': '输入元器件型号、名称或关键词...',
+                'search.advanced': '高级搜索',
+                'search.button': '搜索',
+                'category.all': '所有类别',
+                'category.mcu': '单片机/处理器',
+                'category.sensor': '传感器',
+                'category.communication': '通信模块',
+                'category.power': '电源管理',
+                'category.analog': '模拟器件',
+                'category.digital': '数字器件',
+                'category.display': '显示器件',
+                'category.passive': '无源器件',
+                'filter.manufacturer': '制造商',
+                'filter.package': '封装类型',
+                'filter.temperature': '工作温度范围',
+                'filter.tempMin': '最小值',
+                'filter.tempMax': '最大值',
+                'filter.to': '至',
+                'filter.hotSearch': '热门搜索：',
+                'filter.tempSensor': '温度传感器',
+                'filter.wifiModule': 'WiFi模块',
+                'filter.lcd': 'LCD显示屏',
+                'results.title': '搜索结果',
+                'results.count': '找到 {0} 个结果',
+                'sort.relevance': '相关度排序',
+                'sort.nameAsc': '名称升序',
+                'sort.nameDesc': '名称降序',
+                'sort.manufacturer': '制造商',
+                'pagination.info': '第 {0} 页，共 {1} 页',
+                'footer.slogan': '探索创新科技的无限可能',
+                'footer.quickLinks': '快速链接',
+                'footer.home': '首页',
+                'footer.learn': '学习',
+                'footer.search': '元器件搜索',
+                'footer.community': '社区',
+                'footer.resources': '资源中心',
+                'footer.datasheet': '数据手册',
+                'footer.appnote': '应用笔记',
+                'footer.reference': '参考设计',
+                'footer.support': '技术支持',
+                'footer.followUs': '关注我们',
+                'footer.wechat': '微信公众号',
+                'footer.builders': '网站建设者',
+                'footer.progress': '网站开发进度',
+                'footer.copyright': '© 2024 MCU Learn. 保留所有权利。'
+            },
+            'en': {
+                'nav.home': 'Home',
+                'nav.learn': 'Learn',
+                'nav.knowledge': 'Knowledge',
+                'nav.search': 'Component Search',
+                'nav.resources': 'Resources',
+                'nav.journal': 'Journal',
+                'nav.community': 'Community',
+                'hero.title': 'Component Search Engine',
+                'hero.subtitle': 'Quickly find electronic component data, parameters and alternatives',
+                'search.placeholder': 'Enter component model, name or keywords...',
+                'search.advanced': 'Advanced Search',
+                'search.button': 'Search',
+                'category.all': 'All Categories',
+                'category.mcu': 'MCU/Processor',
+                'category.sensor': 'Sensors',
+                'category.communication': 'Communication',
+                'category.power': 'Power Management',
+                'category.analog': 'Analog',
+                'category.digital': 'Digital',
+                'category.display': 'Display',
+                'category.passive': 'Passive',
+                'filter.manufacturer': 'Manufacturer',
+                'filter.package': 'Package Type',
+                'filter.temperature': 'Operating Temperature',
+                'filter.tempMin': 'Min',
+                'filter.tempMax': 'Max',
+                'filter.to': 'to',
+                'filter.hotSearch': 'Hot Search:',
+                'filter.tempSensor': 'Temperature Sensor',
+                'filter.wifiModule': 'WiFi Module',
+                'filter.lcd': 'LCD Display',
+                'results.title': 'Search Results',
+                'results.count': 'Found {0} results',
+                'sort.relevance': 'Sort by Relevance',
+                'sort.nameAsc': 'Name Ascending',
+                'sort.nameDesc': 'Name Descending',
+                'sort.manufacturer': 'Manufacturer',
+                'pagination.info': 'Page {0} of {1}',
+                'footer.slogan': 'Explore Infinite Possibilities of Innovation Technology',
+                'footer.quickLinks': 'Quick Links',
+                'footer.home': 'Home',
+                'footer.learn': 'Learn',
+                'footer.search': 'Component Search',
+                'footer.community': 'Community',
+                'footer.resources': 'Resource Center',
+                'footer.datasheet': 'Datasheets',
+                'footer.appnote': 'Application Notes',
+                'footer.reference': 'Reference Designs',
+                'footer.support': 'Technical Support',
+                'footer.followUs': 'Follow Us',
+                'footer.wechat': 'WeChat Official',
+                'footer.builders': 'Website Builders',
+                'footer.progress': 'Development Progress',
+                'footer.copyright': '© 2024 MCU Learn. All rights reserved.'
+            }
+        };
+
+        // 语言切换功能
+        const langToggle = document.querySelector('.lang-toggle');
+        let currentLang = localStorage.getItem('lang') || 'zh-CN';
+
+        function updateLanguage() {
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[currentLang][key]) {
+                    element.textContent = translations[currentLang][key];
+                }
+            });
+
+            // 更新 placeholder
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
+                const key = element.getAttribute('data-i18n-placeholder');
+                if (translations[currentLang][key]) {
+                    element.placeholder = translations[currentLang][key];
+                }
+            });
+
+            // 更新 select options
+            document.querySelectorAll('select').forEach(select => {
+                Array.from(select.options).forEach(option => {
+                    const key = option.getAttribute('data-i18n');
+                    if (key && translations[currentLang][key]) {
+                        option.textContent = translations[currentLang][key];
+                    }
+                });
+            });
+
+            document.documentElement.lang = currentLang;
+        }
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'zh-CN' ? 'en' : 'zh-CN';
+            localStorage.setItem('lang', currentLang);
+            updateLanguage();
+        }
+
+        // 事件监听
+        langToggle.addEventListener('click', toggleLanguage);
+
+        // 初始化语言
+        document.addEventListener('DOMContentLoaded', () => {
+            currentLang = localStorage.getItem('lang') || 'zh-CN';
+            updateLanguage();
+        });
+    </script>
 </body>
 </html> 

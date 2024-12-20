@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +9,29 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
     <style>
+        /* 语言切换按钮样式 */
+        .controls {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .theme-toggle, .lang-toggle {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            padding: 0.5rem;
+            font-size: 1.2rem;
+            transition: var(--transition);
+            border-radius: 50%;
+        }
+
+        .theme-toggle:hover, .lang-toggle:hover {
+            background: var(--bg-color);
+            transform: scale(1.1);
+        }
+
         .journal-section {
             padding: 40px 0;
         }
@@ -108,32 +131,37 @@
         <div class="nav-content">
             <a href="../indexmodern.html" class="logo">MCU Learn</a>
             <ul class="nav-links">
-                <li><a href="../indexmodern.html">首页</a></li>
-                <li><a href="blognew.html">学习</a></li>
-                <li><a href="knowledge.html" id="knowledgeEngine">分享</a></li>
-                <li><a href="source.html" class="active">期刊</a></li>
-                <li><a href="../StudySources/Sources.html">资源</a></li>
-                <li><a href="pages/community.html">社区</a></li>
-                <li><a href="../relation.html">联系我们</a></li>
+                <li><a href="../indexmodern.html" data-i18n="nav.home">首页</a></li>
+                <li><a href="blognew.html" data-i18n="nav.learn">学习</a></li>
+                <li><a href="knowledge.html" id="knowledgeEngine" data-i18n="nav.share">分享</a></li>
+                <li><a href="source.html" class="active" data-i18n="nav.journal">期刊</a></li>
+                <li><a href="../StudySources/Sources.html" data-i18n="nav.resources">资源</a></li>
+                <li><a href="pages/community.html" data-i18n="nav.community">社区</a></li>
+                <li><a href="../relation.html" data-i18n="nav.contact">联系我们</a></li>
             </ul>
-            <button class="theme-toggle">
-                <i class="fas fa-moon"></i>
-            </button>
+            <div class="controls">
+                <button class="lang-toggle" title="切换语言">
+                    <i class="fas fa-globe"></i>
+                </button>
+                <button class="theme-toggle" title="切换主题">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
         </div>
     </nav>
 
     <!-- 页面标题 -->
     <section class="blog-hero">
         <div class="hero-content" data-aos="fade-up">
-            <h1>学术期刊资源</h1>
-            <p>探索顶级学术期刊，获取前沿研究动态</p>
+            <h1 data-i18n="hero.title">学术期刊资源</h1>
+            <p data-i18n="hero.subtitle">探索顶级学术期刊，获取前沿研究动态</p>
         </div>
     </section>
 
     <!-- 搜索栏 -->
     <div class="container">
         <div class="search-bar" data-aos="fade-up">
-            <input type="text" placeholder="搜索期刊...">
+            <input type="text" data-i18n-placeholder="search.placeholder" placeholder="搜索期刊...">
             <i class="fas fa-search"></i>
         </div>
     </div>
@@ -144,7 +172,7 @@
             <div class="journal-grid">
                 <!-- 计算机科学期刊 -->
                 <div class="journal-category" data-aos="fade-up">
-                    <h3><i class="fas fa-laptop-code"></i> 计算机科学</h3>
+                    <h3><i class="fas fa-laptop-code"></i> <span data-i18n="categories.cs">计算机科学</span></h3>
                     <ul class="journal-list">
                         <li class="journal-item">
                             <a href="#">
@@ -181,7 +209,7 @@
 
                 <!-- 机械工程期刊 -->
                 <div class="journal-category" data-aos="fade-up" data-aos-delay="100">
-                    <h3><i class="fas fa-cogs"></i> 机械工程</h3>
+                    <h3><i class="fas fa-cogs"></i> <span data-i18n="categories.me">机械工程</span></h3>
                     <ul class="journal-list">
                         <li class="journal-item">
                             <a href="#">
@@ -191,7 +219,7 @@
                         </li>
                         <li class="journal-item">
                             <a href="#">
-                                <span>机械工程学报</span>
+                                <span data-i18n="journals.me.journal1">机械工程学报</span>
                                 <span class="impact-factor">IF: 2.037</span>
                             </a>
                         </li>
@@ -218,7 +246,7 @@
 
                 <!-- 电气工程期刊 -->
                 <div class="journal-category" data-aos="fade-up" data-aos-delay="200">
-                    <h3><i class="fas fa-bolt"></i> 电气工程</h3>
+                    <h3><i class="fas fa-bolt"></i> <span data-i18n="categories.ee">电气工程</span></h3>
                     <ul class="journal-list">
                         <li class="journal-item">
                             <a href="#">
@@ -228,7 +256,7 @@
                         </li>
                         <li class="journal-item">
                             <a href="#">
-                                <span>中国电机工程学报</span>
+                                <span data-i18n="journals.ee.journal1">中国电机工程学报</span>
                                 <span class="impact-factor">IF: 2.458</span>
                             </a>
                         </li>
@@ -293,7 +321,7 @@
         </div>
     </section>
 
-    <!-- 开发工具和��档资源 -->
+    <!-- 开发工具和文档资源 -->
     <section class="tools-section">
         <div class="container">
             <h2 class="section-title" data-aos="fade-up">开发工具与文档</h2>
@@ -550,7 +578,7 @@
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h4>关注���们</h4>
+                    <h4>关注我们</h4>
                     <ul>
                         <li><a href="#">GitHub</a></li>
                         <li><a href="#">微信公众号</a></li>
@@ -589,6 +617,82 @@
                     item.style.display = 'none';
                 }
             });
+        });
+
+        // 语言配置
+        const translations = {
+            'zh-CN': {
+                'nav.home': '首页',
+                'nav.learn': '学习',
+                'nav.share': '分享',
+                'nav.journal': '期刊',
+                'nav.resources': '资源',
+                'nav.community': '社区',
+                'nav.contact': '联系我们',
+                'hero.title': '学术期刊资源',
+                'hero.subtitle': '探索顶级学术期刊，获取前沿研究动态',
+                'search.placeholder': '搜索期刊...',
+                'categories.cs': '计算机科学',
+                'categories.me': '机械工程',
+                'categories.ee': '电气工程',
+                'journals.me.journal1': '机械工程学报',
+                'journals.ee.journal1': '中国电机工程学报'
+            },
+            'en': {
+                'nav.home': 'Home',
+                'nav.learn': 'Learn',
+                'nav.share': 'Share',
+                'nav.journal': 'Journal',
+                'nav.resources': 'Resources',
+                'nav.community': 'Community',
+                'nav.contact': 'Contact',
+                'hero.title': 'Academic Journal Resources',
+                'hero.subtitle': 'Explore top academic journals and get the latest research updates',
+                'search.placeholder': 'Search journals...',
+                'categories.cs': 'Computer Science',
+                'categories.me': 'Mechanical Engineering',
+                'categories.ee': 'Electrical Engineering',
+                'journals.me.journal1': 'Journal of Mechanical Engineering',
+                'journals.ee.journal1': 'Journal of China Electrical Engineering'
+            }
+        };
+
+        // 语言切换功能
+        const langToggle = document.querySelector('.lang-toggle');
+        let currentLang = localStorage.getItem('lang') || 'zh-CN';
+
+        function updateLanguage() {
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[currentLang][key]) {
+                    element.textContent = translations[currentLang][key];
+                }
+            });
+
+            // 更新 placeholder
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
+                const key = element.getAttribute('data-i18n-placeholder');
+                if (translations[currentLang][key]) {
+                    element.placeholder = translations[currentLang][key];
+                }
+            });
+
+            document.documentElement.lang = currentLang;
+        }
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'zh-CN' ? 'en' : 'zh-CN';
+            localStorage.setItem('lang', currentLang);
+            updateLanguage();
+        }
+
+        // 事件监听
+        langToggle.addEventListener('click', toggleLanguage);
+
+        // 初始化语言
+        document.addEventListener('DOMContentLoaded', () => {
+            currentLang = localStorage.getItem('lang') || 'zh-CN';
+            updateLanguage();
         });
     </script>
 </body>

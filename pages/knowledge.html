@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +8,30 @@
     <link rel="stylesheet" href="../z_css/modern-knowledge.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+    <style>
+        /* 语言切换按钮样式 */
+        .controls {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .theme-toggle, .lang-toggle {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            padding: 0.5rem;
+            font-size: 1.2rem;
+            transition: var(--transition);
+            border-radius: 50%;
+        }
+
+        .theme-toggle:hover, .lang-toggle:hover {
+            background: var(--bg-color);
+            transform: scale(1.1);
+        }
+    </style>
 </head>
 <body>
     <!-- 导航栏 -->
@@ -15,57 +39,62 @@
         <div class="nav-content">
             <a href="../indexmodern.html" class="logo">MCU Learn</a>
             <ul class="nav-links">
-                <li><a href="../indexmodern.html">首页</a></li>
-                <li><a href="blognew.html">学习</a></li>
-                <li><a href="knowledge.html" class="active">知识分享</a></li>
-                <li><a href="source.html">期刊</a></li>
-                <li><a href="StudySources/Sources.html">资源</a></li>
-                <li><a href="../News/news.html">新闻</a></li>
-                <li><a href="community.html">社区</a></li>
-                <li><a href="../relation.html">联系我们</a></li>
+                <li><a href="../indexmodern.html" data-i18n="nav.home">首页</a></li>
+                <li><a href="blognew.html" data-i18n="nav.learn">学习</a></li>
+                <li><a href="knowledge.html" class="active" data-i18n="nav.knowledge">知识分享</a></li>
+                <li><a href="source.html" data-i18n="nav.journal">期刊</a></li>
+                <li><a href="StudySources/Sources.html" data-i18n="nav.resources">资源</a></li>
+                <li><a href="../News/news.html" data-i18n="nav.news">新闻</a></li>
+                <li><a href="community.html" data-i18n="nav.community">社区</a></li>
+                <li><a href="../relation.html" data-i18n="nav.contact">联系我们</a></li>
             </ul>
-            <button class="theme-toggle">
-                <i class="fas fa-moon"></i>
-            </button>
+            <div class="controls">
+                <button class="lang-toggle" title="切换语言">
+                    <i class="fas fa-globe"></i>
+                </button>
+                <button class="theme-toggle" title="切换主题">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
         </div>
     </nav>
 
     <!-- 英雄区域 -->
     <section class="knowledge-hero">
         <div class="hero-content" data-aos="fade-up">
-            <h1>分享你的知识</h1>
-            <p>在这里，每个想法都值得被听见</p>
+            <h1 data-i18n="hero.title">分享你的知识</h1>
+            <p data-i18n="hero.subtitle">在这里，每个想法都值得被听见</p>
             <div class="contribution-stats">
                 <div class="stat">
                     <span class="number">10+</span>
-                    <span class="label">实验案例</span>
+                    <span class="label" data-i18n="stats.experiments">实验案例</span>
                 </div>
                 <div class="stat">
                     <span class="number">10+</span>
-                    <span class="label">博客文章</span>
+                    <span class="label" data-i18n="stats.blogs">博客文章</span>
                 </div>
                 <div class="stat">
                     <span class="number">10+</span>
-                    <span class="label">创意想法</span>
+                    <span class="label" data-i18n="stats.ideas">创意想法</span>
                 </div>
             </div>
         </div>
         <div class="floating-cards">
             <div class="float-card" data-aos="fade-left" data-aos-delay="100">
                 <i class="fas fa-flask"></i>
-                <span>实验发布</span>
+                <span data-i18n="cards.experiment">实验发布</span>
             </div>
             <div class="float-card" data-aos="fade-left" data-aos-delay="200">
                 <i class="fas fa-blog"></i>
-                <span>博客提交</span>
+                <span data-i18n="cards.blog">博客提交</span>
             </div>
             <div class="float-card" data-aos="fade-left" data-aos-delay="300">
                 <i class="fas fa-lightbulb"></i>
-                <span>想法投稿</span>
+                <span data-i18n="cards.idea">想法投稿</span>
             </div>
             <div class="float-card" data-aos="fade-left" data-aos-delay="400">
                 <i class="fas fa-envelope"></i>
-                <span>邮箱投稿</span>
+                <span data-i18n="cards.email">邮箱投稿</span>
             </div>
         </div>
     </section>
@@ -77,8 +106,8 @@
                 <i class="fas fa-exclamation-triangle"></i>
             </div>
             <div class="alert-message">
-                <strong>系统维护公告：</strong>
-                <span>服务器正在维护中，系统暂时不提供推送服务，请使用邮箱投稿。</span>
+                <strong data-i18n="alert.title">系统维护公告：</strong>
+                <span data-i18n="alert.message">服务器正在维护中，系统暂时不提供推送服务，请使用邮箱投稿。</span>
             </div>
             <div class="beijing-time">
                 <i class="fas fa-clock"></i>
@@ -93,69 +122,69 @@
         <div class="tabs-container" data-aos="fade-up">
             <div class="tab active" data-tab="experiment">
                 <i class="fas fa-flask"></i>
-                实验发布
+                <span data-i18n="tabs.experiment">实验发布</span>
             </div>
             <div class="tab" data-tab="blog">
                 <i class="fas fa-blog"></i>
-                博客提交
+                <span data-i18n="tabs.blog">博客提交</span>
             </div>
             <div class="tab" data-tab="idea">
                 <i class="fas fa-lightbulb"></i>
-                想法投稿
+                <span data-i18n="tabs.idea">想法投稿</span>
             </div>
             <div class="tab" data-tab="email">
                 <i class="fas fa-envelope"></i>
-                邮箱投稿
+                <span data-i18n="tabs.email">邮箱投稿</span>
             </div>
         </div>
 
         <!-- 实验发布表单 -->
         <div class="tab-content active" id="experiment-content" data-aos="fade-up">
             <div class="form-container">
-                <h2>发布新实验</h2>
+                <h2 data-i18n="experiment.title">发布新实验</h2>
                 <form class="modern-form">
                     <div class="form-group">
-                        <label>实验标题</label>
-                        <input type="text" placeholder="输入实验标题" required>
+                        <label data-i18n="experiment.form.title">实验标题</label>
+                        <input type="text" data-i18n-placeholder="experiment.form.titlePlaceholder" placeholder="输入实验标题" required>
                     </div>
                     <div class="form-group">
-                        <label>实验类别</label>
+                        <label data-i18n="experiment.form.category">实验类别</label>
                         <select required>
-                            <option value="">选择实验类别</option>
-                            <option value="hardware">硬件实验</option>
-                            <option value="software">软件实验</option>
-                            <option value="embedded">嵌入式实验</option>
-                            <option value="simulation">仿真实验</option>
+                            <option value="" data-i18n="experiment.form.categorySelect">选择实验类别</option>
+                            <option value="hardware" data-i18n="experiment.form.hardware">硬件实验</option>
+                            <option value="software" data-i18n="experiment.form.software">软件实验</option>
+                            <option value="embedded" data-i18n="experiment.form.embedded">嵌入式实验</option>
+                            <option value="simulation" data-i18n="experiment.form.simulation">仿真实验</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>实验难度</label>
+                        <label data-i18n="experiment.form.difficulty">实验难度</label>
                         <div class="difficulty-selector">
                             <input type="radio" id="easy" name="difficulty" value="easy">
-                            <label for="easy">入门</label>
+                            <label for="easy" data-i18n="experiment.form.easy">入门</label>
                             <input type="radio" id="medium" name="difficulty" value="medium">
-                            <label for="medium">进阶</label>
+                            <label for="medium" data-i18n="experiment.form.medium">进阶</label>
                             <input type="radio" id="hard" name="difficulty" value="hard">
-                            <label for="hard">高级</label>
+                            <label for="hard" data-i18n="experiment.form.hard">高级</label>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label>实验描述</label>
-                        <textarea placeholder="详细描述实验内容、目标和步骤" required></textarea>
+                        <label data-i18n="experiment.form.description">实验描述</label>
+                        <textarea data-i18n-placeholder="experiment.form.descriptionPlaceholder" placeholder="详细描述实验内容、目标和步骤" required></textarea>
                     </div>
                     <div class="form-group">
-                        <label>上传附件</label>
+                        <label data-i18n="experiment.form.attachment">上传附件</label>
                         <div class="file-upload">
                             <input type="file" id="experiment-file" multiple>
                             <label for="experiment-file">
                                 <i class="fas fa-cloud-upload-alt"></i>
-                                <span>点击或拖拽文件到此处</span>
+                                <span data-i18n="experiment.form.upload">点击或拖拽文件到此处</span>
                             </label>
                         </div>
                     </div>
                     <button type="submit" class="submit-btn">
                         <i class="fas fa-paper-plane"></i>
-                        发布实验
+                        <span data-i18n="experiment.form.submit">发布实验</span>
                     </button>
                 </form>
             </div>
@@ -398,5 +427,137 @@
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="../z_js/knowledge.js"></script>
+    <script>
+        // 语言配置
+        const translations = {
+            'zh-CN': {
+                'nav.home': '首页',
+                'nav.learn': '学习',
+                'nav.knowledge': '知识分享',
+                'nav.journal': '期刊',
+                'nav.resources': '资源',
+                'nav.news': '新闻',
+                'nav.community': '社区',
+                'nav.contact': '联系我们',
+                'hero.title': '分享你的知识',
+                'hero.subtitle': '在这里，每个想法都值得被听见',
+                'stats.experiments': '实验案例',
+                'stats.blogs': '博客文章',
+                'stats.ideas': '创意想法',
+                'cards.experiment': '实验发布',
+                'cards.blog': '博客提交',
+                'cards.idea': '想法投稿',
+                'cards.email': '邮箱投稿',
+                'alert.title': '系统维护公告：',
+                'alert.message': '服务器正在维护中，系统暂时不提供推送服务，请使用邮箱投稿。',
+                'tabs.experiment': '实验发布',
+                'tabs.blog': '博客提交',
+                'tabs.idea': '想法投稿',
+                'tabs.email': '邮箱投稿',
+                'experiment.title': '发布新实验',
+                'experiment.form.title': '实验标题',
+                'experiment.form.titlePlaceholder': '输入实验标题',
+                'experiment.form.category': '实验类别',
+                'experiment.form.categorySelect': '选择实验类别',
+                'experiment.form.hardware': '硬件实验',
+                'experiment.form.software': '软件实验',
+                'experiment.form.embedded': '嵌入式实验',
+                'experiment.form.simulation': '仿真实验',
+                'experiment.form.difficulty': '实验难度',
+                'experiment.form.easy': '入门',
+                'experiment.form.medium': '进阶',
+                'experiment.form.hard': '高级',
+                'experiment.form.description': '实验描述',
+                'experiment.form.descriptionPlaceholder': '详细描述实验内容、目标和步骤',
+                'experiment.form.attachment': '上传附件',
+                'experiment.form.upload': '点击或拖拽文件到此处',
+                'experiment.form.submit': '发布实验'
+            },
+            'en': {
+                'nav.home': 'Home',
+                'nav.learn': 'Learn',
+                'nav.knowledge': 'Knowledge',
+                'nav.journal': 'Journal',
+                'nav.resources': 'Resources',
+                'nav.news': 'News',
+                'nav.community': 'Community',
+                'nav.contact': 'Contact',
+                'hero.title': 'Share Your Knowledge',
+                'hero.subtitle': 'Here, every idea deserves to be heard',
+                'stats.experiments': 'Experiments',
+                'stats.blogs': 'Blog Posts',
+                'stats.ideas': 'Creative Ideas',
+                'cards.experiment': 'Publish Experiment',
+                'cards.blog': 'Submit Blog',
+                'cards.idea': 'Submit Idea',
+                'cards.email': 'Email Submission',
+                'alert.title': 'System Maintenance Notice:',
+                'alert.message': 'Server is under maintenance, push service is temporarily unavailable. Please use email submission.',
+                'tabs.experiment': 'Publish Experiment',
+                'tabs.blog': 'Submit Blog',
+                'tabs.idea': 'Submit Idea',
+                'tabs.email': 'Email Submission',
+                'experiment.title': 'Publish New Experiment',
+                'experiment.form.title': 'Experiment Title',
+                'experiment.form.titlePlaceholder': 'Enter experiment title',
+                'experiment.form.category': 'Category',
+                'experiment.form.categorySelect': 'Select category',
+                'experiment.form.hardware': 'Hardware',
+                'experiment.form.software': 'Software',
+                'experiment.form.embedded': 'Embedded',
+                'experiment.form.simulation': 'Simulation',
+                'experiment.form.difficulty': 'Difficulty',
+                'experiment.form.easy': 'Beginner',
+                'experiment.form.medium': 'Intermediate',
+                'experiment.form.hard': 'Advanced',
+                'experiment.form.description': 'Description',
+                'experiment.form.descriptionPlaceholder': 'Describe experiment content, objectives and steps',
+                'experiment.form.attachment': 'Attachments',
+                'experiment.form.upload': 'Click or drag files here',
+                'experiment.form.submit': 'Publish Experiment'
+            }
+        };
+
+        // 语言切换功能
+        const langToggle = document.querySelector('.lang-toggle');
+        let currentLang = localStorage.getItem('lang') || 'zh-CN';
+
+        function updateLanguage() {
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[currentLang][key]) {
+                    element.textContent = translations[currentLang][key];
+                }
+            });
+
+            // 更新 placeholder
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
+                const key = element.getAttribute('data-i18n-placeholder');
+                if (translations[currentLang][key]) {
+                    element.placeholder = translations[currentLang][key];
+                }
+            });
+
+            document.documentElement.lang = currentLang;
+        }
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'zh-CN' ? 'en' : 'zh-CN';
+            localStorage.setItem('lang', currentLang);
+            updateLanguage();
+        }
+
+        // 事件监听
+        langToggle.addEventListener('click', toggleLanguage);
+
+        // 初始化语言
+        document.addEventListener('DOMContentLoaded', () => {
+            currentLang = localStorage.getItem('lang') || 'zh-CN';
+            updateLanguage();
+        });
+
+        // 其他现有的 JavaScript 代码保持不变
+        // ... existing code ...
+    </script>
 </body>
 </html> 

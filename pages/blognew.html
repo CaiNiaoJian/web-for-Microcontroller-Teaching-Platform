@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +9,29 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
     <style>
+        /* 语言切换按钮样式 */
+        .controls {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .theme-toggle, .lang-toggle {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            padding: 0.5rem;
+            font-size: 1.2rem;
+            transition: var(--transition);
+            border-radius: 50%;
+        }
+
+        .theme-toggle:hover, .lang-toggle:hover {
+            background: var(--bg-color);
+            transform: scale(1.1);
+        }
+
         /* 提示框样式 */
         .coming-soon-toast {
             position: fixed;
@@ -116,46 +139,51 @@
         <div class="nav-content">
             <a href="../indexmodern.html" class="logo">MCU Learn</a>
             <ul class="nav-links">
-                <li><a href="../indexmodern.html">首页</a></li>
-                <li><a href="blognew.html" class="active">学习</a></li>
-                <li><a href="knowledge.html" id="knowledgeEngine">知识分享</a></li>
-                <li><a href="source.html">期刊文档</a></li>
-                <li><a href="../StudySources/Sources.html">学习中心</a></li>
-                <li><a href="community.html">社区</a></li>
-                <li><a href="../about.html">联系我们</a></li>
+                <li><a href="../indexmodern.html" data-i18n="nav.home">首页</a></li>
+                <li><a href="blognew.html" class="active" data-i18n="nav.learn">学习</a></li>
+                <li><a href="knowledge.html" id="knowledgeEngine" data-i18n="nav.knowledge">知识分享</a></li>
+                <li><a href="source.html" data-i18n="nav.journal">期刊文档</a></li>
+                <li><a href="../StudySources/Sources.html" data-i18n="nav.resources">学习中心</a></li>
+                <li><a href="community.html" data-i18n="nav.community">社区</a></li>
+                <li><a href="../about.html" data-i18n="nav.contact">联系我们</a></li>
             </ul>
-            <button class="theme-toggle">
-                <i class="fas fa-moon"></i>
-            </button>
+            <div class="controls">
+                <button class="lang-toggle" title="切换语言">
+                    <i class="fas fa-globe"></i>
+                </button>
+                <button class="theme-toggle" title="切换主题">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
         </div>
     </nav>
 
     <!-- 页面标题 -->
     <section class="blog-hero">
         <div class="hero-content" data-aos="fade-up">
-            <h1>学习中心</h1>
-            <p>探索单片机的精彩世界，开启你的学习之旅</p>
+            <h1 data-i18n="hero.title">学习中心</h1>
+            <p data-i18n="hero.subtitle">探索单片机的精彩世界，开启你的学习之旅</p>
         </div>
     </section>
 
     <!-- 主要学习资源入口 -->
     <section class="learning-resources">
         <div class="container">
-            <h2 class="section-title" data-aos="fade-up">学习资源</h2>
+            <h2 class="section-title" data-aos="fade-up" data-i18n="resources.title">学习资源</h2>
             <div class="resources-grid">
                 <!-- 基础实验入口 -->
                 <div class="resource-card" data-aos="fade-up">
                     <div class="resource-icon">
                         <i class="fas fa-microchip"></i>
                     </div>
-                    <h3>基础实验</h3>
-                    <p>单片机基础知识与实验</p>
+                    <h3 data-i18n="resources.basic.title">基础实验</h3>
+                    <p data-i18n="resources.basic.desc">单片机基础知识与实验</p>
                     <ul class="resource-features">
-                        <li><i class="fas fa-check"></i> 开发环境搭建</li>
-                        <li><i class="fas fa-check"></i> 音乐盒编程实验</li>
-                        <li><i class="fas fa-check"></i> 示波器实验</li>
+                        <li><i class="fas fa-check"></i> <span data-i18n="resources.basic.feature1">开发环境搭建</span></li>
+                        <li><i class="fas fa-check"></i> <span data-i18n="resources.basic.feature2">音乐盒编程实验</span></li>
+                        <li><i class="fas fa-check"></i> <span data-i18n="resources.basic.feature3">示波器实验</span></li>
                     </ul>
-                    <a href="../control_articles/control-articles.html" class="resource-link">开始学习 <i class="fas fa-arrow-right"></i></a>
+                    <a href="../control_articles/control-articles.html" class="resource-link"><span data-i18n="resources.basic.link">开始学习</span> <i class="fas fa-arrow-right"></i></a>
                 </div>
 
                 <!-- 进阶实验入口 -->
@@ -163,14 +191,14 @@
                     <div class="resource-icon">
                         <i class="fas fa-code"></i>
                     </div>
-                    <h3>进阶实验</h3>
-                    <p>深入单片机高级应用</p>
+                    <h3 data-i18n="resources.advanced.title">进阶实验</h3>
+                    <p data-i18n="resources.advanced.desc">深入单片机高级应用</p>
                     <ul class="resource-features">
-                        <li><i class="fas fa-check"></i> 通信协议实验</li>
-                        <li><i class="fas fa-check"></i> RTOS应用开发</li>
-                        <li><i class="fas fa-check"></i> 传感器应用</li>
+                        <li><i class="fas fa-check"></i> <span data-i18n="resources.advanced.feature1">通信协议实验</span></li>
+                        <li><i class="fas fa-check"></i> <span data-i18n="resources.advanced.feature2">RTOS应用开发</span></li>
+                        <li><i class="fas fa-check"></i> <span data-i18n="resources.advanced.feature3">传感器应用</span></li>
                     </ul>
-                    <a href="../non_control_articles/non-control-articles.html" class="resource-link">进入学习 <i class="fas fa-arrow-right"></i></a>
+                    <a href="../non_control_articles/non-control-articles.html" class="resource-link"><span data-i18n="resources.advanced.link">进入学习</span> <i class="fas fa-arrow-right"></i></a>
                 </div>
 
                 <!-- 技术文档入口 -->
@@ -178,14 +206,14 @@
                     <div class="resource-icon">
                         <i class="fas fa-book"></i>
                     </div>
-                    <h3>其他文章</h3>
-                    <p>其他类的参考资料</p>
+                    <h3 data-i18n="resources.docs.title">其他文章</h3>
+                    <p data-i18n="resources.docs.desc">其他类的参考资料</p>
                     <ul class="resource-features">
-                        <li><i class="fas fa-check"></i> 文章博客</li>
-                        <li><i class="fas fa-check"></i> 编程指南</li>
-                        <li><i class="fas fa-check"></i> 论文参考</li>
+                        <li><i class="fas fa-check"></i> <span data-i18n="resources.docs.feature1">文章博客</span></li>
+                        <li><i class="fas fa-check"></i> <span data-i18n="resources.docs.feature2">编程指南</span></li>
+                        <li><i class="fas fa-check"></i> <span data-i18n="resources.docs.feature3">论文参考</span></li>
                     </ul>
-                    <a href="../other_articles/other-articles.html" class="resource-link">查看文档 <i class="fas fa-arrow-right"></i></a>
+                    <a href="../other_articles/other-articles.html" class="resource-link"><span data-i18n="resources.docs.link">查看文档</span> <i class="fas fa-arrow-right"></i></a>
                 </div>
 
                 <!-- 开源项目入口 -->
@@ -193,29 +221,29 @@
                     <div class="resource-icon">
                         <i class="fas fa-code-branch"></i>
                     </div>
-                    <h3>开源项目</h3>
-                    <p>优质开源项目和示例</p>
+                    <h3 data-i18n="resources.projects.title">开源项目</h3>
+                    <p data-i18n="resources.projects.desc">优质开源项目和示例</p>
                     <ul class="resource-features">
-                        <li><i class="fas fa-check"></i> 示例代码</li>
-                        <li><i class="fas fa-check"></i> 项目实战</li>
-                        <li><i class="fas fa-check"></i> 社区贡献</li>
+                        <li><i class="fas fa-check"></i> <span data-i18n="resources.projects.feature1">示例代码</span></li>
+                        <li><i class="fas fa-check"></i> <span data-i18n="resources.projects.feature2">项目实战</span></li>
+                        <li><i class="fas fa-check"></i> <span data-i18n="resources.projects.feature3">社区贡献</span></li>
                     </ul>
-                    <a href="../StudyAdd/CodeSrc.html" class="resource-link">浏览项目 <i class="fas fa-arrow-right"></i></a>
+                    <a href="../StudyAdd/CodeSrc.html" class="resource-link"><span data-i18n="resources.projects.link">浏览项目</span> <i class="fas fa-arrow-right"></i></a>
                 </div>
 
-                <!-- 其他类文章入口 -->
+                <!-- 技术专栏入口 -->
                 <div class="resource-card" data-aos="fade-up" data-aos-delay="400">
                     <div class="resource-icon">
                         <i class="fas fa-newspaper"></i>
                     </div>
-                    <h3>技术专栏</h3>
-                    <p>深度技术文章与经验分享</p>
+                    <h3 data-i18n="resources.tech.title">技术专栏</h3>
+                    <p data-i18n="resources.tech.desc">深度技术文章与经验分享</p>
                     <ul class="resource-features">
-                        <li><i class="fas fa-check"></i> 技术分析</li>
-                        <li><i class="fas fa-check"></i> 经验总结</li>
-                        <li><i class="fas fa-check"></i> 行业动态</li>
+                        <li><i class="fas fa-check"></i> <span data-i18n="resources.tech.feature1">技术分析</span></li>
+                        <li><i class="fas fa-check"></i> <span data-i18n="resources.tech.feature2">经验总结</span></li>
+                        <li><i class="fas fa-check"></i> <span data-i18n="resources.tech.feature3">行业动态</span></li>
                     </ul>
-                    <a href="#" class="resource-link">阅读文章 <i class="fas fa-arrow-right"></i></a>
+                    <a href="#" class="resource-link"><span data-i18n="resources.tech.link">阅读文章</span> <i class="fas fa-arrow-right"></i></a>
                 </div>
 
                 <!-- 元器件搜索入口 -->
@@ -223,14 +251,14 @@
                     <div class="resource-icon">
                         <i class="fas fa-search"></i>
                     </div>
-                    <h3>元器件搜索</h3>
-                    <p>快速查找和了解各类电子元器件</p>
+                    <h3 data-i18n="resources.search.title">元器件搜索</h3>
+                    <p data-i18n="resources.search.desc">快速查找和了解各类电子元器件</p>
                     <ul class="resource-features">
-                        <li><i class="fas fa-check"></i> MCU芯片检索</li>
-                        <li><i class="fas fa-check"></i> 传感器模块</li>
-                        <li><i class="fas fa-check"></i> 技术参数</li>
+                        <li><i class="fas fa-check"></i> <span data-i18n="resources.search.feature1">MCU芯片检索</span></li>
+                        <li><i class="fas fa-check"></i> <span data-i18n="resources.search.feature2">传感器模块</span></li>
+                        <li><i class="fas fa-check"></i> <span data-i18n="resources.search.feature3">技术参数</span></li>
                     </ul>
-                    <a href="search.html" class="resource-link">开始搜索 <i class="fas fa-arrow-right"></i></a>
+                    <a href="search.html" class="resource-link"><span data-i18n="resources.search.link">开始搜索</span> <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>  
         </div>
@@ -403,6 +431,135 @@
     <script src="../z_js/weather.js"></script>
     <script src="../z_js/emoji-fountain.js"></script>
     <script>
+        // 语言配置
+        const translations = {
+            'zh-CN': {
+                'nav.home': '首页',
+                'nav.learn': '学习',
+                'nav.knowledge': '知识分享',
+                'nav.journal': '期刊文档',
+                'nav.resources': '学习中心',
+                'nav.community': '社区',
+                'nav.contact': '联系我们',
+                'hero.title': '学习中心',
+                'hero.subtitle': '探索单片机的精彩世界，开启你的学习之旅',
+                'resources.title': '学习资源',
+                'resources.basic.title': '基础实验',
+                'resources.basic.desc': '单片机基础知识与实验',
+                'resources.basic.feature1': '开发环境搭建',
+                'resources.basic.feature2': '音乐盒编程实验',
+                'resources.basic.feature3': '示波器实验',
+                'resources.basic.link': '开始学习',
+                'resources.advanced.title': '进阶实验',
+                'resources.advanced.desc': '深入单片机高级应用',
+                'resources.advanced.feature1': '通信协议实验',
+                'resources.advanced.feature2': 'RTOS应用开发',
+                'resources.advanced.feature3': '传感器应用',
+                'resources.advanced.link': '进入学习',
+                'resources.docs.title': '其他文章',
+                'resources.docs.desc': '其他类的参考资料',
+                'resources.docs.feature1': '文章博客',
+                'resources.docs.feature2': '编程指南',
+                'resources.docs.feature3': '论文参考',
+                'resources.docs.link': '查看文档',
+                'resources.projects.title': '开源项目',
+                'resources.projects.desc': '优质开源项目和示例',
+                'resources.projects.feature1': '示例代码',
+                'resources.projects.feature2': '项目实战',
+                'resources.projects.feature3': '社区贡献',
+                'resources.projects.link': '浏览项目',
+                'resources.tech.title': '技术专栏',
+                'resources.tech.desc': '深度技术文章与经验分享',
+                'resources.tech.feature1': '技术分析',
+                'resources.tech.feature2': '经验总结',
+                'resources.tech.feature3': '行业动态',
+                'resources.tech.link': '阅读文章',
+                'resources.search.title': '元器件搜索',
+                'resources.search.desc': '快速查找和了解各类电子元器件',
+                'resources.search.feature1': 'MCU芯片检索',
+                'resources.search.feature2': '传感器模块',
+                'resources.search.feature3': '技术参数',
+                'resources.search.link': '开始搜索'
+            },
+            'en': {
+                'nav.home': 'Home',
+                'nav.learn': 'Learn',
+                'nav.knowledge': 'Knowledge',
+                'nav.journal': 'Journal',
+                'nav.resources': 'Resources',
+                'nav.community': 'Community',
+                'nav.contact': 'Contact',
+                'hero.title': 'Learning Center',
+                'hero.subtitle': 'Explore the fascinating world of MCU and start your learning journey',
+                'resources.title': 'Learning Resources',
+                'resources.basic.title': 'Basic Experiments',
+                'resources.basic.desc': 'MCU basics and experiments',
+                'resources.basic.feature1': 'Development Environment Setup',
+                'resources.basic.feature2': 'Music Box Programming',
+                'resources.basic.feature3': 'Oscilloscope Experiment',
+                'resources.basic.link': 'Start Learning',
+                'resources.advanced.title': 'Advanced Experiments',
+                'resources.advanced.desc': 'Advanced MCU applications',
+                'resources.advanced.feature1': 'Communication Protocols',
+                'resources.advanced.feature2': 'RTOS Development',
+                'resources.advanced.feature3': 'Sensor Applications',
+                'resources.advanced.link': 'Start Learning',
+                'resources.docs.title': 'Other Articles',
+                'resources.docs.desc': 'Reference materials',
+                'resources.docs.feature1': 'Blog Articles',
+                'resources.docs.feature2': 'Programming Guide',
+                'resources.docs.feature3': 'Paper References',
+                'resources.docs.link': 'View Docs',
+                'resources.projects.title': 'Open Source Projects',
+                'resources.projects.desc': 'Quality projects and examples',
+                'resources.projects.feature1': 'Example Code',
+                'resources.projects.feature2': 'Project Practice',
+                'resources.projects.feature3': 'Community Contribution',
+                'resources.projects.link': 'Browse Projects',
+                'resources.tech.title': 'Technical Column',
+                'resources.tech.desc': 'In-depth articles and experience sharing',
+                'resources.tech.feature1': 'Technical Analysis',
+                'resources.tech.feature2': 'Experience Summary',
+                'resources.tech.feature3': 'Industry Updates',
+                'resources.tech.link': 'Read Articles',
+                'resources.search.title': 'Component Search',
+                'resources.search.desc': 'Quick search for electronic components',
+                'resources.search.feature1': 'MCU Chip Search',
+                'resources.search.feature2': 'Sensor Modules',
+                'resources.search.feature3': 'Technical Parameters',
+                'resources.search.link': 'Start Search'
+            }
+        };
+
+        // 语言切换功能
+        const langToggle = document.querySelector('.lang-toggle');
+        let currentLang = localStorage.getItem('lang') || 'zh-CN';
+
+        function updateLanguage() {
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[currentLang][key]) {
+                    element.textContent = translations[currentLang][key];
+                }
+            });
+            document.documentElement.lang = currentLang;
+        }
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'zh-CN' ? 'en' : 'zh-CN';
+            localStorage.setItem('lang', currentLang);
+            updateLanguage();
+        }
+
+        // 事件监听
+        langToggle.addEventListener('click', toggleLanguage);
+
+        // 初始化语言
+        document.addEventListener('DOMContentLoaded', () => {
+            currentLang = localStorage.getItem('lang') || 'zh-CN';
+            updateLanguage();
+        });
+
         // 提示功能
         document.addEventListener('DOMContentLoaded', function() {
             const comingSoonElements = document.querySelectorAll('.coming-soon');
