@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>圣诞快乐 - 2024</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .snow-container {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .snow {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: white;
+            border-radius: 50%;
+            filter: blur(3px);
+            opacity: 0;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100vh) translateX(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) translateX(100px);
+                opacity: 0.3;
+            }
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .snowflake {
+            position: relative;
+            font-size: 24px;
+            color: #fff;
+            animation: float 6s ease-in-out infinite;
+            margin: 20px;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .title {
+            font-size: 3em;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ff0000; }
+            to { text-shadow: 0 0 20px #fff, 0 0 30px #ff0000, 0 0 40px #ff0000; }
+        }
+
+        .content {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+            line-height: 1.8;
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+            flex: 1;
+            min-width: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        .card h2 {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+
+        .card p {
+            font-size: 0.9em;
+            margin: 5px 0;
+        }
+
+        @media (max-width: 900px) {
+            .content {
+                flex-direction: column;
+            }
+            .card {
+                width: 100%;
+            }
+        }
+
+        .highlight {
+            color: #ff4d4d;
+            font-weight: bold;
+        }
+
+        .footer {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            background: rgba(30, 60, 114, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 30px 0;
+            margin-top: 50px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .team-message {
+            font-size: 1.2em;
+            color: #ff4d4d;
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            display: inline-block;
+        }
+
+        .footer-links {
+            margin: 15px 0;
+            padding: 0;
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .footer-links a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #ff4d4d;
+        }
+
+        .copyright {
+            font-size: 0.9em;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 20px;
+        }
+
+        .team-signature {
+            font-family: "STKaiti", "楷体", serif;
+            color: #ff4d4d;
+            font-size: 1.1em;
+            margin-top: 15px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="snow-container"></div>
+    <div class="container">
+        <div class="snowflake">🎄</div>
+        <h1 class="title">圣诞快乐</h1>
+        
+        <div class="content">
+            <div class="card">
+                <h2>🎅 圣诞祝福</h2>
+                <p>圣诞节，愿这个温馨的节日，带给大家欢乐与祝福。</p>
+                <p>让我们一起分享节日的喜悦，传递温暖的祝福~</p>
+            </div>
+
+            <div class="card">
+                <h2>🎁 节日礼物</h2>
+                <p>圣诞已至，惊喜将至</p>
+                <p>愿每一位同学都能收到心仪的礼物</p>
+                <p>用温暖的心意，点亮冬日的夜晚</p>
+            </div>
+
+            <div class="card">
+                <h2>🎄 圣诞习俗</h2>
+                <p>装饰圣诞树，挂上彩灯</p>
+                <p>交换礼物，分享美食</p>
+                <p>让我们一起感受节日的欢乐与温馨</p>
+            </div>
+
+            <div class="card">
+                <h2>💝 温馨提示</h2>
+                <p>圣诞节是一个充满爱与分享的节日</p>
+                <p>记得与家人朋友共度美好时光</p>
+                <p>在欢乐的同时，也要注意保暖哦！</p>
+            </div>
+        </div>
+        
+        <div class="snowflake">🎄</div>
+    </div>
+    
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="team-message">
+                🎄 愿这个圣诞节，带给大家欢乐与祝福
+            </div>
+            <ul class="footer-links">
+                <li><a href="../index.html">首页</a></li>
+                <li><a href="../about.html">关于我们</a></li>
+                <li><a href="../Team.html">团队介绍</a></li>
+                <li><a href="news.html">新闻中心</a></li>
+            </ul>
+            <div class="team-signature">
+                ——来自开发团队的圣诞祝福
+            </div>
+            <div class="copyright">
+                © 2024 Study Room Team. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        function createSnowflake() {
+            const snow = document.createElement('div');
+            snow.className = 'snow';
+            
+            // 随机设置雪花的大小
+            const size = Math.random() * 5 + 3;
+            snow.style.width = `${size}px`;
+            snow.style.height = `${size}px`;
+            
+            // 随机设置雪花的起始位置
+            snow.style.left = `${Math.random() * 100}vw`;
+            
+            // 随机设置��画持续时间
+            const duration = Math.random() * 5 + 5;
+            snow.style.animationDuration = `${duration}s`;
+            
+            // 随机设置动画延迟
+            snow.style.animationDelay = `${Math.random() * 5}s`;
+            
+            document.querySelector('.snow-container').appendChild(snow);
+            
+            // 动画结束后移除雪花
+            setTimeout(() => {
+                snow.remove();
+            }, duration * 1000);
+        }
+
+        // 持续创建雪花
+        setInterval(createSnowflake, 200);
+    </script>
+</body>
+</html> 

@@ -1,70 +1,277 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="light">
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>404 页面走丢了</title>
+		<title>404 - MCU Learn</title>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 		<style>
+			:root {
+				--primary-color: #007bff;
+				--secondary-color: #6c757d;
+				--background-color: #f8f9fa;
+				--text-color: #212529;
+				--error-color: #dc3545;
+				--success-color: #28a745;
+				--transition: all 0.3s ease;
+			}
+
+			[data-theme="dark"] {
+				--primary-color: #0d6efd;
+				--secondary-color: #adb5bd;
+				--background-color: #212529;
+				--text-color: #f8f9fa;
+				--error-color: #dc3545;
+				--success-color: #28a745;
+			}
+
 			body {
 				margin: 0;
 				overflow: hidden;
-				background-color: #f0f0f0;
+				background-color: var(--background-color);
+				color: var(--text-color);
 				display: flex;
 				flex-direction: column;
 				align-items: center;
 				justify-content: center;
-				height: 100vh;
-				font-family: Arial, sans-serif;
+				min-height: 100vh;
+				font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+				transition: var(--transition);
+			}
+
+			.controls {
+				position: fixed;
+				top: 20px;
+				right: 20px;
+				display: flex;
+				gap: 1rem;
+				z-index: 1000;
+			}
+
+			.theme-toggle, .lang-toggle {
+				background: none;
+				border: 2px solid var(--primary-color);
+				color: var(--primary-color);
+				cursor: pointer;
+				padding: 0.5rem;
+				font-size: 1.2rem;
+				transition: var(--transition);
+				border-radius: 50%;
+				width: 40px;
+				height: 40px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+
+			.theme-toggle:hover, .lang-toggle:hover {
+				background: var(--primary-color);
+				color: white;
+				transform: scale(1.1);
+			}
+
+			.error-container {
+				text-align: center;
+				z-index: 1;
+				padding: 2rem;
+				background: rgba(255, 255, 255, 0.1);
+				backdrop-filter: blur(10px);
+				border-radius: 20px;
+				box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+				max-width: 600px;
+				width: 90%;
+				margin: 20px;
+				animation: fadeIn 0.5s ease-out;
+			}
+
+			@keyframes fadeIn {
+				from {
+					opacity: 0;
+					transform: translateY(20px);
+				}
+				to {
+					opacity: 1;
+					transform: translateY(0);
+				}
+			}
+
+			.error-code {
+				font-size: 8rem;
+				font-weight: bold;
+				margin: 0;
+				background: linear-gradient(45deg, var(--primary-color), var(--error-color));
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
+				line-height: 1;
+			}
+
+			.error-title {
+				font-size: 2rem;
+				margin: 1rem 0;
+				color: var(--text-color);
+			}
+
+			.error-message {
+				font-size: 1.2rem;
+				margin: 1rem 0 2rem;
+				color: var(--secondary-color);
+			}
+
+			.home-button {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.5rem;
+				padding: 1rem 2rem;
+				font-size: 1.1rem;
+				color: white;
+				background: var(--primary-color);
+				border: none;
+				border-radius: 50px;
+				cursor: pointer;
+				transition: var(--transition);
+				text-decoration: none;
+			}
+
+			.home-button:hover {
+				transform: translateY(-2px);
+				box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 			}
 
 			.emoji {
 				position: absolute;
 				font-size: 2rem;
+				transition: var(--transition);
+				z-index: 0;
+				opacity: 0.5;
+				filter: blur(1px);
 			}
 
-			.message {
-				text-align: center;
-				z-index: 1;
+			@media (max-width: 768px) {
+				.error-code {
+					font-size: 6rem;
+				}
+
+				.error-title {
+					font-size: 1.5rem;
+				}
+
+				.error-message {
+					font-size: 1rem;
+				}
+
+				.home-button {
+					padding: 0.8rem 1.6rem;
+					font-size: 1rem;
+				}
 			}
 
-			.message h1 {
-				font-size: 2.5rem;
-				margin: 0;
+			/* 暗色模式适配 */
+			body.dark-mode {
+				background-color: var(--background-color);
 			}
 
-			.message p {
-				font-size: 1.2rem;
-				margin: 10px 0 20px;
-			}
-
-			.button {
-				padding: 10px 20px;
-				font-size: 1rem;
-				color: white;
-				background-color: #007bff;
-				border: none;
-				border-radius: 5px;
-				cursor: pointer;
-				transition: background-color 0.3s;
-			}
-
-			.button:hover {
-				background-color: #0056b3;
+			body.dark-mode .error-container {
+				background: rgba(0, 0, 0, 0.2);
 			}
 		</style>
 	</head>
 	<body>
-		<div class="message">
-			<h1>404 错误：页面走丢了！</h1>
-			<p>别担心，我们正在努力寻找它！</p>
-			<button class="button" onclick="window.location.href='indexmodern.html'">返回首页</button>
+		<div class="controls">
+			<button class="lang-toggle" title="切换语言">
+				<i class="fas fa-globe"></i>
+			</button>
+			<button class="theme-toggle" title="切换主题">
+				<i class="fas fa-moon"></i>
+			</button>
+		</div>
+
+		<div class="error-container">
+			<div class="error-code">404</div>
+			<h1 class="error-title" data-i18n="title">页面走丢了！</h1>
+			<p class="error-message" data-i18n="message">别担心，这种情况时有发生。让我们一起回到首页吧！</p>
+			<a href="indexmodern.html" class="home-button">
+				<i class="fas fa-home"></i>
+				<span data-i18n="button">返回首页</span>
+			</a>
 		</div>
 
 		<script>
+			// 语言配置
+			const translations = {
+				'zh-CN': {
+					'title': '页面走丢了！',
+					'message': '别担心，这种情况时有发生。让我们一起回到首页吧！',
+					'button': '返回首页'
+				},
+				'en': {
+					'title': 'Page Not Found!',
+					'message': "Don't worry, this happens sometimes. Let's go back home together!",
+					'button': 'Back to Home'
+				}
+			};
+
+			// 语言切换功能
+			const langToggle = document.querySelector('.lang-toggle');
+			let currentLang = localStorage.getItem('lang') || 'zh-CN';
+
+			function updateLanguage() {
+				document.querySelectorAll('[data-i18n]').forEach(element => {
+					const key = element.getAttribute('data-i18n');
+					if (translations[currentLang][key]) {
+						element.textContent = translations[currentLang][key];
+					}
+				});
+				document.documentElement.lang = currentLang;
+			}
+
+			function toggleLanguage() {
+				currentLang = currentLang === 'zh-CN' ? 'en' : 'zh-CN';
+				localStorage.setItem('lang', currentLang);
+				updateLanguage();
+			}
+
+			langToggle.addEventListener('click', toggleLanguage);
+
+			// 初始化语言
+			document.addEventListener('DOMContentLoaded', () => {
+				currentLang = localStorage.getItem('lang') || 'zh-CN';
+				updateLanguage();
+			});
+
+			// 主题切换功能
+			const themeToggle = document.querySelector('.theme-toggle');
+			const body = document.body;
+			const icon = themeToggle.querySelector('i');
+
+			// 检查本地存储中的主题设置
+			const savedTheme = localStorage.getItem('theme');
+			if (savedTheme === 'dark') {
+				body.classList.add('dark-mode');
+				icon.classList.remove('fa-moon');
+				icon.classList.add('fa-sun');
+				document.documentElement.setAttribute('data-theme', 'dark');
+			}
+
+			themeToggle.addEventListener('click', () => {
+				body.classList.toggle('dark-mode');
+				if (body.classList.contains('dark-mode')) {
+					icon.classList.remove('fa-moon');
+					icon.classList.add('fa-sun');
+					localStorage.setItem('theme', 'dark');
+					document.documentElement.setAttribute('data-theme', 'dark');
+				} else {
+					icon.classList.remove('fa-sun');
+					icon.classList.add('fa-moon');
+					localStorage.setItem('theme', 'light');
+					document.documentElement.setAttribute('data-theme', 'light');
+				}
+			});
+
+			// Emoji 动画
 			const emojis = ['😕', '😲', '😢', '😂', '😎', '🤔', '😱', '😊', '😶‍🌫', '️🥵'];
-			const emojiCount = 10;
+			const emojiCount = 15;
 			const emojiSize = 2;
-			const speed = 0.05;
+			const speed = 0.03;
 
 			function createEmoji() {
 				const emoji = document.createElement('div');
@@ -80,6 +287,7 @@
 			function moveEmoji(emoji) {
 				let xDirection = Math.random() > 0.5 ? 1 : -1;
 				let yDirection = Math.random() > 0.5 ? 1 : -1;
+				let rotation = 0;
 
 				setInterval(() => {
 					const left = parseFloat(emoji.style.left);
@@ -90,6 +298,9 @@
 
 					emoji.style.left = `${left + speed * xDirection}vw`;
 					emoji.style.top = `${top + speed * yDirection}vh`;
+					
+					rotation += 1;
+					emoji.style.transform = `rotate(${rotation}deg)`;
 				}, 50);
 			}
 
