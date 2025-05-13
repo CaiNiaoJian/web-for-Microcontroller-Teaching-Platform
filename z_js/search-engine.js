@@ -33,6 +33,18 @@ function setupEventListeners() {
             performSearch();
         });
     });
+    
+    // 热门搜索标签点击事件
+    document.querySelectorAll('.popular-term').forEach(term => {
+        term.addEventListener('click', function(e) {
+            e.preventDefault(); // 防止链接跳转
+            const searchTerm = this.textContent;
+            document.getElementById('componentSearch').value = searchTerm;
+            performSearch();
+            // 滚动到搜索结果区域
+            document.getElementById('searchResults').scrollIntoView({ behavior: 'smooth' });
+        });
+    });
 
     // 排序选择事件
     document.getElementById('sortResults').addEventListener('change', function() {
@@ -85,22 +97,38 @@ function performSearch() {
 function showLoadingState() {
     const resultsSection = document.getElementById('searchResults');
     resultsSection.classList.add('loading');
-    document.querySelector('.results-count strong').textContent = '搜索中...';
+    const resultsCountEl = document.querySelector('.results-count');
+    if (resultsCountEl) {
+        // 保存原始文本以便于替换
+        resultsCountEl._originalText = resultsCountEl.textContent;
+        resultsCountEl.textContent = '搜索中...';
+    }
 }
 
 // 隐藏加载状态
 function hideLoadingState() {
     const resultsSection = document.getElementById('searchResults');
     resultsSection.classList.remove('loading');
+    const resultsCountEl = document.querySelector('.results-count');
+    if (resultsCountEl && resultsCountEl._originalText) {
+        resultsCountEl.textContent = resultsCountEl._originalText;
+    }
 }
 
 // 显示搜索结果
 function displaySearchResults(results) {
     const resultsGrid = document.getElementById('resultsGrid');
-    const resultsCount = document.querySelector('.results-count strong');
+    const resultsCountEl = document.querySelector('.results-count');
     
     resultsGrid.innerHTML = '';
-    resultsCount.textContent = results.length;
+    
+    // 更新结果计数
+    if (resultsCountEl) {
+        const countText = resultsCountEl.getAttribute('data-i18n') === 'results.count' ?
+            `找到 <strong>${results.length}</strong> 个结果` :
+            `Found <strong>${results.length}</strong> results`;
+        resultsCountEl.innerHTML = countText;
+    }
 
     results.forEach(result => {
         const resultCard = createResultCard(result);
