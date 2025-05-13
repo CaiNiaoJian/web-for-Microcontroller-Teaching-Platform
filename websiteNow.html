@@ -31,8 +31,13 @@
 			}
 
 			@keyframes backgroundMove {
-				from { background-position: 0 0; }
-				to { background-position: 100% 100%; }
+				from {
+					background-position: 0 0;
+				}
+
+				to {
+					background-position: 100% 100%;
+				}
 			}
 
 			.progress-hero h1 {
@@ -177,9 +182,20 @@
 			}
 
 			@keyframes pulse {
-				0% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
-				50% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
-				100% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
+				0% {
+					transform: translate(-50%, -50%) scale(1);
+					opacity: 0.3;
+				}
+
+				50% {
+					transform: translate(-50%, -50%) scale(1.5);
+					opacity: 0;
+				}
+
+				100% {
+					transform: translate(-50%, -50%) scale(1);
+					opacity: 0.3;
+				}
 			}
 
 			.timeline-content h3 {
@@ -295,7 +311,8 @@
 				align-items: center;
 			}
 
-			.theme-toggle, .lang-toggle {
+			.theme-toggle,
+			.lang-toggle {
 				background: none;
 				border: none;
 				color: #fff;
@@ -306,7 +323,8 @@
 				border-radius: 50%;
 			}
 
-			.theme-toggle:hover, .lang-toggle:hover {
+			.theme-toggle:hover,
+			.lang-toggle:hover {
 				background: rgba(255, 255, 255, 0.1);
 				transform: scale(1.1);
 			}
@@ -341,7 +359,7 @@
 		<section class="progress-hero">
 			<h1 data-aos="fade-up" data-i18n="hero.title">网站建设进度</h1>
 			<p data-aos="fade-up" data-aos-delay="100" data-i18n="hero.subtitle">探索我们的发展历程，见证每一步的进步与创新</p>
-			
+
 			<div class="progress-stats">
 				<div class="stat-item" data-aos="fade-up" data-aos-delay="200">
 					<div class="stat-number">65%</div>
@@ -357,10 +375,10 @@
 				</div>
 			</div>
 		</section>
-				
+
 		<!-- 进度卡片 -->
 		<section class="progress-cards">
-				<div class="progress-card" data-aos="fade-up">
+			<div class="progress-card" data-aos="fade-up">
 				<h3><i class="fas fa-paint-brush"></i> <span data-i18n="cards.ui.title">界面设计</span></h3>
 				<div class="progress-bar">
 					<div class="progress-fill" style="width: 95%;"></div>
@@ -370,25 +388,25 @@
 					<span>95%</span>
 				</div>
 				<p data-i18n="cards.ui.desc">采用最新的设计趋势，打造直观、美观的用户界面</p>
-				</div>
+			</div>
 
 			<div class="progress-card" data-aos="fade-up" data-aos-delay="100">
 				<h3><i class="fas fa-cogs"></i> <span data-i18n="cards.function.title">功能开发</span></h3>
-					<div class="progress-bar">
-						<div class="progress-fill" style="width: 80%;"></div>
-					</div>
+				<div class="progress-bar">
+					<div class="progress-fill" style="width: 80%;"></div>
+				</div>
 				<div class="progress-text">
 					<span data-i18n="cards.function.subtitle">核心功能实现</span>
 					<span>80%</span>
-					</div>
-				<p data-i18n="cards.function.desc">持续开发和优化各项功能，提升用户体验</p>
 				</div>
+				<p data-i18n="cards.function.desc">持续开发和优化各项功能，提升用户体验</p>
+			</div>
 
 			<div class="progress-card" data-aos="fade-up" data-aos-delay="200">
 				<h3><i class="fas fa-mobile-alt"></i> <span data-i18n="cards.mobile.title">移动适配</span></h3>
-					<div class="progress-bar">
+				<div class="progress-bar">
 					<div class="progress-fill" style="width: 75%;"></div>
-					</div>
+				</div>
 				<div class="progress-text">
 					<span data-i18n="cards.mobile.subtitle">响应式设计</span>
 					<span>75%</span>
@@ -416,7 +434,7 @@
 						<p data-i18n="timeline.community.desc">优化社区互动功能，增加用户反馈机制，提升社区活跃度。</p>
 					</div>
 					<div class="timeline-dot"></div>
-					</div>
+				</div>
 
 				<div class="timeline-item" data-aos="fade-up">
 					<div class="timeline-content">
@@ -461,9 +479,11 @@
 						<p data-i18n="timeline.check.desc">中期检查通过，项目进展顺利。</p>
 					</div>
 					<div class="timeline-dot"></div>
-					</div>
 				</div>
-			</section>
+			</div>
+
+
+		</section>
 
 		<!-- 页脚 -->
 		<footer class="footer">
@@ -655,10 +675,11 @@
 			const observer = new IntersectionObserver((entries) => {
 				entries.forEach(entry => {
 					if (entry.isIntersecting) {
-						entry.target.style.width = entry.target.parentElement.getAttribute('data-progress') + '%';
+						entry.target.style.width = entry.target.parentElement.getAttribute('data-progress') +
+							'%';
 					}
 				});
-				});
+			});
 
 			progressBars.forEach(bar => {
 				observer.observe(bar);

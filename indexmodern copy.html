@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="light">
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,121 +7,143 @@
 		<link rel="stylesheet" href="z_css/modern-style.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 		<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+		<!-- 引入新春主题相关依赖 -->
+		<link href="https://cdn.bootcdn.net/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
 		<style>
-			/* Cookie同意提示样式 */
-			.cookie-consent {
+			/* 新春主题变量 */
+			:root {
+				--festival-red: #e60012;
+				--festival-gold: #ffd700;
+				--festival-dark-red: #8b0000;
+			}
+
+			/* 灯笼装饰 */
+			.lantern-decoration {
 				position: fixed;
-				bottom: 0;
+				width: 60px;
+				height: 80px;
+				background: linear-gradient(145deg, var(--festival-red), var(--festival-dark-red));
+				border-radius: 50% / 10%;
+				box-shadow: 0 0 20px rgba(230, 0, 18, 0.6);
+				z-index: 1000;
+				animation: lanternSwing 3s ease-in-out infinite;
+			}
+
+			.lantern-decoration::before {
+				content: "福";
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				color: var(--festival-gold);
+				font-size: 2em;
+				font-weight: bold;
+			}
+
+			@keyframes lanternSwing {
+				0%, 100% { transform: rotate(-5deg); }
+				50% { transform: rotate(5deg); }
+			}
+
+			/* 雪花效果 */
+			.snowflake {
+				position: fixed;
+				pointer-events: none;
+				z-index: 999;
+				animation: snowfall linear infinite;
+			}
+
+			@keyframes snowfall {
+				0% {
+					transform: translateY(-100%) rotate(0deg);
+				}
+				100% {
+					transform: translateY(100vh) rotate(360deg);
+				}
+			}
+
+			/* 节日装饰元素 */
+			.festival-decoration {
+				position: fixed;
+				width: 100%;
+				height: 100%;
+				pointer-events: none;
+				z-index: 1;
+				background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"><path d="M20 2C10 2 2 10 2 20s8 18 18 18 18-8 18-18S30 2 20 2zm0 32c-7.7 0-14-6.3-14-14S12.3 4 20 4s14 6.3 14 14-6.3 14-14 14z" fill="rgba(255,215,0,0.1)"/></svg>');
+			}
+
+			/* 春节主题覆盖样式 */
+			.nav-wrapper {
+				background: linear-gradient(to right, var(--festival-dark-red), var(--festival-red));
+				border-bottom: 2px solid var(--festival-gold);
+			}
+
+			.hero {
+				position: relative;
+				overflow: hidden;
+			}
+
+			.hero::before {
+				content: "";
+				position: absolute;
+				top: 0;
 				left: 0;
 				right: 0;
-				background: #ffffff;
-				padding: 20px;
-				box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15);
-				z-index: 1000;
-				display: none;
-				animation: slideUp 0.5s ease-out;
-				border-top: 1px solid #e0e0e0;
+				bottom: 0;
+				background: linear-gradient(45deg, rgba(230, 0, 18, 0.1), rgba(255, 215, 0, 0.1));
+				z-index: 1;
 			}
 
-			.cookie-content {
-				max-width: 1200px;
-				margin: 0 auto;
-				display: flex;
-				justify-content: space-between;
-
-				align-items: center;
-				gap: 20px;
-				flex-wrap: wrap;
+			.section-title {
+				color: var(--festival-red);
+				text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 			}
 
-			.cookie-text {
-				flex-grow: 1;
-				color: #333333;
+			/* 饺子和蛇年图标 */
+			.festival-icon {
+				font-size: 1.5em;
+				margin: 0 5px;
+				color: var(--festival-gold);
 			}
 
-			.cookie-text p {
-				margin: 5px 0;
-				line-height: 1.6;
+			/* 新春主题按钮样式 */
+			.cta-button {
+				background: linear-gradient(45deg, var(--festival-red), var(--festival-dark-red));
+				border: 2px solid var(--festival-gold);
+				box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
 			}
 
-			.cookie-text strong {
-				color: var(--primary-color);
+			.cta-button:hover {
+				transform: translateY(-2px);
+				box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
 			}
 
-			.cookie-text a {
-				color: var(--primary-color);
-				text-decoration: none;
+			/* 卡片新春样式 */
+			.course-card, .news-card, .community-card {
+				border: 1px solid rgba(255, 215, 0, 0.2);
+				box-shadow: 0 4px 15px rgba(230, 0, 18, 0.1);
 			}
 
-			.cookie-text a:hover {
-				text-decoration: underline;
+			.course-card:hover, .news-card:hover, .community-card:hover {
+				border-color: var(--festival-gold);
+				transform: translateY(-5px);
 			}
 
-			.cookie-buttons {
-				display: flex;
-				gap: 10px;
-			}
-
-			.cookie-btn {
-				padding: 10px 20px;
-				border-radius: 8px;
-				cursor: pointer;
-				border: none;
-				font-weight: 500;
-				transition: all 0.3s ease;
-			}
-
-			.cookie-btn.accept {
-				background: var(--primary-color);
-				color: white;
-			}
-
-			.cookie-btn.accept:hover {
-				opacity: 0.9;
-			}
-
-			.cookie-btn.decline {
-				background: transparent;
-				color: var(--text-color);
-				border: 1px solid var(--text-color);
-			}
-
-			.cookie-btn.decline:hover {
-				background: rgba(0, 0, 0, 0.1);
-			}
-
-			@keyframes slideUp {
-				from {
-					transform: translateY(100%);
-				}
-
-				to {
-					transform: translateY(0);
-				}
-			}
-
-			/* 暗色模式适配 */
-			body.dark-mode .cookie-consent {
-				background: #2c2c2c;
-				border-color: #3a3a3a;
-			}
-
-			body.dark-mode .cookie-text {
-				color: #ffffff;
-			}
-
-			body.dark-mode .cookie-btn.decline {
-				border-color: #ffffff;
-				color: #ffffff;
-				background: transparent;
-			}
-
-			body.dark-mode .cookie-btn.decline:hover {
-				background: rgba(255, 255, 255, 0.1);
+			/* 页脚新春样式 */
+			.footer {
+				background: linear-gradient(to right, var(--festival-dark-red), var(--festival-red));
+				border-top: 2px solid var(--festival-gold);
 			}
 		</style>
 	</head>
 	<body>
+		<!-- 添加灯笼装饰 -->
+		<div class="lantern-decoration" style="top: 100px; left: 50px;"></div>
+		<div class="lantern-decoration" style="top: 100px; right: 50px;"></div>
+		
+		<!-- 添加节日装饰背景 -->
+		<div class="festival-decoration"></div>
+
 		<!-- 导航栏 -->
 		<nav class="nav-wrapper">
 			<div class="nav-content">
@@ -424,6 +446,39 @@
 					setTimeout(() => {
 						cookieConsent.style.display = 'none';
 					}, 300);
+				});
+			});
+
+			// 创建雪花效果
+			function createSnowflake() {
+				const snow = document.createElement('div');
+				snow.className = 'snowflake';
+				snow.innerHTML = '❄';
+				snow.style.left = Math.random() * 100 + 'vw';
+				snow.style.animationDuration = Math.random() * 3 + 2 + 's';
+				snow.style.opacity = Math.random();
+				snow.style.fontSize = Math.random() * 10 + 10 + 'px';
+				
+				document.body.appendChild(snow);
+				
+				snow.addEventListener('animationend', () => snow.remove());
+			}
+
+			// 定期创建雪花
+			setInterval(createSnowflake, 100);
+
+			// 灯笼摆动效果
+			document.querySelectorAll('.lantern-decoration').forEach(lantern => {
+				lantern.style.animationDelay = Math.random() * 2 + 's';
+			});
+
+			// 添加鼠标移动视差效果
+			document.addEventListener('mousemove', (e) => {
+				const moveX = (e.clientX - window.innerWidth / 2) * 0.01;
+				const moveY = (e.clientY - window.innerHeight / 2) * 0.01;
+				
+				document.querySelectorAll('.lantern-decoration').forEach(lantern => {
+					lantern.style.transform = `translate(${moveX}px, ${moveY}px) rotate(${moveX}deg)`;
 				});
 			});
 		</script>
